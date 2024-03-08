@@ -30,6 +30,9 @@
           "node_modules/@taiga-ui/styles/taiga-ui-global.less",
           "apps/esm/src/styles.less"
         ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/styles"]
+        },
         "scripts": []
       },
       "configurations": {

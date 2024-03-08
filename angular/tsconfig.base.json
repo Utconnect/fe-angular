@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@utconnect/components": ["libs/shared/components/src/index.ts"],
+      "@utconnect/styles": ["libs/shared/styles/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

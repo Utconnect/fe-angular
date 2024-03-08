@@ -52,10 +52,19 @@
     },
     "@nrwl/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "changeDetection": "OnPush",
+      "standalone": true,
+      "style": "less"
     },
     "@nrwl/angular:component": {
-      "style": "less"
+      "style": "less",
+      "changeDetection": "OnPush",
+      "standalone": true,
+      "export": true
+    },
+    "@nrwl/js": {
+      "minimal": true
     }
   }
 }
