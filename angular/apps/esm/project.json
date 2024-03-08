@@ -15,8 +15,21 @@
         "main": "apps/esm/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/esm/tsconfig.app.json",
-        "assets": ["apps/esm/src/favicon.ico", "apps/esm/src/assets"],
-        "styles": ["apps/esm/src/styles.less"],
+        "assets": [
+          "apps/esm/src/favicon.ico",
+          "apps/esm/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          }
+        ],
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+          "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+          "apps/esm/src/styles.less"
+        ],
         "scripts": []
       },
       "configurations": {

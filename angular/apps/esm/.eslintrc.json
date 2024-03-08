@@ -20,7 +20,8 @@
             "prefix": "angular",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "semi": "warn"
       },
       "extends": [
         "plugin:@nrwl/nx/angular",

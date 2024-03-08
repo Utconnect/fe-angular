@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "cd .. && husky angular/.husky"
+    "prepare": "cd .. && husky install"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~15.2.0",
+    "@angular/cdk": "^15.0.0",
     "@angular/common": "~15.2.0",
     "@angular/compiler": "~15.2.0",
     "@angular/core": "~15.2.0",
@@ -16,6 +17,16 @@
     "@angular/platform-browser-dynamic": "~15.2.0",
     "@angular/router": "~15.2.0",
     "@nrwl/angular": "15.9.7",
+    "@taiga-ui/addon-charts": "^3.26.0",
+    "@taiga-ui/addon-mobile": "^3.26.0",
+    "@taiga-ui/addon-table": "^3.26.0",
+    "@taiga-ui/cdk": "^3.26.0",
+    "@taiga-ui/core": "^3.26.0",
+    "@taiga-ui/icons": "^3.26.0",
+    "@taiga-ui/kit": "^3.26.0",
+    "@taiga-ui/styles": "^3.26.0",
+    "@tinkoff/ng-dompurify": "4.0.0",
+    "dompurify": "3.0.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -41,6 +52,7 @@
     "@nrwl/web": "15.9.7",
     "@nrwl/workspace": "15.9.7",
     "@schematics/angular": "~15.2.0",
+    "@types/dompurify": "3.0.5",
     "@types/jest": "^29.4.0",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
@@ -53,10 +65,23 @@
     "jest": "^29.4.1",
     "jest-environment-jsdom": "^29.4.1",
     "jest-preset-angular": "~13.0.0",
+    "lint-staged": "^14.0.1",
     "nx": "15.9.7",
     "prettier": "^2.6.2",
     "ts-jest": "^29.0.5",
     "ts-node": "10.9.1",
     "typescript": "~4.9.5"
+  },
+  "lint-staged": {
+    "*.less": [
+      "stylelint --fix"
+    ],
+    "*.{js,ts,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{svg,yml,md,less,json}": [
+      "prettier --write"
+    ]
   }
 }
