@@ -1,7 +1,8 @@
 {
+  "name": "shared-styles",
   "projectType": "library",
-  "root": "libs/tailwind-preset",
-  "sourceRoot": "libs/tailwind-preset",
+  "root": "libs/shared/styles",
+  "sourceRoot": "libs/shared/styles/src",
   "targets": {},
   "tags": []
 }

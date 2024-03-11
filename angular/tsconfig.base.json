@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@utconnect/animations": ["libs/shared/animations/src/index.ts"],
       "@utconnect/components": ["libs/shared/components/src/index.ts"],
       "@utconnect/styles": ["libs/shared/styles/src/index.ts"]
     }

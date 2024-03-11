@@ -1,0 +1,11 @@
+{
+  "name": "@utconnect/animations",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/animations": "^15.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

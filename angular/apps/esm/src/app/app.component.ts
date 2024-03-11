@@ -6,16 +6,16 @@ import {
   TUI_SANITIZER,
 } from '@taiga-ui/core';
 import { Component } from '@angular/core';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { ScreenLoaderComponent } from '@utconnect/components';
+
+const TAIGA_UI = [TuiRootModule, TuiDialogModule, TuiAlertModule];
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, TuiRootModule, TuiDialogModule, TuiAlertModule],
+  imports: [ScreenLoaderComponent,...TAIGA_UI, ],
   selector: 'angular-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less'],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
 })
-export class AppComponent {
-  title = 'esm';
-}
+export class AppComponent {}

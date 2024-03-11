@@ -1,0 +1,16 @@
+{
+  "name": "shared-animations",
+  "projectType": "library",
+  "root": "libs/shared/animations",
+  "sourceRoot": "libs/shared/animations/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/animations/**/*.ts"]
+      }
+    }
+  }
+}
