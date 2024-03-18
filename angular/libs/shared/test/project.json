@@ -1,0 +1,26 @@
+{
+  "name": "shared-test",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/test/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared//test",
+        "main": "libs/shared/test/src/index.ts",
+        "tsConfig": "libs/shared/test/tsconfig.lib.json",
+        "assets": ["libs/shared/test/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/test/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

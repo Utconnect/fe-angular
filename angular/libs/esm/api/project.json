@@ -1,0 +1,26 @@
+{
+  "name": "esm-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/esm/api/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/esm/api",
+        "main": "libs/esm/api/src/index.ts",
+        "tsConfig": "libs/esm/api/tsconfig.lib.json",
+        "assets": ["libs/esm/api/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/esm/api/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

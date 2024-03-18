@@ -63,6 +63,11 @@
       "standalone": true,
       "export": true
     },
+    "@nrwl/angular:pipe": {
+      "flat": "false",
+      "standalone": true,
+      "export": true
+    },
     "@nrwl/js": {
       "minimal": true
     }
