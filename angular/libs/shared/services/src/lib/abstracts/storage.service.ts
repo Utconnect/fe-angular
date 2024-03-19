@@ -6,7 +6,7 @@ export abstract class StorageService {
   private subjects = new Map<string, BehaviorSubject<Nullable<string>>>();
 
   // CONSTRUCTOR
-  constructor(protected storage: Storage) {}
+  protected constructor(protected storage: Storage) {}
 
   // PUBLIC METHODS
   watch(key: string): Observable<Nullable<string>> {

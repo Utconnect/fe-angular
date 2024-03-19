@@ -15,20 +15,23 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@auth": ["libs/auth/src/index.ts"],
       "@esm/api": ["libs/esm/api/src/index.ts"],
       "@esm/config": ["libs/esm/config/src/index.ts"],
       "@esm/feature": ["libs/esm/shell/feature/src/index.ts"],
+      "@esm/home": ["libs/esm/home/src/index.ts"],
       "@esm/services": ["libs/esm/shared/data-access/services/src/index.ts"],
       "@esm/store": ["libs/esm/shell/data-access/store/src/index.ts"],
       "@utconnect/animations": ["libs/shared/animations/src/index.ts"],
       "@utconnect/components": ["libs/shared/components/src/index.ts"],
-      "@utconnect/guards": ["libs/shared/guards/src/index.ts"],
+      "@utconnect/directives": ["libs/shared/directives/src/index.ts"],
       "@utconnect/helpers": ["libs/shared/helpers/src/index.ts"],
       "@utconnect/pipes": ["libs/shared/pipes/src/index.ts"],
       "@utconnect/services": ["libs/shared/services/src/index.ts"],
       "@utconnect/styles": ["libs/shared/styles/src/index.ts"],
       "@utconnect/test": ["libs/shared/test/src/index.ts"],
-      "@utconnect/types": ["libs/shared/types/src/index.ts"]
+      "@utconnect/types": ["libs/shared/types/src/index.ts"],
+      "@utconnect/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -2,7 +2,7 @@
   "name": "esm",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "angular",
+  "prefix": "esm",
   "sourceRoot": "apps/esm/src",
   "tags": [],
   "targets": {

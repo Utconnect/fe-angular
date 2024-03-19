@@ -1,7 +1,7 @@
 import { ESMApplicationExaminationsCommandsUpdateUpdateParams } from '@esm/api';
 import { createAction, props } from '@ngrx/store';
 
-export class AppPageAction {
+export class EsmPageAction {
   static readonly getUserInfo = createAction('[App/Page] Get user info');
   static readonly logOut = createAction('[App/Page] Log out');
   static readonly getRelatedExaminations = createAction(

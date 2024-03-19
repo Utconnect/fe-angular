@@ -6,7 +6,7 @@ import {
 } from '@esm/api';
 import { GenericState, Status } from '@utconnect/types';
 
-type UserState = {
+type EsmUserState = {
   showLoader: boolean | null;
   user: GetMySummaryInfoData['data'] | null;
   userStatus: Status;
@@ -25,7 +25,7 @@ type RelatedExaminationsState = GenericState<
 
 type DepartmentsState = GenericState<GetAllFacultyData['data'], 'departments'>;
 
-export type EsmState = UserState &
+export type EsmState = EsmUserState &
   ExaminationState &
   RelatedExaminationsState &
   DepartmentsState;

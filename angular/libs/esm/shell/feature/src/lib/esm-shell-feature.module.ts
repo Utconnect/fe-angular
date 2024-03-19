@@ -1,104 +1,44 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { inject, LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard, authServiceProviders } from '@auth';
+import { EsmAuthService } from '@esm/api';
+import { ESM_CONFIG } from '@esm/config';
+import {
+  appFeatureKey,
+  appReducer,
+  EsmEffects,
+  EsmSelector,
+  EsmState,
+} from '@esm/store';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
-import { TUI_IS_CYPRESS } from '@taiga-ui/cdk';
-import {
-  TUI_ANIMATIONS_DURATION,
-  TUI_HINT_DEFAULT_OPTIONS,
-  TUI_HINT_OPTIONS,
-  TUI_SANITIZER,
-} from '@taiga-ui/core';
-import { TUI_LANGUAGE, TUI_VIETNAMESE_LANGUAGE } from '@taiga-ui/i18n';
-import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
+import { Store, StoreModule } from '@ngrx/store';
+import { useLayoutRoutes } from '@utconnect/components';
+import { TAIGA_PROVIDERS } from '@utconnect/utils';
 import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
-import { ESM_CONFIG } from '@esm/config';
-import { authGuard } from '@utconnect/guards';
-
-// import {
-//   PermissionConstant,
-//   RoleConstant,
-// } from '@teaching-scheduling-system/core/data-access/constants';
-// import {
-//   beforeTodayFactory,
-//   maxLengthFactory,
-//   notContainValueFactory,
-//   requiredFactory,
-// } from '@teaching-scheduling-system/core/utils/factories';
-// import { ContentTypeInterceptor } from '@teaching-scheduling-system/core/utils/interceptors';
-// import { TokenService } from '@teaching-scheduling-system/web/shared/data-access/services';
-// import {
-//   KeepUserGuard,
-//   MaintenanceGuard,
-//   PermissionGuard,
-// } from '@teaching-scheduling-system/web/shared/utils/guards';
-// import { AuthInterceptor } from '@teaching-scheduling-system/web/shared/utils/interceptors';
-// import {
-//   LayoutComponent,
-//   LayoutModule,
-// } from '@teaching-scheduling-system/web/shell/ui/layout';
-// import { NavbarService } from '@teaching-scheduling-system/web/shell/ui/navbar';
-import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
-import { of } from 'rxjs';
+import { map } from 'rxjs';
 import { extModules } from './build-specifics';
-import {
-  AuthService,
-  TokenService,
-  authServiceProvider,
-} from '@utconnect/services';
-import { loginProvider } from '@utconnect/components';
-import { AppEffects, appFeatureKey, appReducer } from '@esm/store';
-import { EsmAuthService } from '@esm/api';
 
 const NGRX = [
   StoreModule.forRoot({ router: routerReducer }, {}),
   StoreModule.forFeature(appFeatureKey, appReducer),
-  EffectsModule.forRoot([AppEffects]),
+  EffectsModule.forRoot([EsmEffects]),
   StoreRouterConnectingModule.forRoot(),
 ];
 
 export const routes: Routes = [
   {
-    path: 'login',
-    canActivate: [authGuard],
-    loadComponent: async () =>
-      (await import('@utconnect/components')).LoginComponent,
+    path: '',
+    loadComponent: async () => (await import('@esm/home')).EsmHomeComponent,
   },
   // {
-  //   path: '403',
-  //   loadChildren: async () =>
-  //     (await import('./error/forbidden/forbidden.routing')).ROUTES,
+  // path: 'create',
+  // canActivate: [permissionGuard],
+  // data: {
+  // roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+  // isCreateMode: true,
   // },
-  // {
-  //   path: '404',
-  //   loadChildren: async () =>
-  //     (await import('./error/not-found/not-found.routing')).ROUTES,
-  // },
-  // {
-  //   path: '',
-  //   canActivate: [authGuard],
-  //   component: LayoutComponent,
-  //   providers: [
-  //     importProvidersFrom(
-  //       StoreModule.forFeature(notificationFeatureKey, notificationReducer),
-  //       EffectsModule.forFeature([NotificationEffects])
-  //     ),
-  //   ],
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadChildren: async () => (await import('./home/home.routing')).ROUTES,
-  //     },
-  //     {
-  //       path: 'create',
-  //       canActivate: [permissionGuard],
-  //       data: {
-  //         roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-  //         isCreateMode: true,
-  //       },
   //       loadChildren: async () =>
   //         (await import('./examination/edit/edit.routing')).ROUTES,
   //     },
@@ -255,47 +195,40 @@ export const routes: Routes = [
   //         },
   //       ],
   //     },
-  //   ],
   // },
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes),
-    // LayoutModule,
+    RouterModule.forRoot(
+      useLayoutRoutes({
+        children: routes,
+        loginRoute: {
+          path: 'login',
+          canActivate: [authGuard],
+          loadComponent: async () => (await import('@auth')).LoginComponent,
+        },
+      }),
+    ),
     ...NGRX,
     ...extModules,
   ],
   exports: [RouterModule],
   providers: [
-    authServiceProvider({
+    TAIGA_PROVIDERS,
+    authServiceProviders({
       authService: EsmAuthService,
       storage: 'localStorage',
+      guard: {
+        role: (store) =>
+          store.select(EsmSelector.user).pipe(map((u) => u?.roles ?? [])),
+        store: Store<EsmState>,
+      },
     }),
     {
       provide: RECAPTCHA_SETTINGS,
       useFactory: (): { siteKey: string } => inject(ESM_CONFIG).recaptcha,
-    },
-    {
-      provide: TUI_SANITIZER,
-      useClass: NgDompurifySanitizer,
-    },
-    {
-      provide: TUI_LANGUAGE,
-      useValue: of(TUI_VIETNAMESE_LANGUAGE),
-    },
-    // {
-    //   provide: TUI_VALIDATION_ERRORS,
-    //   useValue: {
-    //     required: requiredFactory,
-    //     email: emailFactory,
-    //     duplicated: duplicatedFactory,
-    //   },
-    // },
-    {
-      provide: TUI_ANIMATIONS_DURATION,
-      useFactory: (): number => (inject(TUI_IS_CYPRESS) ? 0 : 300),
     },
   ],
 })

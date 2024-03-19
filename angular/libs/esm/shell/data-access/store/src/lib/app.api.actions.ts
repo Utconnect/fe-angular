@@ -6,7 +6,7 @@ import {
 } from '@esm/api';
 import { createAction, props } from '@ngrx/store';
 
-export class AppApiAction {
+export class EsmApiAction {
   static readonly noCacheUserInfo = createAction(
     '[App/API] No cache user info'
   );

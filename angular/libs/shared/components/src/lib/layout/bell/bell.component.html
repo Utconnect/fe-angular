@@ -1,0 +1,19 @@
+<tui-badged-content [rounded]="true" [@fadeInOut]>
+  <tui-hosted-dropdown [(open)]="openDropdown" [content]="dropdown">
+    <button
+      tuiIconButton
+      [pseudoHover]="openDropdown || null"
+      icon="tuiIconBellLarge"
+      size="m"
+      aria-label="Notification"
+    ></button>
+  </tui-hosted-dropdown>
+</tui-badged-content>
+
+<ng-template #dropdown let-activeZone>
+  <div class="w-80 pt-5">
+    <utconnect-notification-list
+      [activeZone]="activeZone"
+    ></utconnect-notification-list>
+  </div>
+</ng-template>

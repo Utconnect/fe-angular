@@ -20,3 +20,5 @@ testem.log
 Thumbs.db
 
 .angular
+environments/*
+!environments.example.ts

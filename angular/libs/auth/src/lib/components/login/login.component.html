@@ -1,0 +1,61 @@
+<div
+  class="relative w-screen h-screen center-flex bg-[url('/assets/img/login-background.png')] bg-cover bg-top z-0 after:absolute after:inset-0 after:w-screen after:h-screen after:block after:bg-[rgba(0,0,0,0.15)] after:z-10"
+>
+  <div
+    [@slideUp]
+    class="w-full p-4 bg-[rgba(255,255,255,0.95)] rounded-lg z-20 sm:px-14 sm:pt-10 sm:w-auto sm:pb-7"
+  >
+    <h1
+      class="slide-element mb-4 text-lg text-center font-bold uppercase sm:mb-10 sm:text-[26px]"
+    >
+      Hệ thống quản lý <br class="sm:hidden" />
+      lịch thi ESM
+    </h1>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <div class="slide-element mt-5">
+        <label>
+          Tên đăng nhập hoặc email
+          <tui-input
+            formControlName="userName"
+            [tuiTextfieldLabelOutside]="true"
+            tuiTextfieldSize="m"
+          >
+            <input tuiTextfield />
+          </tui-input>
+          <tui-error
+            formControlName="userName"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </label>
+      </div>
+
+      <div class="slide-element mt-5">
+        <label>
+          Mật khẩu
+          <tui-input-password
+            formControlName="password"
+            [tuiTextfieldLabelOutside]="true"
+            tuiTextfieldSize="m"
+          ></tui-input-password>
+          <tui-error
+            formControlName="password"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </label>
+      </div>
+
+      <div class="slide-element flex justify-center mt-5">
+        <button
+          *ngrxLet="status$ as status"
+          tuiButton
+          (click)="login()"
+          [showLoader]="status === 'loading'"
+          [disabled]="form.invalid"
+          size="m"
+        >
+          Đăng nhập
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -14,7 +14,7 @@
         "tailwindConfig": "libs/shared/components/tailwind.config.js",
         "tsConfig": "libs/shared/components/tsconfig.lib.json"
       },
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",

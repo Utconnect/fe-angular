@@ -4,16 +4,6 @@
   "sourceRoot": "libs/esm/shell/data-access/store/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/esm/shell/data-access/store",
-        "main": "libs/esm/shell/data-access/store/src/index.ts",
-        "tsConfig": "libs/esm/shell/data-access/store/tsconfig.lib.json",
-        "assets": ["libs/esm/shell/data-access/store/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
