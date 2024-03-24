@@ -1,13 +1,19 @@
 <div
   *ngIf="showLoader"
   [@fadeOut]="{ value: true, params: { duration: '500ms' } }"
-  class="absolute left-0 top-0 w-screen h-screen center-flex z-[9999] bg-white">
+  class="absolute left-0 top-0 w-screen h-screen center-flex z-[9999] bg-white"
+>
   <div class="relative w-36 h-36">
     <div
-      class="spinner w-full h-full border-[3px] border-utc-1 rounded-full after:center-absolute after:w-[125%] after:h-[125%] after:border-[6px] after:border-t-utc-2 after:border-b-utc-3 after:border-x-transparent after:rounded-full"></div>
+      class="spinner w-full h-full border-[3px] border-utc-1 rounded-full after:center-absolute after:w-[125%] after:h-[125%] after:border-[6px] after:border-t-utc-2 after:border-b-utc-3 after:border-x-transparent after:rounded-full"
+    ></div>
     <img
-      ngSrc="/assets/favicon/logo.png" width="500" height="500"
+      ngSrc="/assets/favicon/logo.png"
+      width="500"
+      height="500"
       class="center-absolute w-11/12"
-      alt="" />
+      priority
+      alt=""
+    />
   </div>
 </div>

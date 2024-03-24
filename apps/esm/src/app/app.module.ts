@@ -18,7 +18,6 @@ const TAIGA_UI = [TuiRootModule, TuiDialogModule, TuiAlertModule];
     ScreenLoaderComponent,
     ...TAIGA_UI,
   ],
-  providers: [],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })

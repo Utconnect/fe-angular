@@ -61,7 +61,7 @@
           </a>
         </ng-template>
         <ng-template #button>
-          <button tuiOption (click)="item.action?.()" role="menuitem">
+          <button tuiOption (click)="onClick(item)" role="menuitem">
             <tui-svg [src]="item.icon"></tui-svg>
             <span>{{ item.label }}</span>
           </button>

@@ -5,9 +5,9 @@ import { authGuard, authServiceProviders, permissionGuard } from '@auth';
 import { EsmAuthService } from '@esm/api';
 import { ESM_CONFIG } from '@esm/config';
 import {
-  esmFeatureKey,
   appReducer,
   EsmEffects,
+  esmFeatureKey,
   EsmSelector,
   EsmState,
 } from '@esm/store';
@@ -32,7 +32,7 @@ const NGRX = [
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: async () => (await import('@esm/home')).EsmHomeComponent,
+    loadChildren: async () => (await import('@esm/home')).ROUTES,
   },
   {
     path: 'create',
@@ -41,8 +41,7 @@ export const routes: Routes = [
       roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
       isCreateMode: true,
     },
-    loadComponent: async () =>
-      (await import('@esm/examination')).ExaminationEditComponent,
+    loadChildren: async () => (await import('@esm/examination')).ROUTES,
   },
   //     {
   //       path: 'data',
@@ -206,10 +205,11 @@ export const routes: Routes = [
     RouterModule.forRoot(
       useLayoutRoutes({
         children: routes,
+        canActivate: [authGuard],
         loginRoute: {
           path: 'login',
           canActivate: [authGuard],
-          loadComponent: async () => (await import('@auth')).LoginComponent,
+          loadChildren: async () => (await import('@auth')).ROUTES,
         },
       }),
     ),
@@ -224,14 +224,15 @@ export const routes: Routes = [
       storage: 'localStorage',
       guard: {
         role: (store) =>
-          store.select(EsmSelector.user).pipe(
-            tap((x) => console.log(store)),
+          store.pipe(EsmSelector.notNullUser).pipe(
+            tap((x) => console.log(store, x)),
             map((u) => u?.roles ?? []),
           ),
         store: Store<EsmState>,
       },
     }),
     layoutProviders({
+      store: Store<EsmState>,
       sideBar: {
         items: esmSideBarItems,
       },
@@ -247,7 +248,6 @@ export const routes: Routes = [
                 `Xin chào ${title ?? ''} ${name ?? ''}`.trim(),
               ),
             ),
-          store: Store<EsmState>,
         },
       },
     }),

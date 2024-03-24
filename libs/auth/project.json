@@ -5,11 +5,10 @@
   "prefix": "auth",
   "tags": [],
   "projectType": "library",
-  
   "targets": {
     "build": {
       "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "outputs": ["{workspaceRoot}/dist/auth"],
       "options": {
         "project": "libs/auth/ng-package.json",
         "tsConfig": "libs/auth/tsconfig.lib.json"

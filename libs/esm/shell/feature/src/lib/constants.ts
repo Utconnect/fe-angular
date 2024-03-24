@@ -1,12 +1,12 @@
-import { SidebarItem } from '@utconnect/components';
-import { Role } from './roles';
-import { TopBarGroup } from '@utconnect/components';
+import { EsmPageAction } from '@esm/store';
 import {
   tuiIconCommentLarge,
   tuiIconHelpCircleLarge,
   tuiIconLogOutLarge,
   tuiIconSettingsLarge,
 } from '@taiga-ui/icons';
+import { SidebarItem, TopBarGroup } from '@utconnect/components';
+import { Role } from './roles';
 
 export const esmSideBarItems: SidebarItem[] = [
   {
@@ -161,6 +161,7 @@ export class EsmTopBarConstants {
           key: EsmTopBarConstants.keys.LOG_OUT,
           label: 'Đăng xuất',
           icon: tuiIconLogOutLarge,
+          action: (store) => store.dispatch(EsmPageAction.logOut()),
         },
       ],
     },

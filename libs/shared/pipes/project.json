@@ -13,7 +13,7 @@
         "project": "libs/shared/pipes/ng-package.json",
         "tsConfig": "libs/shared/components/tsconfig.lib.json"
       },
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",

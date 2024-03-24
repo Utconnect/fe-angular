@@ -19,6 +19,10 @@ export class TokenService {
     this.storageService.setItem(STORAGE_ACCESS_TOKEN_KEY, token);
   }
 
+  isEmpty(): boolean {
+    return !!this.get();
+  }
+
   clear(): void {
     this.storageService.removeItem(STORAGE_ACCESS_TOKEN_KEY);
   }

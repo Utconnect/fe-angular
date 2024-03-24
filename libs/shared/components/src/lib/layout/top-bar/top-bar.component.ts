@@ -10,20 +10,22 @@ import {
 } from '@taiga-ui/cdk';
 import {
   TuiButtonModule,
+  tuiButtonOptionsProvider,
   TuiDataListModule,
   TuiHostedDropdownModule,
   TuiLoaderModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
-  tuiButtonOptionsProvider,
 } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
 import { fadeInOut } from '@utconnect/animations';
 import { BellComponent } from '../bell';
+import { LAYOUT_OPTION_STORE_TOKEN } from '../layout.tokens';
 import {
   TOP_BAR_OPTION_ITEM_TOKEN,
   TOP_BAR_OPTION_MENU_TEXT_TOKEN,
 } from './top-bar.tokens';
+import { TopBarItem } from './top-bar.types';
 
 const NGRX = [LetModule];
 const TAIGA_UI = [
@@ -64,8 +66,14 @@ const TAIGA_UI = [
 export class TopBarComponent {
   // INJECT PROPERTIES
   readonly items = inject(TOP_BAR_OPTION_ITEM_TOKEN);
+  readonly store = inject(LAYOUT_OPTION_STORE_TOKEN);
   readonly menuText = inject(TOP_BAR_OPTION_MENU_TEXT_TOKEN);
 
   // PUBLIC PROPERTIES
   openUserDropdown = false;
+
+  // PUBLIC METHODS
+  onClick(item: TopBarItem): void {
+    item.action?.(this.store);
+  }
 }
