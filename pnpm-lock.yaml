@@ -42,32 +42,32 @@ dependencies:
     specifier: 15.9.7
     version: 15.9.7(@angular-devkit/build-angular@15.2.10)(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@schematics/angular@15.2.10)(@types/node@16.11.7)(cypress@12.17.4)(eslint@8.15.0)(nx@15.9.7)(rxjs@7.8.1)(typescript@4.9.5)
   '@taiga-ui/addon-charts':
-    specifier: 3.26.0
-    version: 3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)
   '@taiga-ui/addon-mobile':
-    specifier: 3.26.0
-    version: 3.26.0(@angular/cdk@15.2.9)(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/kit@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular/cdk@15.2.9)(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/kit@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
   '@taiga-ui/addon-table':
-    specifier: 3.26.0
-    version: 3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/intersection-observer@3.2.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/i18n@3.26.0)(@taiga-ui/kit@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/intersection-observer@3.2.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/i18n@3.27.0)(@taiga-ui/kit@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
   '@taiga-ui/cdk':
-    specifier: 3.26.0
-    version: 3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
   '@taiga-ui/core':
-    specifier: 3.26.0
-    version: 3.26.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
   '@taiga-ui/i18n':
-    specifier: 3.26.0
-    version: 3.26.0(@angular/core@15.2.10)(rxjs@7.8.1)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular/core@15.2.10)(rxjs@7.8.1)
   '@taiga-ui/icons':
-    specifier: 3.26.0
-    version: 3.26.0
+    specifier: ~3.27.0
+    version: 3.27.0
   '@taiga-ui/kit':
-    specifier: 3.26.0
-    version: 3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+    specifier: ~3.27.0
+    version: 3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
   '@taiga-ui/styles':
-    specifier: 3.26.0
-    version: 3.26.0
+    specifier: ~3.27.0
+    version: 3.27.0
   '@tinkoff/ng-dompurify':
     specifier: 4.0.0
     version: 4.0.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(@types/dompurify@3.0.5)(dompurify@3.0.6)
@@ -3588,6 +3588,35 @@ packages:
   /@leichtgewicht/ip-codec@2.0.4:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
 
+  /@maskito/angular@0.11.1(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@maskito/core@0.11.1)(rxjs@7.8.1):
+    resolution: {integrity: sha512-80V4FT2jHv+VrJA2gRJpvWvbYVJvPHHoS0ZDqt8DZO/ejWe2SJP3+i/tFHar3i423tXk59dBLp0ahfwkaaNN1A==}
+    peerDependencies:
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@angular/forms': '>=12.0.0'
+      '@maskito/core': ^0.11.1
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/common': 15.2.10(@angular/core@15.2.10)(rxjs@7.8.1)
+      '@angular/core': 15.2.10(rxjs@7.8.1)(zone.js@0.12.0)
+      '@angular/forms': 15.2.10(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@maskito/core': 0.11.1
+      rxjs: 7.8.1
+      tslib: 2.6.2
+    dev: false
+
+  /@maskito/core@0.11.1:
+    resolution: {integrity: sha512-8wPNVvlf+q1g4KF1By++eppIZxYs0XWCd/dzvtbfLQRwPXIPTnp9Cm8yWFPGbUVkfA5znkpk5OiiCLzkuYYg7A==}
+    dev: false
+
+  /@maskito/kit@0.11.1(@maskito/core@0.11.1):
+    resolution: {integrity: sha512-5P+WC/oP9Cwk2aEyxGLpy934jpOwagvm2wLGGfNLZ7D0WaXSuDtXJGizG0Yt6EOnx3/EdChwI3WcmdLhDKK+bQ==}
+    peerDependencies:
+      '@maskito/core': ^0.11.1
+    dependencies:
+      '@maskito/core': 0.11.1
+    dev: false
+
   /@ng-web-apis/common@2.1.0(@angular/common@15.2.10)(@angular/core@15.2.10)(rxjs@7.8.1):
     resolution: {integrity: sha512-6DLtrsk59z9YwfR8Pm1DiExXpxvMk/RVry/mfsAKkyRmgCGICgDdyQ+eWMVhrOIyUAtt9V+DRvHUeC6iYaHKNQ==}
     peerDependencies:
@@ -4420,35 +4449,35 @@ packages:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  /@taiga-ui/addon-charts@3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0):
-    resolution: {integrity: sha512-nkAzI+B4CcPogUrpEwANu3D8n3cJzuIakF//8MyOzxvg0S4olpL81t9/Mx4+zyXxqjVTaU8q2a/rJNaV+7SyRg==}
+  /@taiga-ui/addon-charts@3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0):
+    resolution: {integrity: sha512-PZMwRl8pcbF1UcRXzrnzF6rcdg6ZMHSdiF7Q2VUO8Q39GFguyYNYIFdkRHOLvh1wbsXQKoSxho72RN2yeEybCA==}
     peerDependencies:
       '@angular/common': '>=12.0.0'
       '@angular/core': '>=12.0.0'
       '@ng-web-apis/common': '>=2.0.0'
-      '@taiga-ui/cdk': '>=3.26.0'
-      '@taiga-ui/core': '>=3.26.0'
+      '@taiga-ui/cdk': '>=3.27.0'
+      '@taiga-ui/core': '>=3.27.0'
       '@tinkoff/ng-polymorpheus': '>=4.0.0'
     dependencies:
       '@angular/common': 15.2.10(@angular/core@15.2.10)(rxjs@7.8.1)
       '@angular/core': 15.2.10(rxjs@7.8.1)(zone.js@0.12.0)
       '@ng-web-apis/common': 3.0.6(@angular/common@15.2.10)(@angular/core@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/cdk': 3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/core': 3.26.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+      '@taiga-ui/cdk': 3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/core': 3.27.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
       '@tinkoff/ng-polymorpheus': 4.3.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/addon-mobile@3.26.0(@angular/cdk@15.2.9)(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/kit@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-kBnsvWoQw8BXq7Eoj97AcioPcF29i1QNCmU9d2hh0vlEbXydKdtMM9/bEyCW4FI7FQOQi4p1f3ZCw/YVWAE4cw==}
+  /@taiga-ui/addon-mobile@3.27.0(@angular/cdk@15.2.9)(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/kit@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
+    resolution: {integrity: sha512-iXlCfZ7qdIEQEfaSPGcEQ6PumMjloDOPWbG1zkcsEQYfsSoWhIX6ZZmrWfbNtPjNuBtiocGOVoXYArRvw5bzHA==}
     peerDependencies:
       '@angular/cdk': '>=12.0.0'
       '@angular/common': '>=12.0.0'
       '@angular/core': '>=12.0.0'
       '@ng-web-apis/common': '>=2.0.0'
-      '@taiga-ui/cdk': '>=3.26.0'
-      '@taiga-ui/core': '>=3.26.0'
-      '@taiga-ui/kit': '>=3.26.0'
+      '@taiga-ui/cdk': '>=3.27.0'
+      '@taiga-ui/core': '>=3.27.0'
+      '@taiga-ui/kit': '>=3.27.0'
       '@tinkoff/ng-polymorpheus': '>=4.0.0'
       rxjs: '>=6.0.0'
     dependencies:
@@ -4456,41 +4485,41 @@ packages:
       '@angular/common': 15.2.10(@angular/core@15.2.10)(rxjs@7.8.1)
       '@angular/core': 15.2.10(rxjs@7.8.1)(zone.js@0.12.0)
       '@ng-web-apis/common': 3.0.6(@angular/common@15.2.10)(@angular/core@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/cdk': 3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/core': 3.26.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
-      '@taiga-ui/kit': 3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+      '@taiga-ui/cdk': 3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/core': 3.27.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+      '@taiga-ui/kit': 3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
       '@tinkoff/ng-polymorpheus': 4.3.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/addon-table@3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/intersection-observer@3.2.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/i18n@3.26.0)(@taiga-ui/kit@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-J6Qonm47KRZZQD2Lp3kT3Fy8vEqJlOPEaYGc+mYrzsdRbdsuiWoifYLZL4AcNEZQmYtCpTSPSFZpu56d0BHSaw==}
+  /@taiga-ui/addon-table@3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/intersection-observer@3.2.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/i18n@3.27.0)(@taiga-ui/kit@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
+    resolution: {integrity: sha512-BWXUgP4okDuLTDNcCjZ4Cw4x/3+sV8rcYPt+kzFsjD1yN5B3ASKN6DPGDo/Is1F46Qps8hmOrGvOHAKWyX9BiA==}
     peerDependencies:
       '@angular/common': '>=12.0.0'
       '@angular/core': '>=12.0.0'
       '@ng-web-apis/intersection-observer': '>=3.0.0'
-      '@taiga-ui/cdk': '>=3.26.0'
-      '@taiga-ui/core': '>=3.26.0'
-      '@taiga-ui/i18n': '>=3.26.0'
-      '@taiga-ui/kit': '>=3.26.0'
+      '@taiga-ui/cdk': '>=3.27.0'
+      '@taiga-ui/core': '>=3.27.0'
+      '@taiga-ui/i18n': '>=3.27.0'
+      '@taiga-ui/kit': '>=3.27.0'
       '@tinkoff/ng-polymorpheus': '>=4.0.0'
       rxjs: '>=6.0.0'
     dependencies:
       '@angular/common': 15.2.10(@angular/core@15.2.10)(rxjs@7.8.1)
       '@angular/core': 15.2.10(rxjs@7.8.1)(zone.js@0.12.0)
       '@ng-web-apis/intersection-observer': 3.2.0(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)
-      '@taiga-ui/cdk': 3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/core': 3.26.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
-      '@taiga-ui/i18n': 3.26.0(@angular/core@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/kit': 3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+      '@taiga-ui/cdk': 3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/core': 3.27.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+      '@taiga-ui/i18n': 3.27.0(@angular/core@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/kit': 3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
       '@tinkoff/ng-polymorpheus': 4.3.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/cdk@3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1):
-    resolution: {integrity: sha512-vd2CMQ/Z6bhzCQSBSHjSoCIJEE2g4RKmjl3RBK/OdA/L46s9/nQS8oTRBG8I0zk8lNx7YHqqC6u9IY6BZgOeAg==}
+  /@taiga-ui/cdk@3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1):
+    resolution: {integrity: sha512-53XLDaQzStpjTV7a4X8658YVlaG7bp1JG4cgIamexylXwkWdsHa9o9KnFFOgsGO5I7heiQ2+kotKPWg7sgUwuQ==}
     peerDependencies:
       '@angular/animations': '>=12.0.0'
       '@angular/common': '>=12.0.0'
@@ -4510,7 +4539,7 @@ packages:
       rxjs: 7.8.1
       tslib: 2.5.0
     optionalDependencies:
-      ng-morph: 2.2.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)
+      ng-morph: 2.2.4(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)
       parse5: 6.0.1
     transitivePeerDependencies:
       - '@angular-devkit/core'
@@ -4518,8 +4547,8 @@ packages:
       - '@angular/platform-browser'
     dev: false
 
-  /@taiga-ui/core@3.26.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-+IYn0ssZ3dO8Cm1HYAtbL5t+dvhp0RVzljdS72HBcr7IsnEhr2UDWWvsLv4DqsG4tXigWq6sL9wjXqg6/ylH4g==}
+  /@taiga-ui/core@3.27.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
+    resolution: {integrity: sha512-kXODpMjhxR+4YcdEFVpVaC++G7scMCSuSKPuXXoOCWtEZsQTp/pvSCCxcg951/lLRyh0MkzvEHyz7a8BKikgog==}
     peerDependencies:
       '@angular/animations': '>=12.0.0'
       '@angular/common': '>=12.0.0'
@@ -4529,8 +4558,8 @@ packages:
       '@angular/router': '>=12.0.0'
       '@ng-web-apis/common': '>=2.0.0'
       '@ng-web-apis/mutation-observer': '>=2.0.0'
-      '@taiga-ui/cdk': '>=3.26.0'
-      '@taiga-ui/i18n': '>=3.26.0'
+      '@taiga-ui/cdk': '>=3.27.0'
+      '@taiga-ui/i18n': '>=3.27.0'
       '@tinkoff/ng-event-plugins': '>=3.1.0'
       '@tinkoff/ng-polymorpheus': '>=4.0.0'
       rxjs: '>=6.0.0'
@@ -4543,16 +4572,16 @@ packages:
       '@angular/router': 15.2.10(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
       '@ng-web-apis/common': 3.0.6(@angular/common@15.2.10)(@angular/core@15.2.10)(rxjs@7.8.1)
       '@ng-web-apis/mutation-observer': 3.1.0(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)
-      '@taiga-ui/cdk': 3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/i18n': 3.26.0(@angular/core@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/cdk': 3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/i18n': 3.27.0(@angular/core@15.2.10)(rxjs@7.8.1)
       '@tinkoff/ng-event-plugins': 3.1.1(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
       '@tinkoff/ng-polymorpheus': 4.3.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/i18n@3.26.0(@angular/core@15.2.10)(rxjs@7.8.1):
-    resolution: {integrity: sha512-pI8IIQPYe3I7f/HQ4prCNpttEzwR1VA6ooJoaygVcSQDS8KVr03yyl9RBUzKpl57vnemuduVdfqM9LxX4bPeWQ==}
+  /@taiga-ui/i18n@3.27.0(@angular/core@15.2.10)(rxjs@7.8.1):
+    resolution: {integrity: sha512-orOoo4CeecBc4GVMFcMhwvYo83wsudgtbnEbmFecE2NZO3wdntjOGE/TNpVM28JinO3uL5yabgDTd3UaxK6NSw==}
     peerDependencies:
       '@angular/core': '>=12.0.0'
       rxjs: '>=6.0.0'
@@ -4562,14 +4591,14 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/icons@3.26.0:
-    resolution: {integrity: sha512-q42C7LYqmOEf1P6GZPl6we5YZe9dboke4kNmbSYxWMT1EWCsgPWK8QmK02BsDeltUwSp7cnCP7jGZG1lkbuzKg==}
+  /@taiga-ui/icons@3.27.0:
+    resolution: {integrity: sha512-uXMe4B3cMgJ1qLfezsrOxvsHD9Bw6y39921GFMvlpeIwSEnXMc/rn1wEQpyd6Qo1Ib9AfFWHRDhBa7NPGnXllA==}
     dependencies:
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/kit@3.26.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.26.0)(@taiga-ui/core@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
-    resolution: {integrity: sha512-Sdp9FKSi/+C2PgirSLr03YQNyboewhFOaFRtT6cBXzscHJLfTWLSv6nNq1kMDLueVTtuPJjksAXsHj+fpnWIiQ==}
+  /@taiga-ui/kit@3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@ng-web-apis/resize-observer@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1):
+    resolution: {integrity: sha512-2YYiku5wXCr1XeqZHnOgLTH4o3rW3EsCx5O8FRSy2LCtkGFLfLemV7E8x1WQqYzOlTW7cCa2goo+K1NMrUWfMQ==}
     peerDependencies:
       '@angular/common': '>=12.0.0'
       '@angular/core': '>=12.0.0'
@@ -4578,9 +4607,9 @@ packages:
       '@ng-web-apis/common': '>=2.0.0'
       '@ng-web-apis/mutation-observer': '>=2.0.0'
       '@ng-web-apis/resize-observer': '>=2.0.0'
-      '@taiga-ui/cdk': '>=3.26.0'
-      '@taiga-ui/core': '>=3.26.0'
-      '@taiga-ui/i18n': '>=3.26.0'
+      '@taiga-ui/cdk': '>=3.27.0'
+      '@taiga-ui/core': '>=3.27.0'
+      '@taiga-ui/i18n': '>=3.27.0'
       '@tinkoff/ng-polymorpheus': '>=4.0.0'
       rxjs: '>=6.0.0'
     dependencies:
@@ -4588,21 +4617,24 @@ packages:
       '@angular/core': 15.2.10(rxjs@7.8.1)(zone.js@0.12.0)
       '@angular/forms': 15.2.10(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
       '@angular/router': 15.2.10(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@maskito/angular': 0.11.1(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@maskito/core@0.11.1)(rxjs@7.8.1)
+      '@maskito/core': 0.11.1
+      '@maskito/kit': 0.11.1(@maskito/core@0.11.1)
       '@ng-web-apis/common': 3.0.6(@angular/common@15.2.10)(@angular/core@15.2.10)(rxjs@7.8.1)
       '@ng-web-apis/intersection-observer': 3.0.0(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)
       '@ng-web-apis/mutation-observer': 3.1.0(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)
       '@ng-web-apis/resize-observer': 3.0.6(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)
-      '@taiga-ui/cdk': 3.26.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
-      '@taiga-ui/core': 3.26.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.26.0)(@taiga-ui/i18n@3.26.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
-      '@taiga-ui/i18n': 3.26.0(@angular/core@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/cdk': 3.27.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(rxjs@7.8.1)
+      '@taiga-ui/core': 3.27.0(@angular/animations@15.2.10)(@angular/common@15.2.10)(@angular/core@15.2.10)(@angular/forms@15.2.10)(@angular/platform-browser@15.2.10)(@angular/router@15.2.10)(@ng-web-apis/common@3.0.6)(@ng-web-apis/mutation-observer@3.1.0)(@taiga-ui/cdk@3.27.0)(@taiga-ui/i18n@3.27.0)(@tinkoff/ng-event-plugins@3.1.1)(@tinkoff/ng-polymorpheus@4.3.0)(rxjs@7.8.1)
+      '@taiga-ui/i18n': 3.27.0(@angular/core@15.2.10)(rxjs@7.8.1)
       '@tinkoff/ng-polymorpheus': 4.3.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)
       rxjs: 7.8.1
       text-mask-core: 5.1.2
       tslib: 2.6.2
     dev: false
 
-  /@taiga-ui/styles@3.26.0:
-    resolution: {integrity: sha512-TjNI0cHAx5zHusWa5tXF+QH98TO/doQsoUy3zfzru1LxbbKsX1MEVVZNjCwhOFRaCHJGo0KSJUuKJWUIvD+Zow==}
+  /@taiga-ui/styles@3.27.0:
+    resolution: {integrity: sha512-nHs5A4JtNwuJTrymqFG5X2JQDEGCoFQKXiLwGRK1rmWUgERkVqFI7+pcc/gCkzMlcwKmi6ypT8+yd6Yw+ODheg==}
     dev: false
 
   /@tinkoff/ng-dompurify@4.0.0(@angular/core@15.2.10)(@angular/platform-browser@15.2.10)(@types/dompurify@3.0.5)(dompurify@3.0.6):
@@ -10156,8 +10188,8 @@ packages:
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  /ng-morph@2.2.0(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10):
-    resolution: {integrity: sha512-0CEswQ+QrxPBWv1dBBu/N6idk0wIXkdFmqk+GW55/Ta7DJTKMCPZLVGXpp+Lia9XF55vVyxnOBw9J3QNN2Dv5A==}
+  /ng-morph@2.2.4(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10):
+    resolution: {integrity: sha512-4AIsjcvUAT6htnX56DsUPZDQuNhWxmi09exUS6TreD6hKghGuqT3QfRf+K9aFw1FJyCsLsh/0py3S/sMtarsIA==}
     requiresBuild: true
     peerDependencies:
       '@angular-devkit/core': '>=11.0.0'
