@@ -1,0 +1,83 @@
+<ng-container *ngrxLet="isCreateMode$ as isCreateMode">
+  <ng-container *ngrxLet="obs$ as obs">
+    <tui-island *ngIf="form" [formGroup]="form" size="l">
+      <h3 class="text-2xl font-bold">
+        {{ isCreateMode ? "Tạo kỳ thi mới" : "Chỉnh sửa thông tin kỳ thi" }}
+      </h3>
+
+      <ng-container
+        *ngrxLet="
+          obs.examination?.status === ExaminationStatus.Closed as isReadonly
+        "
+      >
+        <label tuiLabel="Tên kỳ thi *">
+          <tui-input
+            formControlName="name"
+            [tuiTextfieldLabelOutside]="true"
+            [readOnly]="isReadonly"
+          >
+            Kỳ thi kết thúc học phần...
+          </tui-input>
+          <tui-error
+            formControlName="name"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </label>
+
+        <label tuiLabel="Mã kỳ thi">
+          <tui-input
+            formControlName="displayId"
+            [tuiTextfieldLabelOutside]="true"
+            [readOnly]="isReadonly"
+          >
+            Tên viết tắt của kỳ thi (tùy chọn)
+          </tui-input>
+        </label>
+
+        <label tuiLabel="Mô tả">
+          <tui-input
+            formControlName="description"
+            [tuiTextfieldLabelOutside]="true"
+            [readOnly]="isReadonly"
+          >
+            Tóm tắt nội dung (tùy chọn)
+          </tui-input>
+        </label>
+
+        <label tuiLabel=" Khoảng thời gian dự kiến">
+          <tui-input-date-range
+            formControlName="expectedDateRange"
+            [tuiTextfieldLabelOutside]="true"
+            [readOnly]="isReadonly"
+          >
+            Thời gian diễn ra (tùy chọn)
+          </tui-input-date-range>
+        </label>
+      </ng-container>
+
+      <div class="flex justify-end">
+        <button
+          tuiButton
+          *ngIf="obs.examination?.status !== ExaminationStatus.Closed"
+          (click)="isCreateMode ? onCreate() : onUpdate()"
+          [showLoader]="obs.status === 'loading'"
+          [disabled]="form.invalid"
+          icon="tuiIconCheckLarge"
+        >
+          Hoàn thành
+        </button>
+      </div>
+    </tui-island>
+
+    <tui-island
+      *ngIf="
+        !isCreateMode &&
+        !!obs.examination &&
+        obs.examination.status !== ExaminationStatus.Closed
+      "
+      class="mt-5"
+    >
+      <esm-examination-edit-finish-examination></esm-examination-edit-finish-examination>
+    </tui-island>
+  </ng-container>
+</ng-container>

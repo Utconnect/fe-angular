@@ -1,7 +1,4 @@
 {
-  "cSpell.words": [
-    "utconnect"
-  ],
-  "terminal.integrated.cwd": "${workspaceFolder}/angular",
-  "emmet.showExpandedAbbreviation": "never"
+  "cSpell.words": ["utconnect"],
+  "emmet.showExpandedAbbreviation": "never",
 }

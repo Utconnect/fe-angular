@@ -1,0 +1,71 @@
+<tui-scrollbar class="w-full h-full border-r border-tui-base-03">
+  <ng-container *ngFor="let item of options.items">
+    <ng-container *utconnectRole="role; accept item.roles">
+      <!-- Accordion item -->
+      <tui-accordion-item
+        *ngIf="item.subItems; else link"
+        [nativeId]="item.name"
+        [borders]="null"
+        size="s"
+        class="!rounded-none"
+      >
+        <!-- Accordion title -->
+        <span class="icon-wrapper inline-block">
+          <div class="flex">
+            <i [class]="item.icon" class="mx-auto"></i>
+          </div>
+        </span>
+        <strong>{{ item.name }}</strong>
+
+        <!-- Accordion content -->
+        <ng-template tuiAccordionItemContent>
+          <div class="sub-item -mt-4 -mb-2">
+            <div
+              [class.border-l-2]="item.subItems"
+              (click)="$event.stopPropagation()"
+              class="my-2 pl-3 border-tui-base-03"
+            >
+              <ng-container *ngFor="let subItem of item.subItems">
+                <a
+                  tuiLink
+                  *utconnectRole="role; accept subItem.roles"
+                  [routerLink]="subItem.routerLink"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  tuiMode="onLight"
+                  routerLinkActive="!text-tui-base-09"
+                  iconAlign="left"
+                  class="block !pt-2 leading-6 w-fit"
+                >
+                  <span class="inline-block">
+                    <div class="flex w-6 h-6">
+                      <i [class]="subItem.icon" class="block mx-auto"></i>
+                    </div>
+                  </span>
+                  {{ subItem.name }}
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </ng-template>
+      </tui-accordion-item>
+
+      <!-- Link -->
+      <ng-template #link>
+        <a
+          tuiLink
+          [routerLink]="item.routerLink ?? ''"
+          [routerLinkActiveOptions]="{ exact: item.exactRouterLink ?? true }"
+          routerLinkActive="!bg-tui-base-03"
+          class="block !px-3 !py-2.5 bg-white !text-tui-text-01 hover:bg-tui-base-02"
+        >
+          <span class="icon-wrapper inline-block">
+            <div class="flex">
+              <i [class]="item.icon" class="block mx-auto"></i>
+            </div>
+          </span>
+          <strong>{{ item.name }}</strong>
+        </a>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</tui-scrollbar>

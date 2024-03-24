@@ -1,0 +1,14 @@
+<h3 class="text-2xl font-bold">Kỳ thi đã diễn ra xong?</h3>
+
+<div class="flex justify-end">
+  <button
+    *ngrxLet="status$ as status"
+    tuiButton
+    (click)="onFinish()"
+    [showLoader]="status === 'loading'"
+    appearance="accent"
+    icon="tuiIconCheckLarge"
+  >
+    Kết thúc kỳ thi
+  </button>
+</div>

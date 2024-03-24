@@ -1,0 +1,13 @@
+<div class="wrapper w-screen h-screen grid">
+  <utconnect-top-bar class="col-start-1 col-span-2"></utconnect-top-bar>
+  <utconnect-side-bar
+    [role]="role"
+    [class.!hidden]="isInCommonPage$.value"
+    class="hidden lg:block"
+  ></utconnect-side-bar>
+  <utconnect-main-view
+    [isInCommonPage]="isInCommonPage$.value"
+    [class.col-span-2]="isInCommonPage$.value"
+    class="max-h-main-view-h"
+  ></utconnect-main-view>
+</div>
