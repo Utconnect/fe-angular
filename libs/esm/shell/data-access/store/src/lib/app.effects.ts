@@ -17,7 +17,7 @@ export class EsmEffects {
   private readonly router = inject(Router);
   private readonly actions$ = inject(Actions);
   private readonly authService: EsmAuthService = inject(
-    AUTH_SERVICE_TOKEN
+    AUTH_SERVICE_TOKEN,
   ) as EsmAuthService;
   private readonly esmStore = inject(Store<EsmState>);
   private readonly tokenService = inject(TokenService);
@@ -37,9 +37,9 @@ export class EsmEffects {
         }
         return this.authService.getMySummaryInfo().pipe(
           map(({ data }) => EsmApiAction.getUserInfoSuccessful({ user: data })),
-          catchError(() => of(EsmApiAction.getUserInfoFailed()))
+          catchError(() => of(EsmApiAction.getUserInfoFailed())),
         );
-      })
+      }),
     );
   });
 
@@ -50,10 +50,10 @@ export class EsmEffects {
         tap(() => {
           this.tokenService.clear();
           this.router.navigate(['/login']).catch(() => null);
-        })
+        }),
       );
     },
-    { dispatch: false }
+    { dispatch: false },
   );
 
   readonly getRelatedExaminations$ = createEffect(() => {
@@ -64,11 +64,11 @@ export class EsmEffects {
           map(({ data: relatedExaminations }) =>
             EsmApiAction.getRelatedExaminationsSuccessful({
               relatedExaminations,
-            })
+            }),
           ),
-          catchError(() => of(EsmApiAction.getRelatedExaminationsFailed()))
+          catchError(() => of(EsmApiAction.getRelatedExaminationsFailed())),
         );
-      })
+      }),
     );
   });
 
@@ -78,11 +78,11 @@ export class EsmEffects {
       mergeMap(() => {
         return this.facultyService.getAllFaculty().pipe(
           map(({ data: departments }) =>
-            EsmApiAction.getDepartmentsSuccessful({ departments })
+            EsmApiAction.getDepartmentsSuccessful({ departments }),
           ),
-          catchError(() => of(EsmApiAction.getDepartmentsFailed()))
+          catchError(() => of(EsmApiAction.getDepartmentsFailed())),
         );
-      })
+      }),
     );
   });
 
@@ -107,10 +107,10 @@ export class EsmEffects {
           }
 
           return of(null);
-        })
+        }),
       );
     },
-    { dispatch: false }
+    { dispatch: false },
   );
 
   readonly changeExaminationId$ = createEffect(() => {
@@ -119,11 +119,11 @@ export class EsmEffects {
       mergeMap(({ id }) => {
         if (id === null) {
           return of(
-            EsmApiAction.getExaminationSuccessful({ examination: null })
+            EsmApiAction.getExaminationSuccessful({ examination: null }),
           );
         }
         return of(EsmPageAction.getExaminationSummary({ id }));
-      })
+      }),
     );
   });
 
@@ -133,11 +133,11 @@ export class EsmEffects {
       mergeMap(({ id }) => {
         return this.examinationService.getSummary(id).pipe(
           map(({ data: examination }) =>
-            EsmApiAction.getExaminationSuccessful({ examination })
+            EsmApiAction.getExaminationSuccessful({ examination }),
           ),
-          catchError(() => of(EsmApiAction.getExaminationFailed()))
+          catchError(() => of(EsmApiAction.getExaminationFailed())),
         );
-      })
+      }),
     );
   });
 }

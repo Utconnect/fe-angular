@@ -36,8 +36,8 @@ describe('LoginComponent', () => {
         if (control !== 'validator') {
           expect(
             form.controls[control as keyof typeof form.controls].hasValidator(
-              Validators.required
-            )
+              Validators.required,
+            ),
           ).toEqual(true);
         }
       }

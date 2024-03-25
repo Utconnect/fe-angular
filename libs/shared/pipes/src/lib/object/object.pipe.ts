@@ -9,7 +9,7 @@ type Method = 'entries' | 'values';
 export class ObjectPipe<T extends object> implements PipeTransform {
   transform(
     value: Record<string, T>,
-    method: 'entries'
+    method: 'entries',
   ): { key: string; value: T }[];
   transform(value: T, method: 'entries'): { key: string; value: unknown }[];
   transform(value: Record<string, T>, method: 'values'): T[];

@@ -1448,14 +1448,6 @@ export type GetAllGroupsData =
 export type GetAllShiftsData =
   ESMApplicationCommonModelsResultSystemCollectionsGenericListESMApplicationExaminationsQueriesGetAllShiftsGetAllShiftDto;
 
-export type GetAllTeacherData =
-  ESMApplicationCommonModelsResultSystemCollectionsGenericIEnumerableESMApplicationTeachersQueriesGetGetDto;
-
-export interface GetAllTeacherQuery {
-  IsFaculty?: boolean;
-  IsInvigilator?: boolean;
-}
-
 export type GetAvailableInvigilatorsInShiftGroupData =
   ESMApplicationCommonModelsResultESMApplicationExaminationsQueriesGetAvailableInvigilatorsInGroupsGetAvailableInvigilatorsInGroupsDto;
 
@@ -1486,6 +1478,16 @@ export type GetStatisticData =
 
 export type GetSummaryData =
   ESMApplicationCommonModelsResultESMDomainDtosExaminationExaminationSummary;
+
+export type GetTeachersData =
+  ESMApplicationCommonModelsResultSystemCollectionsGenericIEnumerableESMApplicationTeachersQueriesGetGetDto;
+
+export interface GetTeachersQuery {
+  /** @format uuid */
+  FacultyId?: string;
+  IsFaculty?: boolean;
+  IsInvigilator?: boolean;
+}
 
 export type GetTemporaryDataData =
   ESMApplicationCommonModelsResultESMApplicationCommonModelsPaginatedListESMDomainEntitiesExaminationData;

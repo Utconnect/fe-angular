@@ -19,9 +19,11 @@ export class HomeStore extends ComponentStore<HomeState> {
   private readonly examinationService = inject(ExaminationService);
 
   // STATE SELECTORS
-  private readonly closedExaminations$ = this.select(s => s.closedExaminations);
+  private readonly closedExaminations$ = this.select(
+    (s) => s.closedExaminations,
+  );
   private readonly closedExaminationsStatus$ = this.select(
-    s => s.closedExaminationsStatus
+    (s) => s.closedExaminationsStatus,
   );
 
   // GLOBAL SELECTORS
@@ -50,18 +52,18 @@ export class HomeStore extends ComponentStore<HomeState> {
         closedExaminationsStatus,
         relatedExaminations,
         relatedStatus,
-      })
-    )
+      }),
+    ),
   );
 
   // EFFECTS
-  readonly getClosedExaminations = this.effect<void>(params$ =>
+  readonly getClosedExaminations = this.effect<void>((params$) =>
     params$.pipe(
       tap(() =>
         this.patchState({
           closedExaminationsStatus: 'loading',
           closedExaminationsError: null,
-        })
+        }),
       ),
       switchMap(() =>
         this.examinationService.getRelated({ IsActive: false }).pipe(
@@ -72,15 +74,15 @@ export class HomeStore extends ComponentStore<HomeState> {
                 closedExaminationsStatus: 'success',
                 closedExaminationsError: null,
               }),
-            error =>
+            (error) =>
               this.patchState({
                 closedExaminationsStatus: 'error',
                 closedExaminationsError: error as string,
-              })
-          )
-        )
-      )
-    )
+              }),
+          ),
+        ),
+      ),
+    ),
   );
 
   // CONSTRUCTOR

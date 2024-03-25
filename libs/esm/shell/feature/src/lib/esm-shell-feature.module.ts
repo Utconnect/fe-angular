@@ -43,14 +43,14 @@ export const routes: Routes = [
     },
     loadChildren: async () => (await import('@esm/examination')).ROUTES,
   },
-  //     {
-  //       path: 'data',
-  //       canActivate: [permissionGuard],
-  //       data: {
-  //         roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-  //       },
-  //       loadChildren: async () => (await import('./data/data.routing')).ROUTES,
-  //     },
+  {
+    path: 'data',
+    canActivate: [permissionGuard],
+    data: {
+      roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+    },
+    loadChildren: async () => (await import('./data/data.routing')).ROUTES,
+  },
   //     {
   //       path: 'notification',
   //       loadChildren: async () =>

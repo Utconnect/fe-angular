@@ -1,0 +1,13 @@
+<%
+const { utils, route, apiClassName } = it;
+const { type } = route.response;
+
+%>
+<%~ route.routeName.usage %>Successful = createAction(
+  '[<%~ apiClassName %>/API] <%~ route.routeName.usage %> Successful',
+  props<{data: <%~ type %>['data']}>()
+)
+
+<%~ route.routeName.usage %>Failed = createAction(
+  '[<%~ apiClassName %>/API] <%~ route.routeName.usage %> Failed'
+)

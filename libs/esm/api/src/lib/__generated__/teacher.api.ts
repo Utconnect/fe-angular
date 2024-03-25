@@ -11,14 +11,14 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { ObjectHelper } from '@utconnect/helpers';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   ESMApplicationTeachersCommandsUpdateUpdateRequest,
-  GetAllTeacherData,
-  GetAllTeacherQuery,
+  GetTeachersData,
+  GetTeachersQuery,
   SearchData,
   SearchQuery,
   UpdateInfoData,
@@ -30,7 +30,7 @@ import {
 export class TeacherService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -39,12 +39,12 @@ export class TeacherService {
    * No description
    *
    * @tags Teacher
-   * @name GetAllTeacher
+   * @name GetTeachers
    * @request GET:/Teacher
-   * @response `200` `GetAllTeacherData` Success
+   * @response `200` `GetTeachersData` Success
    */
-  getAllTeacher(query: GetAllTeacherQuery): Observable<GetAllTeacherData> {
-    return this.http.get<GetAllTeacherData>(this.url + `/Teacher`, {
+  getTeachers(query: GetTeachersQuery): Observable<GetTeachersData> {
+    return this.http.get<GetTeachersData>(this.url + `/Teacher`, {
       params: ObjectHelper.removeUndefinedField(query),
     });
   }
@@ -73,33 +73,33 @@ export class TeacherService {
    */
   updateInfo(
     teacherId: string,
-    data: ESMApplicationTeachersCommandsUpdateUpdateRequest
+    data: ESMApplicationTeachersCommandsUpdateUpdateRequest,
   ): Observable<UpdateInfoData> {
     return this.http.put<UpdateInfoData>(
       this.url + `/Teacher/${teacherId}`,
-      data
+      data,
     );
   }
 }
 
 export class TeacherApiAction {
-  getAllTeacherSuccessful = createAction(
-    '[Teacher/API] getAllTeacher Successful',
-    props<{ data: GetAllTeacherData['data'] }>()
+  getTeachersSuccessful = createAction(
+    '[Teacher/API] getTeachers Successful',
+    props<{ data: GetTeachersData['data'] }>(),
   );
 
-  getAllTeacherFailed = createAction('[Teacher/API] getAllTeacher Failed');
+  getTeachersFailed = createAction('[Teacher/API] getTeachers Failed');
 
   searchSuccessful = createAction(
     '[Teacher/API] search Successful',
-    props<{ data: SearchData['data'] }>()
+    props<{ data: SearchData['data'] }>(),
   );
 
   searchFailed = createAction('[Teacher/API] search Failed');
 
   updateInfoSuccessful = createAction(
     '[Teacher/API] updateInfo Successful',
-    props<{ data: UpdateInfoData['data'] }>()
+    props<{ data: UpdateInfoData['data'] }>(),
   );
 
   updateInfoFailed = createAction('[Teacher/API] updateInfo Failed');

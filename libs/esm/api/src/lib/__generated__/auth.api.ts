@@ -11,10 +11,10 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { ObjectHelper } from '@utconnect/helpers';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   ChangePasswordData,
   ESMApplicationAuthCommandsChangePasswordChangePasswordCommand,
@@ -24,13 +24,14 @@ import {
   ResetPasswordData,
   ResetPasswordQuery,
 } from './data-contracts';
-import { AuthService } from '@auth';
 
-@Injectable()
-export class EsmAuthService implements AuthService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -39,7 +40,7 @@ export class EsmAuthService implements AuthService {
    * No description
    *
    * @tags Auth
-   * @name changePassword
+   * @name ChangePassword
    * @request PATCH:/Auth/change-password
    * @response `200` `ChangePasswordData` Success
    */
@@ -56,7 +57,7 @@ export class EsmAuthService implements AuthService {
    * No description
    *
    * @tags Auth
-   * @name login
+   * @name Login
    * @request POST:/Auth/login
    * @response `200` `LoginData` Success
    */
@@ -70,7 +71,7 @@ export class EsmAuthService implements AuthService {
    * No description
    *
    * @tags Auth
-   * @name getMySummaryInfo
+   * @name GetMySummaryInfo
    * @request GET:/Auth/me
    * @response `200` `GetMySummaryInfoData` Success
    */
@@ -82,7 +83,7 @@ export class EsmAuthService implements AuthService {
    * No description
    *
    * @tags Auth
-   * @name resetPassword
+   * @name ResetPassword
    * @request PATCH:/Auth/reset-password
    * @response `200` `ResetPasswordData` Success
    */

@@ -11,9 +11,9 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   CreateFacultyData,
   ESMApplicationFacultiesCommandsCreateCreateCommand,
@@ -29,7 +29,7 @@ import {
 export class FacultyService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -55,7 +55,7 @@ export class FacultyService {
    * @response `200` `CreateFacultyData` Success
    */
   createFaculty(
-    data: ESMApplicationFacultiesCommandsCreateCreateCommand
+    data: ESMApplicationFacultiesCommandsCreateCreateCommand,
   ): Observable<CreateFacultyData> {
     return this.http.post<CreateFacultyData>(this.url + `/Faculty`, data);
   }
@@ -70,11 +70,11 @@ export class FacultyService {
    */
   updateFaculty(
     facultyId: string,
-    data: ESMApplicationFacultiesCommandsUpdateUpdateRequest
+    data: ESMApplicationFacultiesCommandsUpdateUpdateRequest,
   ): Observable<UpdateFacultyData> {
     return this.http.put<UpdateFacultyData>(
       this.url + `/Faculty/${facultyId}`,
-      data
+      data,
     );
   }
 
@@ -94,28 +94,28 @@ export class FacultyService {
 export class FacultyApiAction {
   getAllFacultySuccessful = createAction(
     '[Faculty/API] getAllFaculty Successful',
-    props<{ data: GetAllFacultyData['data'] }>()
+    props<{ data: GetAllFacultyData['data'] }>(),
   );
 
   getAllFacultyFailed = createAction('[Faculty/API] getAllFaculty Failed');
 
   createFacultySuccessful = createAction(
     '[Faculty/API] createFaculty Successful',
-    props<{ data: CreateFacultyData['data'] }>()
+    props<{ data: CreateFacultyData['data'] }>(),
   );
 
   createFacultyFailed = createAction('[Faculty/API] createFaculty Failed');
 
   updateFacultySuccessful = createAction(
     '[Faculty/API] updateFaculty Successful',
-    props<{ data: UpdateFacultyData['data'] }>()
+    props<{ data: UpdateFacultyData['data'] }>(),
   );
 
   updateFacultyFailed = createAction('[Faculty/API] updateFaculty Failed');
 
   getUserSuccessful = createAction(
     '[Faculty/API] getUser Successful',
-    props<{ data: GetUserData['data'] }>()
+    props<{ data: GetUserData['data'] }>(),
   );
 
   getUserFailed = createAction('[Faculty/API] getUser Failed');

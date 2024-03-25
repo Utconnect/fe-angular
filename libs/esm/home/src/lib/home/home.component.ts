@@ -11,8 +11,8 @@ import { TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
 import { TuiActionModule } from '@taiga-ui/kit';
 import { HomeStore } from './home.store';
 
-export const NGRX = [LetModule];
-export const TAIGA_UI = [TuiActionModule, TuiLinkModule, TuiLoaderModule];
+const NGRX = [LetModule];
+const TAIGA_UI = [TuiActionModule, TuiLinkModule, TuiLoaderModule];
 
 @Component({
   selector: 'esm-home',

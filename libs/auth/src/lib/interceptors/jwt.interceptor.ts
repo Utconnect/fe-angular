@@ -7,7 +7,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { RedirectService, } from '@utconnect/services';
+import { RedirectService } from '@utconnect/services';
 import { Observable, tap } from 'rxjs';
 import { TokenService } from '../services';
 

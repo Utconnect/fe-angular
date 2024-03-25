@@ -79,11 +79,11 @@ export class LoginComponent implements OnInit {
   private handleStatusChange(): void {
     this.status$
       .pipe(
-        tap(status => {
+        tap((status) => {
           if (status === 'error') {
             this.form.setErrors({ validator: 'Username or password is wrong' });
           }
-        })
+        }),
       )
       .subscribe();
   }

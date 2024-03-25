@@ -11,10 +11,10 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { ObjectHelper } from '@utconnect/helpers';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   AssignInvigilatorNumerateOfShiftToFacultyData,
   AssignInvigilatorNumerateOfShiftToFacultyPayload,
@@ -60,7 +60,7 @@ import {
 export class ExaminationService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -74,11 +74,11 @@ export class ExaminationService {
    * @response `200` `CreateExaminationData` Success
    */
   createExamination(
-    data: ESMApplicationExaminationsCommandsCreateCreateCommand
+    data: ESMApplicationExaminationsCommandsCreateCreateCommand,
   ): Observable<CreateExaminationData> {
     return this.http.post<CreateExaminationData>(
       this.url + `/Examination`,
-      data
+      data,
     );
   }
 
@@ -106,7 +106,7 @@ export class ExaminationService {
    */
   getAllShifts(examinationId: string): Observable<GetAllShiftsData> {
     return this.http.get<GetAllShiftsData>(
-      this.url + `/Examination/${examinationId}`
+      this.url + `/Examination/${examinationId}`,
     );
   }
 
@@ -120,14 +120,14 @@ export class ExaminationService {
    */
   importExamination(
     examinationId: string,
-    data: ImportExaminationPayload
+    data: ImportExaminationPayload,
   ): Observable<ImportExaminationData> {
     const formData = new FormData();
 
     for (const property in data) {
       const d = data[property as keyof ImportExaminationPayload];
       if (Array.isArray(d)) {
-        d.forEach(element => {
+        d.forEach((element) => {
           formData.append(property, element);
         });
       } else if (d !== undefined) {
@@ -137,7 +137,7 @@ export class ExaminationService {
 
     return this.http.post<ImportExaminationData>(
       this.url + `/Examination/${examinationId}`,
-      formData
+      formData,
     );
   }
 
@@ -151,11 +151,11 @@ export class ExaminationService {
    */
   updateExamination(
     examinationId: string,
-    data: ESMApplicationExaminationsCommandsUpdateUpdateParams
+    data: ESMApplicationExaminationsCommandsUpdateUpdateParams,
   ): Observable<UpdateExaminationData> {
     return this.http.patch<UpdateExaminationData>(
       this.url + `/Examination/${examinationId}`,
-      data
+      data,
     );
   }
 
@@ -169,7 +169,7 @@ export class ExaminationService {
    */
   getEvents(examinationId: string): Observable<GetEventsData> {
     return this.http.get<GetEventsData>(
-      this.url + `/Examination/${examinationId}/events`
+      this.url + `/Examination/${examinationId}/events`,
     );
   }
 
@@ -183,7 +183,7 @@ export class ExaminationService {
    */
   getHandoverData(examinationId: string): Observable<GetHandoverDataData> {
     return this.http.get<GetHandoverDataData>(
-      this.url + `/Examination/${examinationId}/handover`
+      this.url + `/Examination/${examinationId}/handover`,
     );
   }
 
@@ -197,7 +197,7 @@ export class ExaminationService {
    */
   getShifts(examinationId: string): Observable<GetShiftsData> {
     return this.http.get<GetShiftsData>(
-      this.url + `/Examination/${examinationId}/shift`
+      this.url + `/Examination/${examinationId}/shift`,
     );
   }
 
@@ -211,11 +211,11 @@ export class ExaminationService {
    */
   assignInvigilatorsToShifts(
     examinationId: string,
-    data: AssignInvigilatorsToShiftsPayload
+    data: AssignInvigilatorsToShiftsPayload,
   ): Observable<AssignInvigilatorsToShiftsData> {
     return this.http.patch<AssignInvigilatorsToShiftsData>(
       this.url + `/Examination/${examinationId}/shift`,
-      data
+      data,
     );
   }
 
@@ -231,11 +231,11 @@ export class ExaminationService {
   updateShiftExamination(
     examinationId: string,
     shiftId: string,
-    data: UpdateShiftExaminationPayload
+    data: UpdateShiftExaminationPayload,
   ): Observable<UpdateShiftExaminationData> {
     return this.http.patch<UpdateShiftExaminationData>(
       this.url + `/Examination/${examinationId}/shift/${shiftId}`,
-      data
+      data,
     );
   }
 
@@ -248,11 +248,11 @@ export class ExaminationService {
    * @response `200` `AutoAssignTeachersToShiftData` Success
    */
   autoAssignTeachersToShift(
-    examinationId: string
+    examinationId: string,
   ): Observable<AutoAssignTeachersToShiftData> {
     return this.http.post<AutoAssignTeachersToShiftData>(
       this.url + `/Examination/${examinationId}/shift/calculate`,
-      {}
+      {},
     );
   }
 
@@ -266,11 +266,11 @@ export class ExaminationService {
    */
   changeStatus(
     examinationId: string,
-    data: ESMApplicationExaminationsCommandsChangeStatusChangeStatusRequest
+    data: ESMApplicationExaminationsCommandsChangeStatusChangeStatusRequest,
   ): Observable<ChangeStatusData> {
     return this.http.post<ChangeStatusData>(
       this.url + `/Examination/${examinationId}/status`,
-      data
+      data,
     );
   }
 
@@ -284,11 +284,11 @@ export class ExaminationService {
    */
   updateExamsCount(
     examinationId: string,
-    data: UpdateExamsCountPayload
+    data: UpdateExamsCountPayload,
   ): Observable<UpdateExamsCountData> {
     return this.http.patch<UpdateExamsCountData>(
       this.url + `/Examination/${examinationId}/exams-number`,
-      data
+      data,
     );
   }
 
@@ -302,10 +302,10 @@ export class ExaminationService {
    */
   getGroupsByFacultyId(
     examinationId: string,
-    facultyId: string
+    facultyId: string,
   ): Observable<GetGroupsByFacultyIdData> {
     return this.http.get<GetGroupsByFacultyIdData>(
-      this.url + `/Examination/${examinationId}/faculty/${facultyId}/group`
+      this.url + `/Examination/${examinationId}/faculty/${facultyId}/group`,
     );
   }
 
@@ -320,11 +320,11 @@ export class ExaminationService {
   updateTeacherAssignment(
     examinationId: string,
     facultyId: string,
-    data: UpdateTeacherAssignmentPayload
+    data: UpdateTeacherAssignmentPayload,
   ): Observable<UpdateTeacherAssignmentData> {
     return this.http.post<UpdateTeacherAssignmentData>(
       this.url + `/Examination/${examinationId}/faculty/${facultyId}/group`,
-      data
+      data,
     );
   }
 
@@ -338,12 +338,12 @@ export class ExaminationService {
    */
   autoAssignTeachersToGroups(
     examinationId: string,
-    facultyId: string
+    facultyId: string,
   ): Observable<AutoAssignTeachersToGroupsData> {
     return this.http.post<AutoAssignTeachersToGroupsData>(
       this.url +
         `/Examination/${examinationId}/faculty/${facultyId}/group/calculate`,
-      {}
+      {},
     );
   }
 
@@ -357,7 +357,7 @@ export class ExaminationService {
    */
   getAllGroups(examinationId: string): Observable<GetAllGroupsData> {
     return this.http.get<GetAllGroupsData>(
-      this.url + `/Examination/${examinationId}/group`
+      this.url + `/Examination/${examinationId}/group`,
     );
   }
 
@@ -370,11 +370,11 @@ export class ExaminationService {
    * @response `200` `CalculateInvigilatorNumerateOfShiftForEachFacultyData` Success
    */
   calculateInvigilatorNumerateOfShiftForEachFaculty(
-    examinationId: string
+    examinationId: string,
   ): Observable<CalculateInvigilatorNumerateOfShiftForEachFacultyData> {
     return this.http.post<CalculateInvigilatorNumerateOfShiftForEachFacultyData>(
       this.url + `/Examination/${examinationId}/group/calculate`,
-      {}
+      {},
     );
   }
 
@@ -391,12 +391,12 @@ export class ExaminationService {
     examinationId: string,
     groupId: string,
     departmentId: string,
-    data: UpdateTemporaryTeacherToUserIdInDepartmentShiftGroupPayload
+    data: UpdateTemporaryTeacherToUserIdInDepartmentShiftGroupPayload,
   ): Observable<UpdateTemporaryTeacherToUserIdInDepartmentShiftGroupData> {
     return this.http.post<UpdateTemporaryTeacherToUserIdInDepartmentShiftGroupData>(
       this.url +
         `/Examination/${examinationId}/group/${groupId}/department/${departmentId}`,
-      data
+      data,
     );
   }
 
@@ -413,11 +413,11 @@ export class ExaminationService {
     examinationId: string,
     groupId: string,
     facultyId: string,
-    data: AssignInvigilatorNumerateOfShiftToFacultyPayload
+    data: AssignInvigilatorNumerateOfShiftToFacultyPayload,
   ): Observable<AssignInvigilatorNumerateOfShiftToFacultyData> {
     return this.http.post<AssignInvigilatorNumerateOfShiftToFacultyData>(
       this.url + `/Examination/${examinationId}/group/${groupId}/${facultyId}`,
-      data
+      data,
     );
   }
 
@@ -430,10 +430,10 @@ export class ExaminationService {
    * @response `200` `GetAvailableInvigilatorsInShiftGroupData` Success
    */
   getAvailableInvigilatorsInShiftGroup(
-    examinationId: string
+    examinationId: string,
   ): Observable<GetAvailableInvigilatorsInShiftGroupData> {
     return this.http.get<GetAvailableInvigilatorsInShiftGroupData>(
-      this.url + `/Examination/${examinationId}/invigilator`
+      this.url + `/Examination/${examinationId}/invigilator`,
     );
   }
 
@@ -447,7 +447,7 @@ export class ExaminationService {
    */
   getStatistic(examinationId: string): Observable<GetStatisticData> {
     return this.http.get<GetStatisticData>(
-      this.url + `/Examination/${examinationId}/statistic`
+      this.url + `/Examination/${examinationId}/statistic`,
     );
   }
 
@@ -461,7 +461,7 @@ export class ExaminationService {
    */
   getSummary(examinationId: string): Observable<GetSummaryData> {
     return this.http.get<GetSummaryData>(
-      this.url + `/Examination/${examinationId}/summary`
+      this.url + `/Examination/${examinationId}/summary`,
     );
   }
 
@@ -479,7 +479,7 @@ export class ExaminationService {
   }: GetTemporaryDataQuery): Observable<GetTemporaryDataData> {
     return this.http.get<GetTemporaryDataData>(
       this.url + `/Examination/${examinationId}/temporary`,
-      { params: ObjectHelper.removeUndefinedField(query) }
+      { params: ObjectHelper.removeUndefinedField(query) },
     );
   }
 }
@@ -487,141 +487,141 @@ export class ExaminationService {
 export class ExaminationApiAction {
   createExaminationSuccessful = createAction(
     '[Examination/API] createExamination Successful',
-    props<{ data: CreateExaminationData['data'] }>()
+    props<{ data: CreateExaminationData['data'] }>(),
   );
 
   createExaminationFailed = createAction(
-    '[Examination/API] createExamination Failed'
+    '[Examination/API] createExamination Failed',
   );
 
   getRelatedSuccessful = createAction(
     '[Examination/API] getRelated Successful',
-    props<{ data: GetRelatedData['data'] }>()
+    props<{ data: GetRelatedData['data'] }>(),
   );
 
   getRelatedFailed = createAction('[Examination/API] getRelated Failed');
 
   getAllShiftsSuccessful = createAction(
     '[Examination/API] getAllShifts Successful',
-    props<{ data: GetAllShiftsData['data'] }>()
+    props<{ data: GetAllShiftsData['data'] }>(),
   );
 
   getAllShiftsFailed = createAction('[Examination/API] getAllShifts Failed');
 
   importExaminationSuccessful = createAction(
     '[Examination/API] importExamination Successful',
-    props<{ data: ImportExaminationData['data'] }>()
+    props<{ data: ImportExaminationData['data'] }>(),
   );
 
   importExaminationFailed = createAction(
-    '[Examination/API] importExamination Failed'
+    '[Examination/API] importExamination Failed',
   );
 
   updateExaminationSuccessful = createAction(
     '[Examination/API] updateExamination Successful',
-    props<{ data: UpdateExaminationData['data'] }>()
+    props<{ data: UpdateExaminationData['data'] }>(),
   );
 
   updateExaminationFailed = createAction(
-    '[Examination/API] updateExamination Failed'
+    '[Examination/API] updateExamination Failed',
   );
 
   getEventsSuccessful = createAction(
     '[Examination/API] getEvents Successful',
-    props<{ data: GetEventsData['data'] }>()
+    props<{ data: GetEventsData['data'] }>(),
   );
 
   getEventsFailed = createAction('[Examination/API] getEvents Failed');
 
   getHandoverDataSuccessful = createAction(
     '[Examination/API] getHandoverData Successful',
-    props<{ data: GetHandoverDataData['data'] }>()
+    props<{ data: GetHandoverDataData['data'] }>(),
   );
 
   getHandoverDataFailed = createAction(
-    '[Examination/API] getHandoverData Failed'
+    '[Examination/API] getHandoverData Failed',
   );
 
   getShiftsSuccessful = createAction(
     '[Examination/API] getShifts Successful',
-    props<{ data: GetShiftsData['data'] }>()
+    props<{ data: GetShiftsData['data'] }>(),
   );
 
   getShiftsFailed = createAction('[Examination/API] getShifts Failed');
 
   assignInvigilatorsToShiftsSuccessful = createAction(
     '[Examination/API] assignInvigilatorsToShifts Successful',
-    props<{ data: AssignInvigilatorsToShiftsData['data'] }>()
+    props<{ data: AssignInvigilatorsToShiftsData['data'] }>(),
   );
 
   assignInvigilatorsToShiftsFailed = createAction(
-    '[Examination/API] assignInvigilatorsToShifts Failed'
+    '[Examination/API] assignInvigilatorsToShifts Failed',
   );
 
   updateShiftExaminationSuccessful = createAction(
     '[Examination/API] updateShiftExamination Successful',
-    props<{ data: UpdateShiftExaminationData['data'] }>()
+    props<{ data: UpdateShiftExaminationData['data'] }>(),
   );
 
   updateShiftExaminationFailed = createAction(
-    '[Examination/API] updateShiftExamination Failed'
+    '[Examination/API] updateShiftExamination Failed',
   );
 
   autoAssignTeachersToShiftSuccessful = createAction(
     '[Examination/API] autoAssignTeachersToShift Successful',
-    props<{ data: AutoAssignTeachersToShiftData['data'] }>()
+    props<{ data: AutoAssignTeachersToShiftData['data'] }>(),
   );
 
   autoAssignTeachersToShiftFailed = createAction(
-    '[Examination/API] autoAssignTeachersToShift Failed'
+    '[Examination/API] autoAssignTeachersToShift Failed',
   );
 
   changeStatusSuccessful = createAction(
     '[Examination/API] changeStatus Successful',
-    props<{ data: ChangeStatusData['data'] }>()
+    props<{ data: ChangeStatusData['data'] }>(),
   );
 
   changeStatusFailed = createAction('[Examination/API] changeStatus Failed');
 
   updateExamsCountSuccessful = createAction(
     '[Examination/API] updateExamsCount Successful',
-    props<{ data: UpdateExamsCountData['data'] }>()
+    props<{ data: UpdateExamsCountData['data'] }>(),
   );
 
   updateExamsCountFailed = createAction(
-    '[Examination/API] updateExamsCount Failed'
+    '[Examination/API] updateExamsCount Failed',
   );
 
   getGroupsByFacultyIdSuccessful = createAction(
     '[Examination/API] getGroupsByFacultyId Successful',
-    props<{ data: GetGroupsByFacultyIdData['data'] }>()
+    props<{ data: GetGroupsByFacultyIdData['data'] }>(),
   );
 
   getGroupsByFacultyIdFailed = createAction(
-    '[Examination/API] getGroupsByFacultyId Failed'
+    '[Examination/API] getGroupsByFacultyId Failed',
   );
 
   updateTeacherAssignmentSuccessful = createAction(
     '[Examination/API] updateTeacherAssignment Successful',
-    props<{ data: UpdateTeacherAssignmentData['data'] }>()
+    props<{ data: UpdateTeacherAssignmentData['data'] }>(),
   );
 
   updateTeacherAssignmentFailed = createAction(
-    '[Examination/API] updateTeacherAssignment Failed'
+    '[Examination/API] updateTeacherAssignment Failed',
   );
 
   autoAssignTeachersToGroupsSuccessful = createAction(
     '[Examination/API] autoAssignTeachersToGroups Successful',
-    props<{ data: AutoAssignTeachersToGroupsData['data'] }>()
+    props<{ data: AutoAssignTeachersToGroupsData['data'] }>(),
   );
 
   autoAssignTeachersToGroupsFailed = createAction(
-    '[Examination/API] autoAssignTeachersToGroups Failed'
+    '[Examination/API] autoAssignTeachersToGroups Failed',
   );
 
   getAllGroupsSuccessful = createAction(
     '[Examination/API] getAllGroups Successful',
-    props<{ data: GetAllGroupsData['data'] }>()
+    props<{ data: GetAllGroupsData['data'] }>(),
   );
 
   getAllGroupsFailed = createAction('[Examination/API] getAllGroups Failed');
@@ -630,62 +630,62 @@ export class ExaminationApiAction {
     '[Examination/API] calculateInvigilatorNumerateOfShiftForEachFaculty Successful',
     props<{
       data: CalculateInvigilatorNumerateOfShiftForEachFacultyData['data'];
-    }>()
+    }>(),
   );
 
   calculateInvigilatorNumerateOfShiftForEachFacultyFailed = createAction(
-    '[Examination/API] calculateInvigilatorNumerateOfShiftForEachFaculty Failed'
+    '[Examination/API] calculateInvigilatorNumerateOfShiftForEachFaculty Failed',
   );
 
   updateTemporaryTeacherToUserIdInDepartmentShiftGroupSuccessful = createAction(
     '[Examination/API] updateTemporaryTeacherToUserIdInDepartmentShiftGroup Successful',
     props<{
       data: UpdateTemporaryTeacherToUserIdInDepartmentShiftGroupData['data'];
-    }>()
+    }>(),
   );
 
   updateTemporaryTeacherToUserIdInDepartmentShiftGroupFailed = createAction(
-    '[Examination/API] updateTemporaryTeacherToUserIdInDepartmentShiftGroup Failed'
+    '[Examination/API] updateTemporaryTeacherToUserIdInDepartmentShiftGroup Failed',
   );
 
   assignInvigilatorNumerateOfShiftToFacultySuccessful = createAction(
     '[Examination/API] assignInvigilatorNumerateOfShiftToFaculty Successful',
-    props<{ data: AssignInvigilatorNumerateOfShiftToFacultyData['data'] }>()
+    props<{ data: AssignInvigilatorNumerateOfShiftToFacultyData['data'] }>(),
   );
 
   assignInvigilatorNumerateOfShiftToFacultyFailed = createAction(
-    '[Examination/API] assignInvigilatorNumerateOfShiftToFaculty Failed'
+    '[Examination/API] assignInvigilatorNumerateOfShiftToFaculty Failed',
   );
 
   getAvailableInvigilatorsInShiftGroupSuccessful = createAction(
     '[Examination/API] getAvailableInvigilatorsInShiftGroup Successful',
-    props<{ data: GetAvailableInvigilatorsInShiftGroupData['data'] }>()
+    props<{ data: GetAvailableInvigilatorsInShiftGroupData['data'] }>(),
   );
 
   getAvailableInvigilatorsInShiftGroupFailed = createAction(
-    '[Examination/API] getAvailableInvigilatorsInShiftGroup Failed'
+    '[Examination/API] getAvailableInvigilatorsInShiftGroup Failed',
   );
 
   getStatisticSuccessful = createAction(
     '[Examination/API] getStatistic Successful',
-    props<{ data: GetStatisticData['data'] }>()
+    props<{ data: GetStatisticData['data'] }>(),
   );
 
   getStatisticFailed = createAction('[Examination/API] getStatistic Failed');
 
   getSummarySuccessful = createAction(
     '[Examination/API] getSummary Successful',
-    props<{ data: GetSummaryData['data'] }>()
+    props<{ data: GetSummaryData['data'] }>(),
   );
 
   getSummaryFailed = createAction('[Examination/API] getSummary Failed');
 
   getTemporaryDataSuccessful = createAction(
     '[Examination/API] getTemporaryData Successful',
-    props<{ data: GetTemporaryDataData['data'] }>()
+    props<{ data: GetTemporaryDataData['data'] }>(),
   );
 
   getTemporaryDataFailed = createAction(
-    '[Examination/API] getTemporaryData Failed'
+    '[Examination/API] getTemporaryData Failed',
   );
 }

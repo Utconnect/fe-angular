@@ -15,20 +15,18 @@ export class ErrorLogger {
   static containsField(
     value: object,
     field: 'id',
-    valueType: string,
     tag: string,
   ): value is { id: unknown };
 
   static containsField(
     value: object,
     field: ErrorLoggerContainsField,
-    valueType: string,
     tag: string,
   ): boolean {
     if (field in value) {
       return true;
     }
 
-    throw Error(`[${tag}] Required field ${field} is missing in ${valueType}`);
+    throw Error(`[${tag}] Required field ${field} is missing in ${value}`);
   }
 }

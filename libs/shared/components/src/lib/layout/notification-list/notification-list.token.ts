@@ -12,11 +12,11 @@ export const NOTIFICATION_LIST_OPTIONS = new InjectionToken(
   'notificationList',
   {
     factory: (): NotificationListOptions => NOTIFICATION_LIST_DEFAULT_OPTIONS,
-  }
+  },
 );
 
 export const notificationListOptionsProvider: (
-  options: Partial<NotificationListOptions>
+  options: Partial<NotificationListOptions>,
 ) => ValueProvider = (options: Partial<NotificationListOptions>) => ({
   provide: NOTIFICATION_LIST_OPTIONS,
   useValue: { ...NOTIFICATION_LIST_DEFAULT_OPTIONS, ...options },

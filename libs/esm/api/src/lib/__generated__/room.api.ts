@@ -11,9 +11,9 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   CreateRoomData,
   ESMApplicationRoomsCommandsCreateCreateCommand,
@@ -27,7 +27,7 @@ import {
 export class RoomService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -41,7 +41,7 @@ export class RoomService {
    * @response `200` `CreateRoomData` Success
    */
   createRoom(
-    data: ESMApplicationRoomsCommandsCreateCreateCommand
+    data: ESMApplicationRoomsCommandsCreateCreateCommand,
   ): Observable<CreateRoomData> {
     return this.http.post<CreateRoomData>(this.url + `/Room`, data);
   }
@@ -60,7 +60,7 @@ export class RoomService {
     for (const property in data) {
       const d = data[property as keyof ImportRoomPayload];
       if (Array.isArray(d)) {
-        d.forEach(element => {
+        d.forEach((element) => {
           formData.append(property, element);
         });
       } else if (d !== undefined) {
@@ -75,14 +75,14 @@ export class RoomService {
 export class RoomApiAction {
   createRoomSuccessful = createAction(
     '[Room/API] createRoom Successful',
-    props<{ data: CreateRoomData['data'] }>()
+    props<{ data: CreateRoomData['data'] }>(),
   );
 
   createRoomFailed = createAction('[Room/API] createRoom Failed');
 
   importRoomSuccessful = createAction(
     '[Room/API] importRoom Successful',
-    props<{ data: ImportRoomData['data'] }>()
+    props<{ data: ImportRoomData['data'] }>(),
   );
 
   importRoomFailed = createAction('[Room/API] importRoom Failed');

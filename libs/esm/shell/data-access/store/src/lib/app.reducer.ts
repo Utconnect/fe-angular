@@ -27,19 +27,19 @@ export const esmFeatureKey = '[NGRX Key] ESM';
 
 export const appReducer = createReducer(
   esmInitialState,
-  on(EsmPageAction.getUserInfo, state => ({
+  on(EsmPageAction.getUserInfo, (state) => ({
     ...state,
     userStatus: 'loading',
   })),
-  on(EsmPageAction.logOut, state => ({
+  on(EsmPageAction.logOut, (state) => ({
     ...state,
     user: null,
   })),
-  on(EsmPageAction.getRelatedExaminations, state => ({
+  on(EsmPageAction.getRelatedExaminations, (state) => ({
     ...state,
     relatedExaminationsStatus: 'loading',
   })),
-  on(EsmPageAction.getDepartments, state => ({
+  on(EsmPageAction.getDepartments, (state) => ({
     ...state,
     departmentsStatus: 'loading',
   })),
@@ -47,7 +47,7 @@ export const appReducer = createReducer(
     const examination = ErrorLogger.nullOrEmpty(
       state.examination,
       'Examination',
-      'appReducer/updateExamination'
+      'appReducer/updateExamination',
     );
 
     return {
@@ -61,18 +61,18 @@ export const appReducer = createReducer(
         expectEndAt: data.expectEndAt ?? examination.expectEndAt,
         updatedAt: data.updatedAt,
       },
-      relatedExaminations: state.relatedExaminations.map(e =>
+      relatedExaminations: state.relatedExaminations.map((e) =>
         e.id !== id
           ? e
           : {
               ...e,
               displayId: data.displayId ?? examination.displayId,
               name: data.name ?? examination.name,
-            }
+            },
       ),
     };
   }),
-  on(EsmApiAction.noCacheUserInfo, state => ({
+  on(EsmApiAction.noCacheUserInfo, (state) => ({
     ...state,
     userStatus: 'success',
   })),
@@ -81,7 +81,7 @@ export const appReducer = createReducer(
     user,
     userStatus: 'success',
   })),
-  on(EsmApiAction.getUserInfoFailed, state => ({
+  on(EsmApiAction.getUserInfoFailed, (state) => ({
     ...state,
     user: null,
     userStatus: 'error',
@@ -98,11 +98,11 @@ export const appReducer = createReducer(
     relatedExaminations:
       examination === null ||
       examination.status === ESMDomainEnumsExaminationStatus.Closed ||
-      state.relatedExaminations.find(e => e.id === examination.id)
+      state.relatedExaminations.find((e) => e.id === examination.id)
         ? state.relatedExaminations
         : [...state.relatedExaminations, examination],
   })),
-  on(EsmApiAction.getExaminationFailed, state => ({
+  on(EsmApiAction.getExaminationFailed, (state) => ({
     ...state,
     examination: null,
     examinationStatus: 'error',
@@ -113,9 +113,9 @@ export const appReducer = createReducer(
       ...state,
       relatedExaminations,
       relatedExaminationsStatus: 'success',
-    })
+    }),
   ),
-  on(EsmApiAction.getRelatedExaminationsFailed, state => ({
+  on(EsmApiAction.getRelatedExaminationsFailed, (state) => ({
     ...state,
     relatedExaminations: [],
     relatedExaminationsStatus: 'error',
@@ -125,16 +125,16 @@ export const appReducer = createReducer(
     departments,
     departmentsStatus: 'success',
   })),
-  on(EsmApiAction.getDepartmentsFailed, state => ({
+  on(EsmApiAction.getDepartmentsFailed, (state) => ({
     ...state,
     departments: [],
     departmentsStatus: 'error',
   })),
-  on(EsmApiAction.commitNumberOfInvigilatorForFacultySuccessful, state => {
+  on(EsmApiAction.commitNumberOfInvigilatorForFacultySuccessful, (state) => {
     const examination = ErrorLogger.nullOrEmpty(
       state.examination,
       'Examination',
-      'appReducer/commitNumberOfInvigilatorForFacultySuccessful'
+      'appReducer/commitNumberOfInvigilatorForFacultySuccessful',
     );
 
     return {
@@ -143,21 +143,21 @@ export const appReducer = createReducer(
         ...examination,
         status: ESMDomainEnumsExaminationStatus.AssignInvigilator,
       },
-      relatedExaminations: state.relatedExaminations.map(e =>
+      relatedExaminations: state.relatedExaminations.map((e) =>
         e.id !== examination.id
           ? e
           : {
               ...e,
               status: ESMDomainEnumsExaminationStatus.AssignInvigilator,
-            }
+            },
       ),
     };
   }),
-  on(EsmApiAction.closeSuccessful, state => {
+  on(EsmApiAction.closeSuccessful, (state) => {
     const examination = ErrorLogger.nullOrEmpty(
       state.examination,
       'Examination',
-      'appReducer/closeSuccessful'
+      'appReducer/closeSuccessful',
     );
 
     return {
@@ -166,14 +166,14 @@ export const appReducer = createReducer(
         ...examination,
         status: ESMDomainEnumsExaminationStatus.Closed,
       },
-      relatedExaminations: state.relatedExaminations.map(e =>
+      relatedExaminations: state.relatedExaminations.map((e) =>
         e.id !== examination.id
           ? e
           : {
               ...e,
               status: ESMDomainEnumsExaminationStatus.Closed,
-            }
+            },
       ),
     };
-  })
+  }),
 );

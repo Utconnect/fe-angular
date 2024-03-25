@@ -19,7 +19,7 @@ export const permissionGuard: CanActivateFn = (route) => {
       }
 
       const redirect = route.data['redirect'] as string;
-      router.navigate([redirect ?? '/403']).catch(() => null);
+      router.navigate([redirect ?? '/403']).catch(() => false);
 
       return false;
     }),

@@ -1,4 +1,5 @@
 import { GetAllFacultyData, GetMySummaryInfoData } from '@esm/api';
+import { DepartmentSummary } from '@esm/model';
 import { createFeatureSelector, createSelector, select } from '@ngrx/store';
 import { ObservableHelper, StringHelper } from '@utconnect/helpers';
 import { Observable, UnaryFunction, map, pipe } from 'rxjs';
@@ -9,35 +10,35 @@ export class EsmSelector {
   private static readonly selector =
     createFeatureSelector<EsmState>(esmFeatureKey);
 
-  static readonly user = createSelector(this.selector, state => state.user);
+  static readonly user = createSelector(this.selector, (state) => state.user);
   static readonly notNullUser = pipe(
     select(this.user),
-    ObservableHelper.filterNullish()
+    ObservableHelper.filterNullish(),
   );
   static readonly userStatus = createSelector(
     this.selector,
-    state => state.userStatus
+    (state) => state.userStatus,
   );
   static readonly roles = createSelector(
     this.selector,
-    state => state.user?.roles ?? []
+    (state) => state.user?.roles ?? [],
   );
 
   static readonly userName = pipe(
     this.notNullUser,
-    map(user =>
+    map((user) =>
       this.isOrganizationAccount(user)
         ? user.fullName
-        : StringHelper.getFirstName(user.fullName ?? '')
-    )
+        : StringHelper.getFirstName(user.fullName ?? ''),
+    ),
   );
 
   static readonly userTitle = (
-    useTitleCase = true
+    useTitleCase = true,
   ): UnaryFunction<Observable<object>, Observable<string | null>> =>
     pipe(
       this.notNullUser,
-      map(user => {
+      map((user) => {
         if (this.isOrganizationAccount(user)) return null;
 
         let title = user.isMale ? 'Thầy' : 'Cô';
@@ -45,7 +46,7 @@ export class EsmSelector {
           title = title.toLocaleLowerCase();
         }
         return title;
-      })
+      }),
     );
 
   static readonly showLoader = createSelector(
@@ -56,66 +57,66 @@ export class EsmSelector {
         return userShowLoader;
       }
       return status === 'idle' || status === 'loading';
-    }
+    },
   );
 
   static readonly examinationStatus = createSelector(
     this.selector,
-    state => state.examinationStatus
+    (state) => state.examinationStatus,
   );
 
   static readonly examinationId = createSelector(
     this.selector,
-    state => state.examinationId
+    (state) => state.examinationId,
   );
 
   static readonly examination = createSelector(
     this.selector,
-    state => state.examination
+    (state) => state.examination,
   );
 
   static readonly relatedExaminationsStatus = createSelector(
     this.selector,
-    state => state.relatedExaminationsStatus
+    (state) => state.relatedExaminationsStatus,
   );
 
   static readonly relatedExaminations = createSelector(
     this.selector,
-    state => state.relatedExaminations
+    (state) => state.relatedExaminations,
   );
 
   static readonly departmentsStatus = createSelector(
     this.selector,
-    state => state.departmentsStatus
+    (state) => state.departmentsStatus,
   );
 
   static readonly facultiesWithDepartment = createSelector(
     this.selector,
-    state => state.departments
+    (state) => state.departments,
   );
 
-  static readonly faculties = createSelector(this.selector, state =>
-    state.departments.map(f => {
+  static readonly faculties = createSelector(this.selector, (state) =>
+    state.departments.map((f) => {
       const { departments, ...rest } = f;
       return rest as GetAllFacultyData['data'][number];
-    })
+    }),
   );
 
-  // static readonly departmentsWithFaculty = createSelector(
-  //   this.selector,
-  //   state =>
-  //     state.departments.reduce((acc, curr) => {
-  //       acc = [
-  //         ...acc,
-  //         ...curr.departments.map(f => {
-  //           const { departments, ...faculty } = curr;
-  //           const res = { ...f, faculty };
-  //           return res;
-  //         }),
-  //       ];
-  //       return acc;
-  //     }, [] as DepartmentSummary[])
-  // );
+  static readonly departmentsWithFaculty = createSelector(
+    this.selector,
+    (state) =>
+      state.departments.reduce((acc, curr) => {
+        acc = [
+          ...acc,
+          ...curr.departments.map((f) => {
+            const { departments, ...faculty } = curr;
+            const res = { ...f, faculty };
+            return res;
+          }),
+        ];
+        return acc;
+      }, [] as DepartmentSummary[]),
+  );
 
   private static isOrganizationAccount({
     faculty,

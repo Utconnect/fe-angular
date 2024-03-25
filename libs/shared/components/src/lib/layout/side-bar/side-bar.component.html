@@ -1,6 +1,6 @@
 <tui-scrollbar class="w-full h-full border-r border-tui-base-03">
   <ng-container *ngFor="let item of options.items">
-    <ng-container *utconnectRole="role; accept item.roles">
+    <ng-container *utconnectRole="role; accept: item.roles">
       <!-- Accordion item -->
       <tui-accordion-item
         *ngIf="item.subItems; else link"
@@ -28,7 +28,7 @@
               <ng-container *ngFor="let subItem of item.subItems">
                 <a
                   tuiLink
-                  *utconnectRole="role; accept subItem.roles"
+                  *utconnectRole="role; accept: subItem.roles"
                   [routerLink]="subItem.routerLink"
                   [routerLinkActiveOptions]="{ exact: true }"
                   tuiMode="onLight"

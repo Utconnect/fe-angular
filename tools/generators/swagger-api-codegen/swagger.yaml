@@ -1,0 +1,4188 @@
+openapi: 3.0.1
+info:
+  title: ESM.Presentation
+  version: '1.0'
+paths:
+  /Auth/change-password:
+    patch:
+      tags:
+        - Auth
+      operationId: ChangePassword
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.ChangePassword.ChangePasswordCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.ChangePassword.ChangePasswordCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.ChangePassword.ChangePasswordCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.ChangePassword.ChangePasswordCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  /Auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: Login
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.Login.LoginCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.Login.LoginCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.Login.LoginCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Auth.Commands.Login.LoginCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.GeneratedToken]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.GeneratedToken]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.GeneratedToken]'
+  /Auth/me:
+    get:
+      tags:
+        - Auth
+      operationId: GetMySummaryInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Auth.Queries.MySummaryInfo.MySummaryInfoDto]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Auth.Queries.MySummaryInfo.MySummaryInfoDto]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Auth.Queries.MySummaryInfo.MySummaryInfoDto]'
+  /Auth/reset-password:
+    patch:
+      tags:
+        - Auth
+      operationId: ResetPassword
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  /Department:
+    post:
+      tags:
+        - Department
+      operationId: CreateDepartment
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateDepartment.CreateDepartmentCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateDepartment.CreateDepartmentCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateDepartment.CreateDepartmentCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateDepartment.CreateDepartmentCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+  /Department/import:
+    post:
+      tags:
+        - Department
+      operationId: ImportDepartment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                Files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              Files:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Department/{departmentId}':
+    put:
+      tags:
+        - Department
+      operationId: UpdateDepartment
+      parameters:
+        - name: departmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.UpdateDepartment.UpdateDepartmentParams'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.UpdateDepartment.UpdateDepartmentParams'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.UpdateDepartment.UpdateDepartmentParams'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.UpdateDepartment.UpdateDepartmentParams'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Department/{departmentId}/user':
+    post:
+      tags:
+        - Department
+      operationId: CreateUser
+      parameters:
+        - name: departmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateUserInDepartment.CreateUserInDepartmentParams'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateUserInDepartment.CreateUserInDepartmentParams'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateUserInDepartment.CreateUserInDepartmentParams'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Departments.Commands.CreateUserInDepartment.CreateUserInDepartmentParams'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+  /Examination:
+    post:
+      tags:
+        - Examination
+      operationId: CreateExamination
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Create.CreateCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Create.CreateCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Create.CreateCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Create.CreateCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+  /Examination/related:
+    get:
+      tags:
+        - Examination
+      operationId: GetRelated
+      parameters:
+        - name: IsActive
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetRelatedExaminations.RelatedExaminationDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetRelatedExaminations.RelatedExaminationDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetRelatedExaminations.RelatedExaminationDto]]'
+  '/Examination/{examinationId}':
+    get:
+      tags:
+        - Examination
+      operationId: GetAllShifts
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto]]'
+    post:
+      tags:
+        - Examination
+      operationId: ImportExamination
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - File
+              type: object
+              properties:
+                File:
+                  type: string
+                  format: binary
+            encoding:
+              File:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+    patch:
+      tags:
+        - Examination
+      operationId: UpdateExamination
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Update.UpdateParams'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Update.UpdateParams'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Update.UpdateParams'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.Update.UpdateParams'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/events':
+    get:
+      tags:
+        - Examination
+      operationId: GetEvents
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Entities.ExaminationEvent]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Entities.ExaminationEvent]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Entities.ExaminationEvent]]'
+  '/Examination/{examinationId}/handover':
+    get:
+      tags:
+        - Examination
+      operationId: GetHandoverData
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto]]'
+  '/Examination/{examinationId}/shift':
+    get:
+      tags:
+        - Examination
+      operationId: GetShifts
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto]]'
+    patch:
+      tags:
+        - Examination
+      operationId: AssignInvigilatorsToShifts
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+          text/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+          application/*+json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/shift/{shiftId}':
+    patch:
+      tags:
+        - Examination
+      operationId: UpdateShiftExamination
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: shiftId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema: {}
+          application/json:
+            schema: {}
+          text/json:
+            schema: {}
+          application/*+json:
+            schema: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+      deprecated: true
+  '/Examination/{examinationId}/shift/calculate':
+    post:
+      tags:
+        - Examination
+      operationId: AutoAssignTeachersToShift
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/status':
+    post:
+      tags:
+        - Examination
+      operationId: ChangeStatus
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.ChangeStatus.ChangeStatusRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.ChangeStatus.ChangeStatusRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.ChangeStatus.ChangeStatusRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Examinations.Commands.ChangeStatus.ChangeStatusRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/exams-number':
+    patch:
+      tags:
+        - Examination
+      operationId: UpdateExamsCount
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: object
+              additionalProperties:
+                type: integer
+                format: int32
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: integer
+                format: int32
+          text/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: integer
+                format: int32
+          application/*+json:
+            schema:
+              type: object
+              additionalProperties:
+                type: integer
+                format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/faculty/{facultyId}/group':
+    get:
+      tags:
+        - Examination
+      operationId: GetGroupsByFacultyId
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto]]'
+    post:
+      tags:
+        - Examination
+      operationId: UpdateTeacherAssignment
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/ESM.Application.Examinations.Commands.UpdateTeacherAssignment.UpdateTeacherAssignmentDto'
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/ESM.Application.Examinations.Commands.UpdateTeacherAssignment.UpdateTeacherAssignmentDto'
+          text/json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/ESM.Application.Examinations.Commands.UpdateTeacherAssignment.UpdateTeacherAssignmentDto'
+          application/*+json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/ESM.Application.Examinations.Commands.UpdateTeacherAssignment.UpdateTeacherAssignmentDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/faculty/{facultyId}/group/calculate':
+    post:
+      tags:
+        - Examination
+      operationId: AutoAssignTeachersToGroups
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/group':
+    get:
+      tags:
+        - Examination
+      operationId: GetAllGroups
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto]]'
+  '/Examination/{examinationId}/group/calculate':
+    post:
+      tags:
+        - Examination
+      operationId: CalculateInvigilatorNumerateOfShiftForEachFaculty
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Examination/{examinationId}/group/{groupId}/department/{departmentId}':
+    post:
+      tags:
+        - Examination
+      operationId: UpdateTemporaryTeacherToUserIdInDepartmentShiftGroup
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: departmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema: {}
+          application/json:
+            schema: {}
+          text/json:
+            schema: {}
+          application/*+json:
+            schema: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+      deprecated: true
+  '/Examination/{examinationId}/group/{groupId}/{facultyId}':
+    post:
+      tags:
+        - Examination
+      operationId: AssignInvigilatorNumerateOfShiftToFaculty
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: integer
+              format: int32
+          application/json:
+            schema:
+              type: integer
+              format: int32
+          text/json:
+            schema:
+              type: integer
+              format: int32
+          application/*+json:
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]'
+      deprecated: true
+  '/Examination/{examinationId}/invigilator':
+    get:
+      tags:
+        - Examination
+      operationId: GetAvailableInvigilatorsInShiftGroup
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsDto]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsDto]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsDto]'
+  '/Examination/{examinationId}/statistic':
+    get:
+      tags:
+        - Examination
+      operationId: GetStatistic
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetStatistic.GetStatisticDto]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetStatistic.GetStatisticDto]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetStatistic.GetStatisticDto]'
+  '/Examination/{examinationId}/summary':
+    get:
+      tags:
+        - Examination
+      operationId: GetSummary
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Examination.ExaminationSummary]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Examination.ExaminationSummary]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Examination.ExaminationSummary]'
+  '/Examination/{examinationId}/temporary':
+    get:
+      tags:
+        - Examination
+      operationId: GetTemporaryData
+      parameters:
+        - name: examinationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Common.Models.PaginatedList[ESM.Domain.Entities.ExaminationData]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Common.Models.PaginatedList[ESM.Domain.Entities.ExaminationData]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Common.Models.PaginatedList[ESM.Domain.Entities.ExaminationData]]'
+  /Faculty:
+    get:
+      tags:
+        - Faculty
+      operationId: GetAllFaculty
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Faculties.Queries.GetAll.GetAllDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Faculties.Queries.GetAll.GetAllDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Faculties.Queries.GetAll.GetAllDto]]'
+    post:
+      tags:
+        - Faculty
+      operationId: CreateFaculty
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Create.CreateCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Create.CreateCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Create.CreateCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Create.CreateCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Faculty.FacultySummary]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Faculty.FacultySummary]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Faculty.FacultySummary]'
+  '/Faculty/{facultyId}':
+    put:
+      tags:
+        - Faculty
+      operationId: UpdateFaculty
+      parameters:
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Update.UpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Update.UpdateRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Update.UpdateRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Faculties.Commands.Update.UpdateRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Faculty/{facultyId}/users':
+    get:
+      tags:
+        - Faculty
+      operationId: GetUser
+      parameters:
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Dtos.User.UserSummary]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Dtos.User.UserSummary]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Dtos.User.UserSummary]]'
+  '/Group/{groupId}':
+    patch:
+      tags:
+        - Group
+      operationId: UpdateTemporaryNameToTeacher
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Groups.Commands.UpdateTemporaryNameToTeacher.UpdateTemporaryNameToTeacherRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Groups.Commands.UpdateTemporaryNameToTeacher.UpdateTemporaryNameToTeacherRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Groups.Commands.UpdateTemporaryNameToTeacher.UpdateTemporaryNameToTeacherRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Groups.Commands.UpdateTemporaryNameToTeacher.UpdateTemporaryNameToTeacherRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Group/{groupId}/{facultyId}':
+    patch:
+      tags:
+        - Group
+      operationId: AssignInvigilatorsNumberToFaculty
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: facultyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: integer
+              format: int32
+          application/json:
+            schema:
+              type: integer
+              format: int32
+          text/json:
+            schema:
+              type: integer
+              format: int32
+          application/*+json:
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]'
+  /Module:
+    post:
+      tags:
+        - Module
+      operationId: CreateModule
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Create.CreateCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Create.CreateCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Create.CreateCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Create.CreateCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+  /Module/import:
+    post:
+      tags:
+        - Module
+      operationId: ImportExaminationModule
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Import.ImportCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Import.ImportCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Import.ImportCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Modules.Commands.Import.ImportCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  /Room:
+    post:
+      tags:
+        - Room
+      operationId: CreateRoom
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Rooms.Commands.Create.CreateCommand'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Rooms.Commands.Create.CreateCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Rooms.Commands.Create.CreateCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Rooms.Commands.Create.CreateCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Guid]'
+  /Room/import:
+    post:
+      tags:
+        - Room
+      operationId: ImportRoom
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - File
+              type: object
+              properties:
+                File:
+                  type: string
+                  format: binary
+            encoding:
+              File:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  '/Shift/{shiftId}':
+    patch:
+      tags:
+        - Shift
+      operationId: UpdateShift
+      parameters:
+        - name: shiftId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Shifts.Commands.Update.UpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Shifts.Commands.Update.UpdateRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Shifts.Commands.Update.UpdateRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Shifts.Commands.Update.UpdateRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+  /Teacher:
+    get:
+      tags:
+        - Teacher
+      operationId: GetAllTeacher
+      parameters:
+        - name: IsInvigilator
+          in: query
+          schema:
+            type: boolean
+        - name: IsFaculty
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Application.Teachers.Queries.Get.GetDto]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Application.Teachers.Queries.Get.GetDto]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Application.Teachers.Queries.Get.GetDto]]'
+  /Teacher/search:
+    get:
+      tags:
+        - Teacher
+      operationId: Search
+      parameters:
+        - name: FullName
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Domain.Dtos.User.UserSummary]]'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Domain.Dtos.User.UserSummary]]'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Domain.Dtos.User.UserSummary]]'
+  '/Teacher/{teacherId}':
+    put:
+      tags:
+        - Teacher
+      operationId: UpdateInfo
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Teachers.Commands.Update.UpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Teachers.Commands.Update.UpdateRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Teachers.Commands.Update.UpdateRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ESM.Application.Teachers.Commands.Update.UpdateRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+            text/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+                  - $ref: '#/components/schemas/ESM.Application.Common.Models.Result'
+components:
+  schemas:
+    ESM.Application.Auth.Commands.ChangePassword.ChangePasswordCommand:
+      required:
+        - newPassword
+        - oldPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      additionalProperties: false
+    ESM.Application.Auth.Commands.Login.LoginCommand:
+      required:
+        - password
+        - userName
+      type: object
+      properties:
+        userName:
+          type: string
+        password:
+          type: string
+      additionalProperties: false
+    ESM.Application.Auth.Queries.MySummaryInfo.InternalDepartment:
+      required:
+        - faculty
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Auth.Queries.MySummaryInfo.InternalFaculty'
+      additionalProperties: false
+    ESM.Application.Auth.Queries.MySummaryInfo.InternalFaculty:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Auth.Queries.MySummaryInfo.MySummaryInfoDto:
+      required:
+        - department
+        - faculty
+        - id
+        - roles
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+          nullable: true
+        isMale:
+          type: boolean
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Application.Auth.Queries.MySummaryInfo.InternalDepartment'
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Auth.Queries.MySummaryInfo.InternalFaculty'
+        roles:
+          type: array
+          items:
+            type: string
+        phoneNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Common.Models.Error:
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/System.Net.HttpStatusCode'
+        message:
+          type: string
+        property:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.PaginatedList[ESM.Domain.Entities.ExaminationData]':
+      required:
+        - hasNextPage
+        - hasPreviousPage
+        - isEmpty
+        - items
+        - pageNumber
+        - totalCount
+        - totalPages
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.ExaminationData'
+        pageNumber:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+          readOnly: true
+        totalCount:
+          type: integer
+          format: int32
+          readOnly: true
+        hasPreviousPage:
+          type: boolean
+          readOnly: true
+        hasNextPage:
+          type: boolean
+          readOnly: true
+        isEmpty:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    ESM.Application.Common.Models.Result:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Application.Common.Models.Result[System.Boolean]'
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Application.Auth.Queries.MySummaryInfo.MySummaryInfoDto]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Application.Auth.Queries.MySummaryInfo.MySummaryInfoDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Application.Common.Models.PaginatedList[ESM.Domain.Entities.ExaminationData]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Application.Common.Models.PaginatedList[ESM.Domain.Entities.ExaminationData]'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsDto]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              oneOf:
+                - $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.VerifiedInvigilator'
+                - $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.TemporaryInvigilator'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Application.Examinations.Queries.GetStatistic.GetStatisticDto]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetStatistic.GetStatisticDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Examination.ExaminationSummary]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Examination.ExaminationSummary'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Domain.Dtos.Faculty.FacultySummary]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Faculty.FacultySummary'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[ESM.Domain.Dtos.GeneratedToken]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.GeneratedToken'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Boolean]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: boolean
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Application.Teachers.Queries.Get.GetDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Teachers.Queries.Get.GetDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.IEnumerable[ESM.Domain.Dtos.User.UserSummary]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Dtos.User.UserSummary'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Examinations.Queries.GetRelatedExaminations.RelatedExaminationDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetRelatedExaminations.RelatedExaminationDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Application.Faculties.Queries.GetAll.GetAllDto]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Faculties.Queries.GetAll.GetAllDto'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Dtos.User.UserSummary]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Dtos.User.UserSummary'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Collections.Generic.List[ESM.Domain.Entities.ExaminationEvent]]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.ExaminationEvent'
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    'ESM.Application.Common.Models.Result[System.Guid]':
+      required:
+        - data
+        - success
+      type: object
+      properties:
+        data:
+          type: string
+          format: uuid
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Common.Models.Error'
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Departments.Commands.CreateDepartment.CreateDepartmentCommand:
+      required:
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        facultyId:
+          type: string
+          format: uuid
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Departments.Commands.CreateUserInDepartment.CreateUserInDepartmentParams:
+      required:
+        - email
+        - fullName
+        - isMale
+      type: object
+      properties:
+        email:
+          type: string
+        teacherId:
+          type: string
+          nullable: true
+        fullName:
+          type: string
+        isMale:
+          type: boolean
+        phoneNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Departments.Commands.UpdateDepartment.UpdateDepartmentParams:
+      required:
+        - displayId
+        - facultyId
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        facultyId:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Commands.ChangeStatus.ChangeStatusRequest:
+      required:
+        - createdAt
+        - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExaminationStatus'
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ESM.Application.Examinations.Commands.Create.CreateCommand:
+      required:
+        - createdAt
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        expectStartAt:
+          type: string
+          format: date-time
+          nullable: true
+        expectEndAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ESM.Application.Examinations.Commands.Update.UpdateParams:
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        expectStartAt:
+          type: string
+          format: date-time
+          nullable: true
+        expectEndAt:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Examinations.Commands.UpdateTeacherAssignment.UpdateTeacherAssignmentDto:
+      type: object
+      properties:
+        departmentId:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        temporaryInvigilatorName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto:
+      required:
+        - assignNumerate
+        - departmentAssign
+        - id
+        - invigilatorsCount
+        - method
+        - module
+        - roomsCount
+        - startAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        invigilatorsCount:
+          type: integer
+          format: int32
+        roomsCount:
+          type: integer
+          format: int32
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        departmentAssign:
+          type: boolean
+        module:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto.InternalModule'
+        assignNumerate:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ESM.Domain.Dtos.Examination.ShiftGroupDataCell'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto.InternalFaculty:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto.InternalModule:
+      required:
+        - displayId
+        - faculty
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllGroups.GetAllGroupsDto.InternalFaculty'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto:
+      required:
+        - candidatesCount
+        - examsCount
+        - id
+        - invigilatorsCount
+        - room
+        - shiftGroup
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        examsCount:
+          type: integer
+          format: int32
+        candidatesCount:
+          type: integer
+          format: int32
+        invigilatorsCount:
+          type: integer
+          format: int32
+        room:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto.InternalRoom'
+        shiftGroup:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto.InternalShiftGroup'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto.InternalModule:
+      required:
+        - credits
+        - displayId
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        credits:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto.InternalRoom:
+      required:
+        - displayId
+      type: object
+      properties:
+        displayId:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto.InternalShiftGroup:
+      required:
+        - departmentAssign
+        - id
+        - method
+        - module
+        - startAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        departmentAssign:
+          type: boolean
+        module:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShifts.GetAllShiftDto.InternalModule'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto:
+      required:
+        - candidatesCount
+        - invigilatorShift
+        - isDuplicated
+        - room
+        - shiftGroup
+      type: object
+      properties:
+        shiftGroup:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalShiftGroup'
+        room:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Room.RoomSummary'
+        candidatesCount:
+          type: integer
+          format: int32
+        invigilatorShift:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalInvigilatorShift'
+        isDuplicated:
+          type: boolean
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalDepartment:
+      required:
+        - faculty
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalFaculty'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalFaculty:
+      required:
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalInvigilatorShift:
+      required:
+        - id
+        - invigilator
+        - orderIndex
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderIndex:
+          type: integer
+          format: int32
+        invigilator:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalTeacher'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalShiftGroup:
+      required:
+        - departmentAssign
+        - id
+        - method
+        - module
+        - startAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        departmentAssign:
+          type: boolean
+        module:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Module.ModuleSimple'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalTeacher:
+      required:
+        - department
+        - fullName
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        invigilatorId:
+          type: string
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAllShiftsDetails.ShiftDetailsDto.InternalDepartment'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.ResponseItem:
+      required:
+        - isPriority
+      type: object
+      properties:
+        isPriority:
+          type: boolean
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.TemporaryInvigilator:
+      required:
+        - temporaryName
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.ResponseItem'
+      properties:
+        temporaryName:
+          type: string
+        departmentId:
+          type: string
+          format: uuid
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.VerifiedInvigilator:
+      required:
+        - fullName
+        - id
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetAvailableInvigilatorsInGroups.GetAvailableInvigilatorsInGroupsItem.ResponseItem'
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        invigilatorId:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        facultyName:
+          type: string
+          nullable: true
+        departmentName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto:
+      required:
+        - facultyShiftGroup
+        - id
+        - user
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        departmentId:
+          type: string
+          format: uuid
+          nullable: true
+        user:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.User.UserSimple'
+        temporaryInvigilatorName:
+          type: string
+          nullable: true
+        facultyShiftGroup:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto.InternalFacultyShiftGroup'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto.InternalFacultyShiftGroup:
+      required:
+        - id
+        - shiftGroup
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        shiftGroup:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto.InternalShiftGroup'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto.InternalModule:
+      required:
+        - displayId
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto.InternalShiftGroup:
+      required:
+        - module
+        - startAt
+      type: object
+      properties:
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        module:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetGroupsByFacultyId.GetGroupsByFacultyIdDto.InternalModule'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto:
+      required:
+        - id
+        - invigilatorShift
+        - room
+        - shiftGroup
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        shiftGroup:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalShiftGroup'
+        room:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalRoom'
+        invigilatorShift:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalInvigilatorShift'
+        handedOverUserId:
+          type: string
+          format: uuid
+          nullable: true
+        report:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalDepartment:
+      required:
+        - faculty
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalFaculty'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalFaculty:
+      required:
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalInvigilatorShift:
+      required:
+        - id
+        - invigilator
+        - orderIndex
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderIndex:
+          type: integer
+          format: int32
+        invigilator:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalUser'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalModule:
+      required:
+        - displayId
+        - faculty
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalFaculty'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalRoom:
+      required:
+        - displayId
+      type: object
+      properties:
+        displayId:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalShiftGroup:
+      required:
+        - departmentAssign
+        - id
+        - method
+        - module
+        - startAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        departmentAssign:
+          type: boolean
+        module:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalModule'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalUser:
+      required:
+        - department
+        - fullName
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        invigilatorId:
+          type: string
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Application.Examinations.Queries.GetHandoverData.HandoverDataDto.InternalDepartment'
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetRelatedExaminations.RelatedExaminationDto:
+      required:
+        - displayId
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Examinations.Queries.GetStatistic.GetStatisticDto:
+      required:
+        - id
+        - name
+        - numberOfCandidates
+        - numberOfInvigilators
+        - numberOfModules
+        - numberOfModulesOver
+        - numberOfShifts
+        - numberOfShiftsOver
+        - timePercent
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        startAt:
+          type: string
+          format: date-time
+          nullable: true
+        endAt:
+          type: string
+          format: date-time
+          nullable: true
+        timePercent:
+          type: number
+          format: double
+        numberOfModules:
+          type: integer
+          format: int32
+        numberOfModulesOver:
+          type: integer
+          format: int32
+        numberOfShifts:
+          type: integer
+          format: int32
+        numberOfShiftsOver:
+          type: integer
+          format: int32
+        numberOfCandidates:
+          type: integer
+          format: int32
+        numberOfInvigilators:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ESM.Application.Faculties.Commands.Create.CreateCommand:
+      required:
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Faculties.Commands.Update.UpdateRequest:
+      required:
+        - displayId
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Faculties.Queries.GetAll.GetAllDto:
+      required:
+        - departments
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Application.Faculties.Queries.GetAll.GetAllDto.InternalDepartment'
+      additionalProperties: false
+    ESM.Application.Faculties.Queries.GetAll.GetAllDto.InternalDepartment:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto:
+      required:
+        - assignNumerate
+        - departmentAssign
+        - id
+        - invigilatorsCount
+        - method
+        - module
+        - roomsCount
+        - startAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        invigilatorsCount:
+          type: integer
+          format: int32
+        roomsCount:
+          type: integer
+          format: int32
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        departmentAssign:
+          type: boolean
+        module:
+          $ref: '#/components/schemas/ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto.InternalModule'
+        assignNumerate:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ESM.Domain.Dtos.Examination.ShiftGroupDataCell'
+      additionalProperties: false
+    ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto.InternalFaculty:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto.InternalModule:
+      required:
+        - displayId
+        - faculty
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        faculty:
+          $ref: '#/components/schemas/ESM.Application.Groups.Commands.AssignInvigilatorsNumberToFaculty.AssignInvigilatorsNumberToFacultyDto.InternalFaculty'
+      additionalProperties: false
+    ESM.Application.Groups.Commands.UpdateTemporaryNameToTeacher.UpdateTemporaryNameToTeacherRequest:
+      required:
+        - userId
+      type: object
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
+    ESM.Application.Modules.Commands.Create.CreateCommand:
+      required:
+        - displayId
+        - facultyId
+        - name
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        facultyId:
+          type: string
+        departmentId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Modules.Commands.Import.ImportCommand:
+      required:
+        - files
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+            format: binary
+      additionalProperties: false
+    ESM.Application.Rooms.Commands.Create.CreateCommand:
+      required:
+        - displayId
+      type: object
+      properties:
+        displayId:
+          type: string
+        capacity:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Shifts.Commands.Update.UpdateRequest:
+      type: object
+      properties:
+        handoverTeacherId:
+          type: string
+          nullable: true
+        report:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Teachers.Commands.Update.UpdateRequest:
+      required:
+        - email
+        - fullName
+        - isMale
+      type: object
+      properties:
+        email:
+          type: string
+        teacherId:
+          type: string
+          nullable: true
+        fullName:
+          type: string
+        isMale:
+          type: boolean
+        departmentId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Application.Teachers.Queries.Get.GetDto:
+      required:
+        - createdAt
+        - department
+        - faculty
+        - fullName
+        - id
+        - isMale
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+          nullable: true
+        isMale:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        invigilatorId:
+          type: string
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Department.DepartmentSummary'
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Faculty.FacultySummary'
+        phoneNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Domain.Common.BaseAuditableEntity:
+      required:
+        - created
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Domain.Common.BaseEntity'
+      properties:
+        created:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+          nullable: true
+        lastModified:
+          type: string
+          format: date-time
+          nullable: true
+        lastModifiedBy:
+          type: string
+          format: uuid
+          nullable: true
+      additionalProperties: false
+    ESM.Domain.Common.BaseEntity:
+      required:
+        - domainEvents
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        domainEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Common.BaseEvent'
+          readOnly: true
+      additionalProperties: false
+    ESM.Domain.Common.BaseEvent:
+      type: object
+      additionalProperties: false
+    ESM.Domain.Dtos.Department.DepartmentSummary:
+      required:
+        - faculty
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Faculty.FacultySummary'
+      additionalProperties: false
+    ESM.Domain.Dtos.Examination.ExaminationSummary:
+      required:
+        - createdAt
+        - createdBy
+        - displayId
+        - id
+        - name
+        - status
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        expectStartAt:
+          type: string
+          format: date-time
+          nullable: true
+        expectEndAt:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExaminationStatus'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdBy:
+          type: string
+          format: uuid
+      additionalProperties: false
+    ESM.Domain.Dtos.Examination.ShiftGroupDataCell:
+      required:
+        - actual
+        - calculated
+        - maximum
+      type: object
+      properties:
+        actual:
+          type: integer
+          format: int32
+        calculated:
+          type: integer
+          format: int32
+        maximum:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ESM.Domain.Dtos.Faculty.FacultySummary:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+          nullable: true
+        name:
+          type: string
+      additionalProperties: false
+    ESM.Domain.Dtos.GeneratedToken:
+      required:
+        - expiration
+        - token
+      type: object
+      properties:
+        token:
+          type: string
+        expiration:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ESM.Domain.Dtos.Module.ModuleSimple:
+      required:
+        - credits
+        - displayId
+        - faculty
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+        name:
+          type: string
+        credits:
+          type: integer
+          format: int32
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Faculty.FacultySummary'
+      additionalProperties: false
+    ESM.Domain.Dtos.Room.RoomSummary:
+      required:
+        - displayId
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type: string
+        capacity:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    ESM.Domain.Dtos.User.UserSimple:
+      required:
+        - createdAt
+        - email
+        - fullName
+        - id
+        - isMale
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        email:
+          type: string
+        isMale:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        invigilatorId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Domain.Dtos.User.UserSummary:
+      required:
+        - createdAt
+        - department
+        - faculty
+        - fullName
+        - id
+        - isMale
+        - role
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+          nullable: true
+        isMale:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        invigilatorId:
+          type: string
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Department.DepartmentSummary'
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Dtos.Faculty.FacultySummary'
+        role:
+          type: string
+        phoneNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ESM.Domain.Entities.Candidate:
+      required:
+        - candidateShift
+        - displayId
+        - examinationModules
+        - id
+        - isStudent
+        - name
+        - updatedAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          maxLength: 20
+          type: string
+        name:
+          maxLength: 100
+          type: string
+        isStudent:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+        candidateShift:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.CandidateShift'
+        examinationModules:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.CandidateExaminationModule'
+      additionalProperties: false
+    ESM.Domain.Entities.CandidateExaminationModule:
+      required:
+        - candidate
+        - candidateId
+        - createAt
+        - examination
+        - examinationId
+        - id
+        - module
+        - moduleId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        examinationId:
+          type: string
+          format: uuid
+        examination:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Examination'
+        candidateId:
+          type: string
+          format: uuid
+        candidate:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Candidate'
+        moduleId:
+          type: string
+          format: uuid
+        module:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Module'
+      additionalProperties: false
+    ESM.Domain.Entities.CandidateShift:
+      required:
+        - candidate
+        - candidateId
+        - id
+        - orderIndex
+        - shift
+        - shiftId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderIndex:
+          type: integer
+          format: int32
+        candidateId:
+          type: string
+          format: uuid
+        candidate:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Candidate'
+        shiftId:
+          type: string
+          format: uuid
+        shift:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Shift'
+      additionalProperties: false
+    ESM.Domain.Entities.Department:
+      required:
+        - departmentShiftGroups
+        - faculty
+        - name
+        - teachers
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Domain.Common.BaseAuditableEntity'
+      properties:
+        displayId:
+          maxLength: 20
+          type: string
+          nullable: true
+        name:
+          maxLength: 100
+          type: string
+        facultyId:
+          type: string
+          format: uuid
+          nullable: true
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Faculty'
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Teacher'
+        departmentShiftGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.DepartmentShiftGroup'
+      additionalProperties: false
+    ESM.Domain.Entities.DepartmentShiftGroup:
+      required:
+        - department
+        - facultyShiftGroup
+        - facultyShiftGroupId
+        - id
+        - user
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        departmentId:
+          type: string
+          format: uuid
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Department'
+        userId:
+          type: string
+          format: uuid
+          nullable: true
+        user:
+          $ref: '#/components/schemas/ESM.Domain.Identity.ApplicationUser'
+        temporaryInvigilatorName:
+          maxLength: 100
+          type: string
+          nullable: true
+        facultyShiftGroupId:
+          type: string
+          format: uuid
+        facultyShiftGroup:
+          $ref: '#/components/schemas/ESM.Domain.Entities.FacultyShiftGroup'
+      additionalProperties: false
+    ESM.Domain.Entities.Examination:
+      required:
+        - candidatesOfModule
+        - createdAt
+        - events
+        - name
+        - shiftGroups
+        - status
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Domain.Common.BaseAuditableEntity'
+      properties:
+        displayId:
+          maxLength: 20
+          type: string
+          nullable: true
+        name:
+          maxLength: 100
+          type: string
+        description:
+          maxLength: 200
+          type: string
+          nullable: true
+        expectStartAt:
+          type: string
+          format: date-time
+          nullable: true
+        expectEndAt:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExaminationStatus'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        shiftGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.ShiftGroup'
+        candidatesOfModule:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.CandidateExaminationModule'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.ExaminationEvent'
+      additionalProperties: false
+    ESM.Domain.Entities.ExaminationData:
+      required:
+        - errors
+        - examination
+        - examinationId
+        - id
+        - method
+        - suggestions
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        moduleId:
+          maxLength: 20
+          type: string
+          nullable: true
+        moduleName:
+          maxLength: 100
+          type: string
+          nullable: true
+        moduleClass:
+          maxLength: 200
+          type: string
+          nullable: true
+        credit:
+          type: integer
+          format: int32
+          nullable: true
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        startAt:
+          type: string
+          format: date-time
+          nullable: true
+        endAt:
+          type: string
+          format: date-time
+          nullable: true
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        candidatesCount:
+          type: integer
+          format: int32
+          nullable: true
+        roomsCount:
+          type: integer
+          format: int32
+          nullable: true
+        rooms:
+          maxLength: 50
+          type: string
+          nullable: true
+        faculty:
+          maxLength: 100
+          type: string
+          nullable: true
+        department:
+          maxLength: 100
+          type: string
+          nullable: true
+        departmentAssign:
+          type: boolean
+          nullable: true
+        examinationId:
+          type: string
+          format: uuid
+        examination:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Examination'
+        errors:
+          type: object
+          additionalProperties:
+            oneOf:
+              - $ref: '#/components/schemas/ESM.Domain.Entities.ExaminationDataError'
+              - $ref: '#/components/schemas/ESM.Domain.Entities.ExaminationDataError[T]'
+            nullable: true
+        suggestions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/System.Collections.Generic.KeyValuePair[System.String,System.String]'
+            nullable: true
+      additionalProperties: false
+    ESM.Domain.Entities.ExaminationDataError:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+      additionalProperties: false
+    'ESM.Domain.Entities.ExaminationDataError[T]':
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Domain.Entities.ExaminationDataError'
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/T'
+          nullable: true
+      additionalProperties: false
+    ESM.Domain.Entities.ExaminationEvent:
+      required:
+        - createAt
+        - examination
+        - examinationId
+        - id
+        - status
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExaminationStatus'
+        createAt:
+          type: string
+          format: date-time
+        examinationId:
+          type: string
+          format: uuid
+        examination:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Examination'
+      additionalProperties: false
+    ESM.Domain.Entities.Faculty:
+      required:
+        - departments
+        - facultyShiftGroups
+        - name
+        - teachers
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Domain.Common.BaseAuditableEntity'
+      properties:
+        displayId:
+          maxLength: 20
+          type: string
+          nullable: true
+        name:
+          maxLength: 100
+          type: string
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Teacher'
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Department'
+        facultyShiftGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.FacultyShiftGroup'
+      additionalProperties: false
+    ESM.Domain.Entities.FacultyShiftGroup:
+      required:
+        - calculatedInvigilatorsCount
+        - departmentShiftGroups
+        - faculty
+        - facultyId
+        - id
+        - invigilatorsCount
+        - shiftGroup
+        - shiftGroupId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        invigilatorsCount:
+          type: integer
+          format: int32
+        calculatedInvigilatorsCount:
+          type: integer
+          format: int32
+        facultyId:
+          type: string
+          format: uuid
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Faculty'
+        shiftGroupId:
+          type: string
+          format: uuid
+        shiftGroup:
+          $ref: '#/components/schemas/ESM.Domain.Entities.ShiftGroup'
+        departmentShiftGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.DepartmentShiftGroup'
+      additionalProperties: false
+    ESM.Domain.Entities.InvigilatorShift:
+      required:
+        - createdAt
+        - id
+        - invigilator
+        - orderIndex
+        - paid
+        - shift
+        - shiftId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderIndex:
+          type: integer
+          format: int32
+        paid:
+          type: integer
+          format: int32
+        invigilator:
+          $ref: '#/components/schemas/ESM.Domain.Identity.ApplicationUser'
+        invigilatorId:
+          type: string
+          format: uuid
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        shiftId:
+          type: string
+          format: uuid
+        shift:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Shift'
+      additionalProperties: false
+    ESM.Domain.Entities.Module:
+      required:
+        - candidatesOfExamination
+        - credits
+        - department
+        - displayId
+        - durationInMinutes
+        - faculty
+        - facultyId
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          maxLength: 20
+          type: string
+        name:
+          maxLength: 100
+          type: string
+        credits:
+          type: integer
+          format: int32
+        durationInMinutes:
+          type: integer
+          format: int32
+        facultyId:
+          type: string
+          format: uuid
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Faculty'
+        departmentId:
+          type: string
+          format: uuid
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Department'
+        candidatesOfExamination:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.CandidateExaminationModule'
+      additionalProperties: false
+    ESM.Domain.Entities.Room:
+      required:
+        - displayId
+        - id
+        - shift
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          maxLength: 20
+          type: string
+        capacity:
+          type: integer
+          format: int32
+          nullable: true
+        shift:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Shift'
+      additionalProperties: false
+    ESM.Domain.Entities.Shift:
+      required:
+        - candidatesCount
+        - candidateShift
+        - examsCount
+        - handedOverUser
+        - id
+        - invigilatorsCount
+        - invigilatorShift
+        - room
+        - shiftGroup
+        - shiftGroupId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        examsCount:
+          type: integer
+          format: int32
+        candidatesCount:
+          type: integer
+          format: int32
+        invigilatorsCount:
+          type: integer
+          format: int32
+        report:
+          maxLength: 10000
+          type: string
+          nullable: true
+        handedOverUserId:
+          type: string
+          format: uuid
+          nullable: true
+        handedOverUser:
+          $ref: '#/components/schemas/ESM.Domain.Identity.ApplicationUser'
+        shiftGroupId:
+          type: string
+          format: uuid
+        shiftGroup:
+          $ref: '#/components/schemas/ESM.Domain.Entities.ShiftGroup'
+        roomId:
+          type: string
+          format: uuid
+          nullable: true
+        room:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Room'
+        invigilatorShift:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.InvigilatorShift'
+        candidateShift:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.CandidateShift'
+      additionalProperties: false
+    ESM.Domain.Entities.ShiftGroup:
+      required:
+        - departmentAssign
+        - examination
+        - examinationId
+        - facultyShiftGroups
+        - id
+        - invigilatorsCount
+        - method
+        - module
+        - moduleId
+        - roomsCount
+        - shifts
+        - startAt
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        method:
+          $ref: '#/components/schemas/ESM.Domain.Enums.ExamMethod'
+        invigilatorsCount:
+          type: integer
+          format: int32
+        roomsCount:
+          type: integer
+          format: int32
+        startAt:
+          type: string
+          format: date-time
+        shift:
+          type: integer
+          format: int32
+          nullable: true
+        departmentAssign:
+          type: boolean
+        examinationId:
+          type: string
+          format: uuid
+        examination:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Examination'
+        moduleId:
+          type: string
+          format: uuid
+        module:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Module'
+        shifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Shift'
+        facultyShiftGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.FacultyShiftGroup'
+      additionalProperties: false
+    ESM.Domain.Entities.Teacher:
+      required:
+        - department
+        - examinations
+        - faculty
+        - fullName
+        - handedOverShifts
+        - invigilatorShifts
+        - isMale
+        - user
+        - userId
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ESM.Domain.Common.BaseAuditableEntity'
+      properties:
+        teacherId:
+          maxLength: 20
+          type: string
+          nullable: true
+        fullName:
+          maxLength: 100
+          type: string
+        isMale:
+          type: boolean
+        examinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Examination'
+        invigilatorShifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.InvigilatorShift'
+        handedOverShifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ESM.Domain.Entities.Shift'
+        user:
+          $ref: '#/components/schemas/ESM.Domain.Identity.ApplicationUser'
+        userId:
+          type: string
+          format: uuid
+        departmentId:
+          type: string
+          format: uuid
+          nullable: true
+        department:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Department'
+        facultyId:
+          type: string
+          format: uuid
+          nullable: true
+        faculty:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Faculty'
+      additionalProperties: false
+    ESM.Domain.Enums.ExamMethod:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      type: integer
+      description: "\n\n0 = Select\n\n1 = Write\n\n2 = Practice\n\n3 = Oral\n\n4 = Report1\n\n5 = Report2"
+      format: int32
+      x-enum-varnames:
+        - Select
+        - Write
+        - Practice
+        - Oral
+        - Report1
+        - Report2
+    ESM.Domain.Enums.ExaminationStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 4
+        - 8
+        - 16
+      type: integer
+      description: "\n\n0 = None\n\n1 = Idle\n\n2 = Setup\n\n4 = AssignFaculty\n\n8 = AssignInvigilator\n\n16 = Closed"
+      format: int32
+      x-enum-varnames:
+        - None
+        - Idle
+        - Setup
+        - AssignFaculty
+        - AssignInvigilator
+        - Closed
+    ESM.Domain.Identity.ApplicationUser:
+      required:
+        - accessFailedCount
+        - emailConfirmed
+        - id
+        - lockoutEnabled
+        - phoneNumberConfirmed
+        - teacher
+        - twoFactorEnabled
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userName:
+          type: string
+          nullable: true
+        normalizedUserName:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        normalizedEmail:
+          type: string
+          nullable: true
+        emailConfirmed:
+          type: boolean
+        passwordHash:
+          type: string
+          nullable: true
+        securityStamp:
+          type: string
+          nullable: true
+        concurrencyStamp:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        phoneNumberConfirmed:
+          type: boolean
+        twoFactorEnabled:
+          type: boolean
+        lockoutEnd:
+          type: string
+          format: date-time
+          nullable: true
+        lockoutEnabled:
+          type: boolean
+        accessFailedCount:
+          type: integer
+          format: int32
+        teacher:
+          $ref: '#/components/schemas/ESM.Domain.Entities.Teacher'
+      additionalProperties: false
+    'System.Collections.Generic.KeyValuePair[System.String,System.String]':
+      required:
+        - key
+        - value
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      additionalProperties: false
+    System.Net.HttpStatusCode:
+      enum:
+        - 100
+        - 101
+        - 102
+        - 103
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        - 400
+        - 401
+        - 402
+        - 403
+        - 404
+        - 405
+        - 406
+        - 407
+        - 408
+        - 409
+        - 410
+        - 411
+        - 412
+        - 413
+        - 414
+        - 415
+        - 416
+        - 417
+        - 421
+        - 422
+        - 423
+        - 424
+        - 426
+        - 428
+        - 429
+        - 431
+        - 451
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        - 506
+        - 507
+        - 508
+        - 510
+        - 511
+      type: integer
+      description: "\n\n100 = Continue\n\n101 = SwitchingProtocols\n\n102 = Processing\n\n103 = EarlyHints\n\n200 = OK\n\n201 = Created\n\n202 = Accepted\n\n203 = NonAuthoritativeInformation\n\n204 = NoContent\n\n205 = ResetContent\n\n206 = PartialContent\n\n207 = MultiStatus\n\n208 = AlreadyReported\n\n226 = IMUsed\n\n300 = Ambiguous\n\n301 = Moved\n\n302 = Redirect\n\n303 = RedirectMethod\n\n304 = NotModified\n\n305 = UseProxy\n\n306 = Unused\n\n307 = RedirectKeepVerb\n\n308 = PermanentRedirect\n\n400 = BadRequest\n\n401 = Unauthorized\n\n402 = PaymentRequired\n\n403 = Forbidden\n\n404 = NotFound\n\n405 = MethodNotAllowed\n\n406 = NotAcceptable\n\n407 = ProxyAuthenticationRequired\n\n408 = RequestTimeout\n\n409 = Conflict\n\n410 = Gone\n\n411 = LengthRequired\n\n412 = PreconditionFailed\n\n413 = RequestEntityTooLarge\n\n414 = RequestUriTooLong\n\n415 = UnsupportedMediaType\n\n416 = RequestedRangeNotSatisfiable\n\n417 = ExpectationFailed\n\n421 = MisdirectedRequest\n\n422 = UnprocessableEntity\n\n423 = Locked\n\n424 = FailedDependency\n\n426 = UpgradeRequired\n\n428 = PreconditionRequired\n\n429 = TooManyRequests\n\n431 = RequestHeaderFieldsTooLarge\n\n451 = UnavailableForLegalReasons\n\n500 = InternalServerError\n\n501 = NotImplemented\n\n502 = BadGateway\n\n503 = ServiceUnavailable\n\n504 = GatewayTimeout\n\n505 = HttpVersionNotSupported\n\n506 = VariantAlsoNegotiates\n\n507 = InsufficientStorage\n\n508 = LoopDetected\n\n510 = NotExtended\n\n511 = NetworkAuthenticationRequired"
+      format: int32
+      x-enum-varnames:
+        - Continue
+        - SwitchingProtocols
+        - Processing
+        - EarlyHints
+        - OK
+        - Created
+        - Accepted
+        - NonAuthoritativeInformation
+        - NoContent
+        - ResetContent
+        - PartialContent
+        - MultiStatus
+        - AlreadyReported
+        - IMUsed
+        - Ambiguous
+        - Moved
+        - Redirect
+        - RedirectMethod
+        - NotModified
+        - UseProxy
+        - Unused
+        - RedirectKeepVerb
+        - PermanentRedirect
+        - BadRequest
+        - Unauthorized
+        - PaymentRequired
+        - Forbidden
+        - NotFound
+        - MethodNotAllowed
+        - NotAcceptable
+        - ProxyAuthenticationRequired
+        - RequestTimeout
+        - Conflict
+        - Gone
+        - LengthRequired
+        - PreconditionFailed
+        - RequestEntityTooLarge
+        - RequestUriTooLong
+        - UnsupportedMediaType
+        - RequestedRangeNotSatisfiable
+        - ExpectationFailed
+        - MisdirectedRequest
+        - UnprocessableEntity
+        - Locked
+        - FailedDependency
+        - UpgradeRequired
+        - PreconditionRequired
+        - TooManyRequests
+        - RequestHeaderFieldsTooLarge
+        - UnavailableForLegalReasons
+        - InternalServerError
+        - NotImplemented
+        - BadGateway
+        - ServiceUnavailable
+        - GatewayTimeout
+        - HttpVersionNotSupported
+        - VariantAlsoNegotiates
+        - InsufficientStorage
+        - LoopDetected
+        - NotExtended
+        - NetworkAuthenticationRequired
+    T:
+      type: object
+      additionalProperties: false

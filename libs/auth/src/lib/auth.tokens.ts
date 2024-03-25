@@ -11,6 +11,6 @@ export const AUTH_SERVICE_TOKEN = new InjectionToken<AuthService>(
   'Auth service',
 );
 
-export const PERMISSION_GUARD_ROLE_TOKEN = new InjectionToken<Observable<string[]>>(
-  'Permission guard role',
-);
+export const PERMISSION_GUARD_ROLE_TOKEN = new InjectionToken<
+  Observable<string[]>
+>('Permission guard role');

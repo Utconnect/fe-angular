@@ -11,9 +11,9 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   CreateModuleData,
   ESMApplicationModulesCommandsCreateCreateCommand,
@@ -27,7 +27,7 @@ import {
 export class ModuleService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -41,7 +41,7 @@ export class ModuleService {
    * @response `200` `CreateModuleData` Success
    */
   createModule(
-    data: ESMApplicationModulesCommandsCreateCreateCommand
+    data: ESMApplicationModulesCommandsCreateCreateCommand,
   ): Observable<CreateModuleData> {
     return this.http.post<CreateModuleData>(this.url + `/Module`, data);
   }
@@ -55,11 +55,11 @@ export class ModuleService {
    * @response `200` `ImportExaminationModuleData` Success
    */
   importExaminationModule(
-    data: ESMApplicationModulesCommandsImportImportCommand
+    data: ESMApplicationModulesCommandsImportImportCommand,
   ): Observable<ImportExaminationModuleData> {
     return this.http.post<ImportExaminationModuleData>(
       this.url + `/Module/import`,
-      data
+      data,
     );
   }
 }
@@ -67,17 +67,17 @@ export class ModuleService {
 export class ModuleApiAction {
   createModuleSuccessful = createAction(
     '[Module/API] createModule Successful',
-    props<{ data: CreateModuleData['data'] }>()
+    props<{ data: CreateModuleData['data'] }>(),
   );
 
   createModuleFailed = createAction('[Module/API] createModule Failed');
 
   importExaminationModuleSuccessful = createAction(
     '[Module/API] importExaminationModule Successful',
-    props<{ data: ImportExaminationModuleData['data'] }>()
+    props<{ data: ImportExaminationModuleData['data'] }>(),
   );
 
   importExaminationModuleFailed = createAction(
-    '[Module/API] importExaminationModule Failed'
+    '[Module/API] importExaminationModule Failed',
   );
 }

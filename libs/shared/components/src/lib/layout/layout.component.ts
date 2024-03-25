@@ -67,19 +67,20 @@ export class LayoutComponent {
   private triggerToggleSideBar(): void {
     this.router.events
       .pipe(
-        filter(e => e instanceof NavigationEnd),
-        tap(e => {
+        filter((e) => e instanceof NavigationEnd),
+        tap((e) => {
           e = e as NavigationEnd;
           this.isInCommonPage$.next(this.isCommonPage(e.url));
           this.isInCreatePage$.next(e.url === '/create');
-        })
+        }),
       )
       .subscribe();
   }
 
   private isCommonPage(url: string): boolean {
     return (
-      url === '/' || this.commonPages.find(p => url.startsWith(p)) !== undefined
+      url === '/' ||
+      this.commonPages.find((p) => url.startsWith(p)) !== undefined
     );
   }
 }

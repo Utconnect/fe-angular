@@ -11,9 +11,9 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   CreateDepartmentData,
   CreateUserData,
@@ -31,7 +31,7 @@ import {
 export class DepartmentService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -45,7 +45,7 @@ export class DepartmentService {
    * @response `200` `CreateDepartmentData` Success
    */
   createDepartment(
-    data: ESMApplicationDepartmentsCommandsCreateDepartmentCreateDepartmentCommand
+    data: ESMApplicationDepartmentsCommandsCreateDepartmentCreateDepartmentCommand,
   ): Observable<CreateDepartmentData> {
     return this.http.post<CreateDepartmentData>(this.url + `/Department`, data);
   }
@@ -59,14 +59,14 @@ export class DepartmentService {
    * @response `200` `ImportDepartmentData` Success
    */
   importDepartment(
-    data: ImportDepartmentPayload
+    data: ImportDepartmentPayload,
   ): Observable<ImportDepartmentData> {
     const formData = new FormData();
 
     for (const property in data) {
       const d = data[property as keyof ImportDepartmentPayload];
       if (Array.isArray(d)) {
-        d.forEach(element => {
+        d.forEach((element) => {
           formData.append(property, element);
         });
       } else if (d !== undefined) {
@@ -76,7 +76,7 @@ export class DepartmentService {
 
     return this.http.post<ImportDepartmentData>(
       this.url + `/Department/import`,
-      formData
+      formData,
     );
   }
 
@@ -90,11 +90,11 @@ export class DepartmentService {
    */
   updateDepartment(
     departmentId: string,
-    data: ESMApplicationDepartmentsCommandsUpdateDepartmentUpdateDepartmentParams
+    data: ESMApplicationDepartmentsCommandsUpdateDepartmentUpdateDepartmentParams,
   ): Observable<UpdateDepartmentData> {
     return this.http.put<UpdateDepartmentData>(
       this.url + `/Department/${departmentId}`,
-      data
+      data,
     );
   }
 
@@ -108,11 +108,11 @@ export class DepartmentService {
    */
   createUser(
     departmentId: string,
-    data: ESMApplicationDepartmentsCommandsCreateUserInDepartmentCreateUserInDepartmentParams
+    data: ESMApplicationDepartmentsCommandsCreateUserInDepartmentCreateUserInDepartmentParams,
   ): Observable<CreateUserData> {
     return this.http.post<CreateUserData>(
       this.url + `/Department/${departmentId}/user`,
-      data
+      data,
     );
   }
 }
@@ -120,34 +120,34 @@ export class DepartmentService {
 export class DepartmentApiAction {
   createDepartmentSuccessful = createAction(
     '[Department/API] createDepartment Successful',
-    props<{ data: CreateDepartmentData['data'] }>()
+    props<{ data: CreateDepartmentData['data'] }>(),
   );
 
   createDepartmentFailed = createAction(
-    '[Department/API] createDepartment Failed'
+    '[Department/API] createDepartment Failed',
   );
 
   importDepartmentSuccessful = createAction(
     '[Department/API] importDepartment Successful',
-    props<{ data: ImportDepartmentData['data'] }>()
+    props<{ data: ImportDepartmentData['data'] }>(),
   );
 
   importDepartmentFailed = createAction(
-    '[Department/API] importDepartment Failed'
+    '[Department/API] importDepartment Failed',
   );
 
   updateDepartmentSuccessful = createAction(
     '[Department/API] updateDepartment Successful',
-    props<{ data: UpdateDepartmentData['data'] }>()
+    props<{ data: UpdateDepartmentData['data'] }>(),
   );
 
   updateDepartmentFailed = createAction(
-    '[Department/API] updateDepartment Failed'
+    '[Department/API] updateDepartment Failed',
   );
 
   createUserSuccessful = createAction(
     '[Department/API] createUser Successful',
-    props<{ data: CreateUserData['data'] }>()
+    props<{ data: CreateUserData['data'] }>(),
   );
 
   createUserFailed = createAction('[Department/API] createUser Failed');

@@ -22,13 +22,13 @@ export class LoginStore extends ComponentStore<LoginState> {
   private readonly tokenService = inject(TokenService);
 
   // PROPERTIES
-  readonly status$ = this.select(s => s.status);
+  readonly status$ = this.select((s) => s.status);
 
   // EFFECTS
-  readonly login = this.effect<LoginRequest>(params$ =>
+  readonly login = this.effect<LoginRequest>((params$) =>
     params$.pipe(
       tap(() => this.patchState({ status: 'loading', error: null })),
-      switchMap(request =>
+      switchMap((request) =>
         this.authService.login(request).pipe(
           tapResponse(
             ({ data }) => {
@@ -38,29 +38,29 @@ export class LoginStore extends ComponentStore<LoginState> {
               this.router
                 .navigate([''])
                 .then(() => this.onLoginSuccess?.())
-                .catch(error =>
+                .catch((error) =>
                   this.patchState({
                     status: 'error',
                     error: error as string,
-                  })
+                  }),
                 );
             },
-            error =>
+            (error) =>
               this.patchState({
                 status: 'error',
                 error: error as string,
-              })
-          )
-        )
-      )
-    )
+              }),
+          ),
+        ),
+      ),
+    ),
   );
 
   // CONSTRUCTOR
   constructor(
     @Optional()
     @Inject(ON_LOGIN_SUCCESS_TOKEN)
-    private readonly onLoginSuccess?: OnLoginSuccessType
+    private readonly onLoginSuccess?: OnLoginSuccessType,
   ) {
     super({ status: 'idle', error: null });
   }

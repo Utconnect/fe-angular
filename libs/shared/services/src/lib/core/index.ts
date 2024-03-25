@@ -1,1 +1,2 @@
-export * from './redirect.service';
+export * from './logger';
+export * from './redirect';

@@ -11,9 +11,9 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
 import { createAction, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getEnv } from '../partial';
 import {
   ESMApplicationShiftsCommandsUpdateUpdateRequest,
   UpdateShiftData,
@@ -25,7 +25,7 @@ import {
 export class ShiftService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);
-  private readonly env = inject(ESM_CONFIG);
+  private readonly env = getEnv();
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -40,11 +40,11 @@ export class ShiftService {
    */
   updateShift(
     shiftId: string,
-    data: ESMApplicationShiftsCommandsUpdateUpdateRequest
+    data: ESMApplicationShiftsCommandsUpdateUpdateRequest,
   ): Observable<UpdateShiftData> {
     return this.http.patch<UpdateShiftData>(
       this.url + `/Shift/${shiftId}`,
-      data
+      data,
     );
   }
 }
@@ -52,7 +52,7 @@ export class ShiftService {
 export class ShiftApiAction {
   updateShiftSuccessful = createAction(
     '[Shift/API] updateShift Successful',
-    props<{ data: UpdateShiftData['data'] }>()
+    props<{ data: UpdateShiftData['data'] }>(),
   );
 
   updateShiftFailed = createAction('[Shift/API] updateShift Failed');
