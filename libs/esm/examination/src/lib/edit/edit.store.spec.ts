@@ -1,12 +1,11 @@
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import {
-  APP_STORE_PROVIDER,
-  ResultBuilder,
-  TESTING_COMMON_IMPORTS,
-} from '@esm/cdk';
-import { CreateExaminationRequest, ExaminationStatus } from '@esm/data';
-import { ExaminationService } from '@esm/api';
+  ESMApplicationExaminationsCommandsCreateCreateCommand,
+  ExaminationService
+} from '@esm/api';
+import { ESM_STORE_PROVIDER } from '@esm/test';
+import { ResultBuilder, TESTING_COMMON_IMPORTS } from '@utconnect/test';
 import { cold } from 'jasmine-marbles';
 import { of } from 'rxjs';
 import { ExaminationEditStore } from './edit.store';
@@ -25,7 +24,7 @@ describe('ExaminationEditStore', () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS],
       providers: [
-        APP_STORE_PROVIDER,
+        ESM_STORE_PROVIDER,
         ExaminationEditStore,
         {
           provide: ExaminationService,
@@ -44,7 +43,7 @@ describe('ExaminationEditStore', () => {
   });
 
   describe('Effect create', () => {
-    const params: CreateExaminationRequest = {
+    const params: ESMApplicationExaminationsCommandsCreateCreateCommand = {
       name: 'Mock name',
       displayId: 'Mock ID',
       description: 'Mock description',
@@ -67,31 +66,7 @@ describe('ExaminationEditStore', () => {
       const navigateSpy = spyOn(router, 'navigateByUrl');
 
       mockExaminationService.create.and.returnValue(
-        of(
-          ResultBuilder.success({
-            id: 'mock-id',
-            displayId: 'Mock display ID',
-            name: 'Mock name',
-            description: 'Mock description',
-            expectStartAt: params.expectStartAt?.toUTCString() ?? '',
-            expectEndAt: params.expectEndAt?.toUTCString() ?? '',
-            status: ExaminationStatus.Idle,
-            createdAt: new Date(),
-            updatedAt: null,
-            createdBy: {
-              id: 'Mock',
-              invigilatorId: 'Mock',
-              fullName: 'Mock',
-              email: 'Mock',
-              createdAt: new Date(2023, 1, 1),
-              department: null,
-              faculty: null,
-              role: 'ExaminationDepartmentHead',
-              isMale: true,
-              phoneNumber: '',
-            },
-          }),
-        ),
+        of(ResultBuilder.success('mock-id')),
       );
 
       store.create(params);

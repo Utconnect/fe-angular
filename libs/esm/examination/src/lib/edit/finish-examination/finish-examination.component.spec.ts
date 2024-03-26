@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { APP_STORE_PROVIDER, TESTING_COMMON_IMPORTS } from '@esm/cdk';
+import { ESM_STORE_PROVIDER } from '@esm/test';
+import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 import { ExaminationEditFinishExaminationComponent } from './finish-examination.component';
 import { ExaminationEditFinishExaminationStore } from './finish-examination.store';
 
@@ -10,7 +11,7 @@ describe('ExaminationEditFinishExaminationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS],
-      providers: [APP_STORE_PROVIDER, ExaminationEditFinishExaminationStore],
+      providers: [ESM_STORE_PROVIDER, ExaminationEditFinishExaminationStore],
     }).compileComponents();
 
     fixture = TestBed.createComponent(

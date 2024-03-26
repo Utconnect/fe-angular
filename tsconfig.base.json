@@ -27,6 +27,7 @@
       "@esm/services": ["libs/esm/shared/data-access/services/src/index.ts"],
       "@esm/settings": ["libs/esm/settings/src/index.ts"],
       "@esm/store": ["libs/esm/shell/data-access/store/src/index.ts"],
+      "@esm/test": ["libs/esm/test/src/index.ts"],
       "@utconnect/animations": ["libs/shared/animations/src/index.ts"],
       "@utconnect/components": ["libs/shared/components/src/index.ts"],
       "@utconnect/directives": ["libs/shared/directives/src/index.ts"],

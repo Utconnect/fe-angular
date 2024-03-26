@@ -1,4 +1,8 @@
 export * from './__generated__/data-contracts';
+export {
+  AuthService as EsmAuthService,
+  AuthApiAction,
+} from './__generated__/auth.api';
 export * from './__generated__/department.api';
 export * from './__generated__/examination.api';
 export * from './__generated__/faculty.api';

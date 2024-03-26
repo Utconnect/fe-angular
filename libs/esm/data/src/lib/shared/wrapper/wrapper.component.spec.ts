@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ESM_STORE_PROVIDER } from '@esm/test';
 import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
-import { DataResetPasswordComponent } from './reset-password.component';
+import { DataWrapperComponent } from './wrapper.component';
 
-describe('ChangePasswordComponent', () => {
-  let component: AuthChangePasswordComponent;
-  let fixture: ComponentFixture<AuthChangePasswordComponent>;
+describe('WrapperComponent', () => {
+  let component: DataWrapperComponent;
+  let fixture: ComponentFixture<DataWrapperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS],
-      providers: [ESM_STORE_PROVIDER],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AuthChangePasswordComponent);
+    fixture = TestBed.createComponent(DataWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

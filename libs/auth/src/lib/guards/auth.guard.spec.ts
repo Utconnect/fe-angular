@@ -4,8 +4,8 @@ import {
   RouterModule,
   RouterStateSnapshot,
 } from '@angular/router';
-import { TokenService } from '@esm/cdk';
-import { RedirectService } from '../services/redirect.service';
+import { RedirectService } from '@utconnect/services';
+import { TokenService } from '../services/token.service';
 import { authGuard } from './auth.guard';
 
 describe('authGuard', () => {
