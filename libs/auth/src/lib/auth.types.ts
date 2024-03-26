@@ -3,7 +3,7 @@ export type LoginRequest = {
   password: string;
 };
 
-export interface LoginResponse {
+export type LoginResponse = {
   data: {
     /** @format date-time */
     expiration: Date;
@@ -11,4 +11,15 @@ export interface LoginResponse {
   };
   errors?: unknown[] | null;
   success: boolean;
-}
+};
+
+export type ChangePasswordRequest = {
+  oldPassword: string;
+  newPassword: string;
+};
+
+export type ChangePasswordResponse = {
+  data: boolean;
+  errors?: unknown[] | null;
+  success: boolean;
+};

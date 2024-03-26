@@ -5,57 +5,72 @@ import {
   LocalStorageService,
   SessionStorageService,
 } from '@utconnect/services';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
+  AUTH_ON_LOGIN_SUCCESS_TOKEN,
+  AUTH_ROLE_TOKEN,
   AUTH_SERVICE_TOKEN,
-  PERMISSION_GUARD_ROLE_TOKEN,
-  TOKEN_STORAGE_SERVICE_TOKEN,
+  AUTH_TITLE_TOKEN,
+  AUTH_TOKEN_STORAGE_SERVICE_TOKEN,
 } from './auth.tokens';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { AuthService, TokenService } from './services';
+import { JwtInterceptor } from './interceptors';
+import { IAuthService, TokenService } from './services';
 
 export type AuthConfigOptions<
-  S extends AuthService,
+  S extends IAuthService,
   I extends HttpInterceptor,
   T extends Store,
 > = {
   authService: Type<S>;
-  storage: 'localStorage' | 'sessionStorage';
   authInterceptor?: Type<I>;
-  guard: {
-    role: (store: T) => Observable<string[]>;
-    store: Type<T>;
-  };
+  onLoginSuccess: (store: T) => () => void;
+  role: (store: T) => Observable<string[]>;
+  storage: 'localStorage' | 'sessionStorage';
+  store: Type<T>;
+  title?: (store: T) => Observable<string | null>;
 };
 
-export const authServiceProviders = <
-  S extends AuthService,
+export const authProviders = <
+  S extends IAuthService,
   I extends HttpInterceptor,
   T extends Store,
 >({
   authService,
-  storage,
   authInterceptor,
-  guard,
+  onLoginSuccess,
+  role,
+  storage,
+  store,
+  title,
 }: AuthConfigOptions<S, I, T>): Provider => [
   TokenService,
-  {
-    provide: TOKEN_STORAGE_SERVICE_TOKEN,
-    useClass:
-      storage === 'localStorage' ? LocalStorageService : SessionStorageService,
-  },
-  {
-    provide: AUTH_SERVICE_TOKEN,
-    useClass: authService,
-  },
   {
     provide: HTTP_INTERCEPTORS,
     useClass: authInterceptor ?? JwtInterceptor,
     multi: true,
   },
   {
-    provide: PERMISSION_GUARD_ROLE_TOKEN,
-    useFactory: guard.role,
-    deps: [guard.store],
+    provide: AUTH_TOKEN_STORAGE_SERVICE_TOKEN,
+    useClass:
+      storage === 'localStorage' ? LocalStorageService : SessionStorageService,
+  },
+  {
+    provide: AUTH_ON_LOGIN_SUCCESS_TOKEN,
+    useFactory: onLoginSuccess,
+    deps: [store],
+  },
+  {
+    provide: AUTH_SERVICE_TOKEN,
+    useClass: authService,
+  },
+  {
+    provide: AUTH_ROLE_TOKEN,
+    useFactory: role,
+    deps: [store],
+  },
+  {
+    provide: AUTH_TITLE_TOKEN,
+    useFactory: title ?? (() => of(null)),
+    deps: [store],
   },
 ];

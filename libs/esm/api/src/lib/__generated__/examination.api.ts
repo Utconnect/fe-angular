@@ -54,9 +54,7 @@ import {
   UpdateTemporaryTeacherToUserIdInDepartmentShiftGroupPayload,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ExaminationService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

@@ -28,7 +28,7 @@ describe('ExaminationEditComponent', () => {
 
       component['buildCreateForm']();
 
-      component.form!.patchValue({
+      component.form?.patchValue({
         description: 'Mock description',
         displayId: 'Mock ID',
         name: 'Mock name',

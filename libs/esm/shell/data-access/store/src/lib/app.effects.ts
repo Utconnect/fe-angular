@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AUTH_SERVICE_TOKEN, TokenService } from '@auth';
 import { EsmAuthService, ExaminationService, FacultyService } from '@esm/api';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
+import { RedirectService } from '@utconnect/services';
 import { catchError, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 import { EsmApiAction } from './app.api.actions';
 import { EsmPageAction } from './app.page.actions';
@@ -14,7 +14,6 @@ import { EsmState } from './app.state';
 @Injectable()
 export class EsmEffects {
   // INJECT PROPERTIES
-  private readonly router = inject(Router);
   private readonly actions$ = inject(Actions);
   private readonly authService: EsmAuthService = inject(
     AUTH_SERVICE_TOKEN,
@@ -22,6 +21,7 @@ export class EsmEffects {
   private readonly esmStore = inject(Store<EsmState>);
   private readonly tokenService = inject(TokenService);
   private readonly facultyService = inject(FacultyService);
+  private readonly redirectService = inject(RedirectService);
   private readonly examinationService = inject(ExaminationService);
 
   // PRIVATE PROPERTIES
@@ -49,7 +49,7 @@ export class EsmEffects {
         ofType(EsmPageAction.logOut),
         tap(() => {
           this.tokenService.clear();
-          this.router.navigate(['/login']).catch(() => null);
+          this.redirectService.login();
         }),
       );
     },

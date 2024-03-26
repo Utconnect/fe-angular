@@ -15,10 +15,8 @@ import {
 import { TuiAccordionModule, TuiCheckboxLabeledModule } from '@taiga-ui/kit';
 import { BehaviorSubject, filter, tap } from 'rxjs';
 import { MainViewComponent } from './main-view';
-import { SideBarComponent } from './side-bar';
-import { SidebarItem } from './side-bar/side-bar.types';
-import { TopBarComponent } from './top-bar';
-import { TopBarGroup } from './top-bar/top-bar.types';
+import { SideBarComponent, SidebarItem } from './side-bar';
+import { TopBarComponent, TopBarGroup } from './top-bar';
 
 const TAIGA_UI = [
   TuiAccordionModule,

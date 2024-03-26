@@ -21,9 +21,7 @@ import {
   UpdateTemporaryNameToTeacherData,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GroupService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

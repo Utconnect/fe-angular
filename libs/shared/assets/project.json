@@ -2,7 +2,7 @@
   "name": "shared-assets",
   "projectType": "library",
   "root": "libs/shared/assets",
-  "sourceRoot": "libs/shared/assets/src",
+  "sourceRoot": "libs/shared/assets",
   "targets": {},
   "tags": ["type:assets", "scope:shared"]
 }

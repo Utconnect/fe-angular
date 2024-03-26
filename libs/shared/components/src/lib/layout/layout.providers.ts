@@ -1,6 +1,6 @@
 import { Provider, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { LAYOUT_OPTION_STORE_TOKEN } from './layout.tokens';
 import { SIDE_BAR_OPTIONS_TOKEN, SideBarOptions } from './side-bar';
 import {
@@ -14,9 +14,7 @@ type LayoutProvidersType<T extends Store> = {
   sideBar: SideBarOptions;
   topBar: {
     items: TopBarGroup[];
-    menuText?: {
-      factory: (store: T) => Observable<string>;
-    };
+    menuText?: (store: T) => Observable<string>;
   };
 };
 
@@ -37,9 +35,9 @@ export const layoutProviders = <T extends Store>({
     provide: TOP_BAR_OPTION_ITEM_TOKEN,
     useValue: topBar.items,
   },
-  topBar.menuText && {
+  {
     provide: TOP_BAR_OPTION_MENU_TEXT_TOKEN,
-    useFactory: topBar.menuText.factory,
+    useFactory: topBar.menuText ?? (() => of(null)),
     deps: [store],
   },
 ];

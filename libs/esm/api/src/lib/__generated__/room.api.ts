@@ -21,9 +21,7 @@ import {
   ImportRoomPayload,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class RoomService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

@@ -21,9 +21,7 @@ import {
   ImportExaminationModuleData,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ModuleService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

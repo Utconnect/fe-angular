@@ -1,13 +1,14 @@
-import { Inject, inject, Injectable, Optional } from '@angular/core';
-import { Router } from '@angular/router';
-import { TokenService } from '@auth';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { RedirectService } from '@utconnect/services';
 import { Status } from '@utconnect/types';
 import { switchMap, tap } from 'rxjs';
-import { AUTH_SERVICE_TOKEN } from '../../auth.tokens';
+import {
+  AUTH_ON_LOGIN_SUCCESS_TOKEN,
+  AUTH_SERVICE_TOKEN,
+} from '../../auth.tokens';
 import { LoginRequest } from '../../auth.types';
-import { ON_LOGIN_SUCCESS_TOKEN } from './login.tokens';
-import { OnLoginSuccessType } from './login.types';
+import { TokenService } from '../../services/token.service';
 
 type LoginState = {
   status: Status;
@@ -17,9 +18,10 @@ type LoginState = {
 @Injectable()
 export class LoginStore extends ComponentStore<LoginState> {
   // INJECT PROPERTIES
-  private readonly router = inject(Router);
   private readonly authService = inject(AUTH_SERVICE_TOKEN);
   private readonly tokenService = inject(TokenService);
+  private readonly onLoginSuccess = inject(AUTH_ON_LOGIN_SUCCESS_TOKEN);
+  private readonly redirectService = inject(RedirectService);
 
   // PROPERTIES
   readonly status$ = this.select((s) => s.status);
@@ -33,17 +35,8 @@ export class LoginStore extends ComponentStore<LoginState> {
           tapResponse(
             ({ data }) => {
               this.tokenService.save(data.token);
-              // TODO
-              // this.appStore.dispatch(AppPageAction.getUserInfo());
-              this.router
-                .navigate([''])
-                .then(() => this.onLoginSuccess?.())
-                .catch((error) =>
-                  this.patchState({
-                    status: 'error',
-                    error: error as string,
-                  }),
-                );
+              this.redirectService.app();
+              this.onLoginSuccess();
             },
             (error) =>
               this.patchState({
@@ -57,11 +50,7 @@ export class LoginStore extends ComponentStore<LoginState> {
   );
 
   // CONSTRUCTOR
-  constructor(
-    @Optional()
-    @Inject(ON_LOGIN_SUCCESS_TOKEN)
-    private readonly onLoginSuccess?: OnLoginSuccessType,
-  ) {
+  constructor() {
     super({ status: 'idle', error: null });
   }
 }

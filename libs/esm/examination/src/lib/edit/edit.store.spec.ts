@@ -86,7 +86,7 @@ describe('ExaminationEditStore', () => {
               createdAt: new Date(2023, 1, 1),
               department: null,
               faculty: null,
-              role: 'ExaminationDepartmentHead' as any,
+              role: 'ExaminationDepartmentHead',
               isMale: true,
               phoneNumber: '',
             },

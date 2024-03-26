@@ -20,14 +20,14 @@
   <div class="right flex items-center">
     <ng-content select="right"></ng-content>
 
-    <div class="hidden lg:block">
+    <div>
       <tui-hosted-dropdown
         [(open)]="openUserDropdown"
         [content]="userDropdown"
         tuiDropdownAlign="left"
       >
         <button tuiButton appearance="nav-button" type="button">
-          {{ (menuText | async) ?? 'Xin chào' }}
+          {{ (menuText$ | async) ?? 'Xin chào' }}
         </button>
       </tui-hosted-dropdown>
     </div>

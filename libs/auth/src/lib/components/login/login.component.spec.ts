@@ -1,11 +1,11 @@
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
-import { LoginComponent, NGRX, TAIGA_UI } from './login.component';
+import { AuthLoginComponent, NGRX, TAIGA_UI } from './login.component';
 import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  let component: AuthLoginComponent;
+  let fixture: ComponentFixture<AuthLoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -13,7 +13,7 @@ describe('LoginComponent', () => {
       providers: [],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(AuthLoginComponent);
     component = fixture.componentInstance;
 
     fixture.detectChanges();

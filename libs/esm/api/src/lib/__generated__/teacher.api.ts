@@ -24,9 +24,7 @@ import {
   UpdateInfoData,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TeacherService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

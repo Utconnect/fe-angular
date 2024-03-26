@@ -4,9 +4,9 @@ const path = require('path');
 const { generateApi } = require('swagger-typescript-api');
 const generateOperationId = require('./generateOperationId');
 const customTranslator = require('./custom-translator').CustomTranslator;
-var argv = require('minimist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2));
 
-generateApi({
+await generateApi({
   input: path.resolve(__dirname, '../../../', argv.p),
   output: path.resolve(__dirname, '../../../', argv.o),
   templates: path.resolve(__dirname, './templates'),
@@ -28,7 +28,7 @@ generateApi({
   extractingOptions: {
     requestParamsSuffix: ['Query'],
   },
-  primitiveTypeConstructs: (struct) => ({
+  primitiveTypeConstructs: (_) => ({
     string: {
       'date-time': 'Date',
     },

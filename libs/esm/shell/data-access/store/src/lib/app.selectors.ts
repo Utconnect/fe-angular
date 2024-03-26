@@ -2,7 +2,7 @@ import { GetAllFacultyData, GetMySummaryInfoData } from '@esm/api';
 import { DepartmentSummary } from '@esm/model';
 import { createFeatureSelector, createSelector, select } from '@ngrx/store';
 import { ObservableHelper, StringHelper } from '@utconnect/helpers';
-import { Observable, UnaryFunction, map, pipe } from 'rxjs';
+import { map, Observable, pipe, UnaryFunction } from 'rxjs';
 import { esmFeatureKey } from './app.reducer';
 import { EsmState } from './app.state';
 
@@ -110,8 +110,7 @@ export class EsmSelector {
           ...acc,
           ...curr.departments.map((f) => {
             const { departments, ...faculty } = curr;
-            const res = { ...f, faculty };
-            return res;
+            return { ...f, faculty };
           }),
         ];
         return acc;

@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { ForbiddenComponent } from './forbidden.component';
 
 export const FORBIDDEN_ROUTES: Routes = [
   {
     path: '',
-    component: ForbiddenComponent,
+    loadComponent: async () =>
+      (await import('./forbidden.component')).ForbiddenComponent,
   },
 ];

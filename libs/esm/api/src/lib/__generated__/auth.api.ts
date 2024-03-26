@@ -25,9 +25,7 @@ import {
   ResetPasswordQuery,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

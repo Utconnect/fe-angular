@@ -25,9 +25,7 @@ import {
   UpdateDepartmentData,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class DepartmentService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

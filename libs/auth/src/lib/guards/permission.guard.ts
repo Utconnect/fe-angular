@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { PERMISSION_GUARD_ROLE_TOKEN } from '../auth.tokens';
+import { AUTH_ROLE_TOKEN } from '../auth.tokens';
 
 export const permissionGuard: CanActivateFn = (route) => {
   const router = inject(Router);
-  const roles$ = inject(PERMISSION_GUARD_ROLE_TOKEN);
+  const roles$ = inject(AUTH_ROLE_TOKEN);
   const acceptRoles = route.data['roles'] as string[] | undefined;
 
   if (!acceptRoles || acceptRoles.length === 0) {

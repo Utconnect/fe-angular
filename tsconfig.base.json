@@ -25,6 +25,7 @@
       "@esm/home": ["libs/esm/home/src/index.ts"],
       "@esm/model": ["libs/esm/shell/data-access/model/src/index.ts"],
       "@esm/services": ["libs/esm/shared/data-access/services/src/index.ts"],
+      "@esm/settings": ["libs/esm/settings/src/index.ts"],
       "@esm/store": ["libs/esm/shell/data-access/store/src/index.ts"],
       "@utconnect/animations": ["libs/shared/animations/src/index.ts"],
       "@utconnect/components": ["libs/shared/components/src/index.ts"],
@@ -35,7 +36,8 @@
       "@utconnect/styles": ["libs/shared/styles/src/index.ts"],
       "@utconnect/test": ["libs/shared/test/src/index.ts"],
       "@utconnect/types": ["libs/shared/types/src/index.ts"],
-      "@utconnect/utils": ["libs/shared/utils/src/index.ts"]
+      "@utconnect/utils": ["libs/shared/utils/src/index.ts"],
+      "@utconnect/validators": ["libs/shared/validations/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

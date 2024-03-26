@@ -19,6 +19,7 @@ import {
 } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
 import { fadeInOut } from '@utconnect/animations';
+import { tap } from 'rxjs';
 import { BellComponent } from '../bell';
 import { LAYOUT_OPTION_STORE_TOKEN } from '../layout.tokens';
 import {
@@ -67,7 +68,7 @@ export class TopBarComponent {
   // INJECT PROPERTIES
   readonly items = inject(TOP_BAR_OPTION_ITEM_TOKEN);
   readonly store = inject(LAYOUT_OPTION_STORE_TOKEN);
-  readonly menuText = inject(TOP_BAR_OPTION_MENU_TEXT_TOKEN);
+  readonly menuText$ = inject(TOP_BAR_OPTION_MENU_TEXT_TOKEN);
 
   // PUBLIC PROPERTIES
   openUserDropdown = false;

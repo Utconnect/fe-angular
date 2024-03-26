@@ -19,9 +19,7 @@ import {
   UpdateShiftData,
 } from './data-contracts';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ShiftService {
   // INJECT PROPERTIES
   private readonly http = inject(HttpClient);

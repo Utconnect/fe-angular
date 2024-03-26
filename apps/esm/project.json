@@ -25,7 +25,7 @@
           },
           {
             "glob": "**/*",
-            "input": "libs/shared/assets/src",
+            "input": "libs/shared/assets/assets",
             "output": "assets"
           }
         ],

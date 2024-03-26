@@ -6,4 +6,4 @@ export * from './top-bar';
 
 export * from './layout.component';
 export * from './layout.providers';
-export * from './layout.routes';
+export * from './layout.routing';

@@ -45,7 +45,7 @@ const TAIGA_UI = [
   providers: [LoginStore],
   animations: [slideUp],
 })
-export class LoginComponent implements OnInit {
+export class AuthLoginComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly store = inject(LoginStore);
   private readonly fb = inject(NonNullableFormBuilder);
