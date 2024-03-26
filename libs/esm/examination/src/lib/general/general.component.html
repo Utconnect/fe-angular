@@ -1,0 +1,79 @@
+<!-- <button tuiButton (click)="openWorkflow()">Biểu đồ</button> -->
+
+<esm-safe-examination-data
+  *ngrxLet="statistic$ as statistic"
+  [minimumStatus]="ExaminationStatus.AssignFaculty"
+  [getDataFunc]="getDataFunc"
+  [showLoader]="showLoader$"
+  class="grow"
+>
+  <tui-island *ngIf="statistic" class="w-[700px] mx-auto">
+    <p class="tui-island__category">Thông tin chung</p>
+    <h3 class="tui-island__title">
+      {{ statistic.name }}
+      <ng-container *ngIf="statistic.displayId">
+        ({{ statistic.displayId }})
+      </ng-container>
+    </h3>
+    <ul class="tui-list">
+      <li class="tui-list__item">
+        Số lượt thi: {{ statistic.numberOfCandidates }}
+      </li>
+      <li class="tui-list__item">
+        Số cán bộ coi thi: {{ statistic.numberOfInvigilators }}
+      </li>
+      <li class="tui-list__item">
+        Thời gian:
+        <span class="font-bold">
+          {{ statistic.timePercent | percentage }}
+        </span>
+        <progress
+          tuiProgressBar
+          [value]="statistic.timePercent"
+          [max]="100"
+        ></progress>
+        <div class="flex justify-between">
+          <span>{{ statistic.startAt | date: "dd/MM/Y" }}</span>
+          <span>{{ statistic.endAt | date: "dd/MM/Y" }}</span>
+        </div>
+      </li>
+      <li class="tui-list__item">
+        Số môn thi: {{ statistic.numberOfModulesOver }}/{{
+          statistic.numberOfModules
+        }}
+        <span class="ml-2 font-bold">
+          ({{
+            statistic.numberOfModulesOver
+              | percentage: statistic.numberOfModules
+          }})
+        </span>
+        <progress
+          tuiProgressBar
+          [value]="statistic.numberOfModulesOver"
+          [max]="statistic.numberOfModules"
+        ></progress>
+        <div class="flex justify-end">
+          <span>{{ statistic.numberOfModules }}</span>
+        </div>
+      </li>
+      <li class="tui-list__item">
+        Số ca thi: {{ statistic.numberOfShiftsOver }}/{{
+          statistic.numberOfShifts
+        }}
+        <span class="ml-2 font-bold">
+          ({{
+            statistic.numberOfShiftsOver | percentage: statistic.numberOfShifts
+          }})
+        </span>
+        <progress
+          tuiProgressBar
+          [value]="statistic.numberOfShiftsOver"
+          [max]="statistic.numberOfShifts"
+        ></progress>
+        <div class="flex justify-end">
+          <span>{{ statistic.numberOfShifts }}</span>
+        </div>
+      </li>
+    </ul>
+  </tui-island>
+</esm-safe-examination-data>
