@@ -3,13 +3,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { DepartmentService } from '@esm/api';
 import { DepartmentSummary } from '@esm/model';
 import { LetModule } from '@ngrx/component';
 import {
@@ -20,12 +21,12 @@ import {
   TuiErrorModule,
   TuiLabelModule,
   TuiNotification,
-  TuiTextfieldControllerModule
+  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
   TuiFieldErrorPipeModule,
   TuiInputModule,
-  TuiSelectModule
+  TuiSelectModule,
 } from '@taiga-ui/kit';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ObservableHelper, StringifyHelper } from '@utconnect/helpers';
@@ -54,9 +55,13 @@ const selector = 'esm-dialog-edit-department';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ...NGRX, ...TAIGA_UI],
-  providers: [EditDepartmentDialogStore, loggerProvider({ tag: selector })],
+  providers: [
+    EditDepartmentDialogStore,
+    DepartmentService,
+    loggerProvider({ tag: selector }),
+  ],
 })
-export class EditDepartmentDialogComponent implements OnInit {
+export class EsmDialogEditDepartmentComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loggerService = inject(LoggerService);

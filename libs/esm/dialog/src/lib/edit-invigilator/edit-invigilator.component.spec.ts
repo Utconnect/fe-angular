@@ -1,22 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ESM_STORE_PROVIDER } from '@esm/test';
+import { APP_STORE_PROVIDER, TESTING_COMMON_IMPORTS } from '@esm/cdk';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 import {
-  EsmDialogEditDepartmentComponent,
+  EsmDialogEditInvigilatorComponent,
   NGRX,
   TAIGA_UI,
-} from './edit-department.component';
+} from './edit-invigilator.component';
 
-describe('EditDepartmentDialogComponent', () => {
-  let component: EsmDialogEditDepartmentComponent;
-  let fixture: ComponentFixture<EsmDialogEditDepartmentComponent>;
+describe('EditInvigilatorDialogComponent', () => {
+  let component: EsmDialogEditInvigilatorComponent;
+  let fixture: ComponentFixture<EsmDialogEditInvigilatorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS, NGRX, TAIGA_UI],
       providers: [
-        ESM_STORE_PROVIDER,
+        APP_STORE_PROVIDER,
         {
           provide: POLYMORPHEUS_CONTEXT,
           useValue: {
@@ -24,13 +23,17 @@ describe('EditDepartmentDialogComponent', () => {
               moduleId: null,
               moduleName: null,
               department: null,
+              invigilator: {
+                displayId: '',
+                id: '',
+              },
             },
           },
         },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EsmDialogEditDepartmentComponent);
+    fixture = TestBed.createComponent(EsmDialogEditInvigilatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { GetTeachersData } from '@esm/api';
-import { EditInvigilatorDialogComponent } from '@esm/dialog';
+import { GetTeachersData, TeacherService } from '@esm/api';
+import { EsmDialogEditInvigilatorComponent } from '@esm/dialog';
 import { LetModule } from '@ngrx/component';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 import { TuiFilterPipeModule } from '@taiga-ui/cdk';
@@ -52,12 +52,16 @@ const TAIGA_UI = [
     CommonModule,
     RouterModule,
     FormsModule,
-    EditInvigilatorDialogComponent,
+    EsmDialogEditInvigilatorComponent,
     ScrollingModule,
     ...NGRX,
     ...TAIGA_UI,
   ],
-  providers: [DataInvigilatorStore, tuiButtonOptionsProvider({ size: 'm' })],
+  providers: [
+    DataInvigilatorStore,
+    TeacherService,
+    tuiButtonOptionsProvider({ size: 'm' }),
+  ],
 })
 export class DataInvigilatorComponent implements OnInit {
   // INJECT PROPERTIES
@@ -100,7 +104,7 @@ export class DataInvigilatorComponent implements OnInit {
     this.dialogService
       .open<EditInvigilatorDialogModel>(
         new PolymorpheusComponent(
-          EditInvigilatorDialogComponent,
+          EsmDialogEditInvigilatorComponent,
           this.injector,
         ),
         { data },

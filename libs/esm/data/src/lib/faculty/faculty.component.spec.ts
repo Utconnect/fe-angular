@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TESTING_COMMON_IMPORTS } from '@esm/cdk';
 import { appFeatureKey, appInitialState } from '@esm/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { DataDepartmentComponent, TAIGA_UI } from './department.component';
+import { DataFacultyComponent, NGRX, TAIGA_UI } from './faculty.component';
 
-describe('DataDepartmentComponent', () => {
-  let component: DataDepartmentComponent;
-  let fixture: ComponentFixture<DataDepartmentComponent>;
+describe('DataFacultyComponent', () => {
+  let component: DataFacultyComponent;
+  let fixture: ComponentFixture<DataFacultyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TESTING_COMMON_IMPORTS, TAIGA_UI],
+      imports: [NGRX, TAIGA_UI],
       providers: [
         provideMockStore({
           initialState: {
@@ -20,7 +19,7 @@ describe('DataDepartmentComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DataDepartmentComponent);
+    fixture = TestBed.createComponent(DataFacultyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

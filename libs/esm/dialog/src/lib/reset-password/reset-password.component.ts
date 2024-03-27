@@ -35,7 +35,7 @@ export const TAIGA_UI = [
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ResetPasswordDialogStore],
 })
-export class ResetPasswordDialogComponent implements OnInit {
+export class EsmDialogResetPasswordComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly env = inject(ESM_CONFIG);
   private readonly store = inject(ResetPasswordDialogStore);

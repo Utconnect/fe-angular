@@ -12,7 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { GetAllFacultyData, GetTeachersData } from '@esm/api';
+import { DepartmentService, GetAllFacultyData, GetTeachersData } from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import {
   TuiContextWithImplicit,
@@ -90,10 +90,11 @@ const selector = 'esm-dialog-edit-department';
       },
     },
     EditInvigilatorDialogStore,
+    DepartmentService,
     loggerProvider({ tag: selector }),
   ],
 })
-export class EditInvigilatorDialogComponent implements OnInit {
+export class EsmDialogEditInvigilatorComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loggerService = inject(LoggerService);
@@ -107,7 +108,7 @@ export class EditInvigilatorDialogComponent implements OnInit {
   // PUBLIC PROPERTIES
   readonly isFillCreateDialog =
     this.context.data &&
-    EditInvigilatorDialogComponent.isTemporaryInvigilator(this.context.data);
+    EsmDialogEditInvigilatorComponent.isTemporaryInvigilator(this.context.data);
   readonly isEditDialog =
     this.context.data !== undefined && !this.isFillCreateDialog;
   readonly form = this.buildForm();
@@ -226,7 +227,7 @@ export class EditInvigilatorDialogComponent implements OnInit {
     let phoneNumber: string | null | undefined;
 
     if (data) {
-      if (EditInvigilatorDialogComponent.isTemporaryInvigilator(data)) {
+      if (EsmDialogEditInvigilatorComponent.isTemporaryInvigilator(data)) {
         fullName = data.invigilatorName;
         departmentId = data.departmentId;
       } else {

@@ -1,0 +1,17 @@
+:host {
+  @apply flex flex-col;
+  height: calc(var(--content-height) - 2.5rem);
+}
+
+.header-right {
+  > *:not(:last-child) {
+    @apply mr-4;
+  }
+  > tui-select {
+    @apply w-60;
+  }
+}
+
+tui-scrollbar ::ng-deep .t-content {
+  @apply h-full;
+}

@@ -49,7 +49,7 @@ const selector = 'esm-dialog-edit-faculty';
   imports: [CommonModule, ReactiveFormsModule, ...NGRX, ...TAIGA_UI],
   providers: [EditFacultyDialogStore, loggerProvider({ tag: selector })],
 })
-export class EditFacultyDialogComponent implements OnInit {
+export class EsmDialogEditFacultyComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loggerService = inject(LoggerService);

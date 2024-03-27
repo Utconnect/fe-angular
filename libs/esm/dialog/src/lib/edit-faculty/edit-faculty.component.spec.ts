@@ -3,14 +3,14 @@ import { ESM_STORE_PROVIDER } from '@esm/test';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 import {
-  EditFacultyDialogComponent,
+  EsmDialogEditFacultyComponent,
   NGRX,
   TAIGA_UI,
 } from './edit-faculty.component';
 
 describe('EditFacultyDialogComponent', () => {
-  let component: EditFacultyDialogComponent;
-  let fixture: ComponentFixture<EditFacultyDialogComponent>;
+  let component: EsmDialogEditFacultyComponent;
+  let fixture: ComponentFixture<EsmDialogEditFacultyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,7 +30,7 @@ describe('EditFacultyDialogComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditFacultyDialogComponent);
+    fixture = TestBed.createComponent(EsmDialogEditFacultyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

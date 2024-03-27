@@ -6,7 +6,8 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
-import { ResetPasswordDialogComponent } from '@esm/dialog';
+import { TeacherService } from '@esm/api';
+import { EsmDialogResetPasswordComponent } from '@esm/dialog';
 import { LetModule } from '@ngrx/component';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 import {
@@ -26,7 +27,11 @@ const TAIGA_UI = [TuiLoaderModule, TuiTableModule, TuiButtonModule];
   imports: [CommonModule, LetModule, ...TAIGA_UI],
   templateUrl: './reset-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DataResetPasswordStore, tuiButtonOptionsProvider({ size: 'm' })],
+  providers: [
+    DataResetPasswordStore,
+    TeacherService,
+    tuiButtonOptionsProvider({ size: 'm' }),
+  ],
 })
 export class DataResetPasswordComponent implements OnInit {
   // INJECT PROPERTIES
@@ -49,7 +54,10 @@ export class DataResetPasswordComponent implements OnInit {
   openDialog(accountId: string): void {
     this.dialogService
       .open<boolean>(
-        new PolymorpheusComponent(ResetPasswordDialogComponent, this.injector),
+        new PolymorpheusComponent(
+          EsmDialogResetPasswordComponent,
+          this.injector,
+        ),
         {
           data: accountId,
           dismissible: false,
