@@ -2,7 +2,7 @@ import { EsmConfig } from '@esm/config';
 
 export const environment: EsmConfig = {
   production: false,
-  baseUrl: 'https://esm-api.utcketnoi.edu.vn',
+  baseUrl: 'http://localhost:5001',
   syncfusionLicense: '',
   recaptcha: {
     siteKey: '',

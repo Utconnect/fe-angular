@@ -6,7 +6,9 @@ import { SIDE_BAR_OPTIONS_TOKEN, SideBarOptions } from './side-bar';
 import {
   TOP_BAR_OPTION_ITEM_TOKEN,
   TOP_BAR_OPTION_MENU_TEXT_TOKEN,
+  TOP_BAR_OPTION_RIGHT_ITEM_TOKEN,
   TopBarGroup,
+  TopBarRightItemProviderType,
 } from './top-bar';
 
 type LayoutProvidersType<T extends Store> = {
@@ -15,6 +17,7 @@ type LayoutProvidersType<T extends Store> = {
   topBar: {
     items: TopBarGroup[];
     menuText?: (store: T) => Observable<string>;
+    right: TopBarRightItemProviderType;
   };
 };
 
@@ -37,7 +40,11 @@ export const layoutProviders = <T extends Store>({
   },
   {
     provide: TOP_BAR_OPTION_MENU_TEXT_TOKEN,
-    useFactory: topBar.menuText ?? (() => of(null)),
+    useFactory: topBar.menuText ?? ((): Observable<string | null> => of(null)),
     deps: [store],
+  },
+  {
+    provide: TOP_BAR_OPTION_RIGHT_ITEM_TOKEN,
+    useValue: topBar.right,
   },
 ];

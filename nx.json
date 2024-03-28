@@ -65,7 +65,8 @@
     },
     "@nrwl/angular:directive": {
       "standalone": true,
-      "export": true
+      "export": true,
+      "flat": "false"
     },
     "@nrwl/angular:pipe": {
       "flat": "false",

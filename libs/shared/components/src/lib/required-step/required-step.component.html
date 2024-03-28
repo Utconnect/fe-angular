@@ -1,10 +1,6 @@
 <ng-container *ngrxLet="showLoader as showLoader">
   <ng-container
-    *esmMinimumExaminationStatus="
-      minimumStatus;
-      else message;
-      load: getDataFunc
-    "
+    *utconnectRequiredStep="minimumStep; else message; load: getDataFunc"
   >
     <ng-container *ngIf="!showLoader; else loader">
       <ng-content></ng-content>
@@ -16,43 +12,19 @@
   <tui-loader class="h-40"></tui-loader>
 </ng-template>
 
-<ng-template
-  #message
-  [polymorpheus]="context"
-  let-status="status"
-  let-examination="examination"
->
+<ng-template #message [polymorpheus]="context" let-currentStep="step">
   <div #customMessage>
     <ng-content select="[message]"></ng-content>
   </div>
 
-  <div
-    *ngIf="!customMessage.children.length"
-    [ngSwitch]="status"
-    class="text-center"
-  >
-    <ng-container *ngSwitchCase="ExaminationStatus.Idle">
-      <h4 class="text-lg">Chưa có dữ liệu lịch thi</h4>
-      <a tuiLink [routerLink]="['/', examination.id, 'exam', 'data']">
-        <span class="text-base">Đến trang nhập dữ liệu</span>
-      </a>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="ExaminationStatus.Setup">
-      <h4 class="text-lg">Kỳ thi chưa được kích hoạt</h4>
-      <a tuiLink [routerLink]="['/', examination.id, 'exam', 'data']">
-        <span class="text-base">Vui lòng Kích hoạt tại đây</span>
-      </a>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="ExaminationStatus.AssignFaculty">
-      <h4 class="text-lg">Chưa chốt số lượng CBCT tới các khoa</h4>
-      <a
-        tuiLink
-        [routerLink]="['/', examination.id, 'invigilator', 'assign-faculty']"
-      >
-        <span class="text-base">Vui lòng chốt số lượng tại đây</span>
-      </a>
+  <div *ngIf="!customMessage.children.length" class="text-center">
+    <ng-container *ngFor="let step of steps$ | async">
+      <ng-container *ngIf="step.step === currentStep">
+        <h4 class="text-lg">{{ step.title }}</h4>
+        <a tuiLink [routerLink]="step.routerLink">
+          <span class="text-base">{{ step.description }}</span>
+        </a>
+      </ng-container>
     </ng-container>
   </div>
 </ng-template>

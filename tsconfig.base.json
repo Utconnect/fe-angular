@@ -17,6 +17,7 @@
     "paths": {
       "@auth": ["libs/auth/src/index.ts"],
       "@esm/api": ["libs/esm/api/src/index.ts"],
+      "@esm/components": ["libs/esm/shared/components/src/index.ts"],
       "@esm/config": ["libs/esm/config/src/index.ts"],
       "@esm/data": ["libs/esm/data/src/index.ts"],
       "@esm/dialog": ["libs/esm/dialog/src/index.ts"],

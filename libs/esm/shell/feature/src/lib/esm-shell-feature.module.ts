@@ -12,12 +12,18 @@ import {
   LAYOUT_ROUTES,
   LayoutComponent,
   layoutProviders,
+  requiredStepProviders,
 } from '@utconnect/components';
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
 import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { extModules } from './build-specifics';
-import { esmSideBarItems, EsmTopBarConstants } from './constants';
 import {
+  esmSideBarItems,
+  EsmTopBarConstants,
+  topBarRightItemMapper,
+} from './constants';
+import {
+  esmRequiredStatusFactory,
   menuTextFactory,
   onLoginSuccess,
   roleFactory,
@@ -51,7 +57,8 @@ const routes: Routes = [
           roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
           isCreateMode: true,
         },
-        loadChildren: async () => (await import('@esm/examination')).ROUTES,
+        loadChildren: async () =>
+          (await import('@esm/examination')).EDIT_ROUTES,
       },
       {
         path: 'data',
@@ -74,11 +81,11 @@ const routes: Routes = [
         path: ':examinationId',
         canActivate: [authGuard],
         children: [
-          //         {
-          //           path: '',
-          //           loadChildren: async () =>
-          //             (await import('./examination/general/general.routing')).ROUTES,
-          //         },
+          {
+            path: '',
+            loadChildren: async () =>
+              (await import('@esm/examination')).GENERAL_ROUTES,
+          },
           //         {
           //           path: 'exam',
           //           children: [
@@ -231,7 +238,14 @@ const routes: Routes = [
       topBar: {
         items: EsmTopBarConstants.items,
         menuText: menuTextFactory,
+        right: {
+          mapper: topBarRightItemMapper,
+        },
       },
+    }),
+    requiredStepProviders({
+      factory: esmRequiredStatusFactory,
+      store: Store<EsmState>,
     }),
     {
       provide: RECAPTCHA_SETTINGS,

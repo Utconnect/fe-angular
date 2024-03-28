@@ -1,13 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ESMDomainEnumsExaminationStatus } from '@esm/api';
-import { ExaminationStatus, ExaminationSummary } from '@esm/data';
-import { MinimumExaminationStatusDirective } from '@esm/shared/directives';
 import { LetModule } from '@ngrx/component';
 import { TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
 import { PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
-import { Observable } from 'rxjs';
+import {
+  RequiredStepContext,
+  RequiredStepDirective,
+} from '@utconnect/directives';
+import { Observable, tap } from 'rxjs';
+import { REQUIRED_STEP_TOKEN } from './required-step.tokens';
 
 export const TAIGA_UI = [TuiLinkModule, TuiLoaderModule];
 
@@ -19,25 +26,21 @@ export const TAIGA_UI = [TuiLinkModule, TuiLoaderModule];
     RouterModule,
     LetModule,
     PolymorpheusModule,
-    MinimumExaminationStatusDirective,
+    RequiredStepDirective,
     ...TAIGA_UI,
   ],
   templateUrl: './required-step.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RequiredStepComponent {
-  // INPUTS
-  @Input() minimumStatus: ESMDomainEnumsExaminationStatus =
-    ESMDomainEnumsExaminationStatus.Closed;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  @Input() getDataFunc: () => void = () => {};
-  @Input() showLoader: Observable<boolean> | boolean = false;
+export class RequiredStepComponent<T, TStep> {
+  // CONTEXT
+  readonly context!: RequiredStepContext<T, TStep>;
 
-  // PUBLIC PROPERTIES
-  readonly ExaminationStatus = ESMDomainEnumsExaminationStatus;
-  readonly context!: {
-    $implicit: ExaminationStatus | null;
-    status: ExaminationStatus;
-    examination: ExaminationSummary;
-  };
+  // INJECT PROPERTIES
+  readonly steps$ = inject(REQUIRED_STEP_TOKEN);
+
+  // INPUTS
+  @Input() minimumStep!: TStep;
+  @Input() showLoader: Observable<boolean> | boolean = false;
+  @Input() getDataFunc?: () => void;
 }

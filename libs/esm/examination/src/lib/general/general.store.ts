@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ExaminationService, GetStatisticData } from '@esm/api';
-import { ObservableHelper, Status } from '@esm/cdk';
-import { AppSelector, AppState } from '@esm/store';
+import { EsmSelector, EsmState } from '@esm/store';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
+import { ObservableHelper } from '@utconnect/helpers';
+import { Status } from '@utconnect/types';
 import { switchMap, takeUntil, tap, withLatestFrom } from 'rxjs';
 
 type ExaminationProcessState = {
@@ -14,7 +15,7 @@ type ExaminationProcessState = {
 @Injectable()
 export class ExaminationProcessStore extends ComponentStore<ExaminationProcessState> {
   // INJECT PROPERTIES
-  private readonly appStore = inject(Store<AppState>);
+  private readonly appStore = inject(Store<EsmState>);
   private readonly examinationService = inject(ExaminationService);
 
   // PUBLIC PROPERTIES
@@ -23,7 +24,7 @@ export class ExaminationProcessStore extends ComponentStore<ExaminationProcessSt
 
   // PRIVATE PROPERTIES
   private readonly examinationId$ = this.appStore
-    .select(AppSelector.examinationId)
+    .select(EsmSelector.examinationId)
     .pipe(ObservableHelper.filterNullish(), takeUntil(this.destroy$));
 
   // EFFECTS

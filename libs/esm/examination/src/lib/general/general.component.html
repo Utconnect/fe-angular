@@ -1,8 +1,8 @@
 <!-- <button tuiButton (click)="openWorkflow()">Biểu đồ</button> -->
 
-<esm-safe-examination-data
+<utconnect-required-step
   *ngrxLet="statistic$ as statistic"
-  [minimumStatus]="ExaminationStatus.AssignFaculty"
+  [minimumStep]="ExaminationStatus.AssignFaculty"
   [getDataFunc]="getDataFunc"
   [showLoader]="showLoader$"
   class="grow"
@@ -76,4 +76,4 @@
       </li>
     </ul>
   </tui-island>
-</esm-safe-examination-data>
+</utconnect-required-step>

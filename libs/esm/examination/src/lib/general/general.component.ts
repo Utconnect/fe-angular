@@ -8,6 +8,7 @@ import {
 import { ESMDomainEnumsExaminationStatus } from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import { TuiIslandModule, TuiProgressModule } from '@taiga-ui/kit';
+import { RequiredStepComponent } from '@utconnect/components';
 import { PercentagePipe } from '@utconnect/pipes';
 import { map, Subscription } from 'rxjs';
 import { ExaminationProcessStore } from './general.store';
@@ -24,7 +25,7 @@ const TAIGA_UI = [
   imports: [
     CommonModule,
     LetModule,
-    SafeExaminationDataComponent,
+    RequiredStepComponent,
     PercentagePipe,
     ...TAIGA_UI,
   ],
@@ -54,20 +55,21 @@ export class ExaminationGeneralComponent implements OnInit {
   private readonly store = inject(ExaminationProcessStore);
 
   // PUBLIC PROPERTIES
-  startDate = new Date(2023, 5, 1);
-  endDate = new Date(2023, 5, 30);
-  modulesCount = 100;
-  subjectsCount = 1000;
-  candidatesCount = 10000;
-  invigilatorsCount = 1000;
+  // startDate = new Date(2023, 5, 1);
+  // endDate = new Date(2023, 5, 30);
+  // modulesCount = 100;
+  // subjectsCount = 1000;8
+  // candidatesCount = 10000;
+  // invigilatorsCount = 1000;
   readonly ExaminationStatus = ESMDomainEnumsExaminationStatus;
-  readonly getDataFunc = (): Subscription => this.store.getStatistic();
 
   readonly status$ = this.store.status$;
   readonly showLoader$ = this.store.status$.pipe(map((s) => s === 'loading'));
 
   // PRIVATE PROPERTIES
   readonly statistic$ = this.store.data$;
+
+  readonly getDataFunc = (): Subscription => this.store.getStatistic();
 
   // CONSTRUCTOR
   // constructor() {}

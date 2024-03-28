@@ -1,3 +1,4 @@
+import { TopBarCreateButtonComponent } from '@esm/components';
 import { EsmPageAction } from '@esm/store';
 import {
   tuiIconCommentLarge,
@@ -5,8 +6,14 @@ import {
   tuiIconLogOutLarge,
   tuiIconSettingsLarge,
 } from '@taiga-ui/icons';
-import { SidebarItem, TopBarGroup } from '@utconnect/components';
+import {
+  SidebarItem,
+  TopBarGroup,
+  TopBarItemMapper,
+} from '@utconnect/components';
 import { Role } from './roles';
+
+export const topBarRightItemKey = 'rightItem';
 
 export const esmSideBarItems: SidebarItem[] = [
   {
@@ -161,9 +168,20 @@ export class EsmTopBarConstants {
           key: EsmTopBarConstants.keys.LOG_OUT,
           label: 'Đăng xuất',
           icon: tuiIconLogOutLarge,
-          action: (store) => store.dispatch(EsmPageAction.logOut()),
+          action: (store): void => store.dispatch(EsmPageAction.logOut()),
         },
       ],
     },
   ];
 }
+
+export const topBarRightItemMapper: TopBarItemMapper = [
+  {
+    paths: ['/create'],
+    component: null,
+  },
+  {
+    path: '*',
+    component: TopBarCreateButtonComponent,
+  },
+];
