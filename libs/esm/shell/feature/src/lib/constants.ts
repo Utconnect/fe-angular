@@ -177,7 +177,7 @@ export class EsmTopBarConstants {
 
 export const topBarRightItemMapper: TopBarItemMapper = [
   {
-    paths: ['/create'],
+    path: '/create',
     component: null,
   },
   {

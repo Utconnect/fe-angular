@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TuiButtonModule, tuiButtonOptionsProvider } from '@taiga-ui/core';
 import { fadeInOut } from '@utconnect/animations';
-import { tap } from 'rxjs';
 import { TopBarCreateButtonStore } from './top-bar-create-button.store';
 
 export const TAIGA_UI = [TuiButtonModule];
@@ -27,6 +31,9 @@ export const TAIGA_UI = [TuiButtonModule];
 export class TopBarCreateButtonComponent {
   // INJECT PROPERTIES
   private readonly store = inject(TopBarCreateButtonStore);
+
+  // HOST BINDING
+  @HostBinding('@fadeInOut') animate = true;
 
   // PUBLIC PROPERTIES
   readonly isInvigilator$ = this.store.isInvigilator$;

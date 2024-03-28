@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 
 const defaultDuration = {
-  duration: '500ms',
+  duration: '400ms',
 };
 
 const fadeInTransition = transition(

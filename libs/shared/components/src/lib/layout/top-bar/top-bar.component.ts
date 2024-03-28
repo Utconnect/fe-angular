@@ -2,19 +2,16 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ComponentRef,
   inject,
   Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  ActivatedRoute,
-  NavigationStart,
-  Router,
-  RouterModule,
-} from '@angular/router';
+import { NavigationStart, Router, RouterModule } from '@angular/router';
 import { LetModule } from '@ngrx/component';
 import {
   TuiActiveZoneModule,
@@ -32,7 +29,6 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { fadeInOut } from '@utconnect/animations';
 import { BellComponent } from '../bell';
 import { LAYOUT_OPTION_STORE_TOKEN } from '../layout.tokens';
 import {
@@ -78,17 +74,16 @@ const TAIGA_UI = [
       size: 'm',
     }),
   ],
-  animations: [fadeInOut],
 })
 export class TopBarComponent implements AfterViewInit {
   // INJECT PROPERTIES
-  readonly route = inject(ActivatedRoute);
   readonly items = inject(TOP_BAR_OPTION_ITEM_TOKEN);
-  readonly store = inject(LAYOUT_OPTION_STORE_TOKEN);
-  readonly router = inject(Router);
-  readonly destroy$ = inject(TuiDestroyService);
   readonly menuText$ = inject(TOP_BAR_OPTION_MENU_TEXT_TOKEN);
-  readonly rightItemOption = inject(TOP_BAR_OPTION_RIGHT_ITEM_TOKEN);
+
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly store = inject(LAYOUT_OPTION_STORE_TOKEN);
+  private readonly router = inject(Router);
+  private readonly rightItemOption = inject(TOP_BAR_OPTION_RIGHT_ITEM_TOKEN);
 
   // VIEW CHILD
   @ViewChild('right', { read: ViewContainerRef })
@@ -97,15 +92,15 @@ export class TopBarComponent implements AfterViewInit {
   // PUBLIC PROPERTIES
   openUserDropdown = false;
 
-  ngAfterViewInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart && this.rightVcr) {
-        this.rightVcr.clear();
+  // PRIVATE PROPERTIES
+  currentRightComponent: ComponentRef<unknown> | null = null;
 
-        const rightItem = this.getRightItem(event.url);
-        if (rightItem) {
-          this.rightVcr.createComponent(rightItem);
-        }
+  ngAfterViewInit(): void {
+    this.updateRightComponentOnNavigation(this.router.url);
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.updateRightComponentOnNavigation(event.url);
       }
     });
   }
@@ -116,6 +111,32 @@ export class TopBarComponent implements AfterViewInit {
   }
 
   // PRIVATE METHODS
+  private updateRightComponentOnNavigation(url: string): void {
+    if (!this.rightVcr) {
+      return;
+    }
+
+    const rightItem = this.getRightItem(url);
+    if (!rightItem) {
+      // this.currentRightComponent?.destroy();
+      this.rightVcr.clear();
+      this.currentRightComponent = null;
+      return;
+    }
+
+    if (!this.currentRightComponent) {
+      this.currentRightComponent = this.rightVcr.createComponent(rightItem);
+      this.cdr.markForCheck();
+      return;
+    }
+
+    if (this.currentRightComponent.componentType.name !== rightItem.name) {
+      this.currentRightComponent.destroy();
+      this.currentRightComponent = this.rightVcr.createComponent(rightItem);
+      this.cdr.markForCheck();
+    }
+  }
+
   private getRightItem(url: string): Type<unknown> | null {
     for (const item of this.rightItemOption.mapper) {
       if ('paths' in item) {
