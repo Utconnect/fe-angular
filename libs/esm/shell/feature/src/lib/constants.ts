@@ -114,62 +114,6 @@ export const esmSideBarItems: SidebarItem[] = [
   },
 ];
 
-export class EsmTopBarConstants {
-  static keys = {
-    USER_INFO: 'user-info',
-    COMMENTS: 'comments',
-    SETTINGS: 'settings',
-    CHANGE_PASSWORD: 'change-password',
-    HELP: 'help',
-    LOG_OUT: 'log-out',
-  };
-
-  static items: TopBarGroup[] = [
-    {
-      items: [
-        {
-          key: EsmTopBarConstants.keys.USER_INFO,
-          label: 'Thông tin cá nhân',
-          routerLink: '/user-info',
-          icon: '<i class="far fa-user" style="font-size: 23px"></i>',
-        },
-      ],
-    },
-    {
-      items: [
-        {
-          key: EsmTopBarConstants.keys.COMMENTS,
-          label: 'Đóng góp ý kiến',
-          routerLink: '/feedback',
-          icon: tuiIconCommentLarge,
-        },
-        {
-          key: EsmTopBarConstants.keys.CHANGE_PASSWORD,
-          label: 'Cài đặt',
-          routerLink: '/settings',
-          icon: tuiIconSettingsLarge,
-        },
-      ],
-    },
-    {
-      items: [
-        {
-          key: EsmTopBarConstants.keys.HELP,
-          label: 'Trợ giúp & hỗ trợ',
-          icon: tuiIconHelpCircleLarge,
-          externalLink: 'https://m.me/utcketnoi',
-        },
-        {
-          key: EsmTopBarConstants.keys.LOG_OUT,
-          label: 'Đăng xuất',
-          icon: tuiIconLogOutLarge,
-          action: (store): void => store.dispatch(EsmPageAction.logOut()),
-        },
-      ],
-    },
-  ];
-}
-
 export const topBarRightItemMapper: ComponentRouteMapper = [
   {
     path: '/create',

@@ -17,13 +17,10 @@ import {
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
 import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { extModules } from './build-specifics';
-import {
-  esmSideBarItems,
-  EsmTopBarConstants,
-  topBarRightItemMapper,
-} from './constants';
+import { esmSideBarItems, topBarRightItemMapper } from './constants';
 import {
   esmRequiredStatusFactory,
+  esmTopBarItemsFactory,
   menuTextFactory,
   onLoginSuccess,
   roleFactory,
@@ -236,7 +233,7 @@ const routes: Routes = [
         items: esmSideBarItems,
       },
       topBar: {
-        items: EsmTopBarConstants.items,
+        items: esmTopBarItemsFactory,
         menuText: menuTextFactory,
         right: {
           mapper: topBarRightItemMapper,

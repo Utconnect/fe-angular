@@ -1,9 +1,62 @@
 import { ESMDomainEnumsExaminationStatus } from '@esm/api';
 import { EsmPageAction, EsmSelector, EsmState } from '@esm/store';
 import { Store } from '@ngrx/store';
-import { RequiredStep } from '@utconnect/components';
+import {
+  tuiIconCommentLarge,
+  tuiIconHelpCircleLarge,
+  tuiIconLogOutLarge,
+  tuiIconSettingsLarge,
+} from '@taiga-ui/icons';
+import { RequiredStep, TopBarGroup } from '@utconnect/components';
 import { ObservableHelper } from '@utconnect/helpers';
-import { combineLatest, map, Observable, tap } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
+
+export const esmTopBarItemsFactory: <T extends Store>(
+  store: T,
+) => TopBarGroup[] = (store) => [
+  {
+    items: [
+      {
+        key: 'user-info',
+        label: 'Thông tin cá nhân',
+        routerLink: '/user-info',
+        icon: '<i class="far fa-user" style="font-size: 23px"></i>',
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        key: 'comments',
+        label: 'Đóng góp ý kiến',
+        routerLink: '/feedback',
+        icon: tuiIconCommentLarge,
+      },
+      {
+        key: 'settings',
+        label: 'Cài đặt',
+        routerLink: '/settings',
+        icon: tuiIconSettingsLarge,
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        key: 'help',
+        label: 'Trợ giúp & hỗ trợ',
+        icon: tuiIconHelpCircleLarge,
+        externalLink: 'https://m.me/utcketnoi',
+      },
+      {
+        key: 'log-out',
+        label: 'Đăng xuất',
+        icon: tuiIconLogOutLarge,
+        action: () => store.dispatch(EsmPageAction.logOut()),
+      },
+    ],
+  },
+];
 
 export const roleFactory: (store: Store<EsmState>) => Observable<string[]> = (
   store,

@@ -1,4 +1,3 @@
-import { Store } from '@ngrx/store';
 import { ComponentRouteMapper } from '@utconnect/types';
 
 export type TopBarItem = {
@@ -7,7 +6,7 @@ export type TopBarItem = {
   routerLink?: string;
   icon: string;
   externalLink?: string;
-  action?: (store: Store) => void;
+  action?: () => void;
 };
 
 export type TopBarGroup = {
