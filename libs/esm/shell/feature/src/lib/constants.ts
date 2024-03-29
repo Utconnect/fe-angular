@@ -6,14 +6,9 @@ import {
   tuiIconLogOutLarge,
   tuiIconSettingsLarge,
 } from '@taiga-ui/icons';
-import {
-  SidebarItem,
-  TopBarGroup,
-  TopBarItemMapper,
-} from '@utconnect/components';
+import { SidebarItem, TopBarGroup } from '@utconnect/components';
+import { ComponentRouteMapper } from '@utconnect/types';
 import { Role } from './roles';
-
-export const topBarRightItemKey = 'rightItem';
 
 export const esmSideBarItems: SidebarItem[] = [
   {
@@ -175,7 +170,7 @@ export class EsmTopBarConstants {
   ];
 }
 
-export const topBarRightItemMapper: TopBarItemMapper = [
+export const topBarRightItemMapper: ComponentRouteMapper = [
   {
     path: '/create',
     component: null,

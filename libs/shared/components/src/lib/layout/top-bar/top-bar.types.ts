@@ -1,5 +1,5 @@
-import { Type } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ComponentRouteMapper } from '@utconnect/types';
 
 export type TopBarItem = {
   key: string;
@@ -14,17 +14,6 @@ export type TopBarGroup = {
   items: TopBarItem[];
 };
 
-export type TopBarItemMapper = (
-  | {
-      path: string;
-      component: Type<unknown> | null;
-    }
-  | {
-      paths: string[];
-      component: Type<unknown> | null;
-    }
-)[];
-
 export type TopBarRightItemProviderType = {
-  mapper: TopBarItemMapper;
+  mapper: ComponentRouteMapper;
 };

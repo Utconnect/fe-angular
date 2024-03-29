@@ -14,11 +14,13 @@
       <h3 class="hidden ml-1 text-lg font-bold uppercase md:block">ESM</h3>
     </a>
 
-    <ng-template #left></ng-template>
+    <!--    <utconnect-dynamic-route-component></utconnect-dynamic-route-component>-->
   </div>
 
   <div class="right flex items-center">
-    <ng-template #right></ng-template>
+    <utconnect-dynamic-route-component
+      [mapper]="rightItemOption.mapper"
+    ></utconnect-dynamic-route-component>
 
     <div>
       <tui-hosted-dropdown

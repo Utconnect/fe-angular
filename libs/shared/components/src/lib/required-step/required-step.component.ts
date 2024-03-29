@@ -13,7 +13,7 @@ import {
   RequiredStepContext,
   RequiredStepDirective,
 } from '@utconnect/directives';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { REQUIRED_STEP_TOKEN } from './required-step.tokens';
 
 export const TAIGA_UI = [TuiLinkModule, TuiLoaderModule];
