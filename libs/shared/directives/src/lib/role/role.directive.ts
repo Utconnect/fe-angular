@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Directive,
+  EmbeddedViewRef,
   inject,
   Input,
   TemplateRef,
@@ -13,30 +14,29 @@ import {
 })
 export class RoleDirective {
   // INJECT PROPERTIES
-  private elseThenTemplateRef = inject(TemplateRef<unknown>);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly thenTemplateRef = inject(TemplateRef<unknown>);
 
   // PRIVATE PROPERTIES
-  private _role: string | null = null;
-  private _acceptRole?: string[] | null;
-  private hadElse = false;
+  private _acceptRoles?: string[] | null;
+  private _roles: string[] = [];
+  private elseThenTemplateRef?: TemplateRef<unknown>;
+  private evr?: EmbeddedViewRef<unknown>;
 
   // SETTER
-  @Input() set utconnectRole(acceptRoles: string | null) {
-    this._role = acceptRoles;
+  @Input() set utconnectRole(roles: string[]) {
+    this._roles = roles;
     this.updateView();
   }
 
   @Input() set utconnectRoleAccept(acceptRoles: string[] | undefined | null) {
-    this._acceptRole = acceptRoles;
+    this._acceptRoles = acceptRoles;
     this.updateView();
   }
 
   @Input() set utconnectRoleElse(templateRef: TemplateRef<unknown>) {
     this.elseThenTemplateRef = templateRef;
-    this.hadElse = true;
     this.updateView();
   }
 
@@ -47,15 +47,23 @@ export class RoleDirective {
 
   // PRIVATE METHODS
   private updateView(): void {
-    if (!this._role) {
+    if (!this._roles || this._roles.length === 0) {
       return;
     }
 
-    if (!this._acceptRole || this._acceptRole.includes(this._role)) {
-      this.viewContainerRef.createEmbeddedView(this.thenTemplateRef);
+    if (
+      !this._acceptRoles ||
+      this._acceptRoles.length === 0 ||
+      this._acceptRoles.find((acceptRole) => this._roles.includes(acceptRole))
+    ) {
+      this.evr?.destroy();
+      this.evr = this.viewContainerRef.createEmbeddedView(this.thenTemplateRef);
       this.cdr.detectChanges();
-    } else if (this.hadElse) {
-      this.viewContainerRef.createEmbeddedView(this.elseThenTemplateRef);
+    } else if (this.elseThenTemplateRef) {
+      this.evr?.destroy();
+      this.evr = this.viewContainerRef.createEmbeddedView(
+        this.elseThenTemplateRef,
+      );
       this.cdr.detectChanges();
     }
   }

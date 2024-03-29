@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Directive,
+  EmbeddedViewRef,
   inject,
   Input,
   TemplateRef,
@@ -15,7 +16,7 @@ import { ObjectHelper } from '@utconnect/helpers';
 export class RequiredStepDirective<T, TStep> {
   // INJECT PROPERTIES
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly viewContainerRef = inject(ViewContainerRef);
+  private readonly vcf = inject(ViewContainerRef);
   private elseTemplateRef: TemplateRef<RequiredStepContext<T, TStep>> | null =
     null;
   private readonly thenTemplateRef = inject(
@@ -23,8 +24,9 @@ export class RequiredStepDirective<T, TStep> {
   );
 
   // PRIVATE PROPERTIES
-  private _minimumStep: TStep | null = null;
+  private evr?: EmbeddedViewRef<unknown>;
   private _data: T | null = null;
+  private _minimumStep: TStep | null = null;
 
   // INPUTS
   @Input() field!: keyof T;
@@ -65,19 +67,20 @@ export class RequiredStepDirective<T, TStep> {
       this._data,
     );
 
-    this.viewContainerRef.clear();
+    console.log(this._minimumStep, this.currentStep)
 
     if (
       ObjectHelper.isNullOrUndefined(this._minimumStep) ||
       ObjectHelper.isNullOrUndefined(this.currentStep) ||
-      ObjectHelper.isNullOrUndefined(this._minimumStep) ||
       this.currentStep >= this._minimumStep
     ) {
-      this.viewContainerRef.createEmbeddedView(this.thenTemplateRef, context);
+      this.evr?.destroy();
+      this.evr = this.vcf.createEmbeddedView(this.thenTemplateRef, context);
       this.cdr.detectChanges();
       this.utconnectRequiredStepLoad?.();
     } else if (this.elseTemplateRef) {
-      this.viewContainerRef.createEmbeddedView(this.elseTemplateRef, context);
+      this.evr?.destroy();
+      this.evr = this.vcf.createEmbeddedView(this.elseTemplateRef, context);
       this.cdr.detectChanges();
     }
   }

@@ -1,7 +1,11 @@
 import { Provider, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { SIDE_BAR_OPTIONS_TOKEN, SideBarOptions } from './side-bar';
+import {
+  SIDE_BAR_OPTION_AUTH_ROLES_TOKEN,
+  SIDE_BAR_OPTION_ITEM_TOKEN,
+  SidebarItem,
+} from './side-bar';
 import {
   TOP_BAR_OPTION_ITEM_TOKEN,
   TOP_BAR_OPTION_MENU_TEXT_TOKEN,
@@ -12,7 +16,10 @@ import {
 
 type LayoutProvidersType<T extends Store> = {
   store: Type<T>;
-  sideBar: SideBarOptions;
+  sideBar: {
+    items: (store: T) => Observable<SidebarItem[]>;
+    roles: (store: T) => Observable<string[]>;
+  };
   topBar: {
     items: (store: T) => TopBarGroup[];
     menuText?: (store: T) => Observable<string>;
@@ -26,8 +33,14 @@ export const layoutProviders = <T extends Store>({
   topBar,
 }: LayoutProvidersType<T>): Provider => [
   {
-    provide: SIDE_BAR_OPTIONS_TOKEN,
-    useValue: sideBar,
+    provide: SIDE_BAR_OPTION_ITEM_TOKEN,
+    useFactory: sideBar.items,
+    deps: [store],
+  },
+  {
+    provide: SIDE_BAR_OPTION_AUTH_ROLES_TOKEN,
+    useFactory: sideBar.roles,
+    deps: [store],
   },
   {
     provide: TOP_BAR_OPTION_ITEM_TOKEN,

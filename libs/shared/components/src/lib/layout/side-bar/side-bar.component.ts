@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { LetModule } from '@ngrx/component';
 import {
   TuiLinkModule,
   TuiLoaderModule,
@@ -14,7 +10,10 @@ import {
 } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiCheckboxLabeledModule } from '@taiga-ui/kit';
 import { RoleDirective } from '@utconnect/directives';
-import { SIDE_BAR_OPTIONS_TOKEN } from './side-bar.tokens';
+import {
+  SIDE_BAR_OPTION_AUTH_ROLES_TOKEN,
+  SIDE_BAR_OPTION_ITEM_TOKEN,
+} from './side-bar.tokens';
 
 const TAIGA_UI = [
   TuiAccordionModule,
@@ -31,12 +30,10 @@ const TAIGA_UI = [
   styleUrls: ['./side-bar.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, RouterModule, RoleDirective, ...TAIGA_UI],
+  imports: [CommonModule, RouterModule, RoleDirective, LetModule, ...TAIGA_UI],
 })
 export class SideBarComponent {
   // INJECT PROPERTIES
-  readonly options = inject(SIDE_BAR_OPTIONS_TOKEN);
-
-  // INPUTS
-  @Input() role: string | null = null;
+  readonly items$ = inject(SIDE_BAR_OPTION_ITEM_TOKEN);
+  readonly roles$ = inject(SIDE_BAR_OPTION_AUTH_ROLES_TOKEN);
 }

@@ -17,9 +17,11 @@ import {
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
 import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { extModules } from './build-specifics';
-import { esmSideBarItems, topBarRightItemMapper } from './constants';
+import { topBarRightItemMapper } from './constants';
 import {
-  esmRequiredStatusFactory,
+  esmRequiredStepDataFactory,
+  esmRequiredStepFactory,
+  esmSideBarItemsFactory,
   esmTopBarItemsFactory,
   menuTextFactory,
   onLoginSuccess,
@@ -230,7 +232,8 @@ const routes: Routes = [
     layoutProviders({
       store: Store<EsmState>,
       sideBar: {
-        items: esmSideBarItems,
+        items: esmSideBarItemsFactory,
+        roles: roleFactory,
       },
       topBar: {
         items: esmTopBarItemsFactory,
@@ -241,7 +244,8 @@ const routes: Routes = [
       },
     }),
     requiredStepProviders({
-      factory: esmRequiredStatusFactory,
+      factory: esmRequiredStepFactory,
+      data: esmRequiredStepDataFactory,
       store: Store<EsmState>,
     }),
     {

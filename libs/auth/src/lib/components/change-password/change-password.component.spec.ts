@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ESM_STORE_PROVIDER } from '@esm/test';
 import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
-import { DataResetPasswordComponent } from './reset-password.component';
+import { AuthChangePasswordComponent } from './change-password.component';
 
 describe('ChangePasswordComponent', () => {
   let component: AuthChangePasswordComponent;
@@ -10,7 +9,6 @@ describe('ChangePasswordComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS],
-      providers: [ESM_STORE_PROVIDER],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthChangePasswordComponent);

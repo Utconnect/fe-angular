@@ -46,10 +46,7 @@ export class LayoutComponent {
   private readonly router = inject(Router);
 
   // INPUT
-  @Input() topBarMenuText?: string;
-  @Input() topBarItems: TopBarGroup[] = [];
   @Input() role: string | null = null;
-  @Input() sideBarItems: SidebarItem[] = [];
 
   // PUBLIC PROPERTIES
   readonly isInCommonPage$ = new BehaviorSubject<boolean>(true);
