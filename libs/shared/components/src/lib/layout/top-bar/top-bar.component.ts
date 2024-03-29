@@ -69,10 +69,11 @@ export class TopBarComponent {
   readonly rightItemOption = inject(TOP_BAR_OPTION_RIGHT_ITEM_TOKEN);
 
   // PUBLIC PROPERTIES
-  openUserDropdown = false;
+  openDropdown = false;
 
   // PUBLIC METHODS
   onClick(item: TopBarItem): void {
+    this.openDropdown = false;
     item.action?.();
   }
 }
