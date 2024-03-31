@@ -8,7 +8,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { TuiButtonModule, tuiButtonOptionsProvider } from '@taiga-ui/core';
 import { fadeInOut } from '@utconnect/animations';
-import { TopBarCreateButtonStore } from './top-bar-create-button.store';
+import { EsmTopBarCreateButtonStore } from './top-bar-create-button.store';
 
 export const TAIGA_UI = [TuiButtonModule];
 
@@ -20,7 +20,7 @@ export const TAIGA_UI = [TuiButtonModule];
   styleUrls: ['./top-bar-create-button.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    TopBarCreateButtonStore,
+    EsmTopBarCreateButtonStore,
     tuiButtonOptionsProvider({
       appearance: 'icon',
       size: 'm',
@@ -28,9 +28,9 @@ export const TAIGA_UI = [TuiButtonModule];
   ],
   animations: [fadeInOut],
 })
-export class TopBarCreateButtonComponent {
+export class EsmTopBarCreateButtonComponent {
   // INJECT PROPERTIES
-  private readonly store = inject(TopBarCreateButtonStore);
+  private readonly store = inject(EsmTopBarCreateButtonStore);
 
   // HOST BINDING
   @HostBinding('@fadeInOut') animate = true;

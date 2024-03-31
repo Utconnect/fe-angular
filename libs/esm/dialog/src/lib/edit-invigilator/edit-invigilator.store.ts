@@ -12,14 +12,14 @@ import { Store } from '@ngrx/store';
 import { ErrorResult, Status } from '@utconnect/types';
 import { switchMap, takeUntil, tap } from 'rxjs';
 
-type EditInvigilatorDialogState = {
+type EsmEditInvigilatorDialogState = {
   status: Status;
   errors: ErrorResult[] | null;
   responseData: string | null;
 };
 
 @Injectable()
-export class EditInvigilatorDialogStore extends ComponentStore<EditInvigilatorDialogState> {
+export class EsmEditInvigilatorDialogStore extends ComponentStore<EsmEditInvigilatorDialogState> {
   // INJECT PROPERTIES
   private readonly appStore = inject(Store<EsmState>);
   private readonly teacherService = inject(TeacherService);

@@ -1,0 +1,20 @@
+<ng-container *ngrxLet="examination$ as examination">
+  <h1 id="title" class="absolute text-3xl font-bold">Dữ liệu lịch thi</h1>
+
+  <ng-container [ngSwitch]="examination.status">
+    <esm-examination-data-import
+      *ngSwitchCase="ExaminationStatus.Idle"
+      class="flex-1"
+    ></esm-examination-data-import>
+
+    <esm-examination-data-temporary
+      *ngSwitchCase="ExaminationStatus.Setup"
+      class="flex-1"
+    ></esm-examination-data-temporary>
+
+    <esm-examination-data-final
+      *ngSwitchDefault
+      class="flex-1"
+    ></esm-examination-data-final>
+  </ng-container>
+</ng-container>

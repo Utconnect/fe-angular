@@ -9,13 +9,13 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { ErrorResult, Status } from '@utconnect/types';
 import { switchMap, tap } from 'rxjs';
 
-type EditFacultyDialogState = {
+type EsmEditFacultyDialogState = {
   status: Status;
   errors: ErrorResult[] | null;
 };
 
 @Injectable()
-export class EditFacultyDialogStore extends ComponentStore<EditFacultyDialogState> {
+export class EsmEditFacultyDialogStore extends ComponentStore<EsmEditFacultyDialogState> {
   // INJECT PROPERTIES
   private readonly facultyService = inject(FacultyService);
 

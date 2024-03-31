@@ -1,0 +1,52 @@
+<table
+  tuiTable
+  *ngIf="form"
+  [formGroup]="form"
+  [columns]="columns"
+  class="w-full"
+>
+  <!-- Fix Sonar, don't remove -->
+  <caption></caption>
+
+  <thead tuiThead>
+    <tr tuiThGroup>
+      <th tuiTh>STT</th>
+      <th tuiTh>Phòng</th>
+      <th tuiTh>Sức chứa (tùy chọn)</th>
+      <th tuiTh class="!text-center">Thao tác</th>
+    </tr>
+  </thead>
+
+  <tbody *ngrxLet="status$ as status" tuiTbody formArrayName="rooms">
+    <tr
+      *ngFor="let item of form.controls.rooms.controls; let i = index"
+      [formGroupName]="i"
+      tuiTr
+    >
+      <td *tuiCell="'id'" tuiTd>{{ i + 1 }}</td>
+      <td *tuiCell="'roomId'" tuiTd>
+        <tui-input formControlName="displayId"></tui-input>
+      </td>
+      <td *tuiCell="'capacity'" tuiTd>
+        <tui-input-number formControlName="capacity"></tui-input-number>
+      </td>
+      <td *tuiCell="'action'" tuiTd class="flex justify-center">
+        <button
+          tuiIconButton
+          (click)="onCreate(i)"
+          [showLoader]="status[i] === 'loading'"
+          icon="tuiIconPlusSquareLarge"
+          tuiHint="Thêm"
+        ></button>
+        <button
+          tuiIconButton
+          (click)="onRemove(i)"
+          [disabled]="status[i] === 'loading'"
+          icon="tuiIconTrash2Large"
+          tuiHint="Xóa"
+          class="ml-2"
+        ></button>
+      </td>
+    </tr>
+  </tbody>
+</table>

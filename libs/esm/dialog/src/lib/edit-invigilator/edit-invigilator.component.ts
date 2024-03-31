@@ -42,7 +42,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ObservableHelper } from '@utconnect/helpers';
 import { loggerProvider, LoggerService } from '@utconnect/services';
 import { filter, tap } from 'rxjs';
-import { EditInvigilatorDialogStore } from './edit-invigilator.store';
+import { EsmEditInvigilatorDialogStore } from './edit-invigilator.store';
 
 export const NGRX = [LetModule];
 export const TAIGA_UI = [
@@ -89,7 +89,7 @@ const selector = 'esm-dialog-edit-department';
         return directive;
       },
     },
-    EditInvigilatorDialogStore,
+    EsmEditInvigilatorDialogStore,
     DepartmentService,
     loggerProvider({ tag: selector }),
   ],
@@ -99,7 +99,7 @@ export class EsmDialogEditInvigilatorComponent implements OnInit {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loggerService = inject(LoggerService);
   private readonly alertService = inject(TuiAlertService);
-  private readonly store = inject(EditInvigilatorDialogStore);
+  private readonly store = inject(EsmEditInvigilatorDialogStore);
   private readonly context = inject(POLYMORPHEUS_CONTEXT) as TuiDialogContext<
     string,
     GetTeachersData['data'][number] | UserTemplate | undefined

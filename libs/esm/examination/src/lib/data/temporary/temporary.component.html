@@ -1,0 +1,239 @@
+<ng-container *ngrxLet="headerObservables$ as obs">
+  <div class="mb-4 flex justify-end">
+    <button
+      tuiButton
+      (click)="activate()"
+      [showLoader]="
+        obs.dataStatus === 'loading' || obs.activateStatus === 'loading'
+      "
+      [disabled]="obs.hasError || obs.activateStatus === 'loading'"
+      icon="tuiIconCheckLarge"
+    >
+      Kích hoạt kỳ thi
+    </button>
+
+    <button
+      tuiButton
+      (click)="getData(obs.pageNumber)"
+      [showLoader]="obs.dataStatus === 'loading'"
+      [disabled]="disableReload"
+      icon="tuiIconRefreshCcw"
+      class="ml-4"
+    >
+      Làm mới
+    </button>
+  </div>
+
+  <tui-loader
+    *ngIf="obs.dataStatus === 'loading'; else loaded"
+    class="h-40"
+  ></tui-loader>
+</ng-container>
+
+<ng-template #loaded>
+  <tui-scrollbar class="w-full h-full">
+    <table
+      tuiTable
+      *ngIf="form"
+      [formGroup]="form"
+      [columns]="columns"
+      class="w-full"
+      aria-describedby="title"
+    >
+      <thead>
+        <tr tuiThGroup>
+          <th tuiTh [sticky]="true">STT</th>
+          <th tuiTh [sticky]="true">Mã học phần</th>
+          <th tuiTh [sticky]="true">Tên học phần</th>
+          <th tuiTh [sticky]="true">Lớp học phần</th>
+          <th tuiTh [sticky]="true">Số TC</th>
+          <th tuiTh [sticky]="true">Hình thức</th>
+          <th tuiTh [sticky]="true">Ngày thi</th>
+          <th tuiTh [sticky]="true">Bắt đầu</th>
+          <th tuiTh [sticky]="true">Kết thúc</th>
+          <th tuiTh [sticky]="true">Ca</th>
+          <th tuiTh [sticky]="true">Số SV</th>
+          <th tuiTh [sticky]="true">Số phòng</th>
+          <th tuiTh [sticky]="true">Tên phòng</th>
+          <th tuiTh [sticky]="true">Khoa</th>
+          <th tuiTh [sticky]="true">Bộ môn</th>
+          <th tuiTh [sticky]="true">Phụ trách</th>
+        </tr>
+      </thead>
+      <tbody tuiTbody formArrayName="data">
+        <tr
+          *ngFor="let item of formControl.controls; let i = index"
+          tuiTr
+          [formGroupName]="i"
+        >
+          <td *tuiCell="'index'" tuiTd>{{ i + 1 }}</td>
+          <td *tuiCell="'moduleId'" tuiTd class="w-24 max-w-[6rem]">
+            <div
+              #moduleIdDropdownHost="tuiDropdown"
+              tuiDropdownContext
+              *ngIf="
+                item.value.errors['moduleId'] as error;
+                else moduleIdNoError
+              "
+              [tuiDropdown]="moduleIdDropdown"
+              class="absolute inset-0 flex items-center p-[inherit]"
+            >
+              {{ item.value.moduleId }}
+              <esm-component-error-flag
+                [error]="error.message"
+              ></esm-component-error-flag>
+              <ng-template #moduleIdDropdown>
+                <tui-data-list role="menu">
+                  <button
+                    tuiOption
+                    (click)="onAddModule(i, moduleIdDropdownHost)"
+                  >
+                    Thêm học phần
+                    <tui-svg class="ml-1" src="tuiIconPlus"></tui-svg>
+                  </button>
+                </tui-data-list>
+              </ng-template>
+            </div>
+            <ng-template #moduleIdNoError>
+              {{ item.value.moduleId }}
+            </ng-template>
+          </td>
+          <td *tuiCell="'moduleName'" tuiTd class="min-w-[13rem]">
+            <tui-line-clamp
+              [content]="moduleNameTmpl"
+              [linesLimit]="1"
+            ></tui-line-clamp>
+            <ng-template #moduleNameTmpl>
+              <div class="whitespace-nowrap">
+                {{ item.value.moduleName }}
+              </div>
+            </ng-template>
+
+            <esm-component-error-flag
+              [error]="item.value.errors['moduleName']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'moduleClass'" tuiTd class="min-w-[450px]">
+            <tui-line-clamp
+              [content]="moduleClassTmpl"
+              [linesLimit]="1"
+            ></tui-line-clamp>
+            <ng-template #moduleClassTmpl>
+              <div class="whitespace-nowrap">
+                {{ item.value.moduleClass }}
+              </div>
+            </ng-template>
+
+            <esm-component-error-flag
+              [error]="item.value.errors['moduleClass']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'credit'" tuiTd class="!text-center">
+            {{ item.value.credit }}
+            <esm-component-error-flag
+              [error]="item.value.errors['credit']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'method'" tuiTd>
+            {{ item.value.method | esmExamMethod }}
+            <esm-component-error-flag
+              [error]="item.value.errors['method']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'date'" tuiTd>
+            {{ item.value.date | date : 'dd/MM/y' }}
+            <esm-component-error-flag
+              [error]="item.value.errors['date']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'startAt'" tuiTd class="!text-center">
+            {{ item.value.startAt | date : 'HH:mm' }}
+            <esm-component-error-flag
+              [error]="item.value.errors['startAt']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'endAt'" tuiTd class="!text-center">
+            {{ item.value.endAt | date : 'HH:mm' }}
+            <esm-component-error-flag
+              [error]="item.value.errors['endAt']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'shift'" tuiTd class="!text-center">
+            {{ item.value.shift }}
+            <esm-component-error-flag
+              [error]="item.value.errors['shift']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'candidatesCount'" tuiTd class="!text-center">
+            <tui-input-number
+              formControlName="candidatesCount"
+            ></tui-input-number>
+            <esm-component-error-flag
+              [error]="item.value.errors['candidatesCount']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'roomsCount'" tuiTd class="!text-center">
+            {{ item.value.roomsCount }}
+            <esm-component-error-flag
+              [error]="item.value.errors['roomsCount']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'rooms'" tuiTd class="min-w-[12rem]">
+            <div
+              #roomsDropdownHost="tuiDropdown"
+              tuiDropdownContext
+              *ngIf="item.value.errors['rooms'] as error; else roomsNoError"
+              [tuiDropdown]="roomsDropdown"
+              class="absolute inset-0 flex items-center p-[inherit]"
+            >
+              {{ item.value.rooms }}
+              <esm-component-error-flag
+                [error]="error.message"
+              ></esm-component-error-flag>
+              <ng-template #roomsDropdown>
+                <tui-data-list role="menu">
+                  <button
+                    tuiOption
+                    (click)="onAddRoom(i); roomsDropdownHost.toggle(false)"
+                  >
+                    Thêm phòng
+                    <tui-svg class="ml-1" src="tuiIconPlus"></tui-svg>
+                  </button>
+                </tui-data-list>
+              </ng-template>
+            </div>
+            <ng-template #roomsNoError>
+              {{ item.value.rooms }}
+            </ng-template>
+          </td>
+          <td *tuiCell="'faculty'" tuiTd>
+            {{ item.value.faculty }}
+            <esm-component-error-flag
+              [error]="item.value.errors['faculty']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'department'" tuiTd>
+            {{ item.value.department }}
+            <esm-component-error-flag
+              [error]="item.value.errors['department']"
+            ></esm-component-error-flag>
+          </td>
+          <td *tuiCell="'departmentAssign'" tuiTd>
+            {{ item.value.departmentAssign ? 'Bộ môn' : 'Phòng KT&ĐBCLĐT' }}
+            <esm-component-error-flag
+              [error]="item.value.errors['departmentAssign']"
+            ></esm-component-error-flag>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </tui-scrollbar>
+
+  <tui-pagination
+    *ngrxLet="paginationObservables$ as obs"
+    (indexChange)="getData($event)"
+    [index]="obs.pageNumber"
+    [length]="obs.totalPages"
+    class="mt-1"
+  ></tui-pagination>
+</ng-template>

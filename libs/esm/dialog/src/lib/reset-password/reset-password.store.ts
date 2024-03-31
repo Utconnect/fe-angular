@@ -4,13 +4,13 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Status } from '@utconnect/types';
 import { switchMap, tap } from 'rxjs';
 
-type ResetPasswordDialogState = {
+type EsmResetPasswordDialogState = {
   status: Status;
   errors: string | null;
 };
 
 @Injectable()
-export class ResetPasswordDialogStore extends ComponentStore<ResetPasswordDialogState> {
+export class EsmResetPasswordDialogStore extends ComponentStore<EsmResetPasswordDialogState> {
   // INJECT PROPERTIES
   private readonly authService = inject(EsmAuthService);
 

@@ -1,0 +1,37 @@
+<ng-container *ngrxLet="status$ as status">
+  <p class="mt-10 mb-4 text-base" [ngSwitch]="status">
+    <ng-container *ngSwitchCase="'loading'">
+      Đang import lịch, vui lòng chờ
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      Chưa có dữ liệu lịch thi, vui lòng import tệp dữ liệu
+    </ng-container>
+  </p>
+
+  <tui-files *ngIf="file; else inputFile">
+    <ng-container [ngSwitch]="status">
+      <tui-file
+        *ngSwitchCase="'loading'"
+        [file]="file"
+        state="loading"
+        size="l"
+      ></tui-file>
+
+      <tui-file
+        *ngSwitchCase="'error'"
+        (removed)="clearRejected()"
+        [file]="file"
+        state="error"
+        size="l"
+      ></tui-file>
+    </ng-container>
+  </tui-files>
+
+  <ng-template #inputFile>
+    <tui-input-files
+      [(ngModel)]="file"
+      (ngModelChange)="importFile($event)"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ></tui-input-files>
+  </ng-template>
+</ng-container>

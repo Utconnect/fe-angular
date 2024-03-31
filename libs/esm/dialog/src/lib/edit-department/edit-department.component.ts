@@ -32,7 +32,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ObservableHelper, StringifyHelper } from '@utconnect/helpers';
 import { loggerProvider, LoggerService } from '@utconnect/services';
 import { filter, tap } from 'rxjs';
-import { EditDepartmentDialogStore } from './edit-department.store';
+import { EsmEditDepartmentDialogStore } from './edit-department.store';
 
 export const NGRX = [LetModule];
 export const TAIGA_UI = [
@@ -56,7 +56,7 @@ const selector = 'esm-dialog-edit-department';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ...NGRX, ...TAIGA_UI],
   providers: [
-    EditDepartmentDialogStore,
+    EsmEditDepartmentDialogStore,
     DepartmentService,
     loggerProvider({ tag: selector }),
   ],
@@ -66,7 +66,7 @@ export class EsmDialogEditDepartmentComponent implements OnInit {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loggerService = inject(LoggerService);
   private readonly alertService = inject(TuiAlertService);
-  private readonly store = inject(EditDepartmentDialogStore);
+  private readonly store = inject(EsmEditDepartmentDialogStore);
   private readonly context = inject(POLYMORPHEUS_CONTEXT) as TuiDialogContext<
     boolean,
     DepartmentSummary | undefined

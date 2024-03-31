@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
 @Injectable()
-export class TopBarCreateButtonStore extends ComponentStore<
+export class EsmTopBarCreateButtonStore extends ComponentStore<
   Record<string, never>
 > {
   // INJECT PROPERTIES

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TopBarCreateButtonComponent } from './top-bar-create-button.component';
+import { EsmTopBarCreateButtonComponent } from './top-bar-create-button.component';
 
 describe('TopBarCreateButtonComponent', () => {
-  let component: TopBarCreateButtonComponent;
-  let fixture: ComponentFixture<TopBarCreateButtonComponent>;
+  let component: EsmTopBarCreateButtonComponent;
+  let fixture: ComponentFixture<EsmTopBarCreateButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TopBarCreateButtonComponent],
+      imports: [EsmTopBarCreateButtonComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TopBarCreateButtonComponent);
+    fixture = TestBed.createComponent(EsmTopBarCreateButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

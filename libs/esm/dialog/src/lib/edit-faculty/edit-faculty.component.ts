@@ -26,7 +26,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ObservableHelper } from '@utconnect/helpers';
 import { loggerProvider, LoggerService } from '@utconnect/services';
 import { filter, tap } from 'rxjs';
-import { EditFacultyDialogStore } from './edit-faculty.store';
+import { EsmEditFacultyDialogStore } from './edit-faculty.store';
 
 export const NGRX = [LetModule];
 export const TAIGA_UI = [
@@ -47,13 +47,13 @@ const selector = 'esm-dialog-edit-faculty';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ...NGRX, ...TAIGA_UI],
-  providers: [EditFacultyDialogStore, loggerProvider({ tag: selector })],
+  providers: [EsmEditFacultyDialogStore, loggerProvider({ tag: selector })],
 })
 export class EsmDialogEditFacultyComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly loggerService = inject(LoggerService);
-  private readonly store = inject(EditFacultyDialogStore);
+  private readonly store = inject(EsmEditFacultyDialogStore);
   private readonly alertService = inject(TuiAlertService);
   private readonly context = inject(POLYMORPHEUS_CONTEXT) as TuiDialogContext<
     boolean,

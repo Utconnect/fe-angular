@@ -1,0 +1,104 @@
+<tui-scrollbar class="h-full">
+  <cdk-virtual-scroll-viewport
+    #viewport
+    *ngrxLet="data$ as data"
+    tuiScrollable
+    class="h-full tui-zero-scrollbar"
+    [itemSize]="45"
+    [maxBufferPx]="1000"
+    [minBufferPx]="700"
+  >
+    <table
+      tuiTable
+      *ngIf="data"
+      [columns]="columns"
+      class="w-full"
+      aria-describedby="title"
+    >
+      <thead>
+        <tr
+          tuiThGroup
+          *ngrxLet="0 - viewport['_renderedContentOffset'] as offset"
+        >
+          <th tuiTh [sticky]="true" [style.top.px]="offset">STT</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Mã học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Tên học phần</th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Số TC
+          </th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Hình thức</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Ngày thi</th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Bắt đầu
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Ca
+          </th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Phòng</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Số thí sinh</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Phụ trách</th>
+        </tr>
+      </thead>
+      <tbody tuiTbody>
+        <tr *cdkVirtualFor="let item of data; let i = index" tuiTr>
+          <td *tuiCell="'index'" tuiTd>{{ i + 1 }}</td>
+          <td *tuiCell="'moduleId'" tuiTd class="w-24 max-w-[6rem]">
+            {{ item.shiftGroup.module.displayId }}
+          </td>
+          <td *tuiCell="'moduleName'" tuiTd class="w-52 max-w-[13rem]">
+            <tui-line-clamp
+              [content]="moduleNameTmpl"
+              [linesLimit]="1"
+            ></tui-line-clamp>
+            <ng-template #moduleNameTmpl>
+              <div class="whitespace-nowrap">
+                {{ item.shiftGroup.module.name }}
+              </div>
+            </ng-template>
+          </td>
+          <td *tuiCell="'credit'" tuiTd class="!text-center">
+            {{ item.shiftGroup.module.credits }}
+          </td>
+          <td *tuiCell="'method'" tuiTd>
+            {{ item.shiftGroup.method | esmExamMethod }}
+          </td>
+          <td *tuiCell="'date'" tuiTd>
+            {{ item.shiftGroup.startAt | date : 'dd/MM/y' }}
+          </td>
+          <td *tuiCell="'startAt'" tuiTd class="!text-center">
+            {{ item.shiftGroup.startAt | date : 'HH:mm' }}
+          </td>
+          <td *tuiCell="'shift'" tuiTd class="!text-center">
+            {{ item.shiftGroup.shift }}
+          </td>
+          <td *tuiCell="'room'" tuiTd>
+            {{ item.room.displayId }}
+          </td>
+          <td *tuiCell="'candidatesCount'" tuiTd>
+            {{ item.candidatesCount }}
+          </td>
+          <td *tuiCell="'departmentAssign'" tuiTd>
+            {{
+              item.shiftGroup.departmentAssign ? 'Bộ môn' : 'Phòng KT&ĐBCLĐT'
+            }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</tui-scrollbar>

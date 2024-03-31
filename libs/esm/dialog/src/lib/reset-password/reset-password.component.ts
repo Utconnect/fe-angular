@@ -19,9 +19,9 @@ import { TuiInputCopyModule } from '@taiga-ui/kit';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ObservableHelper } from '@utconnect/helpers';
 import { filter, switchMap, tap } from 'rxjs';
-import { ResetPasswordDialogStore } from './reset-password.store';
+import { EsmResetPasswordDialogStore } from './reset-password.store';
 
-export const TAIGA_UI = [
+const TAIGA_UI = [
   TuiButtonModule,
   TuiInputCopyModule,
   TuiTextfieldControllerModule,
@@ -33,12 +33,12 @@ export const TAIGA_UI = [
   imports: [CommonModule, FormsModule, LetModule, TAIGA_UI],
   templateUrl: './reset-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ResetPasswordDialogStore],
+  providers: [EsmResetPasswordDialogStore],
 })
 export class EsmDialogResetPasswordComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly env = inject(ESM_CONFIG);
-  private readonly store = inject(ResetPasswordDialogStore);
+  private readonly store = inject(EsmResetPasswordDialogStore);
   private readonly alertService = inject(TuiAlertService);
   private readonly context = inject(POLYMORPHEUS_CONTEXT) as TuiDialogContext<
     boolean,

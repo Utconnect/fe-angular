@@ -1,4 +1,4 @@
-import { TopBarCreateButtonComponent } from '@esm/components';
+import { EsmTopBarCreateButtonComponent } from '@esm/components';
 import { ComponentRouteMapper } from '@utconnect/types';
 
 export const topBarRightItemMapper: ComponentRouteMapper = [
@@ -8,6 +8,6 @@ export const topBarRightItemMapper: ComponentRouteMapper = [
   },
   {
     path: '*',
-    component: TopBarCreateButtonComponent,
+    component: EsmTopBarCreateButtonComponent,
   },
 ];

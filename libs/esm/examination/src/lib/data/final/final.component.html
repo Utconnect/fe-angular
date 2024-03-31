@@ -1,0 +1,14 @@
+<esm-examination-data-final-header></esm-examination-data-final-header>
+
+<ng-container *ngrxLet="status$ as status">
+  <tui-loader
+    *ngIf="status === 'loading'; else loaded"
+    class="h-40"
+  ></tui-loader>
+</ng-container>
+
+<ng-template #loaded>
+  <esm-examination-data-final-table
+    class="flex-1"
+  ></esm-examination-data-final-table>
+</ng-template>
