@@ -19,8 +19,8 @@ import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { extModules } from './build-specifics';
 import { topBarRightItemMapper } from './constants';
 import {
-  esmRequiredStepDataFactory,
-  esmRequiredStepFactory,
+  esmRequiredStepStepFactory,
+  esmRequiredStepListFactory,
   esmSideBarItemsFactory,
   esmTopBarItemsFactory,
   menuTextFactory,
@@ -244,8 +244,8 @@ const routes: Routes = [
       },
     }),
     requiredStepProviders({
-      factory: esmRequiredStepFactory,
-      data: esmRequiredStepDataFactory,
+      list: esmRequiredStepListFactory,
+      step: esmRequiredStepStepFactory,
       store: Store<EsmState>,
     }),
     {

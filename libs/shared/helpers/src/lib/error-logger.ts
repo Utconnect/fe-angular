@@ -3,11 +3,11 @@ export type ErrorLoggerContainsField = 'id';
 export class ErrorLogger {
   static nullOrEmpty<T>(
     value: T | null | undefined,
-    valueType: string,
+    name: string,
     tag: string,
   ): T {
     if (!value) {
-      throw new Error(`[${tag}] ${valueType} should not be null or undefined`);
+      throw new Error(`[${tag}] ${name} should not be null or undefined`);
     }
     return value;
   }
@@ -28,5 +28,9 @@ export class ErrorLogger {
     }
 
     throw Error(`[${tag}] Required field ${field} is missing in ${value}`);
+  }
+
+  static unhandled<T>(name: string, value: T, tag: string): void {
+    throw Error(`[${tag}] Unhandled ${name} with value ${value}`);
   }
 }

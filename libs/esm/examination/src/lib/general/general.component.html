@@ -3,8 +3,6 @@
 <utconnect-required-step
   *ngrxLet="statistic$ as statistic"
   [minimumStep]="ExaminationStatus.AssignFaculty"
-  [getDataFunc]="getDataFunc"
-  [showLoader]="showLoader$"
   class="grow"
 >
   <tui-island *ngIf="statistic" class="w-[700px] mx-auto">
@@ -33,8 +31,8 @@
           [max]="100"
         ></progress>
         <div class="flex justify-between">
-          <span>{{ statistic.startAt | date: "dd/MM/Y" }}</span>
-          <span>{{ statistic.endAt | date: "dd/MM/Y" }}</span>
+          <span>{{ statistic.startAt | date : 'dd/MM/Y' }}</span>
+          <span>{{ statistic.endAt | date : 'dd/MM/Y' }}</span>
         </div>
       </li>
       <li class="tui-list__item">
@@ -44,7 +42,7 @@
         <span class="ml-2 font-bold">
           ({{
             statistic.numberOfModulesOver
-              | percentage: statistic.numberOfModules
+              | percentage : statistic.numberOfModules
           }})
         </span>
         <progress
@@ -62,7 +60,8 @@
         }}
         <span class="ml-2 font-bold">
           ({{
-            statistic.numberOfShiftsOver | percentage: statistic.numberOfShifts
+            statistic.numberOfShiftsOver
+              | percentage : statistic.numberOfShifts
           }})
         </span>
         <progress

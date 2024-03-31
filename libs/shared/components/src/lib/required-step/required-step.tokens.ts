@@ -8,10 +8,10 @@ export type RequiredStep<TStep = number> = {
   description: string;
 };
 
-export const REQUIRED_STEP_TOKEN = new InjectionToken<
+export const REQUIRED_STEP_LIST_TOKEN = new InjectionToken<
   Observable<RequiredStep[]>
->('[Required Step] Step');
+>('[Required Step] Step list');
 
-export const REQUIRED_STEP_DATA_TOKEN = new InjectionToken<
-  Observable<any>
->('[Required Step] Data');
+export const REQUIRED_STEP_STEP_TOKEN = new InjectionToken<Observable<number>>(
+  '[Required Step] Step',
+);

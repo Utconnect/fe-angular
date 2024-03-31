@@ -83,7 +83,7 @@ export class EsmDialogEditFacultyComponent implements OnInit {
     if (this.isEditDialog) {
       const data = this.loggerService.errorNullOrEmpty({
         value: this.context.data,
-        valueType: 'Data',
+        name: 'Data',
       });
 
       this.store.update({ id: data.id, request: formValue });

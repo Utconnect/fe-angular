@@ -145,7 +145,7 @@ export class EsmDialogEditInvigilatorComponent implements OnInit {
 
     const contextData = this.loggerService.errorNullOrEmpty({
       value: this.context.data,
-      valueType: 'Context data',
+      name: 'Context data',
     });
 
     if (this.loggerService.containsField<string>(contextData, 'id')) {

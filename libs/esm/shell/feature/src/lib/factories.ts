@@ -202,15 +202,15 @@ export const menuTextFactory: (store: Store<EsmState>) => Observable<string> = (
     map(([title, name]) => `Xin chào ${title ?? ''} ${name ?? ''}`.trim()),
   );
 
-export const esmRequiredStepDataFactory: (
+export const esmRequiredStepStepFactory: (
   store: Store<EsmState>,
-) => Observable<EsmState['examination']> = (store) =>
-  store.select(EsmSelector.examination);
+) => Observable<number | undefined> = (store) =>
+  store.select(EsmSelector.examination).pipe(map((e) => e?.status));
 
-export const esmRequiredStepFactory: (
-  data: Observable<EsmState['examination']>,
-) => Observable<RequiredStep<ESMDomainEnumsExaminationStatus>[]> = (data) =>
-  data.pipe(
+export const esmRequiredStepListFactory: (
+  store: Store<EsmState>,
+) => Observable<RequiredStep<ESMDomainEnumsExaminationStatus>[]> = (store) =>
+  store.select(EsmSelector.examination).pipe(
     map((examination) => {
       if (!examination) {
         return [];

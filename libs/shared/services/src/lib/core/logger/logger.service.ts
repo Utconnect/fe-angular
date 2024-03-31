@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { ErrorLogger, ErrorLoggerContainsField } from '@utconnect/helpers';
-import { ESM_LOGGER_OPTIONS, LoggerOptions } from './logger.provider';
+import { LOGGER_OPTIONS, LoggerOptions } from './logger.provider';
 
-export type NotNullErrorParams<T> = {
+export type ValueNameErrorParams<T> = {
   value: T | null | undefined;
-  valueType: string;
+  name: string;
 };
 
 @Injectable({
@@ -12,25 +12,25 @@ export type NotNullErrorParams<T> = {
 })
 export class LoggerService {
   constructor(
-    @Inject(ESM_LOGGER_OPTIONS) private readonly options: LoggerOptions,
+    @Inject(LOGGER_OPTIONS) private readonly options: LoggerOptions,
   ) {}
 
-  errorNullOrEmpty<T>(params: NotNullErrorParams<T>): T;
-  errorNullOrEmpty<T>(params: NotNullErrorParams<T>[]): T[];
+  errorNullOrEmpty<T>(params: ValueNameErrorParams<T>): T;
+  errorNullOrEmpty<T>(params: ValueNameErrorParams<T>[]): T[];
 
   errorNullOrEmpty<T>(
-    params: NotNullErrorParams<T> | NotNullErrorParams<T>[],
+    params: ValueNameErrorParams<T> | ValueNameErrorParams<T>[],
   ): T | T[] {
     if ('value' in params) {
       return ErrorLogger.nullOrEmpty(
         params.value,
-        params.valueType,
+        params.name,
         this.options.tag,
       );
     }
 
     return params.map((p) =>
-      ErrorLogger.nullOrEmpty(p.value, p.valueType, this.options.tag),
+      ErrorLogger.nullOrEmpty(p.value, p.name, this.options.tag),
     );
   }
 
@@ -38,5 +38,9 @@ export class LoggerService {
 
   containsField(value: object, field: ErrorLoggerContainsField): boolean {
     return ErrorLogger.containsField(value, field, this.options.tag);
+  }
+
+  unhandled<T>({ name, value }: ValueNameErrorParams<T>): void {
+    return ErrorLogger.unhandled(name, value, this.options.tag);
   }
 }

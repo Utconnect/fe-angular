@@ -1,30 +1,31 @@
-<ng-container *ngrxLet="showLoader as showLoader">
+<ng-container *ngrxLet="currentStep$ as currentStep; suspenseTpl: loader">
   <ng-container
-    *utconnectRequiredStep="minimumStep; else message; load: getDataFunc"
+    *ngTemplateOutlet="currentStep >= minimumStep ? canDisplayData : message"
   >
-    <ng-container *ngIf="!showLoader; else loader">
-      <ng-content></ng-content>
-    </ng-container>
   </ng-container>
+
+  <ng-template #message>
+    <div #customMessage>
+      <ng-content select="[message]"></ng-content>
+    </div>
+
+    <div *ngIf="!customMessage.children.length" class="text-center">
+      <ng-container *ngFor="let step of steps$ | async">
+        <ng-container *ngIf="step.step === currentStep">
+          <h4 class="text-lg">{{ step.title }}</h4>
+          <a tuiLink [routerLink]="step.routerLink">
+            <span class="text-base">{{ step.description }}</span>
+          </a>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-template>
 </ng-container>
+
+<ng-template #canDisplayData>
+  <ng-content></ng-content>
+</ng-template>
 
 <ng-template #loader>
   <tui-loader class="h-40"></tui-loader>
-</ng-template>
-
-<ng-template #message [polymorpheus]="context" let-currentStep="step">
-  <div #customMessage>
-    <ng-content select="[message]"></ng-content>
-  </div>
-
-  <div *ngIf="!customMessage.children.length" class="text-center">
-    <ng-container *ngFor="let step of steps$ | async">
-      <ng-container *ngIf="step.step === currentStep">
-        <h4 class="text-lg">{{ step.title }}</h4>
-        <a tuiLink [routerLink]="step.routerLink">
-          <span class="text-base">{{ step.description }}</span>
-        </a>
-      </ng-container>
-    </ng-container>
-  </div>
 </ng-template>
