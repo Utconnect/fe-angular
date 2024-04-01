@@ -88,7 +88,7 @@ export class ExaminationExamTableComponent implements OnInit {
 
   // PUBLIC METHODS
   examsCountControl(index: number): FormControl {
-    return this.form?.controls.data.controls.at(index) as FormControl;
+    return this.form?.controls.data.controls[index] as FormControl;
   }
 
   save(): void {

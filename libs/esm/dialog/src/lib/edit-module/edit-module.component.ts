@@ -10,7 +10,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ESMDomainEntitiesExaminationData } from '@esm/api';
+import { ESMDomainEntitiesExaminationData, ModuleService } from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import { TuiFilterPipeModule } from '@taiga-ui/cdk';
 import {
@@ -52,6 +52,7 @@ const TAIGA_UI = [
   imports: [CommonModule, ReactiveFormsModule, ...NGRX, ...TAIGA_UI],
   providers: [
     EsmEditModuleDialogStore,
+    ModuleService,
     tuiButtonOptionsProvider({ size: 'm' }),
   ],
 })

@@ -112,11 +112,11 @@ const routes: Routes = [
                 loadChildren: async () =>
                   (await import('@esm/examination')).HANDOVER_ROUTES,
               },
-              //           ],
-              //         },
-              //         {
-              //           path: 'invigilator',
-              //           children: [
+            ],
+          },
+          {
+            path: 'invigilator',
+            children: [
               //             {
               //               path: 'assign-faculty',
               //               canActivate: [permissionGuard],
@@ -153,37 +153,37 @@ const routes: Routes = [
               //                   )
               //                 ).ROUTES,
               //             },
-              //           ],
-              //         },
-              //         {
-              //           path: 'paid',
-              //           children: [
-              //             {
-              //               path: 'invigilator',
-              //               loadChildren: async () =>
-              //                 (await import('./paid/invigilator/invigilator.routing'))
-              //                   .ROUTES,
-              //             },
-              //             {
-              //               path: 'invigilator-department',
-              //               loadChildren: async () =>
-              //                 (
-              //                   await import(
-              //                     './paid/invigilator-department/invigilator-department.routing'
-              //                   )
-              //                 ).ROUTES,
-              //             },
-              //             {
-              //               path: 'exam-department',
-              //               loadChildren: async () =>
-              //                 (
-              //                   await import(
-              //                     './paid/exam-department/exam-department.routing'
-              //                   )
-              //                 ).ROUTES,
-              //             },
             ],
           },
+          //         {
+          //           path: 'paid',
+          //           children: [
+          //             {
+          //               path: 'invigilator',
+          //               loadChildren: async () =>
+          //                 (await import('./paid/invigilator/invigilator.routing'))
+          //                   .ROUTES,
+          //             },
+          //             {
+          //               path: 'invigilator-department',
+          //               loadChildren: async () =>
+          //                 (
+          //                   await import(
+          //                     './paid/invigilator-department/invigilator-department.routing'
+          //                   )
+          //                 ).ROUTES,
+          //             },
+          //             {
+          //               path: 'exam-department',
+          //               loadChildren: async () =>
+          //                 (
+          //                   await import(
+          //                     './paid/exam-department/exam-department.routing'
+          //                   )
+          //                 ).ROUTES,
+          //             },
+          //   ],
+          // },
           //         {
           //           path: 'process',
           //           loadChildren: async () =>

@@ -26,12 +26,12 @@
       <tr>
         <td>Hình thức</td>
         <td>:</td>
-        <td>{{ context.data.shiftGroup.method | examMethod }}</td>
+        <td>{{ context.data.shiftGroup.method | esmExamMethod }}</td>
       </tr>
       <tr>
         <td>Ngày thi</td>
         <td>:</td>
-        <td>{{ context.data.shiftGroup.startAt | date: "dd/MM/y" }}</td>
+        <td>{{ context.data.shiftGroup.startAt | date : 'dd/MM/y' }}</td>
       </tr>
       <tr>
         <td>Ca thi</td>
@@ -39,7 +39,7 @@
         <td>
           {{
             context.data.shiftGroup.shift ||
-              (context.data.shiftGroup.startAt | date: "HH:mm")
+              (context.data.shiftGroup.startAt | date : 'HH:mm')
           }}
         </td>
       </tr>

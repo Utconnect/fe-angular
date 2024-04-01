@@ -13,7 +13,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ESMApplicationRoomsCommandsCreateCreateCommand } from '@esm/api';
+import {
+  ESMApplicationRoomsCommandsCreateCreateCommand,
+  RoomService,
+} from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 import {
@@ -45,6 +48,7 @@ export const TAIGA_UI = [
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ...NGRX, ...TAIGA_UI],
   providers: [
+    RoomService,
     EsmEditRoomDialogStore,
     tuiButtonOptionsProvider({ appearance: 'icon', size: 'm' }),
   ],

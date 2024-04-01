@@ -58,7 +58,7 @@
             {{ row.shiftGroup.module.name }}
           </td>
           <td *tuiCell="'method'" tuiTd>
-            {{ row.shiftGroup.method | examMethod }}
+            {{ row.shiftGroup.method | esmExamMethod }}
           </td>
           <td *tuiCell="'date'" tuiTd>
             {{ row.shiftGroup.startAt | date: "dd/MM/y" }}
