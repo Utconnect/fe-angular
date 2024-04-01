@@ -22,6 +22,7 @@
     "@ngrx/component-store": "15.4.0",
     "@nrwl/angular": "15.9.7",
     "@taiga-ui/addon-charts": "~3.27.0",
+    "@taiga-ui/addon-editor": "~3.27.0",
     "@taiga-ui/addon-mobile": "~3.27.0",
     "@taiga-ui/addon-table": "~3.27.0",
     "@taiga-ui/cdk": "~3.27.0",

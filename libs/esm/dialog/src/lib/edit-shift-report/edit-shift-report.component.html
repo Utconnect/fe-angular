@@ -1,0 +1,71 @@
+<h2 class="text-3xl font-bold">Biên bản ca thi</h2>
+
+<div class="form mt-6">
+  <table class="w-full">
+    <!-- Fix Sonar, don't remove -->
+    <caption></caption>
+
+    <!-- Fix Sonar, don't remove -->
+    <thead>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Mã học phần</td>
+        <td>:</td>
+        <td>{{ context.data.shiftGroup.module.displayId }}</td>
+      </tr>
+      <tr>
+        <td>Tên học phần</td>
+        <td>:</td>
+        <td>{{ context.data.shiftGroup.module.name }}</td>
+      </tr>
+      <tr>
+        <td>Hình thức</td>
+        <td>:</td>
+        <td>{{ context.data.shiftGroup.method | examMethod }}</td>
+      </tr>
+      <tr>
+        <td>Ngày thi</td>
+        <td>:</td>
+        <td>{{ context.data.shiftGroup.startAt | date: "dd/MM/y" }}</td>
+      </tr>
+      <tr>
+        <td>Ca thi</td>
+        <td>:</td>
+        <td>
+          {{
+            context.data.shiftGroup.shift ||
+              (context.data.shiftGroup.startAt | date: "HH:mm")
+          }}
+        </td>
+      </tr>
+      <tr>
+        <td>Người bàn giao</td>
+        <td>:</td>
+        <td>{{ handoverInvigilatorName }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-6">
+    <h6 class="font-bold">Nội dung</h6>
+    <tui-editor [(ngModel)]="reportValue"></tui-editor>
+  </div>
+
+  <div class="flex justify-end mt-6">
+    <button
+      tuiButton
+      *ngrxLet="status$ as status"
+      (click)="onFinish()"
+      [showLoader]="status === 'loading'"
+      [disabled]="reportValue === context.data.report"
+      icon="tuiIconCheck"
+    >
+      Hoàn thành
+    </button>
+  </div>
+</div>

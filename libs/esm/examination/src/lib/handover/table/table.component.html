@@ -1,0 +1,124 @@
+<tui-scrollbar class="h-full">
+  <cdk-virtual-scroll-viewport
+    #viewport
+    *ngrxLet="tableObservables$ as obs"
+    tuiScrollable
+    class="h-full tui-zero-scrollbar"
+    [itemSize]="45"
+    [maxBufferPx]="1000"
+    [minBufferPx]="700"
+  >
+    <table
+      tuiTable
+      *ngIf="form"
+      [formGroup]="form"
+      [columns]="columns"
+      class="w-full"
+      aria-describedby="title"
+    >
+      <thead>
+        <tr
+          tuiThGroup
+          *ngrxLet="0 - viewport['_renderedContentOffset'] as offset"
+        >
+          <th tuiTh [sticky]="true" [style.top.px]="offset">STT</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Mã học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Tên học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Hình thức</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Ngày thi</th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Bắt đầu
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Ca
+          </th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Phòng</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Người bàn giao</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Biên bản</th>
+        </tr>
+      </thead>
+
+      <tbody tuiTbody>
+        <tr *cdkVirtualFor="let row of obs.data; let i = index" tuiTr>
+          <td *tuiCell="'index'" tuiTd class="w-8">{{ i + 1 }}</td>
+          <td *tuiCell="'moduleId'" tuiTd class="w-24 max-w-[6rem]">
+            {{ row.shiftGroup.module.displayId }}
+          </td>
+          <td *tuiCell="'moduleName'" tuiTd class="w-52 max-w-[13rem]">
+            {{ row.shiftGroup.module.name }}
+          </td>
+          <td *tuiCell="'method'" tuiTd>
+            {{ row.shiftGroup.method | examMethod }}
+          </td>
+          <td *tuiCell="'date'" tuiTd>
+            {{ row.shiftGroup.startAt | date: "dd/MM/y" }}
+          </td>
+          <td *tuiCell="'startAt'" tuiTd class="!text-center">
+            {{ row.shiftGroup.startAt | date: "HH:mm" }}
+          </td>
+          <td *tuiCell="'shift'" tuiTd class="!text-center">
+            {{ row.shiftGroup.shift }}
+          </td>
+          <td *tuiCell="'room'" tuiTd>
+            {{ row.room.displayId }}
+          </td>
+          <td *tuiCell="'handover'" tuiTd class="w-60">
+            <tui-loader
+              [showLoader]="obs.handoverPersonStatus[row.id] === 'loading'"
+            >
+              <tui-select
+                (ngModelChange)="onHandoverChanges(row.id, $event)"
+                [formControl]="form.controls[row.id]"
+                [valueContent]="invigilatorStringify(row.invigilatorShift)"
+                [readOnly]="obs.examination.status === ExaminationStatus.Closed"
+                class="w-60"
+              >
+                <ng-template tuiDataList>
+                  <tui-data-list>
+                    <ng-container *ngFor="let ivs of row.invigilatorShift">
+                      <button
+                        tuiOption
+                        *ngIf="ivs.invigilator.id"
+                        [value]="ivs.invigilator.id"
+                      >
+                        {{ ivs.invigilator.fullName }}
+                      </button>
+                    </ng-container>
+                  </tui-data-list>
+                </ng-template>
+              </tui-select>
+            </tui-loader>
+          </td>
+          <td *tuiCell="'report'" tuiTd>
+            <div class="flex justify-center">
+              <button
+                tuiIconButton
+                *ngIf="row.report; else addBtn"
+                (click)="openDialog(row)"
+                icon="tuiIconFileTextLarge"
+                appearance="icon"
+              ></button>
+              <ng-template #addBtn>
+                <button
+                  tuiIconButton
+                  (click)="openDialog(row)"
+                  icon="tuiIconFilePlusLarge"
+                ></button>
+              </ng-template>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</tui-scrollbar>

@@ -103,16 +103,15 @@ const routes: Routes = [
                 loadChildren: async () =>
                   (await import('@esm/examination')).DATA_ROUTES,
               },
-              //             {
-              //               path: 'handover',
-              //               canActivate: [permissionGuard],
-              //               data: {
-              //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-              //               },
-              //               loadChildren: async () =>
-              //                 (await import('./examination/handover/handover.routing'))
-              //                   .ROUTES,
-              //             },
+              {
+                path: 'handover',
+                canActivate: [permissionGuard],
+                data: {
+                  roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+                },
+                loadChildren: async () =>
+                  (await import('@esm/examination')).HANDOVER_ROUTES,
+              },
               //           ],
               //         },
               //         {

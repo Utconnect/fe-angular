@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { StringHelper } from '@esm/cdk';
-import { ExamMethod } from '@esm/data';
-import { ExamMethodPipe } from './exam-method.pipe';
+import { ESMDomainEnumsExamMethod } from '@esm/api';
+import { EsmStringHelper } from '@esm/helpers';
+import { EsmExamMethodPipe } from './exam-method.pipe';
 
 describe('ExamMethod', () => {
-  let pipe: ExamMethodPipe;
+  let pipe: EsmExamMethodPipe;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [ExamMethodPipe] });
-    pipe = TestBed.inject(ExamMethodPipe);
+    TestBed.configureTestingModule({ providers: [EsmExamMethodPipe] });
+    pipe = TestBed.inject(EsmExamMethodPipe);
   });
 
   it('can load instance', () => {
@@ -16,8 +16,8 @@ describe('ExamMethod', () => {
   });
 
   it('should call StringHelper.getExamMethod', () => {
-    const spy = spyOn(StringHelper, 'getExamMethod');
-    const method = ExamMethod.Oral;
+    const spy = spyOn(EsmStringHelper, 'getExamMethod');
+    const method = ESMDomainEnumsExamMethod.Oral;
 
     pipe.transform(method);
 

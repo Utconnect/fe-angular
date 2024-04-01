@@ -1,0 +1,12 @@
+<ng-container *ngrxLet="dataStatus$ as dataStatus">
+  <h1
+    id="title"
+    class="py-3 flex flex-0 justify-between items-center bg-white text-3xl font-bold"
+  >
+    Bàn giao bài thi
+  </h1>
+
+  <utconnect-required-step [minimumStep]="ExaminationStatus.AssignFaculty">
+    <esm-examination-handover-table></esm-examination-handover-table>
+  </utconnect-required-step>
+</ng-container>
