@@ -19,8 +19,8 @@ import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { extModules } from './build-specifics';
 import { topBarRightItemMapper } from './constants';
 import {
-  esmRequiredStepStepFactory,
   esmRequiredStepListFactory,
+  esmRequiredStepStepFactory,
   esmSideBarItemsFactory,
   esmTopBarItemsFactory,
   menuTextFactory,
@@ -85,106 +85,106 @@ const routes: Routes = [
             loadChildren: async () =>
               (await import('@esm/examination')).GENERAL_ROUTES,
           },
-          //         {
-          //           path: 'exam',
-          //           children: [
-          //             {
-          //               path: '',
-          //               canActivate: [permissionGuard],
-          //               loadChildren: async () =>
-          //                 (await import('./examination/exam/exam.routing')).ROUTES,
-          //             },
-          //             {
-          //               path: 'data',
-          //               canActivate: [permissionGuard],
-          //               data: {
-          //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-          //               },
-          //               loadChildren: async () =>
-          //                 (await import('./examination/data/data.routing')).ROUTES,
-          //             },
-          //             {
-          //               path: 'handover',
-          //               canActivate: [permissionGuard],
-          //               data: {
-          //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-          //               },
-          //               loadChildren: async () =>
-          //                 (await import('./examination/handover/handover.routing'))
-          //                   .ROUTES,
-          //             },
-          //           ],
-          //         },
-          //         {
-          //           path: 'invigilator',
-          //           children: [
-          //             {
-          //               path: 'assign-faculty',
-          //               canActivate: [permissionGuard],
-          //               data: {
-          //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-          //               },
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './invigilator/assign-faculty/assign-faculty.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //             {
-          //               path: 'assign-teacher',
-          //               canActivate: [permissionGuard],
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './invigilator/assign-teacher/assign-teacher.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //             {
-          //               path: 'assign-room',
-          //               canActivate: [permissionGuard],
-          //               data: {
-          //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-          //               },
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './invigilator/assign-room/assign-room.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //           ],
-          //         },
-          //         {
-          //           path: 'paid',
-          //           children: [
-          //             {
-          //               path: 'invigilator',
-          //               loadChildren: async () =>
-          //                 (await import('./paid/invigilator/invigilator.routing'))
-          //                   .ROUTES,
-          //             },
-          //             {
-          //               path: 'invigilator-department',
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './paid/invigilator-department/invigilator-department.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //             {
-          //               path: 'exam-department',
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './paid/exam-department/exam-department.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //           ],
-          //         },
+          {
+            path: 'exam',
+            children: [
+              {
+                path: '',
+                canActivate: [permissionGuard],
+                loadChildren: async () =>
+                  (await import('@esm/examination')).EXAM_ROUTES,
+              },
+              {
+                path: 'data',
+                canActivate: [permissionGuard],
+                data: {
+                  roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+                },
+                loadChildren: async () =>
+                  (await import('@esm/examination')).DATA_ROUTES,
+              },
+              //             {
+              //               path: 'handover',
+              //               canActivate: [permissionGuard],
+              //               data: {
+              //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+              //               },
+              //               loadChildren: async () =>
+              //                 (await import('./examination/handover/handover.routing'))
+              //                   .ROUTES,
+              //             },
+              //           ],
+              //         },
+              //         {
+              //           path: 'invigilator',
+              //           children: [
+              //             {
+              //               path: 'assign-faculty',
+              //               canActivate: [permissionGuard],
+              //               data: {
+              //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+              //               },
+              //               loadChildren: async () =>
+              //                 (
+              //                   await import(
+              //                     './invigilator/assign-faculty/assign-faculty.routing'
+              //                   )
+              //                 ).ROUTES,
+              //             },
+              //             {
+              //               path: 'assign-teacher',
+              //               canActivate: [permissionGuard],
+              //               loadChildren: async () =>
+              //                 (
+              //                   await import(
+              //                     './invigilator/assign-teacher/assign-teacher.routing'
+              //                   )
+              //                 ).ROUTES,
+              //             },
+              //             {
+              //               path: 'assign-room',
+              //               canActivate: [permissionGuard],
+              //               data: {
+              //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+              //               },
+              //               loadChildren: async () =>
+              //                 (
+              //                   await import(
+              //                     './invigilator/assign-room/assign-room.routing'
+              //                   )
+              //                 ).ROUTES,
+              //             },
+              //           ],
+              //         },
+              //         {
+              //           path: 'paid',
+              //           children: [
+              //             {
+              //               path: 'invigilator',
+              //               loadChildren: async () =>
+              //                 (await import('./paid/invigilator/invigilator.routing'))
+              //                   .ROUTES,
+              //             },
+              //             {
+              //               path: 'invigilator-department',
+              //               loadChildren: async () =>
+              //                 (
+              //                   await import(
+              //                     './paid/invigilator-department/invigilator-department.routing'
+              //                   )
+              //                 ).ROUTES,
+              //             },
+              //             {
+              //               path: 'exam-department',
+              //               loadChildren: async () =>
+              //                 (
+              //                   await import(
+              //                     './paid/exam-department/exam-department.routing'
+              //                   )
+              //                 ).ROUTES,
+              //             },
+            ],
+          },
           //         {
           //           path: 'process',
           //           loadChildren: async () =>

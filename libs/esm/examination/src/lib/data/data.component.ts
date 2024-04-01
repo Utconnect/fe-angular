@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ExaminationStatus } from '@esm/data';
+import { ESMDomainEnumsExaminationStatus } from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import { tuiButtonOptionsProvider } from '@taiga-ui/core';
 import { ExaminationDataStore } from './data.store';
@@ -32,5 +32,5 @@ export class ExaminationDataComponent {
 
   // PUBLIC PROPERTIES
   readonly examination$ = this.store.examination$;
-  readonly ExaminationStatus = ExaminationStatus;
+  readonly ExaminationStatus = ESMDomainEnumsExaminationStatus;
 }
