@@ -1,0 +1,39 @@
+tui-scrollbar ::ng-deep .t-content {
+  @apply h-full;
+}
+
+table {
+  th,
+  td {
+    @apply whitespace-nowrap;
+  }
+
+  td {
+    @apply overflow-hidden text-ellipsis;
+    transition: all 0.3s ease-in-out;
+  }
+
+  tbody {
+    ::ng-deep td tui-input-number input {
+      @apply text-right;
+    }
+
+    tr {
+      transition: all 0.3s ease-in-out;
+
+      &.updating {
+        @apply bg-black bg-opacity-20;
+        td {
+          @apply bg-transparent;
+        }
+      }
+    }
+  }
+}
+
+tui-input-number ::ng-deep [tuiWrapper] {
+  &:before,
+  &:after {
+    @apply !absolute;
+  }
+}

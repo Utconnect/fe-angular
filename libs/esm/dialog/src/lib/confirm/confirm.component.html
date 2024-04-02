@@ -1,0 +1,27 @@
+<h2 class="flex items-center text-2xl">
+  <tui-svg
+    src="tuiIconAlertCircleLarge"
+    class="mr-2 text-tui-warning-fill"
+  ></tui-svg>
+  Cảnh báo
+</h2>
+<p>{{ context.data.message }}</p>
+<div class="flex justify-end">
+  <button
+    tuiButton
+    *ngrxLet="confirmStatus$ as confirmStatus"
+    (click)="context.data.onConfirm()"
+    [showLoader]="confirmStatus === 'loading'"
+    appearance="accent"
+  >
+    Có, vẫn tiếp tục
+  </button>
+  <button
+    tuiButton
+    (click)="context.completeWith(false)"
+    appearance="secondary"
+    class="ml-4"
+  >
+    Không, đưa tôi trở lại
+  </button>
+</div>

@@ -25,6 +25,7 @@
       "@esm/feature": ["libs/esm/shell/feature/src/index.ts"],
       "@esm/helpers": ["libs/esm/shared/helpers/src/index.ts"],
       "@esm/home": ["libs/esm/home/src/index.ts"],
+      "@esm/invigilator": ["libs/esm/invigilator/src/index.ts"],
       "@esm/model": ["libs/esm/shell/data-access/model/src/index.ts"],
       "@esm/pipes": ["libs/esm/shared/pipes/src/index.ts"],
       "@esm/services": ["libs/esm/shared/data-access/services/src/index.ts"],

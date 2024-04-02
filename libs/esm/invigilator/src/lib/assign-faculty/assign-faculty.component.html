@@ -1,0 +1,11 @@
+<esm-invigilator-assign-faculty-header
+  (exportFile)="table?.exportFile()"
+></esm-invigilator-assign-faculty-header>
+
+<ng-container *ngrxLet="dataStatus$ as dataStatus">
+  <utconnect-required-step>
+    <esm-invigilator-assign-faculty-table
+      #table
+    ></esm-invigilator-assign-faculty-table>
+  </utconnect-required-step>
+</ng-container>

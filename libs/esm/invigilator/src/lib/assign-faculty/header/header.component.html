@@ -1,0 +1,49 @@
+<ng-container *ngrxLet="headerObservables$ as obs">
+  <div
+    class="py-3 flex flex-0 justify-between items-center bg-white text-3xl font-bold"
+  >
+    <div class="flex">
+      <h3 id="title">Danh sách phân giảng viên mỗi khoa</h3>
+      <tui-loader
+        [showLoader]="!!obs.updateRows.length"
+        class="w-9 h-9 ml-2"
+      ></tui-loader>
+    </div>
+    <div class="buttons">
+      <button
+        tuiButton
+        *ngIf="obs.examination?.status === ExaminationStatus.AssignFaculty"
+        (click)="calculate()"
+        [showLoader]="obs.calculateStatus === 'loading'"
+        [disabled]="
+          obs.dataStatus === 'loading' || obs.finishStatus === 'loading'
+        "
+        icon="tuiIconAirplayLarge"
+      >
+        Tính số lượng
+      </button>
+
+      <button
+        tuiButton
+        *ngIf="obs.examination?.status === ExaminationStatus.AssignFaculty"
+        (click)="finishAssign()"
+        [showLoader]="obs.finishStatus === 'loading'"
+        [disabled]="
+          obs.dataStatus === 'loading' || obs.calculateStatus === 'loading'
+        "
+        icon="tuiIconCheckCircleLarge"
+      >
+        Chốt số lượng
+      </button>
+
+      <button
+        tuiButton
+        *ngIf="obs.dataStatus === 'success'"
+        (click)="exportFile.emit()"
+        icon="tuiIconDownloadLarge"
+      >
+        Tải file Excel
+      </button>
+    </div>
+  </div>
+</ng-container>

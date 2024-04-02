@@ -1,0 +1,155 @@
+<tui-scrollbar class="scrollbar" class="h-full">
+  <cdk-virtual-scroll-viewport
+    #viewport
+    *ngrxLet="tableObservables$ as obs"
+    tuiScrollable
+    class="h-full tui-zero-scrollbar"
+    [itemSize]="45"
+    [maxBufferPx]="1000"
+    [minBufferPx]="700"
+  >
+    <table
+      tuiTable
+      *ngIf="form"
+      [formGroup]="form"
+      [columns]="obs.columns"
+      class="relative w-full"
+      aria-describedby="title"
+    >
+      <thead tuiThead>
+        <tr
+          tuiThGroup
+          *ngrxLet="0 - viewport['_renderedContentOffset'] as offset"
+        >
+          <th tuiTh [sticky]="true" [style.top.px]="offset">STT</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Mã học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Tên học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Hình thức thi</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Ngày thi</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Ca thi</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Khoa CN</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Số phòng</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Số CBCT</th>
+          <ng-container *ngFor="let faculty of obs.faculties">
+            <th
+              tuiTh
+              *tuiHead="faculty.id"
+              [sorter]="null"
+              [sticky]="true"
+              [style.top.px]="offset"
+            >
+              {{ faculty.displayId || faculty.name }}
+            </th>
+          </ng-container>
+          <th
+            tuiTh
+            *tuiHead="'total'"
+            [sorter]="null"
+            [sticky]="true"
+            [style.top.px]="offset"
+          >
+            Tổng số
+          </th>
+          <th
+            tuiTh
+            *tuiHead="'difference'"
+            [sorter]="null"
+            [sticky]="true"
+            [style.top.px]="offset"
+          >
+            Chênh lệch
+          </th>
+        </tr>
+      </thead>
+
+      <tbody tuiTbody formArrayName="data">
+        <tr
+          *cdkVirtualFor="let item of formControl.value; let i = index"
+          tuiTr
+          [formGroupName]="i"
+          [class.updating]="obs.updateRows | array: 'in' : i"
+        >
+          <td *tuiCell="'index'" tuiTd>{{ i + 1 }}</td>
+          <td *tuiCell="'moduleId'" tuiTd class="w-24 max-w-[6rem]">
+            {{ item.module.displayId }}
+          </td>
+          <td *tuiCell="'moduleName'" tuiTd class="w-52 max-w-[13rem]">
+            {{ item.module.name }}
+          </td>
+          <td *tuiCell="'method'" tuiTd>
+            {{ item.method | examMethod }}
+          </td>
+          <td *tuiCell="'startAt'" tuiTd>
+            {{ item.startAt | date: "dd/MM/y" }}
+          </td>
+          <td *tuiCell="'shift'" tuiTd class="!text-center">
+            {{ item.shift }}
+          </td>
+          <td *tuiCell="'facultyName'" tuiTd>
+            {{ item.module.faculty.name }}
+          </td>
+          <td *tuiCell="'roomsCount'" tuiTd class="!text-center">
+            {{ item.roomsCount }}
+          </td>
+          <td *tuiCell="'invigilatorsCount'" tuiTd class="!text-center">
+            {{ item.invigilatorsCount }}
+          </td>
+          <ng-container *ngFor="let faculty of obs.faculties">
+            <td
+              *tuiCell="faculty.id"
+              tuiTd
+              (dblclick)="
+                obs.examination?.status === ExaminationStatus.AssignFaculty
+                  ? onDoubleClickCell($event, i, faculty.id)
+                  : null
+              "
+              [class.!bg-tui-success-bg-hover]="
+                item[faculty.id].actual !== item[faculty.id].calculated
+              "
+              class="!text-center"
+            >
+              {{ item[faculty.id].actual }}
+            </td>
+          </ng-container>
+          <td *tuiCell="'total'" tuiTd class="!text-center">
+            {{ item.total.actual }}
+          </td>
+          <ng-container *ngrxLet="item.total.calculated as difference">
+            <td
+              *tuiCell="'difference'"
+              tuiTd
+              [class.!bg-tui-error-bg-hover]="difference"
+              class="!text-center"
+            >
+              {{ difference }}
+              <tui-tooltip
+                *ngIf="difference"
+                [content]="
+                  'Đang ' +
+                  (difference < 0
+                    ? 'thiếu ' + -difference
+                    : 'thừa ' + difference)
+                "
+                direction="left"
+              ></tui-tooltip>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+
+      <div
+        [ngStyle]="inputStyle"
+        class="absolute after:absolute after:inset-px after:bg-white"
+      >
+        <tui-input-number
+          #input
+          [(ngModel)]="inputValue"
+          [ngModelOptions]="{ standalone: true }"
+          (focusedChange)="onFocusedChange($event)"
+          (keydown.enter)="onFocusedChange(false)"
+          class="relative !text-center z-30"
+        ></tui-input-number>
+      </div>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</tui-scrollbar>
