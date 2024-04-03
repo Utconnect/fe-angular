@@ -126,16 +126,12 @@ const routes: Routes = [
                 loadChildren: async () =>
                   (await import('@esm/invigilator')).ASSIGN_FACULTY_ROUTES,
               },
-              //             {
-              //               path: 'assign-teacher',
-              //               canActivate: [permissionGuard],
-              //               loadChildren: async () =>
-              //                 (
-              //                   await import(
-              //                     './invigilator/assign-teacher/assign-teacher.routing'
-              //                   )
-              //                 ).ROUTES,
-              //             },
+              {
+                path: 'assign-teacher',
+                canActivate: [permissionGuard],
+                loadChildren: async () =>
+                  (await import('@esm/invigilator')).ASSIGN_TEACHER_ROUTES,
+              },
               //             {
               //               path: 'assign-room',
               //               canActivate: [permissionGuard],

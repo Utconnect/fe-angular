@@ -1,0 +1,70 @@
+<ng-container *ngrxLet="headerObservables$ as obs">
+  <div
+    class="py-3 flex flex-0 justify-between items-center bg-white text-3xl font-bold"
+  >
+    <h3 id="title">Phân giảng viên coi thi khoa {{ obs.faculty?.name }}</h3>
+
+    <ng-container
+      *ngIf="obs.examination.status >= ExaminationStatus.AssignInvigilator"
+    >
+      <ng-container
+        *ngIf="
+          obs.roles | array : 'in' : 'ExaminationDepartmentHead';
+          else buttons
+        "
+      >
+        <tui-select
+          [ngModel]="obs.faculty?.id"
+          (ngModelChange)="onSelectFaculty($event)"
+          [valueContent]="stringify(obs.faculties)"
+          [tuiTextfieldLabelOutside]="true"
+          tuiTextfieldSize="m"
+          class="w-48"
+        >
+          <ng-template tuiDataList>
+            <tui-data-list>
+              <!-- <button tuiOption [value]="''" role="menuitemradio">
+                Tất cả
+              </button> -->
+              <button
+                tuiOption
+                *ngFor="let faculty of obs.faculties"
+                [value]="faculty.id"
+                role="menuitemradio"
+              >
+                {{ faculty.name }}
+              </button>
+            </tui-data-list>
+          </ng-template>
+        </tui-select>
+      </ng-container>
+
+      <ng-template #buttons>
+        <div class="buttons">
+          <button
+            tuiButton
+            (click)="autoAssign()"
+            [showLoader]="obs.showLoader"
+            [class.!hidden]="hideAutoAssign"
+            icon="tuiIconAirplayLarge"
+          >
+            Tự động phân bổ
+          </button>
+
+          <button
+            tuiButton
+            (click)="saveChange.next()"
+            [showLoader]="obs.showLoader"
+            [disabled]="obs.updateStatus === 'loading'"
+            icon="tuiIconSaveLarge"
+          >
+            Lưu
+          </button>
+
+          <!-- TODO -->
+          <!-- <button tuiButton icon="tuiIconDownloadLarge">Tải file Excel</button> -->
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</ng-container>

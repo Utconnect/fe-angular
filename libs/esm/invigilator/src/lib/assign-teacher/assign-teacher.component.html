@@ -1,0 +1,24 @@
+<esm-invigilator-assign-teacher-header
+  (saveChange)="table?.saveChange()"
+></esm-invigilator-assign-teacher-header>
+
+<ng-container *ngrxLet="dataStatus$ as dataStatus">
+  <ng-container *ngrxLet="roles$ as roles">
+    <utconnect-required-step
+      [minimumStep]="ExaminationStatus.AssignInvigilator"
+      class="grow"
+    >
+      <esm-invigilator-assign-teacher-table
+        #table
+      ></esm-invigilator-assign-teacher-table>
+
+      <h2
+        message
+        *ngIf="roles | array : 'in' : 'Teacher'"
+        class="mt-4 text-center text-lg"
+      >
+        Phòng Khảo thí chưa phân số lượng cho khoa, vui lòng thử lại sau!
+      </h2>
+    </utconnect-required-step>
+  </ng-container>
+</ng-container>

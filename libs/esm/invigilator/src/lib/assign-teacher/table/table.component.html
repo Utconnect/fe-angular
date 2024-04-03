@@ -1,0 +1,172 @@
+<tui-scrollbar class="scrollbar" class="h-full">
+  <cdk-virtual-scroll-viewport
+    #viewport
+    tuiScrollable
+    [itemSize]="45"
+    [maxBufferPx]="1000"
+    [minBufferPx]="700"
+    class="h-full tui-zero-scrollbar"
+  >
+    <table
+      tuiTable
+      *ngIf="form"
+      [formGroup]="form"
+      [columns]="columns"
+      class="w-full"
+      aria-describedby="title"
+    >
+      <thead tuiThead>
+        <tr
+          tuiThGroup
+          *ngrxLet="0 - viewport['_renderedContentOffset'] as offset"
+        >
+          <th tuiTh [sticky]="true" [style.top.px]="offset">STT</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Mã học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Tên học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Ngày thi</th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Ca thi
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Bộ môn
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Họ tên CBCT
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            SĐT
+          </th>
+        </tr>
+      </thead>
+
+      <tbody tuiTbody *ngrxLet="tableObservables$ as obs">
+        <tr *cdkVirtualFor="let row of obs.data; let i = index" tuiTr>
+          <td *tuiCell="'index'" tuiTd class="w-8">{{ i + 1 }}</td>
+          <td *tuiCell="'moduleId'" tuiTd class="w-32 max-w-[8rem]">
+            {{ row.facultyShiftGroup.shiftGroup.module.displayId }}
+          </td>
+          <td *tuiCell="'moduleName'" tuiTd>
+            {{ row.facultyShiftGroup.shiftGroup.module.name }}
+          </td>
+          <td *tuiCell="'startAt'" tuiTd class="w-32">
+            {{ row.facultyShiftGroup.shiftGroup.startAt | date: "dd/MM/y" }}
+          </td>
+          <td *tuiCell="'shift'" tuiTd class="w-24 !text-center">
+            {{ row.facultyShiftGroup.shiftGroup.shift }}
+          </td>
+
+          <ng-container *ngrxLet="form.controls[row.id] as rowControl">
+            <td *tuiCell="'department'" tuiTd class="w-60">
+              <tui-select
+                *ngIf="obs.roles | array: 'in' : 'Teacher'; else departmentTmpl"
+                (ngModelChange)="rowControl.controls.user.setValue(null)"
+                [formControl]="rowControl.controls.departmentId"
+                [valueContent]="stringify(obs.departments)"
+                class="w-60"
+              >
+                <ng-template tuiDataList>
+                  <tui-data-list>
+                    <button
+                      tuiOption
+                      *ngFor="let department of obs.departments"
+                      [value]="department.id"
+                    >
+                      {{ department.name }}
+                    </button>
+                  </tui-data-list>
+                </ng-template>
+              </tui-select>
+
+              <ng-template #departmentTmpl>
+                {{
+                  rowControl.value.user
+                    ? rowControl.value.user.id
+                      ? obs.invigilatorInfoMap[rowControl.value.user.id]
+                          ?.department?.name
+                      : getDepartmentOfAnonymousInvigilator(
+                          obs.departments,
+                          rowControl.value.departmentId
+                        )
+                    : ""
+                }}
+                <!-- rowControl.value.departmentId -->
+              </ng-template>
+            </td>
+
+            <td
+              *tuiCell="'teacher'"
+              tuiTd
+              [class.!bg-tui-warning-bg-hover]="customValues[row.id]"
+              class="w-60"
+            >
+              <tui-combo-box
+                *ngIf="obs.roles | array: 'in' : 'Teacher'; else teacherTmpl"
+                [(search)]="customValues[row.id]"
+                (ngModelChange)="onInvigilatorChanges(row.facultyShiftGroup.id)"
+                [formControl]="rowControl.controls.user"
+                [valueContent]="invigilatorContent"
+                [identityMatcher]="invigilatorIdentityMatcher"
+                class="w-60"
+              >
+                <ng-template tuiDataList>
+                  <tui-data-list>
+                    <button
+                      *ngFor="
+                        let invigilator of obs.invigilatorsData
+                          | tuiFilter
+                            : invigilatorMatcher
+                            : rowControl.value.departmentId
+                            : row.facultyShiftGroup.id
+                      "
+                      tuiOption
+                      [value]="invigilator"
+                    >
+                      {{ invigilator }}
+                    </button>
+                  </tui-data-list>
+                </ng-template>
+              </tui-combo-box>
+
+              <ng-template #teacherTmpl>
+                {{ rowControl.value.user?.fullName }}
+              </ng-template>
+            </td>
+
+            <td *tuiCell="'phoneNumber'" tuiTd class="w-32">
+              {{
+                rowControl.value.user
+                  ? obs.invigilatorInfoMap[rowControl.value.user.id]
+                      ?.phoneNumber
+                  : ""
+              }}
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</tui-scrollbar>
+
+<ng-template #invigilatorContent let-item>
+  <span class="name">{{ item.fullName }}</span>
+</ng-template>
