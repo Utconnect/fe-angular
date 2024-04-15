@@ -1,0 +1,203 @@
+<tui-scrollbar class="scrollbar" class="h-full">
+  <cdk-virtual-scroll-viewport
+    #viewport
+    tuiScrollable
+    [itemSize]="45"
+    [maxBufferPx]="1000"
+    [minBufferPx]="700"
+    class="h-full tui-zero-scrollbar"
+  >
+    <table
+      tuiTable
+      *ngIf="form"
+      [formGroup]="form"
+      [columns]="columns"
+      class="w-full"
+      aria-describedby="title"
+    >
+      <thead tuiThead>
+        <tr
+          tuiThGroup
+          *ngrxLet="0 - viewport['_renderedContentOffset'] as offset"
+        >
+          <th tuiTh [sticky]="true" [style.top.px]="offset">STT</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Mã học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Tên học phần</th>
+          <th tuiTh [sticky]="true" [style.top.px]="offset">Ngày thi</th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Ca thi
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Phòng
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Số thí sinh
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            STT CBCT
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Họ tên CBCT
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Khoa
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            Bộ môn
+          </th>
+          <th
+            tuiTh
+            [sticky]="true"
+            [style.top.px]="offset"
+            class="!text-center"
+          >
+            SĐT
+          </th>
+        </tr>
+      </thead>
+
+      <tbody tuiTbody>
+        <ng-container *ngrxLet="tableObservables$ as obs">
+          <ng-container
+            *ngrxLet="
+              invigilatorStringify(obs.invigilatorsList) as invigilatorContent
+            "
+          >
+            <tr
+              tuiTr
+              *cdkVirtualFor="let row of obs.data; let i = index"
+              [class.no-invigilator]="!row.invigilator"
+              [class.duplicated]="row.isDuplicated"
+            >
+              <td *tuiCell="'index'" tuiTd class="w-8">
+                {{ i + 1 }}
+              </td>
+              <td *tuiCell="'moduleId'" tuiTd class="w-32 max-w-[8rem]">
+                {{ row.shiftGroup.module.displayId }}
+              </td>
+              <td *tuiCell="'moduleName'" tuiTd>
+                <tui-line-clamp
+                  [content]="moduleNameTmpl"
+                  [linesLimit]="1"
+                ></tui-line-clamp>
+                <ng-template #moduleNameTmpl>
+                  <div class="whitespace-nowrap">
+                    {{ row.shiftGroup.module.name }}
+                  </div>
+                </ng-template>
+              </td>
+              <td *tuiCell="'startAt'" tuiTd class="w-32">
+                {{ row.shiftGroup.startAt | date: "dd/MM/y" }}
+              </td>
+              <td *tuiCell="'shift'" tuiTd class="w-20 !text-center">
+                {{ row.shiftGroup.shift }}
+              </td>
+              <td *tuiCell="'room'" tuiTd class="min-w-[5rem] !text-center">
+                {{ row.room.displayId }}
+              </td>
+              <td *tuiCell="'candidatesCount'" tuiTd class="w-24 !text-center">
+                {{ row.candidatesCount }}
+              </td>
+              <td *tuiCell="'orderIndex'" tuiTd class="w-24 !text-center">
+                {{ row.orderIndex }}
+              </td>
+
+              <td *tuiCell="'teacher'" tuiTd class="w-64">
+                <esm-invigilator-assign-room-table-teacher-cell
+                  ngDefaultControl
+                  [formControl]="form.controls[row.id]"
+                  [row]="row"
+                  [invigilatorsData]="obs.invigilatorsData[row.shiftGroup.id]"
+                  [invigilatorContent]="invigilatorContent"
+                ></esm-invigilator-assign-room-table-teacher-cell>
+              </td>
+
+              <td *tuiCell="'teacherFaculty'" tuiTd class="min-w-[6rem]">
+                <tui-line-clamp
+                  *ngIf="form.controls[row.id].value"
+                  [content]="facultyTmpl"
+                  [linesLimit]="1"
+                ></tui-line-clamp>
+                <ng-template #facultyTmpl>
+                  <div class="whitespace-nowrap">
+                    {{
+                      obs.invigilatorFacultyMap[form.controls[row.id].value!]
+                        ?.facultyName
+                    }}
+                  </div>
+                </ng-template>
+              </td>
+
+              <td *tuiCell="'teacherDepartment'" tuiTd class="min-w-[6rem]">
+                <tui-line-clamp
+                  *ngIf="form.controls[row.id].value"
+                  [content]="departmentTmpl"
+                  [linesLimit]="1"
+                ></tui-line-clamp>
+                <ng-template #departmentTmpl>
+                  <div class="whitespace-nowrap">
+                    {{
+                      obs.invigilatorFacultyMap[form.controls[row.id].value!]
+                        ?.departmentName
+                    }}
+                  </div>
+                </ng-template>
+              </td>
+
+              <td *tuiCell="'phoneNumber'" tuiTd class="w-32">
+                <tui-line-clamp
+                  *ngIf="form.controls[row.id].value"
+                  [content]="phoneNumberTmpl"
+                  [linesLimit]="1"
+                ></tui-line-clamp>
+                <ng-template #phoneNumberTmpl>
+                  <div class="whitespace-nowrap">
+                    {{
+                      obs.invigilatorFacultyMap[form.controls[row.id].value!]
+                        ?.phoneNumber
+                    }}
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</tui-scrollbar>

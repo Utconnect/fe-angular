@@ -1,0 +1,14 @@
+<esm-invigilator-assign-room-header
+  (save)="table?.saveChange()"
+></esm-invigilator-assign-room-header>
+
+<ng-container *ngrxLet="dataStatus$ as dataStatus">
+  <utconnect-required-step
+    [minimumStep]="ExaminationStatus.AssignFaculty"
+    class="grow"
+  >
+    <esm-invigilator-assign-room-table
+      #table
+    ></esm-invigilator-assign-room-table>
+  </utconnect-required-step>
+</ng-container>

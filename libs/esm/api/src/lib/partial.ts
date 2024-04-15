@@ -1,4 +1,4 @@
 import { inject } from '@angular/core';
-import { ESM_CONFIG } from '@esm/config';
+import { EsmConfig, ESM_CONFIG } from '@esm/config';
 
-export const getEnv = () => inject(ESM_CONFIG);
+export const getEnv = (): EsmConfig => inject(ESM_CONFIG);

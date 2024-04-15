@@ -1,0 +1,51 @@
+<label tuiLabel="Mã CBCT">
+  <tui-combo-box
+    [(ngModel)]="teacher"
+    [(search)]="search"
+    (searchChange)="searchDebounce$.next()"
+    [valueContent]="value"
+  >
+    Chọn giảng viên
+    <input tuiTextfield placeholder="Gõ tên" />
+    <ng-template tuiDataList *ngrxLet="componentState$ as componentState">
+      <tui-loader
+        *ngIf="componentState.status === 'loading'; else loading"
+        class="tui-space_vertical-4"
+      ></tui-loader>
+      <ng-template #loading>
+        <tui-data-list>
+          <button
+            *ngFor="let item of componentState.data"
+            tuiOption
+            [value]="item"
+          >
+            {{ item.fullName }}
+            <ng-container *ngIf="item.department">
+              - {{ item.department.name }} ({{ item.department.faculty.name }})
+            </ng-container>
+          </button>
+        </tui-data-list>
+      </ng-template>
+    </ng-template>
+  </tui-combo-box>
+</label>
+
+<div class="flex justify-end mt-6">
+  <button
+    tuiButton
+    (click)="onSubmit()"
+    [disabled]="!teacher"
+    icon="tuiIconCheck"
+  >
+    Hoàn thành
+  </button>
+</div>
+
+<ng-template #value [polymorpheus]="teacherContentContext" let-item>
+  <span class="name">
+    {{ item.fullName }}
+    <ng-container *ngIf="item.department">
+      - {{ item.department.name }} ({{ item.department.faculty.name }})
+    </ng-container>
+  </span>
+</ng-template>

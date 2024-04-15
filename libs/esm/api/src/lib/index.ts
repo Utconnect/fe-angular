@@ -13,3 +13,4 @@ export * from './__generated__/shift.api';
 export * from './__generated__/teacher.api';
 
 export * from './auth.api';
+export * from './models';

@@ -1,0 +1,28 @@
+<div
+  *ngrxLet="headerObservables$ as obs"
+  class="py-3 flex flex-0 justify-between items-center bg-white text-3xl font-bold"
+>
+  <h3 id="title">Phân công phòng thi</h3>
+  <div class="buttons">
+    <button
+      tuiButton
+      *ngIf="obs.examination?.status === ExaminationStatus.AssignInvigilator"
+      (click)="autoAssign()"
+      [showLoader]="obs.showLoader"
+      icon="tuiIconAirplayLarge"
+    >
+      Tự động phân bổ
+    </button>
+    <button
+      tuiButton
+      *ngIf="obs.examination?.status === ExaminationStatus.AssignInvigilator"
+      (click)="save.emit()"
+      [showLoader]="obs.showLoader"
+      icon="tuiIconSaveLarge"
+    >
+      Lưu
+    </button>
+    <!-- TODO -->
+    <!-- <button tuiButton icon="tuiIconDownloadLarge">Tải file Excel</button> -->
+  </div>
+</div>

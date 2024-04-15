@@ -1,0 +1,23 @@
+tui-scrollbar ::ng-deep .t-content {
+  @apply h-full;
+}
+
+table {
+  th {
+    @apply whitespace-nowrap;
+  }
+
+  tr.no-invigilator td {
+    @apply bg-tui-error-bg;
+    &:hover {
+      @apply bg-tui-error-bg-hover;
+    }
+  }
+
+  tr.duplicated td {
+    @apply bg-tui-warning-bg;
+    &:hover {
+      @apply bg-tui-warning-bg-hover;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<ng-container *ngIf="control">
+  <tui-select
+    *ngrxLet="examinationIsClosed$ as examinationIsClosed"
+    (ngModelChange)="onInvigilatorChanges(row.shiftGroup.id, row.id, $event)"
+    [formControl]="control"
+    [readOnly]="examinationIsClosed"
+    [valueContent]="invigilatorContent"
+    [tuiTextfieldCleaner]="true"
+    class="w-64"
+  >
+    <ng-template tuiDataList>
+      <tui-data-list>
+        <tui-opt-group *ngrxLet="usedInvigilatorsMap$ as usedInvigilatorsMap">
+          <ng-container *ngFor="let invigilator of invigilatorsData">
+            <!-- Only show prior invigilators on first row, else show other ones -->
+            <ng-container
+              *ngIf="
+                (row.orderIndex === 1 && invigilator.isPriority) ||
+                (row.orderIndex !== 1 && !invigilator.isPriority)
+              "
+            >
+              <!-- Show template to add  -->
+              <ng-container
+                *ngIf="
+                  invigilator
+                    | object
+                      : 'in'
+                      : 'temporaryName'
+                      : temporaryInvigilatorModel;
+                  else selection
+                "
+              >
+                <button
+                  tuiOption
+                  (click)="
+                    onAddNewInvigilator(
+                      invigilator.temporaryName,
+                      invigilator.departmentId,
+                      row.shiftGroup.id
+                    )
+                  "
+                  class="relative"
+                >
+                  <div class="custom-btn">
+                    {{ invigilator.temporaryName }}
+                    <tui-svg
+                      src="tuiIconPlusCircleLarge"
+                      class="text-tui-text-link"
+                    ></tui-svg>
+                  </div>
+                </button>
+              </ng-container>
+
+              <!-- Show selection -->
+              <ng-template #selection>
+                <button
+                  tuiOption
+                  *ngIf="
+                    !usedInvigilatorsMap[row.shiftGroup.id]?.[
+                      $any(invigilator).id
+                    ]
+                  "
+                  [value]="$any(invigilator).id"
+                >
+                  {{ $any(invigilator).fullName }}
+                </button>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+        </tui-opt-group>
+
+        <!-- Add teacher that does not assigned in current shift group -->
+        <tui-opt-group>
+          <button
+            tuiOption
+            (click)="onAddOtherInvigilator(row.id)"
+            class="relative"
+          >
+            <div class="custom-btn">
+              Chọn CBCT khác
+              <tui-svg
+                src="tuiIconPlusCircleLarge"
+                class="text-tui-text-link"
+              ></tui-svg>
+            </div>
+          </button>
+        </tui-opt-group>
+      </tui-data-list>
+    </ng-template>
+  </tui-select>
+</ng-container>
