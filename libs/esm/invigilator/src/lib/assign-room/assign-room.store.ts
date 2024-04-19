@@ -6,10 +6,11 @@ import {
   ExaminationService,
   GetAvailableInvigilatorsInShiftGroupData,
 } from '@esm/api';
-import { ObservableHelper, Status } from '@esm/cdk';
-import { AppSelector, AppState } from '@esm/store';
+import { EsmSelector, EsmState } from '@esm/store';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
+import { ObservableHelper } from '@utconnect/helpers';
+import { Status } from '@utconnect/types';
 import {
   BehaviorSubject,
   combineLatest,
@@ -59,7 +60,7 @@ type InvigilatorAssignRoomState = {
 @Injectable()
 export class InvigilatorAssignRoomStore extends ComponentStore<InvigilatorAssignRoomState> {
   // INJECT PROPERTIES
-  private readonly appStore = inject(Store<AppState>);
+  private readonly appStore = inject(Store<EsmState>);
   private readonly examinationService = inject(ExaminationService);
 
   // PUBLIC PROPERTIES
@@ -74,11 +75,11 @@ export class InvigilatorAssignRoomStore extends ComponentStore<InvigilatorAssign
 
   // GLOBAL SELECTORS
   readonly examination$ = this.appStore
-    .select(AppSelector.examination)
+    .select(EsmSelector.examination)
     .pipe(takeUntil(this.destroy$));
 
   private readonly examinationId$ = this.appStore
-    .select(AppSelector.examinationId)
+    .select(EsmSelector.examinationId)
     .pipe(ObservableHelper.filterNullish(), takeUntil(this.destroy$));
 
   // CUSTOM SELECTORS

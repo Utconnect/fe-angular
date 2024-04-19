@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { APP_STORE_PROVIDER, TESTING_COMMON_IMPORTS } from '@esm/cdk';
+import { ESM_STORE_PROVIDER } from '@esm/test';
+import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 import { InvigilatorAssignRoomStore } from '../assign-room.store';
 import {
   InvigilatorAssignRoomTableComponent,
@@ -13,7 +14,7 @@ describe('InvigilatorAssignRoomTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS, TAIGA_UI],
-      providers: [APP_STORE_PROVIDER, InvigilatorAssignRoomStore],
+      providers: [ESM_STORE_PROVIDER, InvigilatorAssignRoomStore],
     }).compileComponents();
 
     fixture = TestBed.createComponent(InvigilatorAssignRoomTableComponent);

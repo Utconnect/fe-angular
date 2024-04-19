@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { GetTeachersData, TeacherService } from '@esm/api';
+import { TeacherService, UserSummary } from '@esm/api';
 import { EsmDialogEditInvigilatorComponent } from '@esm/dialog';
 import { LetModule } from '@ngrx/component';
 import { TuiTableModule } from '@taiga-ui/addon-table';
@@ -28,8 +28,6 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { StringifyHelper } from '@utconnect/helpers';
 import { filter, tap } from 'rxjs';
 import { DataInvigilatorStore } from './invigilator.store';
-
-type EditInvigilatorDialogModel = GetTeachersData['data'][number];
 
 const NGRX = [LetModule];
 const TAIGA_UI = [
@@ -100,9 +98,9 @@ export class DataInvigilatorComponent implements OnInit {
   }
 
   // PUBLIC METHODS
-  openDialog(data?: EditInvigilatorDialogModel): void {
+  openDialog(data?: UserSummary): void {
     this.dialogService
-      .open<EditInvigilatorDialogModel>(
+      .open<UserSummary>(
         new PolymorpheusComponent(
           EsmDialogEditInvigilatorComponent,
           this.injector,
@@ -117,7 +115,7 @@ export class DataInvigilatorComponent implements OnInit {
   }
 
   readonly userMatcher = (
-    item: GetTeachersData['data'][number],
+    item: UserSummary,
     facultyId: string,
     departmentId: string,
   ): boolean =>

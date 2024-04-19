@@ -34,15 +34,15 @@
                   tuiOption
                   (click)="
                     onAddNewInvigilator(
-                      invigilator.temporaryName,
-                      invigilator.departmentId,
+                      $any(invigilator).temporaryName,
+                      $any(invigilator).departmentId,
                       row.shiftGroup.id
                     )
                   "
                   class="relative"
                 >
                   <div class="custom-btn">
-                    {{ invigilator.temporaryName }}
+                    {{ $any(invigilator).temporaryName }}
                     <tui-svg
                       src="tuiIconPlusCircleLarge"
                       class="text-tui-text-link"

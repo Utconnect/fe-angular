@@ -41,6 +41,12 @@ dependencies:
   '@nrwl/angular':
     specifier: 15.9.7
     version: 15.9.7(@angular-devkit/build-angular@15.2.10)(@angular-devkit/core@15.2.10)(@angular-devkit/schematics@15.2.10)(@schematics/angular@15.2.10)(@types/node@16.11.7)(cypress@12.17.4)(eslint@8.15.0)(nx@15.9.7)(rxjs@7.8.1)(typescript@4.9.5)
+  '@syncfusion/ej2-angular-diagrams':
+    specifier: ^20.4.54
+    version: 20.4.54
+  '@syncfusion/ej2-base':
+    specifier: ^20.4.51
+    version: 20.4.51
   '@taiga-ui/addon-charts':
     specifier: ~3.27.0
     version: 3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@tinkoff/ng-polymorpheus@4.1.0)
@@ -235,6 +241,9 @@ devDependencies:
   nx:
     specifier: 15.9.7
     version: 15.9.7
+  pnpm:
+    specifier: ^8.15.1
+    version: 8.15.7
   postcss:
     specifier: ^8.4.35
     version: 8.4.35
@@ -4490,6 +4499,105 @@ packages:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
+  /@syncfusion/ej2-angular-base@20.4.53:
+    resolution: {integrity: sha512-5ABEbEG7GiliFiRDbdRxgb5//5ynfPulm9PrL5tKYiwUKcZY1do2o1JQlSzFBxWijI8Q5utR6rOE7ugQFyfbTA==}
+    requiresBuild: true
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-icons': 20.4.48
+      core-js: 3.37.0
+      reflect-metadata: 0.1.14
+      rxjs: 6.6.7
+      rxjs-compat: 6.6.7
+      zone.js: 0.10.3
+    dev: false
+
+  /@syncfusion/ej2-angular-diagrams@20.4.54:
+    resolution: {integrity: sha512-KgmaRAEYCjPlMlwN1WPDlcgVItcFZp9/GIYtSVeJrvrqUG+NPVTBS6xTWgNnUITWP+CZhzquRrwsz8ciPV9Vjg==}
+    dependencies:
+      '@syncfusion/ej2-angular-base': 20.4.53
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-diagrams': 20.4.54
+      tslib: 2.6.2
+    dev: false
+
+  /@syncfusion/ej2-base@20.4.51:
+    resolution: {integrity: sha512-nVyqylTXFuEMZARmqAtGQVadqDwwqgKSC4r1IYwSEc8FoEa2mBxlhQWPjBN7SucwAGAh9aQvnkqIJjSCy8jZiA==}
+    hasBin: true
+    dependencies:
+      '@syncfusion/ej2-icons': 20.4.48
+    dev: false
+
+  /@syncfusion/ej2-buttons@20.4.53:
+    resolution: {integrity: sha512-o3/Blcs9VisB7oAoLd6x2jFGIHGY7COzMpEj9jWOdHZMtxj9tCqeqgT8A2NHRzHFFsJSAA/G3+lZs8Hh2SZNOw==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+    dev: false
+
+  /@syncfusion/ej2-data@20.4.48:
+    resolution: {integrity: sha512-RQ0bplZ20GmmBuJYXSMKVGUGpap0Sx7Zls4tL7+IBIIq+jdGNat80b6pemJAKxyZfy3iCB0+L4L2LVAlfN+KTw==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+    dev: false
+
+  /@syncfusion/ej2-diagrams@20.4.54:
+    resolution: {integrity: sha512-xlksi9QDMnQQlQjz8gIxCQdhpeyhYl28qbf0KjuoGdLfur4/B4S7QOov3+CAt28GLuAAk2ehyOU+z+LY8JFF0w==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-buttons': 20.4.53
+      '@syncfusion/ej2-data': 20.4.48
+      '@syncfusion/ej2-inputs': 20.4.54
+      '@syncfusion/ej2-lists': 20.4.50
+      '@syncfusion/ej2-navigations': 20.4.53
+      '@syncfusion/ej2-popups': 20.4.53
+    dev: false
+
+  /@syncfusion/ej2-icons@20.4.48:
+    resolution: {integrity: sha512-uPV4RzwxQ3cj6Zx4h6VvsEmrCGL9ssKG62Pa12k1fow915QSSQkJ0WZ6dBHIdXbk5nSDp2J2wDlV+5h3Ici+sg==}
+    dev: false
+
+  /@syncfusion/ej2-inputs@20.4.54:
+    resolution: {integrity: sha512-xmNc4uIIfm/5nZybat4dniqYzej9QYP7YBT3LoQyITMko8p3D5+iNMg1LjK7d/KhCYK85phkfjp3WzdFzmtzhw==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-buttons': 20.4.53
+      '@syncfusion/ej2-popups': 20.4.53
+      '@syncfusion/ej2-splitbuttons': 20.4.50
+    dev: false
+
+  /@syncfusion/ej2-lists@20.4.50:
+    resolution: {integrity: sha512-Kw0LtJ4ypp6bzO1In4H5QF3LfWQlAqPPLtDWkb8yXxwatDH8nDAJP/yln9Ljm3wZfQFB1hvCJO/Digyl2l+OUw==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-buttons': 20.4.53
+      '@syncfusion/ej2-data': 20.4.48
+    dev: false
+
+  /@syncfusion/ej2-navigations@20.4.53:
+    resolution: {integrity: sha512-+dYgrhzZ1S29jY2485gaQg+5Hib2cNbhX7TWJW7bFtGMdsq+BoqpFr2dUIAN+rLlLs8uqZ/jFUYe1cR2JVCQAg==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-buttons': 20.4.53
+      '@syncfusion/ej2-data': 20.4.48
+      '@syncfusion/ej2-inputs': 20.4.54
+      '@syncfusion/ej2-lists': 20.4.50
+      '@syncfusion/ej2-popups': 20.4.53
+    dev: false
+
+  /@syncfusion/ej2-popups@20.4.53:
+    resolution: {integrity: sha512-EtRwPk8e+rDpdUxoHQtP43JMT67130bM58GK6bby6amrMBdcTMtQ6Iuv2sXBpdP+hp/0QvfNM49xjaEJD4JnsQ==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-buttons': 20.4.53
+    dev: false
+
+  /@syncfusion/ej2-splitbuttons@20.4.50:
+    resolution: {integrity: sha512-Av/d8K1tuRs/gLnWKVfyLZ7iLhW8DyaqBNdpdYWsjNBuoVpRZdYddOSqPOeOzq5Upd6DzCkGpUfT3WDpAoNH7w==}
+    dependencies:
+      '@syncfusion/ej2-base': 20.4.51
+      '@syncfusion/ej2-popups': 20.4.53
+    dev: false
+
   /@taiga-ui/addon-charts@3.27.0(@angular/common@15.2.10)(@angular/core@15.2.10)(@ng-web-apis/common@3.0.6)(@taiga-ui/cdk@3.27.0)(@taiga-ui/core@3.27.0)(@tinkoff/ng-polymorpheus@4.1.0):
     resolution: {integrity: sha512-PZMwRl8pcbF1UcRXzrnzF6rcdg6ZMHSdiF7Q2VUO8Q39GFguyYNYIFdkRHOLvh1wbsXQKoSxho72RN2yeEybCA==}
     peerDependencies:
@@ -7130,6 +7238,11 @@ packages:
     resolution: {integrity: sha512-iV9Pd/PsgjNWBXeq8XRtWVSgz2tKAfhfvBs7qxYty+RlRd+OCksaWmOnc4JKrTc1cToXL1N0s3l/vwlxPtdElw==}
     dependencies:
       browserslist: 4.23.0
+
+  /core-js@3.37.0:
+    resolution: {integrity: sha512-fu5vHevQ8ZG4og+LXug8ulUtVxjOcEYvifJr7L5Bfq9GOztVqsKd9/59hUk2ZSbCrS3BqUr3EpaYGIYzq7g3Ug==}
+    requiresBuild: true
+    dev: false
 
   /core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
@@ -11644,6 +11757,12 @@ packages:
       find-up: 6.3.0
     dev: false
 
+  /pnpm@8.15.7:
+    resolution: {integrity: sha512-yFzSG22hAzIVaxyiqnnAph7nrS6wRTuIqymSienoypPmCRIyslwHy/YfbfdxKNnISeXJrG5EhU29IRxJ86Z63A==}
+    engines: {node: '>=16.14'}
+    hasBin: true
+    dev: true
+
   /portfinder@1.0.32:
     resolution: {integrity: sha512-on2ZJVVDXRADWE6jnQaX0ioEylzgBpQk8r55NE4wjXW1ZxO+BgDlY6DXwj20i0V8eB4SenDQ00WEaxfiIQPcxg==}
     engines: {node: '>= 0.12.0'}
@@ -12995,6 +13114,10 @@ packages:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
       queue-microtask: 1.2.3
+
+  /rxjs-compat@6.6.7:
+    resolution: {integrity: sha512-szN4fK+TqBPOFBcBcsR0g2cmTTUF/vaFEOZNuSdfU8/pGFnNmmn2u8SystYXG1QMrjOPBc6XTKHMVfENDf6hHw==}
+    dev: false
 
   /rxjs@6.6.7:
     resolution: {integrity: sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==}
@@ -15026,6 +15149,10 @@ packages:
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+
+  /zone.js@0.10.3:
+    resolution: {integrity: sha512-LXVLVEq0NNOqK/fLJo3d0kfzd4sxwn2/h67/02pjCjfKDxgx1i9QqpvtHD8CrBnSSwMw5+dy11O7FRX5mkO7Cg==}
+    dev: false
 
   /zone.js@0.12.0:
     resolution: {integrity: sha512-XtC+I5dXU14HrzidAKBNMqneIVUykLEAA1x+v4KVrd6AUPWlwYORF8KgsVqvgdHiKZ4BkxxjvYi/ksEixTPR0Q==}

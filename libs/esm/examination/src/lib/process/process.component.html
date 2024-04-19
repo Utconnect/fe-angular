@@ -1,0 +1,54 @@
+<tui-island class="w-[700px] mx-auto">
+  <p class="tui-island__category">Thông tin chung</p>
+  <h3 class="tui-island__title">
+    Thi kết thúc học phần kỳ 2 năm học 2022-2023
+  </h3>
+  <ul class="tui-list">
+    <li class="tui-list__item">Số thí sinh: {{ candidatesCount }}</li>
+    <li class="tui-list__item">Số cán bộ coi thi: {{ invigilatorsCount }}</li>
+    <li class="tui-list__item">
+      Thời gian: <span class="font-bold">40%</span>
+      <progress tuiProgressBar [value]="40" [max]="100"></progress>
+      <div class="flex justify-between">
+        <span>{{ startDate | date: "dd/MM/Y" }}</span>
+        <span>{{ endDate | date: "dd/MM/Y" }}</span>
+      </div>
+    </li>
+    <li class="tui-list__item">
+      Số môn thi: 60/100 <span class="ml-2 font-bold">(60%)</span>
+      <progress tuiProgressBar [value]="60" [max]="100"></progress>
+      <div class="flex justify-end">
+        <span>{{ modulesCount }}</span>
+      </div>
+    </li>
+    <li class="tui-list__item">
+      Số ca thi: 500/1000 <span class="ml-2 font-bold">(50%)</span>
+      <progress tuiProgressBar [value]="500" [max]="1000"></progress>
+      <div class="flex justify-end">
+        <span>{{ subjectsCount }}</span>
+      </div>
+    </li>
+  </ul>
+</tui-island>
+
+<tui-island *ngrxLet="diagramData$ as diagramData">
+  <div
+    *ngIf="diagramData && diagramData.nodes.length > 0"
+    id="diagram-space"
+    class="w-[1260px] h-[700px]"
+  >
+    <ejs-diagram
+      #diagram
+      id="diagram"
+      width="100%"
+      height="100%"
+      (created)="created()"
+      [snapSettings]="snapSettings"
+      [constraints]="constraints"
+      [nodes]="diagramData.nodes"
+      [connectors]="diagramData.connectors"
+      [getNodeDefaults]="getNodeDefaults"
+      [getConnectorDefaults]="getConnectorDefaults"
+    ></ejs-diagram>
+  </div>
+</tui-island>

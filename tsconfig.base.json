@@ -27,6 +27,7 @@
       "@esm/home": ["libs/esm/home/src/index.ts"],
       "@esm/invigilator": ["libs/esm/invigilator/src/index.ts"],
       "@esm/model": ["libs/esm/shell/data-access/model/src/index.ts"],
+      "@esm/paid": ["libs/esm/paid/src/index.ts"],
       "@esm/pipes": ["libs/esm/shared/pipes/src/index.ts"],
       "@esm/services": ["libs/esm/shared/data-access/services/src/index.ts"],
       "@esm/settings": ["libs/esm/settings/src/index.ts"],

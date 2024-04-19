@@ -2,15 +2,14 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GetTeachersData } from '@esm/api';
+import { UserSummary } from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import {
-  TUI_TEXTFIELD_APPEARANCE_DIRECTIVE,
   TuiAppearance,
   TuiButtonModule,
   TuiDataListModule,
@@ -18,17 +17,18 @@ import {
   TuiLoaderModule,
   TuiTextfieldAppearanceDirective,
   TuiTextfieldControllerModule,
+  TUI_TEXTFIELD_APPEARANCE_DIRECTIVE,
 } from '@taiga-ui/core';
 import { TuiComboBoxModule } from '@taiga-ui/kit';
 import {
-  POLYMORPHEUS_CONTEXT,
   PolymorpheusModule,
+  POLYMORPHEUS_CONTEXT,
 } from '@tinkoff/ng-polymorpheus';
 import {
-  Subject,
   combineLatest,
   debounceTime,
   map,
+  Subject,
   takeUntil,
   tap,
 } from 'rxjs';
@@ -68,14 +68,14 @@ export const TAIGA_UI = [
 })
 export class EsmDialogSelectTeacherComponent implements OnInit {
   // INJECT PROPERTIES
-  private readonly context = inject(POLYMORPHEUS_CONTEXT) as TuiDialogContext<
-    GetTeachersData['data'][number]
-  >;
+  private readonly context = inject(
+    POLYMORPHEUS_CONTEXT,
+  ) as TuiDialogContext<UserSummary>;
   private readonly store = inject(SelectTeacherDialogStore);
   private readonly destroy$ = inject(TuiDestroyService);
 
   readonly teacherContentContext!: {
-    $implicit: GetTeachersData['data'][number];
+    $implicit: UserSummary;
   };
   readonly searchDebounce$ = new Subject<void>();
   private readonly data$ = this.store.data$;
@@ -83,7 +83,7 @@ export class EsmDialogSelectTeacherComponent implements OnInit {
   readonly componentState$ = combineLatest([this.data$, this.status$]).pipe(
     map((arr) => ({ data: arr[0], status: arr[1] })),
   );
-  teacher: GetTeachersData['data'][number] | null = null;
+  teacher: UserSummary | null = null;
   search: string | null = null;
 
   ngOnInit(): void {

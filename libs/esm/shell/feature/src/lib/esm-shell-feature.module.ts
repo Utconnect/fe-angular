@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AUTH_ROUTES, authGuard, authProviders, permissionGuard } from '@auth';
+import { authGuard, authProviders, AUTH_ROUTES, permissionGuard } from '@auth';
 import { EsmAuthService, ExaminationService, FacultyService } from '@esm/api';
 import { ESM_CONFIG } from '@esm/config';
 import { appReducer, EsmEffects, esmFeatureKey, EsmState } from '@esm/store';
@@ -9,9 +9,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  LAYOUT_ROUTES,
   LayoutComponent,
   layoutProviders,
+  LAYOUT_ROUTES,
   requiredStepProviders,
 } from '@utconnect/components';
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
@@ -44,6 +44,9 @@ const routes: Routes = [
     path: '',
     canActivate: [authGuard],
     component: LayoutComponent,
+    data: {
+
+    },
     children: [
       {
         path: '',
@@ -67,11 +70,6 @@ const routes: Routes = [
         },
         loadChildren: async () => (await import('@esm/data')).ROUTES,
       },
-      //     {
-      //       path: 'notification',
-      //       loadChildren: async () =>
-      //         (await import('./notification/notification.routing')).ROUTES,
-      //     },
       {
         path: 'settings',
         loadChildren: async () => (await import('@esm/settings')).ROUTES,
@@ -132,77 +130,63 @@ const routes: Routes = [
                 loadChildren: async () =>
                   (await import('@esm/invigilator')).ASSIGN_TEACHER_ROUTES,
               },
-              //             {
-              //               path: 'assign-room',
-              //               canActivate: [permissionGuard],
-              //               data: {
-              //                 roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-              //               },
-              //               loadChildren: async () =>
-              //                 (
-              //                   await import(
-              //                     './invigilator/assign-room/assign-room.routing'
-              //                   )
-              //                 ).ROUTES,
-              //             },
+              {
+                path: 'assign-room',
+                canActivate: [permissionGuard],
+                data: {
+                  roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+                },
+                loadChildren: async () =>
+                  (await import('@esm/invigilator')).ASSIGN_ROOM_ROUTES,
+              },
             ],
           },
-          //         {
-          //           path: 'paid',
-          //           children: [
-          //             {
-          //               path: 'invigilator',
-          //               loadChildren: async () =>
-          //                 (await import('./paid/invigilator/invigilator.routing'))
-          //                   .ROUTES,
-          //             },
-          //             {
-          //               path: 'invigilator-department',
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './paid/invigilator-department/invigilator-department.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //             {
-          //               path: 'exam-department',
-          //               loadChildren: async () =>
-          //                 (
-          //                   await import(
-          //                     './paid/exam-department/exam-department.routing'
-          //                   )
-          //                 ).ROUTES,
-          //             },
-          //   ],
-          // },
-          //         {
-          //           path: 'process',
-          //           loadChildren: async () =>
-          //             (await import('./examination/process/process.routing')).ROUTES,
-          //         },
-          //         {
-          //           path: 'report',
-          //           loadChildren: async () =>
-          //             (await import('./examination/report/report.routing')).ROUTES,
-          //         },
-          //         {
-          //           path: 'document',
-          //           loadChildren: async () =>
-          //             (await import('./examination/document/document.routing')).ROUTES,
-          //         },
-          //         {
-          //           path: 'edit',
-          //           canActivate: [permissionGuard],
-          //           data: {
-          //             roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
-          //           },
-          //           loadChildren: async () =>
-          //             (await import('./examination/edit/edit.routing')).ROUTES,
-          //         },
+          {
+            path: 'paid',
+            children: [
+              {
+                path: 'invigilator',
+                loadChildren: async () =>
+                  (await import('@esm/paid')).INVIGILATOR_ROUTES,
+              },
+              {
+                path: 'invigilator-department',
+                loadChildren: async () =>
+                  (await import('@esm/paid')).INVIGILATOR_DEPARTMENT_ROUTES,
+              },
+              {
+                path: 'exam-department',
+                loadChildren: async () =>
+                  (await import('@esm/paid')).EXAM_DEPARTMENT_ROUTES,
+              },
+            ],
+          },
+          {
+            path: 'process',
+            loadChildren: async () =>
+              (await import('@esm/examination')).PROCESS_ROUTES,
+          },
+          {
+            path: 'report',
+            loadChildren: async () =>
+              (await import('@esm/examination')).REPORT_ROUTES,
+          },
+          {
+            path: 'document',
+            loadChildren: async () =>
+              (await import('@esm/examination')).DOCUMENT_ROUTES,
+          },
+          {
+            path: 'edit',
+            canActivate: [permissionGuard],
+            data: {
+              roles: [Role.EXAMINATION_DEPARTMENT_HEAD],
+            },
+            loadChildren: async () =>
+              (await import('@esm/examination')).EDIT_ROUTES,
+          },
         ],
       },
-      // },
     ],
   },
 ];

@@ -20,7 +20,7 @@ import {
   ESMApplicationExaminationsQueriesGetAvailableInvigilatorsInGroupsGetAvailableInvigilatorsInGroupsItemTemporaryInvigilator,
   ESMDomainEnumsExaminationStatus,
   GetAvailableInvigilatorsInShiftGroupData,
-  GetTeachersData,
+  UserSummary,
 } from '@esm/api';
 import {
   EsmDialogEditInvigilatorComponent,
@@ -165,7 +165,7 @@ export class InvigilatorAssignRoomTableTeacherCellComponent
     shiftGroupId: string,
   ): void {
     this.dialogService
-      .open<GetTeachersData['data'][number]>(
+      .open<UserSummary>(
         new PolymorpheusComponent(
           EsmDialogEditInvigilatorComponent,
           this.injector,
@@ -187,7 +187,7 @@ export class InvigilatorAssignRoomTableTeacherCellComponent
 
   onAddOtherInvigilator(shiftGroupId: string): void {
     this.dialogService
-      .open<GetTeachersData['data'][number]>(
+      .open<UserSummary>(
         new PolymorpheusComponent(
           EsmDialogSelectTeacherComponent,
           this.injector,

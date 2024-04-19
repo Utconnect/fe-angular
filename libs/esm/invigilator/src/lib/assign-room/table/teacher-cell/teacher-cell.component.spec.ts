@@ -1,7 +1,8 @@
 import { ElementRef, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DefaultValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { APP_STORE_PROVIDER, TESTING_COMMON_IMPORTS } from '@esm/cdk';
+import { ESM_STORE_PROVIDER } from '@esm/test';
+import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 import { of } from 'rxjs';
 import { InvigilatorAssignRoomStore } from '../../assign-room.store';
 import {
@@ -27,7 +28,7 @@ describe('InvigilatorAssignRoomTableTeacherCellComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS, TAIGA_UI],
       providers: [
-        APP_STORE_PROVIDER,
+        ESM_STORE_PROVIDER,
         InvigilatorAssignRoomStore,
         {
           provide: NgControl,
@@ -66,7 +67,7 @@ describe('InvigilatorAssignRoomTableTeacherCellComponent', () => {
     it('should call valueAccessor.registerOnChange', () => {
       assignValueAccessor();
 
-      const fn = (): null => null;
+      const fn = (): object => ({});
       const spy = spyOn<any>(component.valueAccessor, 'registerOnChange');
 
       component.registerOnChange(fn);

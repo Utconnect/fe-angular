@@ -12,7 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DepartmentService, GetAllFacultyData, GetTeachersData } from '@esm/api';
+import { DepartmentService, GetAllFacultyData, UserSummary } from '@esm/api';
 import { LetModule } from '@ngrx/component';
 import {
   TuiContextWithImplicit,
@@ -102,7 +102,7 @@ export class EsmDialogEditInvigilatorComponent implements OnInit {
   private readonly store = inject(EsmEditInvigilatorDialogStore);
   private readonly context = inject(POLYMORPHEUS_CONTEXT) as TuiDialogContext<
     string,
-    GetTeachersData['data'][number] | UserTemplate | undefined
+    UserSummary | UserTemplate | undefined
   >;
 
   // PUBLIC PROPERTIES
