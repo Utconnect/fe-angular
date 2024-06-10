@@ -9,11 +9,11 @@ export class NetworkService {
   private _online = false;
   private _online$!: Observable<boolean>;
 
-  get online() {
+  get online(): boolean {
     return this._online;
   }
 
-  get online$() {
+  get online$(): Observable<boolean> {
     return this._online$;
   }
 
@@ -22,12 +22,12 @@ export class NetworkService {
     this.checkNetworkStatus();
   }
 
-  checkNetworkStatus() {
+  checkNetworkStatus(): void {
     this._online = navigator.onLine;
     this._online$ = merge(
       of(null),
       fromEvent(window, 'online'),
-      fromEvent(window, 'offline')
+      fromEvent(window, 'offline'),
     ).pipe(map(() => navigator.onLine));
   }
 }

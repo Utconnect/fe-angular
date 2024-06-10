@@ -1,7 +1,7 @@
-import { EsmConfig } from '@esm/config';
+import { TssConfig } from '@tss/config';
 
-export const environment: EsmConfig = {
-  production: false,
+export const environment: TssConfig = {
+  production: true,
   baseUrl: 'http://localhost:5001',
   syncfusionLicense: '',
   recaptcha: {
@@ -9,7 +9,7 @@ export const environment: EsmConfig = {
   },
   defaultPassword: '123456',
   pusher: {
-    key: 'exampleKey',
-    cluster: 'exampleCluster',
+    key: 'fde3a10d00f7502271d3',
+    cluster: 'ap1',
   },
 };

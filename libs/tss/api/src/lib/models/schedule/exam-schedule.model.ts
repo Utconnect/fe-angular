@@ -1,4 +1,4 @@
-import { Nullable } from '@teaching-scheduling-system/core/data-access/models';
+import { Nullable } from '@utconnect/types';
 import { EjsScheduleModel } from './ejs-schedule.model';
 import { ScheduleModel } from './schedule.model';
 
@@ -14,7 +14,7 @@ export class ExamScheduleModel extends ScheduleModel {
     note: Nullable<string>,
     public teachers: string[],
     public readonly numberOfStudents: number,
-    public readonly credit: number
+    public readonly credit: number,
   ) {
     super(id, idModuleClass, name, idRoom, 'exam', note ?? '');
   }
@@ -31,7 +31,7 @@ export class ExamScheduleModel extends ScheduleModel {
       obj.note,
       obj.teachers,
       obj.numberOfStudents,
-      obj.credit
+      obj.credit,
     );
   }
 

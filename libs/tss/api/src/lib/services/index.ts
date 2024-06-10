@@ -3,6 +3,7 @@ export * from './class.service';
 export * from './common-info.service';
 export * from './exam.service';
 export * from './export.service';
+export * from './google.service';
 export * from './import.service';
 export * from './schedule.service';
 export * from './statistic.service';

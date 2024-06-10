@@ -1,5 +1,6 @@
 export type SidebarItem = {
   name: string;
+  controlName?: string;
   icon: string;
   routerLink?: string;
   subItems?: {
@@ -7,6 +8,10 @@ export type SidebarItem = {
     routerLink: string;
     icon: string;
     roles?: string[];
+  }[];
+  subCheckboxes?: {
+    controlName: string;
+    name: string;
   }[];
   roles?: string[];
   externalLink?: string;

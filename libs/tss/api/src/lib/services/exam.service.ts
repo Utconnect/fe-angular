@@ -1,23 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { ObjectHelper } from '@teaching-scheduling-system/core/utils/helpers';
-import {
-  AppConfig,
-  APP_CONFIG,
-} from '@teaching-scheduling-system/web/config/data-access';
+import { inject, Injectable } from '@angular/core';
+import { ObjectHelper } from '@utconnect/helpers';
+import { map, Observable } from 'rxjs';
 import {
   ExamScheduleModel,
   Note,
   ResponseModel,
   UpdateExamModel,
-} from '@teaching-scheduling-system/web/shared/data-access/models';
-import { map, Observable } from 'rxjs';
+} from '../models';
+import { getEnv } from './partial';
 
-const parseExamSchedule = (response: ResponseModel<ExamScheduleModel[]>) => ({
+const parseExamSchedule = (
+  response: ResponseModel<ExamScheduleModel[]>,
+): ResponseModel<ExamScheduleModel[]> => ({
   ...response,
   data: response.data.map((x) => {
     return ExamScheduleModel.parse(
-      ObjectHelper.parseDateProperties(x, ['startAt', 'endAt'])
+      ObjectHelper.parseDateProperties(x, ['startAt', 'endAt']),
     );
   }),
 });
@@ -26,25 +25,21 @@ const parseExamSchedule = (response: ResponseModel<ExamScheduleModel[]>) => ({
   providedIn: 'root',
 })
 export class ExamService {
-  // PRIVATE PROPERTIES
-  private readonly url: string;
+  // INJECT PROPERTIES
+  private readonly http = inject(HttpClient);
+  private readonly env = getEnv();
 
-  // CONSTRUCTOR
-  constructor(
-    private readonly http: HttpClient,
-    @Inject(APP_CONFIG) config: AppConfig
-  ) {
-    this.url = config.baseUrl;
-  }
+  // PRIVATE PROPERTIES
+  private readonly url = this.env.baseUrl;
 
   getExamSchedule(
     idTeacher: string,
-    date: string
+    date: string,
   ): Observable<ResponseModel<ExamScheduleModel[]>> {
     return this.http
       .get<ResponseModel<ExamScheduleModel[]>>(
         this.url + `v1/teachers/${idTeacher}/module-classes/exam-schedules`,
-        { params: { 'date[between]': date } }
+        { params: { 'date[between]': date } },
       )
       .pipe(map(parseExamSchedule));
   }
@@ -52,9 +47,9 @@ export class ExamService {
   getDepartmentExamSchedule(
     department: string,
     dateRangeOrSession: string,
-    paramType: 'dateRange' | 'session' = 'dateRange'
+    paramType: 'dateRange' | 'session' = 'dateRange',
   ): Observable<ResponseModel<ExamScheduleModel[]>> {
-    const params =
+    const params: Record<string, string> =
       paramType === 'dateRange'
         ? {
             'date[between]': dateRangeOrSession,
@@ -67,9 +62,7 @@ export class ExamService {
       .get<ResponseModel<ExamScheduleModel[]>>(
         this.url +
           `v1/departments/${department}/modules/module-classes/exam-schedules`,
-        {
-          params: params as any
-        }
+        { params },
       )
       .pipe(map(parseExamSchedule));
   }
@@ -77,25 +70,25 @@ export class ExamService {
   update(idExamSchedule: number, body: UpdateExamModel): Observable<void> {
     return this.http.patch<void>(
       this.url + `v1/exam-schedules/${idExamSchedule}`,
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   updateProctor(idExam: number, proctorsId: string[]): Observable<void> {
     return this.http.post<void>(
       this.url + `v1/exam-schedules/${idExam}/proctors`,
-      proctorsId
+      proctorsId,
     );
   }
 
   updateExamNote(
     idTeacher: string,
     idExamSchedule: number,
-    body: Note
+    body: Note,
   ): Observable<void> {
     return this.http.patch<void>(
       this.url + `v1/teachers/${idTeacher}/exam-schedules/${idExamSchedule}`,
-      body
+      body,
     );
   }
 }

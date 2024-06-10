@@ -1,4 +1,4 @@
-import { Nullable } from '@teaching-scheduling-system/core/data-access/models';
+import { Nullable } from '@utconnect/types';
 
 export interface RequestChangeSchedulePayload {
   idSchedule: number;

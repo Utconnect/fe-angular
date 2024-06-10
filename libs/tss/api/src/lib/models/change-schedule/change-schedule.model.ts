@@ -1,6 +1,5 @@
-import { Nullable } from '@utconnect/types';
-import { SimpleModel } from '../core';
-import { RequestChangeScheduleCode } from '../request-change-schedule.model';
+import { RequestChangeScheduleCode } from '@tss/types';
+import { Nullable, SimpleModel } from '@utconnect/types';
 
 export interface ChangeSchedule {
   id: number;

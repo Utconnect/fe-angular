@@ -188,7 +188,7 @@ export const onLoginSuccess: (store: Store<EsmState>) => () => void = (
   return () => store.dispatch(EsmPageAction.getUserInfo());
 };
 
-export const titleFactory: (
+export const userTitleFactory: (
   store: Store<EsmState>,
 ) => Observable<string | null> = (store) => store.pipe(EsmSelector.userTitle());
 

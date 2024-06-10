@@ -1,10 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { ObjectHelper } from '@teaching-scheduling-system/core/utils/helpers';
-import {
-  APP_CONFIG,
-  AppConfig,
-} from '@teaching-scheduling-system/web/config/data-access';
+import { inject, Injectable } from '@angular/core';
+import { ObjectHelper } from '@utconnect/helpers';
+import { map, Observable } from 'rxjs';
 import {
   AcceptChangeScheduleRequestPayload,
   ChangeSchedule,
@@ -20,15 +17,15 @@ import {
   SetRoomChangeScheduleRequestPayload,
   StatusModel,
   StudyScheduleModel,
-} from '@teaching-scheduling-system/web/shared/data-access/models';
-import { Observable, map } from 'rxjs';
+} from '../models';
+import { getEnv } from './partial';
 
 const parseStudyScheduleModel = (
-  response: ResponseModel<StudyScheduleModel[]>
-) => ({
+  response: ResponseModel<StudyScheduleModel[]>,
+): ResponseModel<StudyScheduleModel[]> => ({
   ...response,
   data: response.data.map((x) =>
-    StudyScheduleModel.parse(ObjectHelper.parseDateProperties(x, ['date']))
+    StudyScheduleModel.parse(ObjectHelper.parseDateProperties(x, ['date'])),
   ),
 });
 
@@ -36,20 +33,16 @@ const parseStudyScheduleModel = (
   providedIn: 'root',
 })
 export class ScheduleService {
-  // PRIVATE PROPERTIES
-  private readonly url: string;
+  // INJECT PROPERTIES
+  private readonly http = inject(HttpClient);
+  private readonly env = getEnv();
 
-  // CONSTRUCTOR
-  constructor(
-    private readonly http: HttpClient,
-    @Inject(APP_CONFIG) readonly config: AppConfig
-  ) {
-    this.url = config.baseUrl;
-  }
+  // PRIVATE PROPERTIES
+  private readonly url = this.env.baseUrl;
 
   getSchedule(
     idTeacher: string,
-    searchSchedule: SearchSchedule
+    searchSchedule: SearchSchedule,
   ): Observable<ResponseModel<StudyScheduleModel[]>> {
     let params = new HttpParams().set('date[between]', searchSchedule.date);
     if (searchSchedule.shift) {
@@ -59,14 +52,14 @@ export class ScheduleService {
     return this.http
       .get<ResponseModel<StudyScheduleModel[]>>(
         this.url + `teachers/${idTeacher}/schedules`,
-        { params }
+        { params },
       )
       .pipe(map(parseStudyScheduleModel));
   }
 
   getDepartmentSchedule(
     department: string,
-    date: string
+    date: string,
   ): Observable<ResponseModel<StudyScheduleModel[]>> {
     const params = { 'date[between]': date };
 
@@ -74,7 +67,7 @@ export class ScheduleService {
       .get<ResponseModel<StudyScheduleModel[]>>(
         this.url +
           `departments/${department}/teachers/module-classes/schedules`,
-        { params }
+        { params },
       )
       .pipe(map(parseStudyScheduleModel));
   }
@@ -82,40 +75,40 @@ export class ScheduleService {
   updateStudyNote(idSchedule: number, body: Note): Observable<void> {
     return this.http.patch<void>(
       this.url + `v1/schedules/update/${idSchedule}`,
-      body
+      body,
     );
   }
 
   requestChangeSchedule(
-    body: RequestChangeSchedulePayload
+    body: RequestChangeSchedulePayload,
   ): Observable<ResponseModel<number>> {
     return this.http.post<ResponseModel<number>>(
       this.url + 'fixed-schedules/create',
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   requestIntendChangeSchedule(
-    body: RequestIntendChangeSchedulePayload
+    body: RequestIntendChangeSchedulePayload,
   ): Observable<ResponseModel<number>> {
     return this.http.post<ResponseModel<number>>(
       this.url + 'fixed-schedules/create?type=soft',
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   changeSchedule(
-    body: RequestChangeSchedulePayload
+    body: RequestChangeSchedulePayload,
   ): Observable<ResponseModel<number>> {
     return this.http.post<ResponseModel<number>>(
       this.url + 'fixed-schedules/create?type=hard',
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   getDepartmentChangeScheduleRequests(
     department: string,
-    changeScheduleSearch: ChangeScheduleSearch
+    changeScheduleSearch: ChangeScheduleSearch,
   ): Observable<PaginationResponseModel<ChangeSchedule[]>> {
     let params = new HttpParams()
       .set('id[sort]', 'desc')
@@ -127,13 +120,13 @@ export class ScheduleService {
 
     return this.http.get<PaginationResponseModel<ChangeSchedule[]>>(
       this.url + `departments/${department}/fixed-schedules`,
-      { params }
+      { params },
     );
   }
 
   getPersonalChangeScheduleRequests(
     teacherId: string,
-    changeScheduleSearch: ChangeScheduleSearch
+    changeScheduleSearch: ChangeScheduleSearch,
   ): Observable<PaginationResponseModel<ChangeSchedule[]>> {
     let params = new HttpParams()
       .set('id[sort]', 'desc')
@@ -145,12 +138,12 @@ export class ScheduleService {
 
     return this.http.get<PaginationResponseModel<ChangeSchedule[]>>(
       this.url + `teachers/${teacherId}/fixed-schedules`,
-      { params }
+      { params },
     );
   }
 
   getManagerChangeScheduleRequests(
-    changeScheduleSearch: ChangeScheduleSearch
+    changeScheduleSearch: ChangeScheduleSearch,
   ): Observable<PaginationResponseModel<ChangeSchedule[]>> {
     let params = new HttpParams()
       .set('id[sort]', 'desc')
@@ -162,54 +155,54 @@ export class ScheduleService {
 
     return this.http.get<PaginationResponseModel<ChangeSchedule[]>>(
       this.url + 'fixed-schedules',
-      { params }
+      { params },
     );
   }
 
   acceptChangeScheduleRequests(
     id: number,
-    body: AcceptChangeScheduleRequestPayload
+    body: AcceptChangeScheduleRequestPayload,
   ): Observable<ResponseModel<StatusModel>> {
     return this.http.patch<ResponseModel<StatusModel>>(
       this.url + `fixed-schedules/update/${id}?type=accept`,
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   setRoomChangeScheduleRequests(
     id: number,
-    body: SetRoomChangeScheduleRequestPayload
+    body: SetRoomChangeScheduleRequestPayload,
   ): Observable<void> {
     return this.http.patch<void>(
       this.url + `fixed-schedules/update/${id}?type=set_room`,
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   denyChangeScheduleRequests(
     id: number,
-    body: DenyChangeScheduleRequestPayload
+    body: DenyChangeScheduleRequestPayload,
   ): Observable<ResponseModel<StatusModel>> {
     return this.http.patch<ResponseModel<StatusModel>>(
       this.url + `fixed-schedules/update/${id}?type=deny`,
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 
   cancelChangeScheduleRequests(id: number): Observable<void> {
     return this.http.patch<void>(
       this.url + `fixed-schedules/update/${id}?type=cancel`,
-      {}
+      {},
     );
   }
 
   intendTimeChangeScheduleRequests(
     id: number,
-    body: IntendTimeChangeScheduleRequestPayload
+    body: IntendTimeChangeScheduleRequestPayload,
   ): Observable<void> {
     return this.http.patch<void>(
       this.url + `fixed-schedules/update/${id}?type=intend_time`,
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 }

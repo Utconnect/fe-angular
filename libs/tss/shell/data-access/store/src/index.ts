@@ -1,1 +1,1 @@
-export * from './lib/tss-shell-data-access-store';
+export * from './lib';

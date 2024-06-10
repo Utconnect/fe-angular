@@ -1,6 +1,11 @@
-import { AcademicData, GoogleCalendar, Teacher } from '@tss/api';
+import { AcademicData, Teacher } from '@tss/api';
 import { BreadcrumbItem } from '@tss/model';
-import { Nullable, SimpleModel, Status } from '@utconnect/types';
+import {
+  GoogleCalendar,
+  Nullable,
+  SimpleModel,
+  Status,
+} from '@utconnect/types';
 
 export interface TssState {
   status: Status;

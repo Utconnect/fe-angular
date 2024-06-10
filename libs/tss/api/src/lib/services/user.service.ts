@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { ObjectHelper } from '@teaching-scheduling-system/core/utils/helpers';
-import {
-  APP_CONFIG,
-  AppConfig,
-} from '@teaching-scheduling-system/web/config/data-access';
+import { inject, Injectable } from '@angular/core';
+import { ObjectHelper } from '@utconnect/helpers';
+import { LocalStorageService } from '@utconnect/services';
+import { Observable, of, tap } from 'rxjs';
 import {
   ChangePassword,
   Feedback,
@@ -12,27 +10,22 @@ import {
   ResponseModel,
   Teacher,
   ValidateToken,
-} from '@teaching-scheduling-system/web/shared/data-access/models';
-import { Observable, of, tap } from 'rxjs';
-import { LocalStorageService } from './core';
+} from '../models';
 import { NetworkService } from './online.service';
+import { getEnv } from './partial';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  // PRIVATE PROPERTIES
-  private readonly url: string;
+  // INJECT PROPERTIES
+  private readonly http = inject(HttpClient);
+  private readonly env = getEnv();
+  private readonly networkService = inject(NetworkService);
+  private readonly localStorageService = inject(LocalStorageService);
 
-  // CONSTRUCTOR
-  constructor(
-    private readonly http: HttpClient,
-    private readonly networkService: NetworkService,
-    private readonly localStorageService: LocalStorageService,
-    @Inject(APP_CONFIG) readonly config: AppConfig
-  ) {
-    this.url = config.baseUrl;
-  }
+  // PRIVATE PROPERTIES
+  private readonly url = this.env.baseUrl;
 
   me(): Observable<ResponseModel<Teacher>> {
     if (!this.networkService.online) {
@@ -42,14 +35,14 @@ export class UserService {
     return this.http
       .get<ResponseModel<Teacher>>(this.url + 'me')
       .pipe(
-        tap((r) => this.localStorageService.setItem('user', JSON.stringify(r)))
+        tap((r) => this.localStorageService.setItem('user', JSON.stringify(r))),
       );
   }
 
   changePassword(uuid: string, body: ChangePassword): Observable<void> {
     return this.http.patch<void>(
       this.url + `accounts/change-password/${uuid}`,
-      body
+      body,
     );
   }
 
@@ -59,7 +52,7 @@ export class UserService {
 
   updateInformation(
     body: Record<string, string>,
-    id: string
+    id: string,
   ): Observable<void> {
     return this.http.patch<void>(this.url + `accounts/update/${id}`, body);
   }
@@ -77,7 +70,7 @@ export class UserService {
   resetPassword(body: ResetPassword): Observable<void> {
     return this.http.patch<void>(
       this.url + 'v1/reset-password',
-      ObjectHelper.toSnakeCase(body)
+      ObjectHelper.toSnakeCase(body),
     );
   }
 }

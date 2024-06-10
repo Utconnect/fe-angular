@@ -1,6 +1,9 @@
-import { SimpleModel } from '../../core/simple.model';
-import { GoogleAttendees, GoogleCalendar } from '../google';
-import { FixedScheduleModel } from './fixed-schedule.model';
+import {
+  FixedScheduleModel,
+  GoogleAttendees,
+  GoogleCalendar,
+  SimpleModel,
+} from '@utconnect/types';
 
 export type EjsScheduleModelType = 'exam' | 'study' | 'googleEvent';
 

@@ -1,7 +1,8 @@
-import { DateHelper } from '@teaching-scheduling-system/core/utils/helpers';
-import { SimpleModel } from '../../core';
+import { DateHelper } from '@utconnect/helpers';
+import { SimpleModel } from '@utconnect/types';
+import { ShiftConstant } from '@utconnect/constants';
 import { EjsScheduleModel } from './ejs-schedule.model';
-import { FixedScheduleModel } from './fixed-schedule.model';
+import { FixedScheduleModel } from '../../../../../../shared/types/src/lib/ejs/fixed-schedule.model';
 import { ScheduleModel } from './schedule.model';
 
 export class StudyScheduleModel extends ScheduleModel {
@@ -18,7 +19,7 @@ export class StudyScheduleModel extends ScheduleModel {
     public readonly color: string,
     public readonly moduleName: string,
     public readonly teacher: string | SimpleModel,
-    public fixedSchedules: FixedScheduleModel[]
+    public fixedSchedules: FixedScheduleModel[],
   ) {
     super(id, idModuleClass, name, idRoom, 'study', note);
     this.people = [teacher] as string[] | SimpleModel[];
@@ -36,12 +37,16 @@ export class StudyScheduleModel extends ScheduleModel {
       obj.color,
       obj.moduleName,
       obj.teacher,
-      obj.fixedSchedules
+      obj.fixedSchedules,
     );
   }
 
   toEjsSchedule(): EjsScheduleModel {
-    const [start, end] = DateHelper.fromShift(this.date, this.shift);
+    const [start, end] = DateHelper.fromShift(
+      this.date,
+      this.shift,
+      ShiftConstant.SHIFTS,
+    );
 
     return {
       Id: this.id,

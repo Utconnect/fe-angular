@@ -21,7 +21,7 @@ export type AuthConfigOptions<
   I extends HttpInterceptor,
   T extends Store,
 > = {
-  authService: Type<S>;
+  authService?: Type<S>;
   authInterceptor?: Type<I>;
   onLoginSuccess: (store: T) => () => void;
   role: (store: T) => Observable<string[]>;
@@ -70,7 +70,7 @@ export const authProviders = <
   },
   {
     provide: AUTH_TITLE_TOKEN,
-    useFactory: title ?? (() => of(null)),
+    useFactory: title ?? ((): Observable<null> => of(null)),
     deps: [store],
   },
 ];

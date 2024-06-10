@@ -4,15 +4,22 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { TokenService } from '@auth';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
+import {
+  AuthService,
+  BreadcrumbItem,
+  CommonInfoService,
+  GoogleService,
+  TeacherService,
+  UserService,
+} from '@tss/api';
 import { ObservableHelper } from '@utconnect/helpers';
 import { RedirectService } from '@utconnect/services';
-import { AuthService } from '@tss/api';
 import { catchError, filter, map, mergeMap, of, tap } from 'rxjs';
-import * as ApiAction from './app.api.actions';
-import * as PageAction from './app.page.actions';
+import { TssApiAction } from './app.api.actions';
+import { TssPageAction } from './app.page.actions';
 
 @Injectable()
-export class AppShellEffects {
+export class TssEffects {
   // INJECT PROPERTIES
   private readonly router = inject(Router);
   private readonly actions$ = inject(Actions);
@@ -26,28 +33,40 @@ export class AppShellEffects {
   private readonly commonInfoService = inject(CommonInfoService);
 
   // EFFECTS
+  readonly getUserInfo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TssPageAction.getUserInfo),
+      mergeMap(() => {
+        return this.userService.me().pipe(
+          map(({ data }) => TssApiAction.autoLoginSuccessfully({ teacher: data })),
+          catchError(() => of(TssApiAction.autoLoginFailure())),
+        );
+      }),
+    );
+  });
+
   readonly changeRouter$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(routerNavigatedAction),
       map(({ payload }) => {
         const breadcrumbs = this.createBreadcrumbs(payload.routerState.root);
-        return ApiAction.updateBreadcrumbs({ breadcrumbs });
+        return TssApiAction.updateBreadcrumbs({ breadcrumbs });
       }),
     );
   });
 
   readonly keepLogin$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(PageAction.keepLogin),
+      ofType(TssPageAction.keepLogin),
       mergeMap(() => {
         return this.userService.me().pipe(
           map(({ data }) => data),
           map((teacher) =>
             teacher
-              ? ApiAction.autoLoginSuccessfully({ teacher })
-              : ApiAction.autoLoginFailure(),
+              ? TssApiAction.autoLoginSuccessfully({ teacher })
+              : TssApiAction.autoLoginFailure(),
           ),
-          catchError(() => of(ApiAction.autoLoginFailure())),
+          catchError(() => of(TssApiAction.autoLoginFailure())),
         );
       }),
     );
@@ -56,7 +75,7 @@ export class AppShellEffects {
   readonly logout$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(PageAction.logout),
+        ofType(TssPageAction.logout),
         tap(() => {
           this.authService.logOut().subscribe();
           this.tokenService.clear();
@@ -70,7 +89,7 @@ export class AppShellEffects {
   readonly autoLoginFailure$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(ApiAction.autoLoginFailure),
+        ofType(TssApiAction.autoLoginFailure),
         mergeMap(() =>
           of({}).pipe(
             tap(() => {
@@ -87,11 +106,11 @@ export class AppShellEffects {
 
   readonly loadRooms$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ApiAction.autoLoginSuccessfully),
+      ofType(TssApiAction.autoLoginSuccessfully),
       mergeMap(() => {
         return this.commonInfoService.getRooms().pipe(
-          map((rooms) => ApiAction.loadRoomsSuccessfully({ rooms })),
-          catchError(() => of(ApiAction.loadRoomsFailure())),
+          map((rooms) => TssApiAction.loadRoomsSuccessfully({ rooms })),
+          catchError(() => of(TssApiAction.loadRoomsFailure())),
         );
       }),
     );
@@ -99,13 +118,13 @@ export class AppShellEffects {
 
   readonly loadSchoolYear$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ApiAction.autoLoginSuccessfully),
+      ofType(TssApiAction.autoLoginSuccessfully),
       mergeMap(() => {
         return this.commonInfoService
           .getCurrentTerm()
           .pipe(
             map((currentTerm) =>
-              ApiAction.loadCurrentTermSuccessful({ currentTerm }),
+              TssApiAction.loadCurrentTermSuccessful({ currentTerm }),
             ),
           );
       }),
@@ -114,13 +133,13 @@ export class AppShellEffects {
 
   readonly loadAcademicYear$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ApiAction.autoLoginSuccessfully),
+      ofType(TssApiAction.autoLoginSuccessfully),
       mergeMap(() => {
         return this.commonInfoService.getAcademicYear().pipe(
           map((academicYears) =>
-            ApiAction.loadAcademicYearSuccessful({ academicYears }),
+            TssApiAction.loadAcademicYearSuccessful({ academicYears }),
           ),
-          catchError(() => of(ApiAction.loadAcademicYearFailure())),
+          catchError(() => of(TssApiAction.loadAcademicYearFailure())),
         );
       }),
     );
@@ -128,15 +147,15 @@ export class AppShellEffects {
 
   readonly loadTeachersInDepartment$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ApiAction.autoLoginSuccessfully),
+      ofType(TssApiAction.autoLoginSuccessfully),
       map(({ teacher }) => teacher.department?.id),
       ObservableHelper.filterNullish(),
       mergeMap((id) => {
         return this.teacherService.getByDepartment(id).pipe(
           map(({ data }) =>
-            ApiAction.loadTeachersInDepartmentSuccessful({ teachers: data }),
+            TssApiAction.loadTeachersInDepartmentSuccessful({ teachers: data }),
           ),
-          catchError(() => of(ApiAction.loadTeachersInDepartmentFailure())),
+          catchError(() => of(TssApiAction.loadTeachersInDepartmentFailure())),
         );
       }),
     );
@@ -144,23 +163,20 @@ export class AppShellEffects {
 
   readonly loadGoogleCalendars = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ApiAction.autoLoginSuccessfully),
+      ofType(TssApiAction.autoLoginSuccessfully),
       filter(({ teacher }) => teacher.settings.googleCalendar),
       map(({ teacher }) => teacher.department?.id),
       ObservableHelper.filterNullish(),
       mergeMap((id) => {
         return this.googleService.getCalendarList(id).pipe(
           map(({ data }) =>
-            ApiAction.loadGoogleCalendarSuccessful({ calendars: data }),
+            TssApiAction.loadGoogleCalendarSuccessful({ calendars: data }),
           ),
-          catchError(() => of(ApiAction.loadGoogleCalendarFailure())),
+          catchError(() => of(TssApiAction.loadGoogleCalendarFailure())),
         );
       }),
     );
   });
-
-  // CONSTRUCTOR
-  constructor() {}
 
   // PRIVATE METHODS
   private createBreadcrumbs(

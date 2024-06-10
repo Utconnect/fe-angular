@@ -1,6 +1,5 @@
-import { Nullable } from '@teaching-scheduling-system/core/data-access/models';
-import { CalendarHelper } from '@teaching-scheduling-system/web/calendar/data-access';
-import { EjsScheduleModel } from '../schedule';
+import { Nullable } from '../utilities';
+import { EjsScheduleModel } from '../ejs/ejs-schedule.model';
 
 export type GoogleDateTime =
   | {
@@ -143,8 +142,15 @@ export class GoogleCalendarEvent {
       People: this.attendees,
       Calendar: this.calendar,
       IsAllDay: !!this.start.date,
-      ReadOnly: CalendarHelper.googleCalendarIsReadonly(this.calendar)
+      ReadOnly: this.isReadonly(),
     };
+  }
+
+  isReadonly(): boolean {
+    return (
+      this.calendar.accessRole === 'freeBusyReader' ||
+      this.calendar.accessRole === 'reader'
+    );
   }
 }
 

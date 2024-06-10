@@ -26,7 +26,7 @@ import {
   menuTextFactory,
   onLoginSuccess,
   roleFactory,
-  titleFactory,
+  userTitleFactory,
 } from './factories';
 import { Role } from './roles';
 
@@ -44,9 +44,6 @@ const routes: Routes = [
     path: '',
     canActivate: [authGuard],
     component: LayoutComponent,
-    data: {
-
-    },
     children: [
       {
         path: '',
@@ -202,7 +199,7 @@ const routes: Routes = [
       onLoginSuccess: onLoginSuccess,
       storage: 'localStorage',
       store: Store<EsmState>,
-      title: titleFactory,
+      title: userTitleFactory,
     }),
     layoutProviders({
       store: Store<EsmState>,

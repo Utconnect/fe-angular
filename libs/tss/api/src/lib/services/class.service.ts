@@ -1,38 +1,27 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import {
-  APP_CONFIG,
-  AppConfig,
-} from '@teaching-scheduling-system/web/config/data-access';
-import {
-  ModuleClass,
-  ResponseModel,
-  SearchAssignSchedule,
-} from '@teaching-scheduling-system/web/shared/data-access/models';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ModuleClass, ResponseModel, SearchAssignSchedule } from '../models';
+import { getEnv } from './partial';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClassService {
-  // PRIVATE PROPERTIES
-  private readonly url: string;
+  // INJECT PROPERTIES
+  private readonly http = inject(HttpClient);
+  private readonly env = getEnv();
 
-  // CONSTRUCTOR
-  constructor(
-    private readonly http: HttpClient,
-    @Inject(APP_CONFIG) config: AppConfig
-  ) {
-    this.url = config.baseUrl;
-  }
+  // PRIVATE PROPERTIES
+  private readonly url = this.env.baseUrl;
 
   getDepartmentModuleClass(
     department: string,
-    params: SearchAssignSchedule
+    params: SearchAssignSchedule,
   ): Observable<ResponseModel<ModuleClass[]>> {
     return this.http.get<ResponseModel<ModuleClass[]>>(
       this.url + `departments/${department}/module-classes`,
-      { params }
+      { params },
     );
   }
 

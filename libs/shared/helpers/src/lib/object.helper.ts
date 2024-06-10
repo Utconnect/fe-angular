@@ -1,3 +1,5 @@
+import { StringHelper } from './string.helper';
+
 type Item<K extends number | string, V> = {
   id: K;
   value: V;
@@ -87,5 +89,47 @@ export class ObjectHelper {
     }
 
     return result as Required<T>;
+  }
+
+  /**
+   * Parse object to a new object with snake-case properties
+   * @param obj
+   * @returns Object with snake-case properties
+   * @example
+   * ObjectHelper.toSnakeCase({ id: 1, firstProp: 'first' })
+   * // returns { id: 1, first_prop: 'first' }
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static toSnakeCase(obj: Record<string, any>): Record<string, unknown> {
+    const result: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(obj)) {
+      const newKey = StringHelper.toSnakeCase(key);
+      if (Array.isArray(value)) {
+        result[newKey] = value.map((v) => this.toSnakeCase(v));
+      } else if (typeof value === 'object' && value !== null) {
+        result[newKey] = this.toSnakeCase(value);
+      } else {
+        result[newKey] = value;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Parse all properties value in `props` to date
+   * @param obj
+   * @param props properties which need to parse
+   * @returns Object with date-parsed properties
+   */
+  static parseDateProperties<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    T extends Record<string, any>,
+    U extends (keyof T)[],
+  >(obj: T, props: U): T {
+    props.forEach((prop) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (obj as any)[prop] = new Date(obj[prop]);
+    });
+    return obj;
   }
 }

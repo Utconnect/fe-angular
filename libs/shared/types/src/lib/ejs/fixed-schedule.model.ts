@@ -1,7 +1,5 @@
-import {
-  Nullable,
-  RequestChangeScheduleCode,
-} from '@teaching-scheduling-system/core/data-access/models';
+import { RequestChangeScheduleCode } from '@tss/types';
+import { Nullable } from '../utilities';
 
 export interface SimpleFixedScheduleModel {
   id: number;

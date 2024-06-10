@@ -1,87 +1,91 @@
 import { createFeatureSelector, createSelector, select } from '@ngrx/store';
 import { ObservableHelper } from '@utconnect/helpers';
-import { pipe } from 'rxjs';
-import { appShellFeatureKey } from './app.reducer';
+import { map, pipe } from 'rxjs';
+import { tssFeatureKey } from './app.reducer';
 import { TssState } from './app.state';
 
-const appShellSelector = createFeatureSelector<TssState>(appShellFeatureKey);
+export class TssSelector {
+  private static selector = createFeatureSelector<TssState>(tssFeatureKey);
 
-export const selectBreadcrumbs = createSelector(
-  appShellSelector,
-  (state) => state.breadcrumbs,
-);
+  static readonly breadcrumbs = createSelector(
+    this.selector,
+    (state) => state.breadcrumbs,
+  );
 
-export const selectStatus = createSelector(
-  appShellSelector,
-  (state) => state.status,
-);
+  static readonly status = createSelector(
+    this.selector,
+    (state) => state.status,
+  );
 
-export const selectTeacher = createSelector(
-  appShellSelector,
-  (state) => state.teacher,
-);
+  static readonly teacher = createSelector(
+    this.selector,
+    (state) => state.teacher,
+  );
 
-export const selectNotNullTeacher = pipe(
-  select(selectTeacher),
-  ObservableHelper.filterNullish(),
-);
+  static readonly notNullTeacher = pipe(
+    select(this.teacher),
+    ObservableHelper.filterNullish(),
+  );
 
-export const selectNameTitle = createSelector(selectTeacher, (teacher) =>
-  teacher === null ? 'Bạn' : teacher.isFemale ? 'Cô' : 'Thầy',
-);
+  static readonly userName = pipe(
+    this.notNullTeacher,
+    map((user) => user.name),
+  );
 
-export const selectPermission = createSelector(
-  selectTeacher,
-  (teacher) => teacher?.permissions || [],
-);
+  static readonly nameTitle = createSelector(this.teacher, (teacher) =>
+    teacher === null ? 'Bạn' : teacher.isFemale ? 'Cô' : 'Thầy',
+  );
 
-export const selectDepartment = createSelector(
-  selectTeacher,
-  (teacher) => teacher?.department || null,
-);
+  static readonly permission = createSelector(
+    this.teacher,
+    (teacher) => teacher?.permissions || [],
+  );
 
-export const selectFaculty = createSelector(
-  selectTeacher,
-  (teacher) => teacher?.faculty || null,
-);
+  static readonly department = createSelector(
+    this.teacher,
+    (teacher) => teacher?.department || null,
+  );
 
-export const selectRooms = createSelector(
-  appShellSelector,
-  (state) => state.rooms,
-);
+  static readonly faculty = createSelector(
+    this.teacher,
+    (teacher) => teacher?.faculty || null,
+  );
 
-export const selectSchoolYear = createSelector(
-  appShellSelector,
-  (state) => state.currentTerm,
-);
+  static readonly rooms = createSelector(this.selector, (state) => state.rooms);
 
-export const selectAcademicData = createSelector(
-  appShellSelector,
-  (state) => state.academicData,
-);
+  static readonly schoolYear = createSelector(
+    this.selector,
+    (state) => state.currentTerm,
+  );
 
-export const selectTrainingTypes = createSelector(
-  selectAcademicData,
-  (academicData) => academicData.map(({ name }, i) => ({ name, id: i })),
-);
+  static readonly academicData = createSelector(
+    this.selector,
+    (state) => state.academicData,
+  );
 
-export const selectTeachersInDepartment = createSelector(
-  appShellSelector,
-  (state) => state.teachersInDepartment,
-);
+  static readonly trainingTypes = createSelector(
+    this.academicData,
+    (academicData) => academicData.map(({ name }, i) => ({ name, id: i })),
+  );
 
-export const selectShowLoader = createSelector(
-  appShellSelector,
-  selectStatus,
-  ({ showLoader }, status) => {
-    if (showLoader !== null) {
-      return showLoader;
-    }
-    return status === 'loading' || status === 'unknown';
-  },
-);
+  static readonly teachersInDepartment = createSelector(
+    this.selector,
+    (state) => state.teachersInDepartment,
+  );
 
-export const selectGoogleCalendars = createSelector(
-  appShellSelector,
-  (state) => state.googleCalendars,
-);
+  static readonly showLoader = createSelector(
+    this.selector,
+    this.status,
+    ({ showLoader }, status) => {
+      if (showLoader !== null) {
+        return showLoader;
+      }
+      return status === 'loading' || status === 'idle';
+    },
+  );
+
+  static readonly googleCalendars = createSelector(
+    this.selector,
+    (state) => state.googleCalendars,
+  );
+}

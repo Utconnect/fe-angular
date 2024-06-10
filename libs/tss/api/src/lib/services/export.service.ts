@@ -1,44 +1,36 @@
 import { DatePipe } from '@angular/common';
-import { Inject, Injectable, Injector } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { TuiDayRange } from '@taiga-ui/cdk';
-import { saveAs } from 'file-saver';
-import {
-  ChangeSchedule,
-  SimpleTeacher,
-  Teacher,
-} from '@teaching-scheduling-system/web/shared/data-access/models';
-import {
-  DateHelper,
-  ChangeStatusHelper,
-} from '@teaching-scheduling-system/core/utils/helpers';
+import { ChangeStatusHelper } from '@tss/helpers';
+import { FileType, RoleConstant } from '@tss/types';
+import { DateHelper } from '@utconnect/helpers';
 import {
   AlignmentType,
+  BorderStyle,
+  ColumnBreak,
   Document,
+  IStylesOptions,
+  ITableBordersOptions,
   Packer,
   PageOrientation,
   Paragraph,
+  SectionType,
   Table,
   TableCell,
   TableRow,
   TextRun,
-  WidthType,
   VerticalAlign,
-  SectionType,
-  ColumnBreak,
-  BorderStyle,
-  ITableBordersOptions,
-  IStylesOptions,
+  WidthType
 } from 'docx';
-import { FileType } from '@teaching-scheduling-system/web/shared/data-access/enums';
-import { TokenService } from './core/token.service';
-import { RoleConstant } from '@teaching-scheduling-system/core/data-access/constants';
+import { saveAs } from 'file-saver';
+import { ChangeSchedule, SimpleTeacher, Teacher } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExportService {
   // PRIVATE PROPERTIES
-  private readonly datePipe: DatePipe;
+  private readonly datePipe = inject(DatePipe);
 
   // GETTERS
   private get documentStyle(): IStylesOptions {
@@ -82,16 +74,6 @@ export class ExportService {
     };
   }
 
-  // CONSTRUCTOR
-  constructor(
-    private readonly tokenService: TokenService,
-    @Inject(Injector) injector: Injector
-  ) {
-    this.datePipe = injector.get(
-      this.tokenService.getToken<DatePipe>('datePipe')
-    );
-  }
-
   // PUBLIC METHODS
   exportBlob(settings: {
     document: Document;
@@ -108,7 +90,7 @@ export class ExportService {
     schedules: ChangeSchedule[],
     teacherName: string,
     department: string,
-    reason: string
+    reason: string,
   ): Document {
     const alignment = AlignmentType.CENTER;
     const today = new Date();
@@ -427,7 +409,7 @@ export class ExportService {
                               text:
                                 this.datePipe.transform(
                                   schedule.oldSchedule.date,
-                                  'dd-MM-Y'
+                                  'dd-MM-Y',
                                 ) ?? schedule.oldSchedule.date,
                               alignment,
                             }),
@@ -467,7 +449,7 @@ export class ExportService {
                               text:
                                 this.datePipe.transform(
                                   schedule.newSchedule.date,
-                                  'dd-MM-Y'
+                                  'dd-MM-Y',
                                 ) ??
                                 schedule.newSchedule.date ??
                                 schedule.intendTime ??
@@ -501,7 +483,7 @@ export class ExportService {
                           ],
                         }),
                       ],
-                    })
+                    }),
                 ),
               ],
             }),
@@ -562,9 +544,9 @@ export class ExportService {
                           children: [
                             new TextRun({
                               text: `Hà Nội, ngày ${DateHelper.beautifyDay(
-                                today.getDate()
+                                today.getDate(),
                               )} tháng ${DateHelper.beautifyDay(
-                                today.getMonth() + 1
+                                today.getMonth() + 1,
                               )} năm ${today.getFullYear()}`,
                               italics: true,
                             }),
@@ -646,7 +628,7 @@ export class ExportService {
 
   exportChangeScheduleRequestForRoomManager(
     schedule: ChangeSchedule,
-    teacher: SimpleTeacher
+    teacher: SimpleTeacher,
   ): Document {
     const alignment = AlignmentType.CENTER;
     const today = new Date();
@@ -965,7 +947,7 @@ export class ExportService {
                           text:
                             this.datePipe.transform(
                               schedule.newSchedule.date,
-                              'dd/MM/Y'
+                              'dd/MM/Y',
                             ) ??
                             schedule.newSchedule.date ??
                             '',
@@ -1038,9 +1020,9 @@ export class ExportService {
                 new TextRun({
                   break: 2,
                   text: `Hà Nội, ngày ${DateHelper.beautifyDay(
-                    today.getDate()
+                    today.getDate(),
                   )} tháng ${DateHelper.beautifyDay(
-                    today.getMonth() + 1
+                    today.getMonth() + 1,
                   )} năm ${today.getFullYear()}`,
                   italics: true,
                 }),
@@ -1113,7 +1095,7 @@ export class ExportService {
     schedules: ChangeSchedule[],
     teacher: Teacher,
     range: TuiDayRange,
-    rangeOptions: { sameMonth: boolean; inOneYear: boolean }
+    rangeOptions: { sameMonth: boolean; inOneYear: boolean },
   ): Document {
     const rangeText = this.calculateRangeText(range, rangeOptions);
     const today = new Date();
@@ -1224,9 +1206,9 @@ export class ExportService {
               children: [
                 new TextRun({
                   text: `Hà Nội, ngày ${DateHelper.beautifyDay(
-                    today.getDate()
+                    today.getDate(),
                   )} tháng ${DateHelper.beautifyDay(
-                    today.getMonth() + 1
+                    today.getMonth() + 1,
                   )} năm ${today.getFullYear()}`,
                   italics: true,
                 }),
@@ -1408,7 +1390,7 @@ export class ExportService {
                 }),
                 ...schedules
                   .filter((schedule) =>
-                    ChangeStatusHelper.isApproved(schedule.status)
+                    ChangeStatusHelper.isApproved(schedule.status),
                   )
                   .map(
                     (schedule, row) =>
@@ -1436,7 +1418,7 @@ export class ExportService {
                                 text: `${
                                   this.datePipe.transform(
                                     schedule.oldSchedule.date,
-                                    'dd/MM/Y'
+                                    'dd/MM/Y',
                                   ) ?? schedule.oldSchedule.date
                                 }, ca ${schedule.oldSchedule.shift}, ${
                                   schedule.oldSchedule.room
@@ -1495,7 +1477,7 @@ export class ExportService {
                                         text: `${
                                           this.datePipe.transform(
                                             schedule.newSchedule.date,
-                                            'dd/MM/Y'
+                                            'dd/MM/Y',
                                           ) ?? schedule.newSchedule.date
                                         }, ca ${
                                           schedule.newSchedule.shift ?? ''
@@ -1517,7 +1499,7 @@ export class ExportService {
                             ],
                           }),
                         ],
-                      })
+                      }),
                   ),
               ],
             }),
@@ -1578,7 +1560,7 @@ export class ExportService {
     schedules: ChangeSchedule[],
     teacher: Teacher,
     range: TuiDayRange,
-    rangeOptions: { sameMonth: boolean; inOneYear: boolean }
+    rangeOptions: { sameMonth: boolean; inOneYear: boolean },
   ): Document {
     const rangeText = rangeOptions.sameMonth
       ? `tháng ${DateHelper.beautifyDay(range.from.month + 1)}/${
@@ -1587,9 +1569,9 @@ export class ExportService {
       : rangeOptions.inOneYear
       ? `năm ${range.from.year}`
       : `từ ${DateHelper.beautifyDay(range.from.day)}/${DateHelper.beautifyDay(
-          range.from.month + 1
+          range.from.month + 1,
         )}/${range.from.year} đến ${DateHelper.beautifyDay(
-          range.to.day
+          range.to.day,
         )}/${DateHelper.beautifyDay(range.to.month + 1)}/${range.to.year}`;
     const today = new Date();
     const alignment = AlignmentType.CENTER;
@@ -1699,9 +1681,9 @@ export class ExportService {
               children: [
                 new TextRun({
                   text: `Hà Nội, ngày ${DateHelper.beautifyDay(
-                    today.getDate()
+                    today.getDate(),
                   )} tháng ${DateHelper.beautifyDay(
-                    today.getMonth() + 1
+                    today.getMonth() + 1,
                   )} năm ${today.getFullYear()}`,
                   italics: true,
                 }),
@@ -1851,7 +1833,7 @@ export class ExportService {
                 }),
                 ...schedules
                   .filter((schedule) =>
-                    ChangeStatusHelper.isApproved(schedule.status)
+                    ChangeStatusHelper.isApproved(schedule.status),
                   )
                   .map(
                     (schedule, row) =>
@@ -1879,7 +1861,7 @@ export class ExportService {
                                 text: `${
                                   this.datePipe.transform(
                                     schedule.oldSchedule.date,
-                                    'dd/MM/Y'
+                                    'dd/MM/Y',
                                   ) ?? schedule.oldSchedule.date
                                 }, ca ${schedule.oldSchedule.shift}, ${
                                   schedule.oldSchedule.room
@@ -1926,7 +1908,7 @@ export class ExportService {
                                         text: `${
                                           this.datePipe.transform(
                                             schedule.newSchedule.date,
-                                            'dd/MM/Y'
+                                            'dd/MM/Y',
                                           ) ?? schedule.newSchedule.date
                                         }, ca ${
                                           schedule.newSchedule.shift ?? ''
@@ -1948,7 +1930,7 @@ export class ExportService {
                             ],
                           }),
                         ],
-                      })
+                      }),
                   ),
               ],
             }),
@@ -1963,7 +1945,7 @@ export class ExportService {
     rangeOptions: {
       sameMonth: boolean;
       inOneYear: boolean;
-    }
+    },
   ): string {
     return rangeOptions.sameMonth
       ? `tháng ${DateHelper.beautifyDay(range.from.month + 1)}/${
@@ -1972,9 +1954,9 @@ export class ExportService {
       : rangeOptions.inOneYear
       ? `năm ${range.from.year}`
       : `từ ${DateHelper.beautifyDay(range.from.day)}/${DateHelper.beautifyDay(
-          range.from.month + 1
+          range.from.month + 1,
         )}/${range.from.year} đến ${DateHelper.beautifyDay(
-          range.to.day
+          range.to.day,
         )}/${DateHelper.beautifyDay(range.to.month + 1)}/${range.to.year}`;
   }
 }

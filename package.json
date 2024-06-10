@@ -5,6 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "esm": "nx run esm:serve",
+    "tss": "nx run tss:serve",
     "esm:generate-api": "node ./tools/generators/swagger-api-codegen -t ./templates -p ./libs/esm/api/src/lib/swagger.yaml -o ./libs/esm/api/src/lib/__generated__"
   },
   "private": true,
@@ -35,8 +36,12 @@
     "@taiga-ui/styles": "~3.27.0",
     "@tinkoff/ng-dompurify": "4.0.0",
     "@tinkoff/ng-polymorpheus": "~4.1.0",
+    "@types/file-saver": "2.0.5",
     "@types/lodash": "^4.17.1",
+    "cldr-data": "36.0.1",
+    "docx": "7.8.2",
     "dompurify": "3.0.6",
+    "file-saver": "2.0.5",
     "ng-recaptcha": "^11.0.0",
     "rxjs": "~7.8.0",
     "ts-md5": "1.3.1",

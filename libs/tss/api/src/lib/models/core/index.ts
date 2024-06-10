@@ -7,6 +7,5 @@ export * from './feature.model';
 export * from './generic-state';
 export * from './managing-class.model';
 export * from './response.model';
-export * from './simple-map.model';
 export * from './status.model';
 export * from './teacher';

@@ -1,31 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import {
-  AppConfig,
-  APP_CONFIG,
-} from '@teaching-scheduling-system/web/config/data-access';
-import {
-  AcademicData,
-  ResponseModel,
-  SimpleMapModel,
-  SimpleModel,
-} from '@teaching-scheduling-system/web/shared/data-access/models';
+import { inject, Injectable } from '@angular/core';
+import { SimpleMapModel, SimpleModel } from '@utconnect/types';
 import { map, Observable, of } from 'rxjs';
+import { AcademicData, ResponseModel } from '../models';
+import { getEnv } from './partial';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonInfoService {
-  // PRIVATE PROPERTIES
-  private readonly url: string;
+  // INJECT PROPERTIES
+  private readonly http = inject(HttpClient);
+  private readonly env = getEnv();
 
-  // CONSTRUCTOR
-  constructor(
-    private readonly http: HttpClient,
-    @Inject(APP_CONFIG) private readonly config: AppConfig
-  ) {
-    this.url = config.baseUrl;
-  }
+  // PRIVATE PROPERTIES
+  private readonly url = this.env.baseUrl;
 
   getAcademicYear(): Observable<AcademicData[]> {
     return this.http
@@ -34,7 +23,7 @@ export class CommonInfoService {
   }
 
   getCurrentTerm(): Observable<string> {
-    return of(this.config.currentTerm);
+    return of('2024 - 2025');
   }
 
   getFaculties(): Observable<
