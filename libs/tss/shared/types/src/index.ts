@@ -1,4 +1,4 @@
 export * from './lib/custom-headers';
 export * from './lib/export-type.enum';
 export * from './lib/request-change-schedule.model';
-export * from './lib/role.constant';
+export * from './lib/role.model';

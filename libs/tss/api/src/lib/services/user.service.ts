@@ -11,7 +11,7 @@ import {
   Teacher,
   ValidateToken,
 } from '../models';
-import { NetworkService } from './online.service';
+import { NetworkService } from '../../../../../shared/services/src/lib/core/network/online.service';
 import { getEnv } from './partial';
 
 @Injectable({

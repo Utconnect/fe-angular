@@ -57,15 +57,15 @@ const routes: Routes = [
       //   (await import('@teaching-scheduling-system/web/admin/feature/shell'))
       //     .ShellModule,
       // },
-      // {
-      //   path: 'calendar',
-      //   data: {
-      //     breadcrumb: 'Lịch biểu',
-      //   },
-      // loadChildren: async () =>
-      //   (await import('@teaching-scheduling-system/web/calendar/feature'))
-      //     .CalendarModule,
-      // },
+      {
+        path: 'calendar',
+        data: {
+          breadcrumb: 'Lịch biểu',
+        },
+        loadChildren: async () =>
+          (await import('@teaching-scheduling-system/web/calendar/feature'))
+            .CalendarModule,
+      },
       // {
       //   path: 'schedule',
       //   data: {

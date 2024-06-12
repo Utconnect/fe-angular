@@ -34,6 +34,7 @@
       "@esm/store": ["libs/esm/shell/data-access/store/src/index.ts"],
       "@esm/test": ["libs/esm/test/src/index.ts"],
       "@tss/api": ["libs/tss/api/src/index.ts"],
+      "@tss/calendar": ["libs/tss/calendar/src/index.ts"],
       "@tss/config": ["libs/tss/config/src/index.ts"],
       "@tss/constants": ["libs/tss/shared/constants/src/index.ts"],
       "@tss/feature": ["libs/tss/shell/feature/src/index.ts"],
