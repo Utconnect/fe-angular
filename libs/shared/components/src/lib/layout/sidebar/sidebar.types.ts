@@ -1,3 +1,5 @@
+import { Type } from '@angular/core';
+
 export type SidebarItem = {
   name: string;
   controlName?: string;
@@ -9,10 +11,7 @@ export type SidebarItem = {
     icon: string;
     roles?: string[];
   }[];
-  subCheckboxes?: {
-    controlName: string;
-    name: string;
-  }[];
+  component?: () => Promise<Type<unknown>>;
   roles?: string[];
   externalLink?: string;
   exactRouterLink?: boolean;

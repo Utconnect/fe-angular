@@ -16,5 +16,5 @@ const TAIGA_UI = [TuiScrollbarModule];
 })
 export class MainViewComponent {
   // INPUT
-  @Input() showSideBar!: boolean;
+  @Input() showSidebar!: boolean;
 }

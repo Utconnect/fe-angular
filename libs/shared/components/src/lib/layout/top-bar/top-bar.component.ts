@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { LetModule } from '@ngrx/component';
 import {
   TuiActiveZoneModule,
+  TuiDestroyService,
   TuiFilterPipeModule,
   TuiLetModule,
 } from '@taiga-ui/cdk';
@@ -17,8 +18,10 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
+import { takeUntil } from 'rxjs';
 import { DynamicRouteComponentComponent } from '../../dynamic-route-component';
 import { BellComponent } from '../bell';
+import { TopBarService } from './top-bar.service';
 import {
   TOP_BAR_OPTION_ITEM_TOKEN,
   TOP_BAR_OPTION_MENU_TEXT_TOKEN,
@@ -64,12 +67,18 @@ const TAIGA_UI = [
 })
 export class TopBarComponent {
   // INJECT PROPERTIES
+  readonly topBarService = inject(TopBarService);
   readonly items = inject(TOP_BAR_OPTION_ITEM_TOKEN);
-  readonly menuText$ = inject(TOP_BAR_OPTION_MENU_TEXT_TOKEN);
   readonly rightItemOption = inject(TOP_BAR_OPTION_RIGHT_ITEM_TOKEN);
+
+  readonly destroy$ = inject(TuiDestroyService);
+  readonly menuText$ = inject(TOP_BAR_OPTION_MENU_TEXT_TOKEN);
 
   // PUBLIC PROPERTIES
   openDropdown = false;
+  readonly rightMenu$ = this.topBarService.rightMenu$.pipe(
+    takeUntil(this.destroy$),
+  );
 
   // PUBLIC METHODS
   onClick(item: TopBarItem): void {

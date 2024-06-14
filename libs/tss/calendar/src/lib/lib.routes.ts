@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-export const tssCalendarRoutes: Route[] = [
+export const ROUTES: Route[] = [
   {
     path: '',
     loadComponent: async () =>

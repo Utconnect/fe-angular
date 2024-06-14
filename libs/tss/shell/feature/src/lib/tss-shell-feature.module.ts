@@ -21,7 +21,7 @@ import {
   menuTextFactory,
   onLoginSuccess,
   roleFactory,
-  tssSideBarItemsFactory,
+  tssSidebarItemsFactory,
   tssTopBarItemsFactory,
   userTitleFactory,
 } from './factories';
@@ -62,9 +62,7 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Lịch biểu',
         },
-        loadChildren: async () =>
-          (await import('@teaching-scheduling-system/web/calendar/feature'))
-            .CalendarModule,
+        loadChildren: async () => (await import('@tss/calendar')).ROUTES,
       },
       // {
       //   path: 'schedule',
@@ -160,8 +158,8 @@ const routes: Routes = [
     }),
     layoutProviders({
       store: Store<TssState>,
-      sideBar: {
-        items: tssSideBarItemsFactory,
+      sidebar: {
+        items: tssSidebarItemsFactory,
         roles: roleFactory,
       },
       topBar: {

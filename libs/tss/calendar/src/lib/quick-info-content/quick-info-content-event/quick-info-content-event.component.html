@@ -1,0 +1,161 @@
+<div class="attr-row">
+  <div class="mdi mdi-calendar"></div>
+  <div [ngSwitch]="data.Type">
+    <ng-container *ngSwitchCase="'exam'">Lịch thi</ng-container>
+    <ng-container *ngSwitchCase="'study'">Lịch giảng dạy</ng-container>
+    <ng-container *ngSwitchCase="'googleEvent'">
+      Lịch Google ({{ data | object : 'extract' : 'Calendar.summary' }})
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="data.StartTime && data.EndTime" class="attr-row">
+  <div class="mdi mdi-clock-time-four-outline"></div>
+  <div>
+    {{ [data.StartTime, data.EndTime] | dateRange : 'format' }}
+  </div>
+</div>
+<div *ngIf="data.Location" class="attr-row">
+  <div class="mdi mdi-map-marker"></div>
+  <div>
+    {{ data.Location }}
+  </div>
+</div>
+<div
+  *ngIf="data | object : 'extract' : 'IdModuleClass' as idModuleClass"
+  class="attr-row"
+>
+  <div class="mdi mdi-book-open-variant"></div>
+  <div>
+    {{ idModuleClass }}
+  </div>
+</div>
+<div *ngIf="data | object : 'extract' : 'Method' as method" class="attr-row">
+  <div class="mdi mdi-bullseye-arrow"></div>
+  <div>
+    {{ method }}
+  </div>
+</div>
+<ng-container
+  *ngIf="data | object : 'extract' : 'FixedSchedules' as fixedSchedules"
+>
+  <ng-container *ngIf="fixedSchedules && fixedSchedules.length > 0">
+    <ng-container
+      *ngrxLet="fixedSchedules[fixedSchedules.length - 1] as lastFixedSchedule"
+    >
+      <ng-container
+        *ngrxLet="
+          lastFixedSchedule.newDate === null ||
+          !!lastFixedSchedule.intendTime as isIntendTime
+        "
+      >
+        <ng-container
+          *ngrxLet="
+            lastFixedSchedule.status | changeStatusType as changeStatusType
+          "
+        >
+          <div
+            *ngIf="
+              changeStatusType === 'pending' || changeStatusType === 'approve'
+            "
+            class="attr-row"
+          >
+            <div class="mdi mdi-swap-horizontal-bold"></div>
+            <div>
+              <p [ngSwitch]="true">
+                <ng-container
+                  *ngSwitchCase="
+                    !isIntendTime && changeStatusType === 'pending'
+                  "
+                >
+                  Đang được yêu cầu đổi đến ca
+                  {{ lastFixedSchedule.newShift }}, ngày
+                  {{ lastFixedSchedule.newDate | date : 'longDate' : '+0700' }}
+                  {{
+                    lastFixedSchedule.newIdRoom
+                      ? ' tại ' + lastFixedSchedule.newIdRoom
+                      : ''
+                  }}
+                </ng-container>
+                <ng-container
+                  *ngSwitchCase="
+                    !isIntendTime && changeStatusType === 'approve'
+                  "
+                >
+                  Đổi từ ca {{ lastFixedSchedule.oldShift }}, ngày
+                  {{ lastFixedSchedule.oldDate | date : 'longDate' : '+0700' }}
+                </ng-container>
+                <ng-container
+                  *ngSwitchCase="isIntendTime && changeStatusType === 'pending'"
+                >
+                  Đang được yêu cầu đổi đến
+                  {{ lastFixedSchedule.intendTime }}
+                </ng-container>
+                <ng-container
+                  *ngSwitchCase="isIntendTime && changeStatusType === 'approve'"
+                >
+                  Dự định dạy trong
+                  {{ lastFixedSchedule.intendTime }}
+                </ng-container>
+                <button
+                  tuiLink
+                  (click)="onShowHistory()"
+                  [pseudo]="true"
+                  class="inline-block ml-0.5 pr-0.5 italic"
+                >
+                  Chi tiết
+                </button>
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="data.People">
+  <!-- TODO: remove any -->
+  <div
+    *ngFor="let person of $any(data.People) | tuiFilter : peopleMatcher"
+    class="attr-row"
+  >
+    <div class="mdi mdi-account"></div>
+    <div>
+      {{
+        $any(person).name ||
+          $any(person).displayName ||
+          $any(person).email ||
+          person
+      }}
+    </div>
+  </div>
+</ng-container>
+<div class="attr-row">
+  <div class="mdi mdi-text"></div>
+  <div class="flex-grow overflow-hidden">
+    <tui-text-area
+      #note
+      [(ngModel)]="data.Note"
+      (ngModelChange)="onNoteChange()"
+      [expandable]="true"
+      [rows]="3"
+      [tuiTextfieldLabelOutside]="true"
+      [readOnly]="data.Type === 'googleEvent'"
+      tuiTextfieldSize="m"
+      class="!min-h-[2.4375rem]"
+    >
+      Nhập ghi chú
+    </tui-text-area>
+  </div>
+</div>
+<div *ngIf="data.Type !== 'googleEvent'" class="flex justify-end mt-3">
+  <button
+    tuiButton
+    *ngrxLet="status$ as status"
+    (click)="onClickSave()"
+    [showLoader]="status === 'loading'"
+    [disabled]="data.Note === initialEventNote"
+  >
+    Lưu
+  </button>
+</div>

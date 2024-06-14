@@ -1,0 +1,147 @@
+<div class="wrapper p-2 flex justify-between border border-[rgba(0,0,0,0.12)]">
+  <!-- Left -->
+  <div class="flex items-center">
+    <ng-container *tssTouchScreen="null; else navigateButtons"></ng-container>
+    <ng-template #navigateButtons>
+      <button
+        tuiIconButton
+        tssNavigate="prev"
+        [scheduleComponent]="scheduleComponent"
+        shape="rounded"
+        icon="tuiIconChevronLeftLarge"
+        aria-label="Chevron Left"
+      ></button>
+      <button
+        tuiIconButton
+        tssNavigate="next"
+        [scheduleComponent]="scheduleComponent"
+        shape="rounded"
+        icon="tuiIconChevronRightLarge"
+        class="ml-2 mr-0.5"
+        aria-label="Chevron Right"
+      ></button>
+    </ng-template>
+
+    <tui-hosted-dropdown [(open)]="openSelectMonth" [content]="monthDropdown">
+      <button
+        tuiButton
+        *ngrxLet="dateRange$ as dateRange"
+        [class.rotate]="openSelectMonth"
+        iconRight="tuiIconChevronDown"
+      >
+        {{ dateRange }}
+      </button>
+    </tui-hosted-dropdown>
+
+    <div [@fadeIn] class="w-px h-full mx-2 bg-[rgba(0,0,0,0.12)]"></div>
+    <tui-hosted-dropdown
+      [(open)]="openFilter"
+      [content]="filterDropdown"
+      [@fadeIn]
+      (openChange)="onFilterOpenChange($event)"
+    >
+      <button
+        tuiButton
+        *ngrxLet="filter$ as filter"
+        [pseudoHover]="filter.showDepartmentSchedule || null"
+        icon="tuiIconFilter"
+      >
+        Bộ lọc:
+        <ng-container
+          *ngIf="filter.showDepartmentSchedule; else personalSchedule"
+        >
+          <ng-container *ngrxLet="activeTeachers$ as activeTeachers">
+            <ng-container *ngIf="activeTeachers.length === 0">
+              <span class="xl:hidden">&nbsp;Lịch BM,</span>
+              <span class="hidden xl:inline">&nbsp;Lịch bộ môn,</span>
+            </ng-container>
+
+            <ng-container [ngSwitch]="activeTeachers.length">
+              <ng-container *ngSwitchCase="0">
+                <span class="xl:hidden">&nbsp;Tất cả GV,</span>
+                <span class="hidden xl:inline">&nbsp;Tất cả giảng viên,</span>
+              </ng-container>
+              <ng-container *ngSwitchCase="1">
+                <span class="xl:hidden">
+                  &nbsp;GV {{ activeTeachers[0].name | shortenName }},
+                </span>
+                <span class="hidden xl:inline">
+                  &nbsp;Giảng viên {{ activeTeachers[0].name }},
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                {{ activeTeachers.length }}
+                <span class="xl:hidden">&nbsp;GV,</span>
+                <span class="hidden xl:inline">&nbsp;giảng viên, </span>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #personalSchedule>Lịch cá nhân,</ng-template>
+
+        <ng-container [ngSwitch]="filter.modules.length">
+          <ng-container *ngSwitchCase="0">
+            <span class="xl:hidden">&nbsp;Tất cả HP</span>
+            <span class="hidden xl:inline">&nbsp;Tất cả học phần</span>
+          </ng-container>
+          <ng-container *ngSwitchCase="1">
+            &nbsp;{{ filter.modules[0] }}
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            &nbsp;{{ filter.modules.length }}
+            <span class="xl:hidden">&nbsp;HP</span>
+            <span class="hidden xl:inline"> &nbsp;học phần </span>
+          </ng-container>
+        </ng-container>
+      </button>
+    </tui-hosted-dropdown>
+  </div>
+
+  <!-- Right -->
+  <div *ngrxLet="view$ as view" class="flex items-center">
+    <button
+      tuiButton
+      tssNavigate="today"
+      *ngrxLet="activeToday$ as activeToday"
+      [scheduleComponent]="scheduleComponent"
+      [pseudoHover]="activeToday || null"
+      class="uppercase"
+    >
+      Hôm nay
+    </button>
+
+    <div class="w-px h-full mx-2 bg-[rgba(0,0,0,0.12)]"></div>
+
+    <button
+      *ngFor="let viewButton of viewsButton; let i = index"
+      tuiButton
+      (click)="onClickViewButton(viewButton.view)"
+      [pseudoHover]="view === viewButton.view || null"
+      [class.ml-2]="i > 0"
+      class="uppercase"
+    >
+      {{ viewButton.label }}
+    </button>
+  </div>
+</div>
+
+<!-- Month-picker dropdown -->
+<ng-template #monthDropdown>
+  <tui-calendar-month
+    *ngrxLet="month$ as month"
+    [value]="month"
+    [year]="month"
+    (monthClick)="onSelectMonth($event)"
+  ></tui-calendar-month>
+</ng-template>
+
+<!-- Filter dropdown -->
+<ng-template #filterDropdown let-activeZone>
+  <div class="w-[25rem] px-3 py-2">
+    <tss-calendar-filter
+      [activeZone]="activeZone"
+      (filter)="onFilter()"
+    ></tss-calendar-filter>
+  </div>
+</ng-template>

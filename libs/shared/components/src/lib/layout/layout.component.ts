@@ -15,7 +15,7 @@ import {
 import { TuiAccordionModule, TuiCheckboxLabeledModule } from '@taiga-ui/kit';
 import { BehaviorSubject, filter, tap } from 'rxjs';
 import { MainViewComponent } from './main-view';
-import { SideBarComponent } from './side-bar';
+import { SidebarComponent } from './sidebar';
 import { TopBarComponent } from './top-bar';
 
 const TAIGA_UI = [
@@ -35,7 +35,7 @@ const TAIGA_UI = [
   imports: [
     CommonModule,
     TopBarComponent,
-    SideBarComponent,
+    SidebarComponent,
     MainViewComponent,
     ...TAIGA_UI,
   ],
@@ -49,24 +49,24 @@ export class LayoutComponent {
   @Input() role: string | null = null;
 
   // PUBLIC PROPERTIES
-  readonly showSideBar$ = new BehaviorSubject<boolean>(false);
+  readonly showSidebar$ = new BehaviorSubject<boolean>(false);
   readonly isInCreatePage$ = new BehaviorSubject<boolean>(true);
   readonly commonPages = ['/create', '/data'];
 
   // LIFECYCLE
   constructor(private readonly route: ActivatedRoute) {
-    this.triggerToggleSideBar();
+    this.triggerToggleSidebar();
     this.route.data.subscribe((data) => console.log(data));
   }
 
   // PRIVATE METHODS
-  private triggerToggleSideBar(): void {
+  private triggerToggleSidebar(): void {
     this.router.events
       .pipe(
         filter((e) => e instanceof NavigationEnd),
         tap((e) => {
           e = e as NavigationEnd;
-          this.showSideBar$.next(!this.isCommonPage(e.url));
+          this.showSidebar$.next(!this.isCommonPage(e.url));
           this.isInCreatePage$.next(e.url === '/create');
         }),
       )

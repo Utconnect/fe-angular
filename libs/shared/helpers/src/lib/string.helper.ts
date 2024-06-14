@@ -44,4 +44,11 @@ export class StringHelper {
   static toSnakeCase(str: string): string {
     return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
   }
+
+  static shortenName(text: string): string {
+    const words = text.split(' ');
+    return words
+      .map((word, i) => (i === words.length - 1 ? ` ${word}` : word[0]))
+      .join('.');
+  }
 }

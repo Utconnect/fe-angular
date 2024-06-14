@@ -1,0 +1,28 @@
+<div *ngIf="data.elementType === 'cell'">
+  <div class="mt-3">
+    <tui-input
+      [(ngModel)]="newEventTitle"
+      [tuiTextfieldLabelOutside]="true"
+      tuiTextfieldSize="m"
+      tuiTextfieldExampleText="Cuộc họp"
+    >
+      Nhập tiêu đề
+    </tui-input>
+  </div>
+  <div *ngIf="data.StartTime && data.EndTime" class="e-date-time">
+    <div class="e-date-time-icon e-icons"></div>
+    <div class="e-date-time-wrapper e-text-ellipsis">
+      <div class="e-date-time-details e-text-ellipsis">
+        <ng-container *ngIf="data.IsAllDay; else notAllDay">
+          {{ data.StartTime | date : 'longDate' }} (cả ngày)
+        </ng-container>
+        <ng-template #notAllDay>
+          {{ [data.StartTime, data.EndTime] | dateRange : 'format' }}
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-end mt-2">
+    <button tuiButton (click)="create()">Tạo sự kiện</button>
+  </div>
+</div>

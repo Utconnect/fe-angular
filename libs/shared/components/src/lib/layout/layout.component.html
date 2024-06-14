@@ -1,12 +1,12 @@
 <div class="wrapper w-screen h-screen grid">
   <utconnect-top-bar class="col-start-1 col-span-2"></utconnect-top-bar>
-  <utconnect-side-bar
-    [class.!hidden]="showSideBar$.value"
+  <utconnect-sidebar
+    [class.!hidden]="showSidebar$.value"
     class="hidden lg:block"
-  ></utconnect-side-bar>
+  ></utconnect-sidebar>
   <utconnect-main-view
-    [showSideBar]="showSideBar$.value"
-    [class.col-span-2]="showSideBar$.value"
+    [showSidebar]="showSidebar$.value"
+    [class.col-span-2]="showSidebar$.value"
     class="max-h-main-view-h"
   ></utconnect-main-view>
 </div>

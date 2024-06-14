@@ -13,8 +13,6 @@
 
       <h3 class="hidden ml-1 text-lg font-bold uppercase md:block">ESM</h3>
     </a>
-
-    <!--    <utconnect-dynamic-route-component></utconnect-dynamic-route-component>-->
   </div>
 
   <div class="right flex items-center">
@@ -33,6 +31,12 @@
         </button>
       </tui-hosted-dropdown>
     </div>
+
+    <ng-container *ngrxLet="rightMenu$ as rightMenu">
+      <div *ngIf="rightMenu" class="flex items-center lg:hidden">
+        <ng-container [ngTemplateOutlet]="rightMenu"></ng-container>
+      </div>
+    </ng-container>
   </div>
 </div>
 

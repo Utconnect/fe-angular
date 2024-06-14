@@ -38,13 +38,13 @@
       <!-- Cell header -->
       <ng-template #cellHeaderTemplate let-data>
         <div
-          *tssVar="data.date | date: 'd' as dayOfMonth"
+          *tssVar="data.date | date : 'd' as dayOfMonth"
           class="min-w-[20px] text-center"
           [class.px-1]="dayOfMonth === '1'"
         >
           {{ dayOfMonth }}
           <span *ngIf="dayOfMonth === '1'" class="hidden md:inline">
-            tháng {{ data.date | date: 'M' }}
+            tháng {{ data.date | date : 'M' }}
           </span>
         </div>
       </ng-template>
@@ -52,21 +52,23 @@
       <!-- Date header -->
       <ng-template #dateHeaderTemplate let-data>
         <div class="text-center">
-          <div class="text-[11px]">{{ data.date | date: 'E' | uppercase }}</div>
+          <div class="text-[11px]">
+            {{ data.date | date : 'E' | uppercase }}
+          </div>
           <div class="day-of-month w-8 h-8 mx-auto text-xl leading-8">
-            {{ data.date | date: 'd' }}
+            {{ data.date | date : 'd' }}
           </div>
         </div>
       </ng-template>
 
       <!-- Quick info header -->
       <ng-template #quickInfoTemplatesHeader let-data>
-        <tss-quick-info-header
+        <tss-calendar-quick-info-header
           (showEditorDialog)="onShowEditorDialog(data)"
           (closeDialog)="onCloseEditorDialog()"
           (remove)="remove$.next(data)"
           [data]="data"
-        ></tss-quick-info-header>
+        ></tss-calendar-quick-info-header>
       </ng-template>
 
       <!-- Quick info content -->

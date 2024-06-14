@@ -5,7 +5,7 @@ import {
   SIDE_BAR_OPTION_AUTH_ROLES_TOKEN,
   SIDE_BAR_OPTION_ITEM_TOKEN,
   SidebarItem,
-} from './side-bar';
+} from './sidebar';
 import {
   TOP_BAR_OPTION_ITEM_TOKEN,
   TOP_BAR_OPTION_MENU_TEXT_TOKEN,
@@ -16,7 +16,7 @@ import {
 
 type LayoutProvidersType<T extends Store> = {
   store: Type<T>;
-  sideBar: {
+  sidebar: {
     items: (store: T) => Observable<SidebarItem[]>;
     roles: (store: T) => Observable<string[]>;
   };
@@ -29,17 +29,17 @@ type LayoutProvidersType<T extends Store> = {
 
 export const layoutProviders = <T extends Store>({
   store,
-  sideBar,
+  sidebar,
   topBar,
 }: LayoutProvidersType<T>): Provider => [
   {
     provide: SIDE_BAR_OPTION_ITEM_TOKEN,
-    useFactory: sideBar.items,
+    useFactory: sidebar.items,
     deps: [store],
   },
   {
     provide: SIDE_BAR_OPTION_AUTH_ROLES_TOKEN,
-    useFactory: sideBar.roles,
+    useFactory: sidebar.roles,
     deps: [store],
   },
   {

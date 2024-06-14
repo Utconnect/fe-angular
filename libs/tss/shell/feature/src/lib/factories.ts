@@ -57,7 +57,7 @@ export const tssTopBarItemsFactory: <T extends Store>(
   },
 ];
 
-export const tssSideBarItemsFactory: (
+export const tssSidebarItemsFactory: (
   store: Store<TssState>,
 ) => Observable<SidebarItem[]> = () => {
   const items: SidebarItem[] = [
@@ -66,16 +66,7 @@ export const tssSideBarItemsFactory: (
       name: 'Lịch biểu',
       icon: 'far fa-calendar-alt',
       routerLink: '/calendar',
-      subCheckboxes: [
-        {
-          controlName: 'study',
-          name: 'Lịch giảng dạy',
-        },
-        {
-          controlName: 'exam',
-          name: 'Lịch thi',
-        },
-      ],
+      component: async () => (await import('@tss/ui')).CalendarItemComponent,
     },
     {
       name: 'Phân giảng',

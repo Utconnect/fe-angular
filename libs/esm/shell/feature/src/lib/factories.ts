@@ -58,7 +58,7 @@ export const esmTopBarItemsFactory: <T extends Store>(
   },
 ];
 
-export const esmSideBarItemsFactory: (
+export const esmSidebarItemsFactory: (
   store: Store<EsmState>,
 ) => Observable<SidebarItem[]> = (store) => {
   return store.select(EsmSelector.examinationId).pipe(

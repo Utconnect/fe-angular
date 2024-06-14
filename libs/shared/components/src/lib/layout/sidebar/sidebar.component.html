@@ -56,8 +56,9 @@
         <!-- Link -->
         <ng-template #link>
           <a
+            *ngIf="item.routerLink; else component"
             tuiLink
-            [routerLink]="item.routerLink ?? ''"
+            [routerLink]="item.routerLink"
             [routerLinkActiveOptions]="{ exact: item.exactRouterLink ?? true }"
             routerLinkActive="!bg-tui-base-03"
             class="block !px-3 !py-2.5 bg-white !text-tui-text-01 hover:bg-tui-base-02"
@@ -69,6 +70,14 @@
             </span>
             <strong>{{ item.name }}</strong>
           </a>
+        </ng-template>
+
+        <!-- Component -->
+        <ng-template #component>
+          <utconnect-sidebar-custom-item
+            *ngIf="item.component"
+            [factory]="item.component"
+          ></utconnect-sidebar-custom-item>
         </ng-template>
       </ng-container>
     </ng-container>

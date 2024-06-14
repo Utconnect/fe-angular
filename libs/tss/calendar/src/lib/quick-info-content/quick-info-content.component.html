@@ -1,0 +1,9 @@
+<tss-calendar-quick-info-content-event
+  *ngIf="data.elementType === 'event'; else cell"
+  [data]="data"
+></tss-calendar-quick-info-content-event>
+<ng-template #cell>
+  <tss-calendar-quick-info-content-cell
+    [data]="data"
+  ></tss-calendar-quick-info-content-cell>
+</ng-template>

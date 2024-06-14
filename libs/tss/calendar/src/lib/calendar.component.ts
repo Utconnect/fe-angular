@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -9,6 +10,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { LetModule } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import {
   AgendaService,
@@ -20,6 +22,7 @@ import {
   PopupOpenEventArgs,
   RenderCellEventArgs,
   ScheduleComponent,
+  ScheduleModule,
   WeekService,
 } from '@syncfusion/ej2-angular-schedule';
 import { Predicate, Query } from '@syncfusion/ej2-data';
@@ -33,7 +36,13 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { GoogleService } from '@tss/api';
 import { ChangeStatusHelper } from '@tss/helpers';
 import { TssSelector, TssState } from '@tss/store';
-import { DateHelper, DeviceHelper, ObservableHelper } from '@utconnect/helpers';
+import { TopBarService } from '@utconnect/components';
+import {
+  DateHelper,
+  DeviceHelper,
+  ObservableHelper,
+  ScheduleHelper,
+} from '@utconnect/helpers';
 import { DialogService } from '@utconnect/services';
 import {
   EjsScheduleModel,
@@ -55,14 +64,30 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs';
+import { TssCalendarHeaderComponent } from './header/calendar-header.component';
+import { TssCalendarQuickInfoHeaderComponent } from './quick-info-header/quick-info-header.component';
 import { CalendarState } from './store';
 import { TssCalendarPageAction } from './store/calendar.page.actions';
+import { TssCalendarSelector } from './store/calendar.selectors';
+
+const NGRX = [
+  // StoreModule.forFeature(calendarFeatureKey, calendarReducer),
+  // EffectsModule.forFeature([CalendarEffects]),
+  LetModule,
+];
 
 @Component({
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    ScheduleModule,
+    TssCalendarHeaderComponent,
+    TssCalendarQuickInfoHeaderComponent,
+    ...NGRX,
+  ],
   providers: [
     TuiDestroyService,
     WeekService,
@@ -78,7 +103,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly googleService = inject(GoogleService);
   private readonly tssDialogService = inject(DialogService);
   private readonly alertService = inject(TuiAlertService);
-  // private readonly navbarService = inject(NavbarService);
+  private readonly topBarService = inject(TopBarService);
   private readonly store = inject(Store<CalendarState>);
   private readonly appStore = inject(Store<TssState>);
   // private readonly sidebarStore = inject(Store<SidebarState>);
@@ -121,11 +146,11 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.handleSelectedDateChanges();
     this.handleChangeView();
     this.handleChangeStatus();
-    // this.navbarService.addRightMenu(this.rightMenuTemplate);
+    this.topBarService.addRightMenu(this.rightMenuTemplate);
   }
 
   ngOnDestroy(): void {
-    // this.sidebarStore.dispatch(sidebar_reset());
+    this.sidebarStore.dispatch(sidebar_reset());
   }
 
   // PUBLIC METHODS
@@ -198,13 +223,13 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
       if (currentDate && previousDate) {
         if (currentDate < previousDate) {
           this.store.dispatch(
-            calendarPrev({
+            TssCalendarPageAction.prev({
               oldSelectedDate: this.scheduleComponent.selectedDate,
             }),
           );
         } else if (currentDate > previousDate) {
           this.store.dispatch(
-            calendarNext({
+            TssCalendarPageAction.next({
               oldSelectedDate: this.scheduleComponent.selectedDate,
             }),
           );
@@ -235,7 +260,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   // PRIVATE METHODS
   private handleLoadSchedule(): void {
     this.store
-      .select(calendarSelectFilteredSchedule)
+      .select(TssCalendarSelector.filteredSchedule)
       .pipe(
         map((schedules) => schedules.map((x) => x.toEjsSchedule())),
         tap((dataSource) => {
@@ -251,7 +276,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe();
     this.store
-      .select(calendarSelectGoogleCalendarEvents)
+      .select(TssCalendarSelector.googleCalendarEvents)
       .pipe(
         map((events) =>
           events.map((x) => GoogleCalendarEvent.parse(x).toEjsSchedule()),
@@ -311,13 +336,11 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
           // https://ej2.syncfusion.com/angular/documentation/schedule/appointments/#appointment-filtering
           this.calendars[name] = value as boolean;
           let predicate: Predicate | undefined;
-
           for (const [key, checked] of Object.entries(this.calendars)) {
             if (checked) {
               //    key         : calendar.study
               // => compareValue: study
               const compareValue = key.substring(9);
-
               if (predicate) {
                 predicate = predicate.or('Type', 'equal', compareValue);
               } else {
@@ -325,7 +348,6 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
               }
             }
           }
-
           this.scheduleComponent.eventSettings.query = predicate
             ? new Query().where(predicate)
             : new Query();
@@ -337,7 +359,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private handleSelectedDateChanges(): void {
     this.store
-      .select(calendarSelectSelectedDate)
+      .select(TssCalendarSelector.selectedDate)
       .pipe(
         tap((date) => {
           this.scheduleComponent.selectedDate = new Date(date);
@@ -349,7 +371,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private handleChangeView(): void {
     this.store
-      .select(calendarSelectView)
+      .select(TssCalendarSelector.view)
       .pipe(
         skip(1),
         distinctUntilChanged(),
@@ -386,7 +408,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private handleChangeStatus(): void {
     this.store
-      .select(calendarSelectStatus)
+      .select(TssCalendarSelector.status)
       .pipe(
         map((status) => status === 'loading'),
         distinctUntilChanged(),

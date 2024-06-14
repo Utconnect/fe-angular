@@ -1,0 +1,43 @@
+<div (click)="onClick()">
+  <tui-accordion-item
+    [borders]="null"
+    [nativeId]="name"
+    size="s"
+    class="!rounded-none"
+  >
+    <!-- Accordion title -->
+    <span class="icon-wrapper inline-block">
+      <div class="flex">
+        <i class="far fa-calendar-alt mx-auto"></i>
+      </div>
+    </span>
+    <strong>{{ name }}</strong>
+
+    <!-- Accordion content -->
+    <ng-template tuiAccordionItemContent>
+      <div class="sub-item -mt-4 -mb-2">
+        <div
+          (click)="$event.stopPropagation()"
+          class="my-2 pl-3 border-tui-base-03"
+        >
+          <ng-container formGroupName="calendar">
+            <tui-checkbox-labeled
+              (ngModelChange)="onClickCheckbox('calendar.study', $event)"
+              formControlName="study"
+              class="sub-checkbox"
+            >
+              Lịch giảng dạy
+            </tui-checkbox-labeled>
+            <tui-checkbox-labeled
+              (ngModelChange)="onClickCheckbox('calendar.exam', $event)"
+              formControlName="exam"
+              class="sub-checkbox mt-2"
+            >
+              Lịch thi
+            </tui-checkbox-labeled>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
+</div>

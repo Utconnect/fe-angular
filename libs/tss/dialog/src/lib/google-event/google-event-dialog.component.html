@@ -1,0 +1,180 @@
+<form [formGroup]="form">
+  <div class="tui-form__row">
+    <tui-select
+      *ngrxLet="googleCalendars$ as googleCalendars"
+      formControlName="calendarId"
+      [readOnly]="readOnly || googleCalendars.length === 0"
+      [valueContent]="stringifyGoogleCalendars(googleCalendars)"
+    >
+      Lịch
+      <tui-data-list *tuiDataList size="l">
+        <button
+          tuiOption
+          *ngFor="let calendar of googleCalendars"
+          [value]="calendar.id"
+          role="option"
+        >
+          {{ calendar.summary }}
+        </button>
+      </tui-data-list>
+    </tui-select>
+  </div>
+  <div class="tui-form__row">
+    <tui-input formControlName="subject" [readOnly]="readOnly">
+      Tiêu đề
+    </tui-input>
+    <tui-error
+      formControlName="subject"
+      [error]="[] | tuiFieldError | async"
+    ></tui-error>
+  </div>
+  <div class="tui-form__row">
+    <tui-input formControlName="location" [readOnly]="readOnly">
+      Địa điểm
+    </tui-input>
+    <tui-error
+      formControlName="location"
+      [error]="[] | tuiFieldError | async"
+    ></tui-error>
+  </div>
+  <div class="time tui-form__row tui-form__row_multi-fields">
+    <div class="tui-form__multi-field">
+      <tui-input-date
+        formControlName="start"
+        [readOnly]="readOnly"
+        tuiUnfinishedValidator="Ngày không hợp lệ!"
+      >
+        Ngày bắt đầu
+      </tui-input-date>
+      <tui-error
+        formControlName="start"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div
+      [ngClass]="
+        isAllDayControlValue
+          ? '!w-0 opacity-0 invisible'
+          : 'tui-form__multi-field'
+      "
+    >
+      <tui-input-time
+        formControlName="startTime"
+        [readOnly]="readOnly"
+        tuiUnfinishedValidator="Giờ không hợp lệ!"
+      >
+        Giờ bắt đầu
+      </tui-input-time>
+      <tui-error
+        formControlName="startTime"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div class="tui-form__multi-field">
+      <tui-input-date
+        formControlName="end"
+        [readOnly]="readOnly"
+        tuiUnfinishedValidator="Ngày không hợp lệ!"
+      >
+        Ngày kết thúc
+      </tui-input-date>
+      <tui-error
+        formControlName="end"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div
+      [ngClass]="
+        isAllDayControlValue
+          ? 'w-0 opacity-0 invisible'
+          : 'tui-form__multi-field'
+      "
+    >
+      <tui-input-time
+        formControlName="endTime"
+        [readOnly]="readOnly"
+        tuiUnfinishedValidator="Giờ không hợp lệ!"
+      >
+        Giờ kết thúc
+      </tui-input-time>
+      <tui-error
+        formControlName="endTime"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+  </div>
+  <div class="tui-form__row">
+    <tui-checkbox-labeled formControlName="isAllDay" [readOnly]="readOnly">
+      Cả ngày
+    </tui-checkbox-labeled>
+  </div>
+  <div class="tui-form__row">
+    <tui-text-area formControlName="note" [readOnly]="readOnly">
+      Mô tả
+    </tui-text-area>
+    <tui-error
+      formControlName="note"
+      [error]="[] | tuiFieldError | async"
+    ></tui-error>
+  </div>
+  <div class="tui-form__row">
+    <ul class="tui-list">
+      <li *ngFor="let person of form.value['people']" class="tui-list__item">
+        {{ person.displayName || person.email }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="mt-8 flex justify-between">
+    <div>
+      <button
+        *ngIf="isEditDialog"
+        tuiButton
+        (click)="remove$.next()"
+        appearance="accent"
+        size="m"
+        class="tui-form__button"
+      >
+        Xóa
+      </button>
+    </div>
+    <div class="flex justify-end">
+      <ng-container *ngIf="!readOnly">
+        <ng-container *ngrxLet="showLoader$ as showLoader">
+          <button
+            tuiButton
+            *ngIf="isEditDialog; else createBtn"
+            (click)="submitEdit()"
+            [showLoader]="showLoader"
+            [disabled]="form.invalid"
+            size="m"
+            class="tui-form__button"
+          >
+            Lưu
+          </button>
+          <ng-template #createBtn>
+            <button
+              tuiButton
+              (click)="submitCreate()"
+              [showLoader]="showLoader"
+              [disabled]="form.invalid"
+              size="m"
+              class="tui-form__button"
+            >
+              Tạo sự kiện
+            </button>
+          </ng-template>
+        </ng-container>
+      </ng-container>
+      <button
+        tuiButton
+        (click)="onCancel()"
+        appearance="outline"
+        size="m"
+        class="tui-form__button"
+      >
+        Đóng
+      </button>
+    </div>
+  </div>
+</form>

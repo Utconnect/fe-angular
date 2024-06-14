@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { SidebarEvent } from '@tss/types';
 
 export class TssPageAction {
   static readonly reset = createAction('[TSS/Page] Reset');
@@ -17,5 +18,9 @@ export class TssPageAction {
   static readonly setConnectToGoogle = createAction(
     '[TSS/Page] Set connect to google',
     props<{ connect: boolean }>(),
+  );
+  static readonly sidebarEmit = createAction(
+    '[TSS/Page] Sidebar emit',
+    props<{ event: SidebarEvent }>(),
   );
 }

@@ -38,7 +38,9 @@ export class TssEffects {
       ofType(TssPageAction.getUserInfo),
       mergeMap(() => {
         return this.userService.me().pipe(
-          map(({ data }) => TssApiAction.autoLoginSuccessfully({ teacher: data })),
+          map(({ data }) =>
+            TssApiAction.autoLoginSuccessfully({ teacher: data }),
+          ),
           catchError(() => of(TssApiAction.autoLoginFailure())),
         );
       }),

@@ -21,7 +21,7 @@ import { topBarRightItemMapper } from './constants';
 import {
   esmRequiredStepListFactory,
   esmRequiredStepStepFactory,
-  esmSideBarItemsFactory,
+  esmSidebarItemsFactory,
   esmTopBarItemsFactory,
   menuTextFactory,
   onLoginSuccess,
@@ -203,8 +203,8 @@ const routes: Routes = [
     }),
     layoutProviders({
       store: Store<EsmState>,
-      sideBar: {
-        items: esmSideBarItemsFactory,
+      sidebar: {
+        items: esmSidebarItemsFactory,
         roles: roleFactory,
       },
       topBar: {
