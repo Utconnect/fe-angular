@@ -1,7 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ExamScheduleModel, StudyScheduleModel } from '@tss/api';
 import { SimpleModel } from '@utconnect/types';
-import { calendarFeatureKey, CalendarState } from '.';
+import { calendarFeatureKey } from './calendar.reducer';
+import { CalendarState } from './calendar.state';
 
 export class TssCalendarSelector {
   private static readonly selector =

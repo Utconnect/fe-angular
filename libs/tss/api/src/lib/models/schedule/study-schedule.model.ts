@@ -1,8 +1,7 @@
-import { DateHelper } from '@utconnect/helpers';
-import { SimpleModel } from '@utconnect/types';
 import { ShiftConstant } from '@utconnect/constants';
+import { DateHelper } from '@utconnect/helpers';
+import { FixedScheduleModel, SimpleModel } from '@utconnect/types';
 import { EjsScheduleModel } from './ejs-schedule.model';
-import { FixedScheduleModel } from '../../../../../../shared/types/src/lib/ejs/fixed-schedule.model';
 import { ScheduleModel } from './schedule.model';
 
 export class StudyScheduleModel extends ScheduleModel {

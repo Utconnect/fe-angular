@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard, authProviders, AUTH_ROUTES } from '@auth';
-import { EffectsModule } from '@ngrx/effects';
-import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { Store, StoreModule } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { provideState, provideStore, Store } from '@ngrx/store';
 import { TssAuthService } from '@tss/api';
 import { TSS_CONFIG } from '@tss/config';
 import { TssEffects, tssFeatureKey, tssReducer, TssState } from '@tss/store';
@@ -15,8 +15,10 @@ import {
 } from '@utconnect/components';
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
 import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { extModules } from './build-specifics';
 import { topBarRightItemMapper } from './constants';
+import { dbConfig } from './db-config';
 import {
   menuTextFactory,
   onLoginSuccess,
@@ -27,9 +29,9 @@ import {
 } from './factories';
 
 const NGRX = [
-  StoreModule.forRoot({ router: routerReducer }, {}),
-  StoreModule.forFeature(tssFeatureKey, tssReducer),
-  EffectsModule.forRoot([TssEffects]),
+  // StoreModule.forRoot({ router: routerReducer }, {}),
+  // StoreModule.forFeature(tssFeatureKey, tssReducer),
+  // EffectsModule.forRoot([TssEffects]),
   StoreRouterConnectingModule.forRoot(),
 ];
 
@@ -139,12 +141,28 @@ const routes: Routes = [
       //   (await import('@teaching-scheduling-system/web/notification/feature'))
       //     .NotificationFeatureModule,
       // },
+      // MOBILE MENU
+      {
+        path: 'calendar',
+        data: {
+          breadcrumb: 'Lịch biểu',
+        },
+        loadComponent: async () =>
+          (await import('@tss/calendar')).TssCalendarMobileMenuComponent,
+        outlet: 'mobile-menu',
+      },
     ],
   },
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forRoot(routes), ...NGRX, ...extModules],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes),
+    NgxIndexedDBModule.forRoot(dbConfig),
+    ...NGRX,
+    ...extModules,
+  ],
   exports: [RouterModule],
   providers: [
     TAIGA_PROVIDERS,
@@ -174,6 +192,9 @@ const routes: Routes = [
       provide: RECAPTCHA_SETTINGS,
       useFactory: (): { siteKey: string } => inject(TSS_CONFIG).recaptcha,
     },
+    provideStore(),
+    provideState(tssFeatureKey, tssReducer),
+    provideEffects(TssEffects),
   ],
 })
 export class TssShellFeatureModule {}

@@ -1,8 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { TuiDayRange } from '@taiga-ui/cdk';
+import { RoleConstant } from '@tss/constants';
 import { ChangeStatusHelper } from '@tss/helpers';
-import { FileType, RoleConstant } from '@tss/types';
+import { FileType } from '@tss/types';
 import { DateHelper } from '@utconnect/helpers';
 import {
   AlignmentType,
@@ -20,7 +21,7 @@ import {
   TableRow,
   TextRun,
   VerticalAlign,
-  WidthType
+  WidthType,
 } from 'docx';
 import { saveAs } from 'file-saver';
 import { ChangeSchedule, SimpleTeacher, Teacher } from '../models';

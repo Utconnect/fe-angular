@@ -5,7 +5,6 @@ import {
   Component,
   inject,
   Injector,
-  OnDestroy,
   OnInit,
   TemplateRef,
   ViewChild,
@@ -34,6 +33,11 @@ import {
 } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { GoogleService } from '@tss/api';
+import {
+  TssExamDialogComponent,
+  TssGoogleEventDialogComponent,
+  TssTeachingDialogComponent,
+} from '@tss/dialog';
 import { ChangeStatusHelper } from '@tss/helpers';
 import { TssSelector, TssState } from '@tss/store';
 import { TopBarService } from '@utconnect/components';
@@ -65,29 +69,21 @@ import {
   withLatestFrom,
 } from 'rxjs';
 import { TssCalendarHeaderComponent } from './header/calendar-header.component';
-import { TssCalendarQuickInfoHeaderComponent } from './quick-info-header/quick-info-header.component';
-import { CalendarState } from './store';
-import { TssCalendarPageAction } from './store/calendar.page.actions';
-import { TssCalendarSelector } from './store/calendar.selectors';
-
-const NGRX = [
-  // StoreModule.forFeature(calendarFeatureKey, calendarReducer),
-  // EffectsModule.forFeature([CalendarEffects]),
-  LetModule,
-];
+import { TssCalendarMobileMenuComponent } from './mobile-menu';
+import { TssCalendarQuickInfoContentComponent } from './quick-info-content';
+import { TssCalendarQuickInfoHeaderComponent } from './quick-info-header';
+import {
+  CalendarState,
+  TssCalendarPageAction,
+  TssCalendarSelector,
+} from './store';
 
 @Component({
+  selector: 'tss-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    ScheduleModule,
-    TssCalendarHeaderComponent,
-    TssCalendarQuickInfoHeaderComponent,
-    ...NGRX,
-  ],
   providers: [
     TuiDestroyService,
     WeekService,
@@ -95,8 +91,17 @@ const NGRX = [
     DayService,
     AgendaService,
   ],
+  imports: [
+    CommonModule,
+    ScheduleModule,
+    TssCalendarHeaderComponent,
+    TssCalendarQuickInfoHeaderComponent,
+    TssCalendarQuickInfoContentComponent,
+    TssCalendarMobileMenuComponent,
+    LetModule,
+  ],
 })
-export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TssCalendarComponent implements OnInit, AfterViewInit {
   // INJECTIONS
   private readonly injector = inject(Injector);
   private readonly tuiDialogService = inject(TuiDialogService);
@@ -147,10 +152,6 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.handleChangeView();
     this.handleChangeStatus();
     this.topBarService.addRightMenu(this.rightMenuTemplate);
-  }
-
-  ngOnDestroy(): void {
-    this.sidebarStore.dispatch(sidebar_reset());
   }
 
   // PUBLIC METHODS
@@ -311,9 +312,9 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private handleSidebarAddItem(): void {
-    this.sidebarStore
+    this.store
       .pipe(
-        sidebar_listen('calendar.create'),
+        TssSelector.sidebarListen('calendar.create'),
         tap((events) => {
           events.forEach((e) => {
             if (!this.calendars[e]) {
@@ -327,8 +328,8 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private handleSidebarCheckboxChange(): void {
-    this.sidebarStore
-      .select(sidebar_selectEvent)
+    this.store
+      .select(TssSelector.sidebarEvent)
       .pipe(
         ObservableHelper.filterNullish(),
         filter(({ name }) => name !== 'calendar.create'),
@@ -340,7 +341,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
             if (checked) {
               //    key         : calendar.study
               // => compareValue: study
-              const compareValue = key.substring(9);
+              const compareValue = key.substring('calendar.'.length);
               if (predicate) {
                 predicate = predicate.or('Type', 'equal', compareValue);
               } else {
@@ -427,7 +428,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   private showExamEditorDialog(data: EjsScheduleModel): void {
     this.tuiDialogService
       .open<string | undefined>(
-        new PolymorpheusComponent(ExamDialogComponent, this.injector),
+        new PolymorpheusComponent(TssExamDialogComponent, this.injector),
         {
           data,
           label: 'Chi tiết lịch thi',
@@ -460,7 +461,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.tuiDialogService
       .open<EjsScheduleModel[] | undefined>(
-        new PolymorpheusComponent(TeachingDialogComponent, this.injector),
+        new PolymorpheusComponent(TssTeachingDialogComponent, this.injector),
         {
           data: { schedules, selectedId },
           size: 'l',
@@ -478,7 +479,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   private showGoogleEventEditorDialog(data: GoogleCalendarModel): void {
     this.tuiDialogService
       .open<Partial<EjsScheduleModel> | boolean | undefined>(
-        new PolymorpheusComponent(GoogleEventDialogComponent, this.injector),
+        new PolymorpheusComponent(TssGoogleEventDialogComponent, this.injector),
         {
           data,
           label: 'Chi tiết sự kiện',

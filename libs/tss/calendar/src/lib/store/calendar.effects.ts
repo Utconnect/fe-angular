@@ -42,13 +42,13 @@ import { CalendarState } from './calendar.state';
 export class CalendarEffects {
   // INJECTIONS
   private readonly actions$ = inject(Actions);
-  private readonly scheduleService = inject(ScheduleService);
   private readonly examService = inject(ExamService);
-  private readonly googleService = inject(GoogleService);
   private readonly store = inject(Store<CalendarState>);
-  private readonly networkService = inject(NetworkService);
+  private readonly googleService = inject(GoogleService);
   private readonly dbService = inject(NgxIndexedDBService);
   private readonly appShellStore = inject(Store<TssState>);
+  private readonly networkService = inject(NetworkService);
+  private readonly scheduleService = inject(ScheduleService);
 
   // PRIVATE PROPERTIES
   private ranges$ = this.store.select(TssCalendarSelector.ranges);

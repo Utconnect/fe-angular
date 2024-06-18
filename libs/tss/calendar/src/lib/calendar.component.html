@@ -73,7 +73,9 @@
 
       <!-- Quick info content -->
       <ng-template #quickInfoTemplatesContent let-data>
-        <tss-quick-info-content [data]="data"></tss-quick-info-content>
+        <tss-calendar-quick-info-content
+          [data]="data"
+        ></tss-calendar-quick-info-content>
       </ng-template>
 
       <!-- Footer Template -->
@@ -83,7 +85,7 @@
 </div>
 
 <ng-template #rightMenu>
-  <tss-calendar-menu
+  <tss-calendar-mobile-menu
     [scheduleComponent]="scheduleComponent"
-  ></tss-calendar-menu>
+  ></tss-calendar-mobile-menu>
 </ng-template>

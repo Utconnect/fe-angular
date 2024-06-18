@@ -1,0 +1,87 @@
+<ng-container [formGroup]="form">
+  <div [tuiTextfieldCleaner]="true" class="tui-form__row">
+    <tui-input-date
+      (ngModelChange)="changeRequest$.next()"
+      formControlName="date"
+    >
+      Chọn ngày học
+    </tui-input-date>
+    <tui-error
+      [error]="[] | tuiFieldError | async"
+      formControlName="date"
+    ></tui-error>
+  </div>
+  <div class="tui-form__row">
+    <tui-select
+      (ngModelChange)="changeRequest$.next()"
+      [valueContent]="shiftSelectContent"
+      formControlName="shift"
+    >
+      Chọn ca học:
+      <tui-data-list *tuiDataList size="l">
+        <button
+          tuiOption
+          *ngFor="let shiftKey of shiftKeys"
+          [value]="shiftKey"
+          role="option"
+        >
+          {{ shiftKey | shift }}
+        </button>
+      </tui-data-list>
+    </tui-select>
+  </div>
+  <div *ngIf="isPersonal" class="tui-form__row">
+    <tui-select [valueContent]="studyTypeContent" formControlName="online">
+      Chọn hình thức học:
+      <ng-template tuiDataList>
+        <tui-data-list size="l">
+          <button tuiOption [value]="true" role="option">
+            Phòng học trực tuyến
+          </button>
+          <button tuiOption [value]="false" role="option">Học trực tiếp</button>
+        </tui-data-list>
+      </ng-template>
+    </tui-select>
+  </div>
+  <div *ngIf="!isPersonal" class="tui-form__row">
+    <tui-combo-box
+      *ngrxLet="rooms$ as rooms"
+      formControlName="room"
+      class="tui-form__row"
+    >
+      Nhập phòng
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="rooms | tuiFilter: roomMatcher | filterByInput"
+        size="l"
+      >
+      </tui-data-list-wrapper>
+    </tui-combo-box>
+    <tui-error
+      [error]="[] | tuiFieldError | async"
+      formControlName="room"
+    ></tui-error>
+  </div>
+  <div *ngIf="isPersonal" class="tui-form__row">
+    <tui-text-area
+      formControlName="reason"
+      [maxLength]="FormConstant.REASON_CHANGE_SCHEDULE_MAX_LENGTH"
+    >
+      Lý do
+    </tui-text-area>
+  </div>
+  <div class="tui-form__row">
+    <tss-teaching-dialog-content-duplicate-checker
+      [sameData]="form.errors?.['sameValue'] || false"
+      [hadReason]="form.controls['reason'].errors?.['required'] !== true"
+    ></tss-teaching-dialog-content-duplicate-checker>
+  </div>
+</ng-container>
+
+<ng-template #shiftSelectContent let-shiftKey>
+  {{ shiftKey | shift }}
+</ng-template>
+
+<ng-template #studyTypeContent let-online>
+  {{ online ? 'Phòng học trực tuyến' : 'Học trực tiếp' }}
+</ng-template>

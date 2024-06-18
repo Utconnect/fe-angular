@@ -32,11 +32,9 @@
       </tui-hosted-dropdown>
     </div>
 
-    <ng-container *ngrxLet="rightMenu$ as rightMenu">
-      <div *ngIf="rightMenu" class="flex items-center lg:hidden">
-        <ng-container [ngTemplateOutlet]="rightMenu"></ng-container>
-      </div>
-    </ng-container>
+    <div class="flex items-center lg:hidden">
+      <router-outlet name="mobile-menu"></router-outlet>
+    </div>
   </div>
 </div>
 

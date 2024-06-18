@@ -30,7 +30,7 @@ import {
   SimpleModel,
 } from '@utconnect/types';
 import { Observable, of, switchMap, takeUntil } from 'rxjs';
-import { TssCalendarQuickInfoContentEventStore } from '../store';
+import { TssCalendarQuickInfoContentEventStore } from '../store/quick-info-content.store';
 
 const TAIGA_UI = [
   TuiButtonModule,

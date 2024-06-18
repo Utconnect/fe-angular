@@ -6,6 +6,6 @@ export type Equals<T1, T2> = (<T>() => T extends T1 ? 1 : 2) extends <
   ? true
   : false;
 
-export type KeysMatching<T, V> = {
+export type KeysMatching<T extends Record<string, unknown>, V> = {
   [K in keyof T]-?: T[K] extends V ? K : never;
 }[keyof T];

@@ -13,9 +13,7 @@ import * as gregorian from 'cldr-data/main/vi/ca-gregorian.json';
 import * as numbers from 'cldr-data/main/vi/numbers.json';
 import * as timeZoneNames from 'cldr-data/main/vi/timeZoneNames.json';
 import * as numberingSystems from 'cldr-data/supplemental/numberingSystems.json';
-import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { default as EJS_LOCALE } from '../assets/locales/ejs-locale.json';
-import { environment } from '../environments/environments';
 import { AppComponent } from './app.component';
 
 registerLocaleData(localeVi, 'vi');
@@ -37,14 +35,6 @@ const disableAnimations =
     TssShellFeatureModule,
     ScreenLoaderComponent,
     ...TAIGA_UI,
-  ],
-  providers: [
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: environment.recaptcha.siteKey,
-      },
-    },
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],

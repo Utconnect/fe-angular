@@ -1,8 +1,8 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ObjectHelper } from '@utconnect/helpers';
 
-export function differentControlValueValidator<T>(
-  otherControl: AbstractControl,
+export function differentValueValidator<T>(
+  otherValue: T,
   options?: {
     comp?: (a: T, b: T) => boolean;
     error?: unknown;
@@ -11,7 +11,6 @@ export function differentControlValueValidator<T>(
   return (control: AbstractControl): ValidationErrors | null => {
     const errorValue = { differentValue: options?.error ?? true };
     const value = control.value as T;
-    const otherValue = otherControl.value as T;
 
     if (
       ObjectHelper.isNullOrUndefined(value) &&

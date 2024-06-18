@@ -97,7 +97,7 @@ type FormModel = {
   imports: [CommonModule, ReactiveFormsModule, LetModule, ...TAIGA_UI],
   providers: [GoogleEventDialogStore, TuiDestroyService],
 })
-export class GoogleEventDialogComponent {
+export class TssGoogleEventDialogComponent {
   // INJECTIONS
   private readonly fb = inject(FormBuilder);
   private readonly destroy$ = inject(TuiDestroyService);
@@ -419,40 +419,24 @@ export class GoogleEventDialogComponent {
       .subscribe();
   }
 
-  private formValidator(value: FormModel) {
+  private formValidator(value: FormModel): ValidatorFn[] {
     return [
       virtualGroupValidator(value, {
         type: TuiDay,
         props: ['start', 'end'],
-        comp: (a, b) => (!!a && !!b && a.daySame(b)) || a === b,
+        comp: (_, a, b) => (!!a && !!b && a.daySame(b)) || a === b,
       }),
       virtualGroupValidator(value, {
         type: TuiTime,
         props: ['startTime', 'endTime'],
-        comp: (a, b, control) => {
-          if (control?.get('isAllDay')?.value) {
+        comp: (control, a, b) => {
+          if (control.get('isAllDay')?.value) {
             return true;
           }
           return a?.valueOf() === b?.valueOf();
         },
       }),
     ];
-    // {
-    //   start: (a, b) => (!!a && !!b && a.daySame(b)) || a === b,
-    //   end: (a, b) => (!!a && !!b && a.daySame(b)) || a === b,
-    //   startTime: (a, b, control) => {
-    //     if (control?.get('isAllDay')?.value) {
-    //       return true;
-    //     }
-    //     return a?.valueOf() === b?.valueOf();
-    //   },
-    //   endTime: (a, b, control) => {
-    //     if (control?.get('isAllDay')?.value) {
-    //       return true;
-    //     }
-    //     return a?.valueOf() === b?.valueOf();
-    //   },
-    // }
   }
 
   private getStartAndEnd(): {

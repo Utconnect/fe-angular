@@ -14,6 +14,7 @@ const initialState: TssState = {
   teachersInDepartment: [],
   showLoader: null,
   googleCalendars: [],
+  sidebarEvent: null,
 };
 
 export const tssFeatureKey = '[NGRX Key] TSS';

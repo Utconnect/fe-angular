@@ -14,6 +14,7 @@ import {
 } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { TssGoogleEventDialogComponent } from '@tss/dialog';
 import { ObservableHelper } from '@utconnect/helpers';
 import { DateRangePipe } from '@utconnect/pipes';
 import { EjsScheduleModel } from '@utconnect/types';
@@ -48,7 +49,7 @@ export class TssCalendarQuickInfoContentCellComponent {
   create(): void {
     this.dialogService
       .open<Partial<EjsScheduleModel> | undefined>(
-        new PolymorpheusComponent(GoogleEventDialogComponent, this.injector),
+        new PolymorpheusComponent(TssGoogleEventDialogComponent, this.injector),
         {
           data: {
             ...this.data,
@@ -62,7 +63,7 @@ export class TssCalendarQuickInfoContentCellComponent {
       )
       .pipe(
         ObservableHelper.filterUndefined(),
-        tap((newData) => {
+        tap((_) => {
           // TODO: Update ejs calendar after create event successfully
           // this.scheduleComponent.saveEvent({ ...data, ...newData });
         }),

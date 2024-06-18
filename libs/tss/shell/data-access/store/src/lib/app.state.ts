@@ -1,5 +1,6 @@
 import { AcademicData, Teacher } from '@tss/api';
 import { BreadcrumbItem } from '@tss/model';
+import { SidebarEvent } from '@tss/types';
 import {
   GoogleCalendar,
   Nullable,
@@ -17,4 +18,5 @@ export interface TssState {
   teachersInDepartment: SimpleModel[];
   showLoader: Nullable<boolean>;
   googleCalendars: GoogleCalendar[];
+  sidebarEvent: Nullable<SidebarEvent>;
 }

@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector, select } from '@ngrx/store';
+import { ExtractValue, SidebarEventName } from '@tss/types';
 import { ObservableHelper } from '@utconnect/helpers';
-import { map, pipe } from 'rxjs';
+import { filter, map, Observable, pipe, UnaryFunction } from 'rxjs';
 import { tssFeatureKey } from './app.reducer';
 import { TssState } from './app.state';
 
@@ -88,4 +89,19 @@ export class TssSelector {
     this.selector,
     (state) => state.googleCalendars,
   );
+
+  static readonly sidebarEvent = createSelector(
+    this.selector,
+    (state) => state.sidebarEvent,
+  );
+
+  static readonly sidebarListen = <T extends SidebarEventName>(
+    eventName: T,
+  ): UnaryFunction<Observable<object>, Observable<ExtractValue<T>>> =>
+    pipe(
+      select(this.sidebarEvent),
+      ObservableHelper.filterNullish(),
+      filter(({ name }) => name === eventName),
+      map(({ value }) => value as ExtractValue<T>),
+    );
 }
