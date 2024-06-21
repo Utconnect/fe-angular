@@ -28,12 +28,7 @@ import {
   userTitleFactory,
 } from './factories';
 
-const NGRX = [
-  // StoreModule.forRoot({ router: routerReducer }, {}),
-  // StoreModule.forFeature(tssFeatureKey, tssReducer),
-  // EffectsModule.forRoot([TssEffects]),
-  StoreRouterConnectingModule.forRoot(),
-];
+const NGRX = [StoreRouterConnectingModule.forRoot()];
 
 const routes: Routes = [
   ...LAYOUT_ROUTES,
@@ -66,18 +61,14 @@ const routes: Routes = [
         },
         loadChildren: async () => (await import('@tss/calendar')).ROUTES,
       },
-      // {
-      //   path: 'schedule',
-      //   data: {
-      //     breadcrumb: 'Lịch giảng dạy',
-      //   },
-      // loadChildren: async () =>
-      //   (
-      //     await import(
-      //       '@teaching-scheduling-system/web/teaching-schedule/feature/shell'
-      //     )
-      //   ).TeachingScheduleShellModule,
-      // },
+      {
+        path: 'schedule',
+        data: {
+          breadcrumb: 'Lịch giảng dạy',
+        },
+        loadChildren: async () =>
+          (await import('@tss/teaching-schedule')).ROUTES,
+      },
       // {
       //   path: 'exam',
       //   canActivate: [permissionGuard],

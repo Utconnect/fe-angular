@@ -43,6 +43,7 @@
       "@tss/model": ["libs/tss/shell/data-access/model/src/index.ts"],
       "@tss/pipes": ["libs/tss/shared/pipes/src/index.ts"],
       "@tss/store": ["libs/tss/shell/data-access/store/src/index.ts"],
+      "@tss/teaching-schedule": ["libs/tss/teaching-schedule/src/index.ts"],
       "@tss/types": ["libs/tss/shared/types/src/index.ts"],
       "@tss/ui": ["libs/tss/shell/ui/src/index.ts"],
       "@utconnect/animations": ["libs/shared/animations/src/index.ts"],

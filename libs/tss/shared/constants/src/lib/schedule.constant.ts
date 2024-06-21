@@ -3,6 +3,11 @@ import { Nullable } from '@utconnect/types';
 import { PermissionConstant } from './permission.constant';
 
 export class ScheduleConstant {
+  static readonly TERMS_IN_YEAR = [1, 2];
+  static readonly BATCHES_IN_TERM: { [key: number]: number[] } = {
+    1: [1, 2, 3],
+    2: [1, 2, 3, 5],
+  };
   static REQUEST_CHANGE_SCHEDULE_STATUS: Record<
     RequestChangeScheduleCode,
     {
