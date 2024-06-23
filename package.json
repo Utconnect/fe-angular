@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "esm": "nx run esm:serve",
-    "tss": "nx run tss:serve",
+    "esm": "nx run esm:serve --port 4201",
+    "tss": "nx run tss:serve --port 4202",
     "esm:generate-api": "node ./tools/generators/swagger-api-codegen -t ./templates -p ./libs/esm/api/src/lib/swagger.yaml -o ./libs/esm/api/src/lib/__generated__"
   },
   "private": true,

@@ -15,4 +15,4 @@ import { TssTeachingScheduleAssignRightTitleComponent } from './assign-right-tit
     TssTeachingScheduleAssignRightTitleComponent,
   ],
 })
-export class AssignComponent {}
+export class TssTeachingScheduleAssignComponent {}
