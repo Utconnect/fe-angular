@@ -1,7 +1,5 @@
-import { Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { TokenService } from '@auth';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import {
@@ -13,7 +11,6 @@ import {
   UserService,
 } from '@tss/api';
 import { ObservableHelper } from '@utconnect/helpers';
-import { RedirectService } from '@utconnect/services';
 import { catchError, filter, map, mergeMap, of, tap } from 'rxjs';
 import { TssApiAction } from './app.api.actions';
 import { TssPageAction } from './app.page.actions';
@@ -23,13 +20,10 @@ export class TssEffects {
   // INJECT PROPERTIES
   private readonly router = inject(Router);
   private readonly actions$ = inject(Actions);
-  private readonly location = inject(Location);
   private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
-  private readonly tokenService = inject(TokenService);
   private readonly googleService = inject(GoogleService);
   private readonly teacherService = inject(TeacherService);
-  private readonly redirectService = inject(RedirectService);
   private readonly commonInfoService = inject(CommonInfoService);
 
   // EFFECTS
@@ -74,20 +68,6 @@ export class TssEffects {
     );
   });
 
-  readonly logout$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(TssPageAction.logout),
-        tap(() => {
-          this.authService.logOut().subscribe();
-          this.tokenService.clear();
-          void this.router.navigate(['/login']);
-        }),
-      );
-    },
-    { dispatch: false },
-  );
-
   readonly autoLoginFailure$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -95,9 +75,9 @@ export class TssEffects {
         mergeMap(() =>
           of({}).pipe(
             tap(() => {
-              this.tokenService.clear();
-              const path = this.location.path();
-              this.redirectService.login(path);
+              this.router.navigate([
+                'https://localhost:7167/Identity/Account/Logout',
+              ]);
             }),
           ),
         ),

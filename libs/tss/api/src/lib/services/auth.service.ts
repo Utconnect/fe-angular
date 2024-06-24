@@ -14,8 +14,8 @@ import { getEnv } from './partial';
 })
 export class AuthService {
   // INJECT PROPERTIES
-  private readonly http = inject(HttpClient);
   private readonly env = getEnv();
+  private readonly http = inject(HttpClient);
 
   // PRIVATE PROPERTIES
   private readonly url = this.env.baseUrl;
@@ -35,10 +35,6 @@ export class AuthService {
       data: true,
       success: true,
     });
-  }
-
-  logOut(): Observable<void> {
-    return this.http.post<void>(this.url + 'logout', {});
   }
 }
 

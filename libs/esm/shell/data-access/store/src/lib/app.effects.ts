@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { AUTH_SERVICE_TOKEN, TokenService } from '@auth';
+import { Router } from '@angular/router';
+import { AUTH_SERVICE_TOKEN } from '@auth';
 import { EsmAuthService, ExaminationService, FacultyService } from '@esm/api';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
-import { RedirectService } from '@utconnect/services';
 import { catchError, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 import { EsmApiAction } from './app.api.actions';
 import { EsmPageAction } from './app.page.actions';
@@ -14,15 +14,14 @@ import { EsmState } from './app.state';
 @Injectable()
 export class EsmEffects {
   // INJECT PROPERTIES
+  private readonly router = inject(Router);
   private readonly actions$ = inject(Actions);
+  private readonly esmStore = inject(Store<EsmState>);
+  private readonly facultyService = inject(FacultyService);
+  private readonly examinationService = inject(ExaminationService);
   private readonly authService: EsmAuthService = inject(
     AUTH_SERVICE_TOKEN,
   ) as EsmAuthService;
-  private readonly esmStore = inject(Store<EsmState>);
-  private readonly tokenService = inject(TokenService);
-  private readonly facultyService = inject(FacultyService);
-  private readonly redirectService = inject(RedirectService);
-  private readonly examinationService = inject(ExaminationService);
 
   // PRIVATE PROPERTIES
   private examinationId$ = this.esmStore.select(EsmSelector.examinationId);
@@ -32,9 +31,6 @@ export class EsmEffects {
     return this.actions$.pipe(
       ofType(EsmPageAction.getUserInfo),
       mergeMap(() => {
-        if (!this.tokenService.get()) {
-          return of(EsmApiAction.noCacheUserInfo());
-        }
         return this.authService.getMySummaryInfo().pipe(
           map(({ data }) => EsmApiAction.getUserInfoSuccessful({ user: data })),
           catchError(() => of(EsmApiAction.getUserInfoFailed())),
@@ -48,8 +44,9 @@ export class EsmEffects {
       return this.actions$.pipe(
         ofType(EsmPageAction.logOut),
         tap(() => {
-          this.tokenService.clear();
-          this.redirectService.login();
+          this.router.navigate([
+            'https://localhost:7167/Identity/Account/Logout',
+          ]);
         }),
       );
     },

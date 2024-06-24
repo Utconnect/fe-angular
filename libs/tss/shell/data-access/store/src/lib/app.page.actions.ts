@@ -5,7 +5,6 @@ export class TssPageAction {
   static readonly reset = createAction('[TSS/Page] Reset');
   static readonly keepLogin = createAction('[TSS/Page] Keep Login');
   static readonly getUserInfo = createAction('[TSS/Page] Get user info');
-  static readonly logout = createAction('[TSS/Page] Logout');
   static readonly loadRooms = createAction('[TSS/Page] Load rooms');
   static readonly loadSchoolYear = createAction('[TSS/Page] Load school year');
   static readonly loadAcademicYear = createAction(

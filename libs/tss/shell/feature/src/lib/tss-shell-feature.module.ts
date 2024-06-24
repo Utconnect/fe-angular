@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard, authProviders, AUTH_ROUTES } from '@auth';
+import { authProviders } from '@auth';
 import { provideEffects } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { provideState, provideStore, Store } from '@ngrx/store';
@@ -32,10 +32,8 @@ const NGRX = [StoreRouterConnectingModule.forRoot()];
 
 const routes: Routes = [
   ...LAYOUT_ROUTES,
-  ...AUTH_ROUTES,
   {
     path: '',
-    canActivate: [authGuard],
     component: LayoutComponent,
     children: [
       {

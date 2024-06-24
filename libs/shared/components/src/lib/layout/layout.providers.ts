@@ -21,7 +21,7 @@ type LayoutProvidersType<T extends Store> = {
     roles: (store: T) => Observable<string[]>;
   };
   topBar: {
-    items: (store: T) => TopBarGroup[];
+    items: () => TopBarGroup[];
     menuText?: (store: T) => Observable<string>;
     right: TopBarRightItemProviderType;
   };

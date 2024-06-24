@@ -1,0 +1,29 @@
+<tui-hosted-dropdown [(open)]="openDropdown" [content]="dropdown">
+  <button
+    tuiIconButton
+    [pseudoHover]="openDropdown || null"
+    appearance="flat"
+    icon="tuiIconGridLarge"
+    aria-label="Applications"
+  ></button>
+</tui-hosted-dropdown>
+
+<ng-template #dropdown let-close="close">
+  <div class="grid grid-cols-3 gap-2 p-2">
+    <a
+      *ngFor="let app of applications"
+      tuiAction
+      [href]="app.url"
+      class="flex !justify-center"
+    >
+      <section class="flex flex-col items-center">
+        <tui-marker-icon
+          size="s"
+          [src]="app.icon"
+          class="tui-island__marker !m-0"
+        ></tui-marker-icon>
+        <h3 class="header tui-text_body-m text-center">{{ app.name }}</h3>
+      </section>
+    </a>
+  </div>
+</ng-template>

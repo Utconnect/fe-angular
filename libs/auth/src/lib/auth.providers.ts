@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
+import { HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Provider, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
@@ -14,7 +14,7 @@ import {
   AUTH_TOKEN_STORAGE_SERVICE_TOKEN,
 } from './auth.tokens';
 import { JwtInterceptor } from './interceptors';
-import { IAuthService, TokenService } from './services';
+import { IAuthService } from './services';
 
 export type AuthConfigOptions<
   S extends IAuthService,
@@ -43,7 +43,6 @@ export const authProviders = <
   store,
   title,
 }: AuthConfigOptions<S, I, T>): Provider => [
-  TokenService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: authInterceptor ?? JwtInterceptor,

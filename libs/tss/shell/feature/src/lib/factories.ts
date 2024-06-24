@@ -10,9 +10,7 @@ import { TssPageAction, TssSelector, TssState } from '@tss/store';
 import { SidebarItem, TopBarGroup } from '@utconnect/components';
 import { combineLatest, map, Observable, of } from 'rxjs';
 
-export const tssTopBarItemsFactory: <T extends Store>(
-  store: T,
-) => TopBarGroup[] = (store) => [
+export const tssTopBarItemsFactory: () => TopBarGroup[] = () => [
   {
     items: [
       {
@@ -51,7 +49,7 @@ export const tssTopBarItemsFactory: <T extends Store>(
         key: 'log-out',
         label: 'Đăng xuất',
         icon: tuiIconLogOutLarge,
-        action: () => store.dispatch(TssPageAction.logout()),
+        externalLink: 'https://localhost:7167/Identity/Account/Logout',
       },
     ],
   },

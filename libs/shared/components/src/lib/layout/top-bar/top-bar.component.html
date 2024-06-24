@@ -16,63 +16,14 @@
   </div>
 
   <div class="right flex items-center">
-    <utconnect-dynamic-route-component
-      [mapper]="rightItemOption.mapper"
-    ></utconnect-dynamic-route-component>
+    <utconnect-dynamic-route-component [mapper]="rightItemOption.mapper" />
 
-    <div>
-      <tui-hosted-dropdown
-        [(open)]="openDropdown"
-        [content]="userDropdown"
-        tuiDropdownAlign="left"
-      >
-        <button tuiButton appearance="nav-button" type="button">
-          {{ (menuText$ | async) ?? 'Xin chào' }}
-        </button>
-      </tui-hosted-dropdown>
-    </div>
+    <utconnect-top-bar-menu />
+
+    <utconnect-top-bar-user />
 
     <div class="flex items-center lg:hidden">
-      <router-outlet name="mobile-menu"></router-outlet>
+      <router-outlet name="mobile-menu" />
     </div>
   </div>
 </div>
-
-<ng-template #userDropdown let-close="close">
-  <tui-data-list class="top-bar-dropdown" size="l" role="menu">
-    <tui-opt-group *ngFor="let group of items">
-      <ng-container *ngFor="let item of group.items">
-        <a
-          tuiOption
-          (click)="close()"
-          *ngIf="item.externalLink; else link"
-          [href]="item.externalLink"
-          target="_blank"
-          role="menuitem"
-        >
-          <tui-svg [src]="item.icon"></tui-svg>
-          <span>{{ item.label }}</span>
-          <tui-svg src="tuiIconExternalLinkLarge"></tui-svg>
-        </a>
-        <ng-template #link>
-          <a
-            tuiOption
-            (click)="close()"
-            *ngIf="item.routerLink; else button"
-            [routerLink]="item.routerLink"
-            role="menuitem"
-          >
-            <tui-svg [src]="item.icon"></tui-svg>
-            <span>{{ item.label }}</span>
-          </a>
-        </ng-template>
-        <ng-template #button>
-          <button tuiOption (click)="onClick(item)" role="menuitem">
-            <tui-svg [src]="item.icon"></tui-svg>
-            <span>{{ item.label }}</span>
-          </button>
-        </ng-template>
-      </ng-container>
-    </tui-opt-group>
-  </tui-data-list>
-</ng-template>

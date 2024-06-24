@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard, authProviders, AUTH_ROUTES, permissionGuard } from '@auth';
+import { authProviders, permissionGuard } from '@auth';
 import { EsmAuthService, ExaminationService, FacultyService } from '@esm/api';
 import { ESM_CONFIG } from '@esm/config';
 import { appReducer, EsmEffects, esmFeatureKey, EsmState } from '@esm/store';
@@ -39,10 +39,8 @@ const NGRX = [
 
 const routes: Routes = [
   ...LAYOUT_ROUTES,
-  ...AUTH_ROUTES,
   {
     path: '',
-    canActivate: [authGuard],
     component: LayoutComponent,
     children: [
       {
@@ -73,7 +71,6 @@ const routes: Routes = [
       },
       {
         path: ':examinationId',
-        canActivate: [authGuard],
         children: [
           {
             path: '',

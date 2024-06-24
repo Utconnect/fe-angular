@@ -11,9 +11,7 @@ import { RequiredStep, SidebarItem, TopBarGroup } from '@utconnect/components';
 import { combineLatest, map, Observable } from 'rxjs';
 import { Role } from './roles';
 
-export const esmTopBarItemsFactory: <T extends Store>(
-  store: T,
-) => TopBarGroup[] = (store) => [
+export const esmTopBarItemsFactory: () => TopBarGroup[] = () => [
   {
     items: [
       {
@@ -52,7 +50,7 @@ export const esmTopBarItemsFactory: <T extends Store>(
         key: 'log-out',
         label: 'Đăng xuất',
         icon: tuiIconLogOutLarge,
-        action: () => store.dispatch(EsmPageAction.logOut()),
+        externalLink: 'https://localhost:7167/Identity/Account/Logout',
       },
     ],
   },

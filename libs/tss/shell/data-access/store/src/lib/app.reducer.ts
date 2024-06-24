@@ -30,11 +30,6 @@ export const tssReducer = createReducer(
     ...state,
     userStatus: 'loading',
   })),
-  on(TssPageAction.logout, (state) => ({
-    ...state,
-    teacher: null,
-    teachersInDepartment: [],
-  })),
   on(TssPageAction.setLoader, (state, { showLoader }) => ({
     ...state,
     showLoader,
