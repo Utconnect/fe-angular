@@ -1,0 +1,25 @@
+<form *ngrxLet="status$ as status" [formGroup]="form">
+  <tss-input-date-range formControlName="range"></tss-input-date-range>
+  <div class="tui-form__buttons tui-form__buttons_align_end">
+    <button
+      tuiButton
+      (click)="confirm$.next()"
+      [showLoader]="status === 'loading'"
+      [disabled]="form.invalid"
+      type="submit"
+      class="tui-form__button"
+    >
+      Xuất báo cáo
+    </button>
+    <button
+      tuiButton
+      (click)="context.$implicit.complete()"
+      [disabled]="status === 'loading'"
+      appearance="secondary"
+      type="button"
+      class="tui-form__button"
+    >
+      Hủy bỏ
+    </button>
+  </div>
+</form>

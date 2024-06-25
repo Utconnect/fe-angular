@@ -3,6 +3,11 @@ import { Nullable } from '@utconnect/types';
 import { PermissionConstant } from './permission.constant';
 
 export class ScheduleConstant {
+  static readonly CLASS_TYPE: { [key: number]: string } = {
+    1: 'Lý thuyết',
+    2: 'Bài tập',
+    3: 'Thực hành',
+  };
   static readonly TERMS_IN_YEAR = [1, 2];
   static readonly BATCHES_IN_TERM: { [key: number]: number[] } = {
     1: [1, 2, 3],

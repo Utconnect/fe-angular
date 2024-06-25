@@ -1,9 +1,13 @@
+import { difference } from 'lodash';
 import {
   filter,
+  map,
+  MonoTypeOperatorFunction,
   Observable,
   OperatorFunction,
   pipe,
   UnaryFunction,
+  withLatestFrom,
 } from 'rxjs';
 import { ObjectHelper } from './object.helper';
 
@@ -39,5 +43,23 @@ export class ObservableHelper {
         return true;
       }) as OperatorFunction<T, UnNull<T>>,
     );
+  }
+
+  static filterWith<T, U>(
+    other$: Observable<U[]>,
+    accept: U[] | U,
+  ): MonoTypeOperatorFunction<T> {
+    return (source$) => {
+      return source$.pipe(
+        withLatestFrom(other$),
+        filter(({ 1: other }) => {
+          if (Array.isArray(accept)) {
+            return difference(accept, other).length === 0;
+          }
+          return other.includes(accept);
+        }),
+        map(([source]) => source),
+      );
+    };
   }
 }

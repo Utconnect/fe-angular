@@ -1,0 +1,81 @@
+<tui-scrollbar class="max-h-full">
+  <tui-loader
+    *ngrxLet="filterStatus$ as filterStatus"
+    [showLoader]="filterStatus === 'loading'"
+    [overlay]="true"
+  >
+    <form [formGroup]="form">
+      <table tuiTable [columns]="columns">
+        <!-- Head -->
+        <thead tuiThead>
+          <tr tuiThGroup>
+            <th tuiTh *tuiHead="'checkbox'" [sorter]="null">
+              <tui-checkbox
+                [(ngModel)]="selectAll"
+                [ngModelOptions]="{ standalone: true }"
+                [disabled]="data.length === 0"
+              ></tui-checkbox>
+            </th>
+            <th tuiTh *tuiHead="'index'" [sorter]="null">STT</th>
+            <th tuiTh *tuiHead="'name'" [resizable]="true">Lớp học phần</th>
+            <th tuiTh *tuiHead="'credit'">Số TC</th>
+            <th tuiTh *tuiHead="'numberReality'">Sĩ số</th>
+            <th tuiTh *tuiHead="'type'">Kiểu lớp</th>
+            <ng-container *ngIf="!excludeTeacher">
+              <th tuiTh *tuiHead="'teacher'">Giảng viên</th>
+            </ng-container>
+          </tr>
+        </thead>
+
+        <!-- Body with data -->
+        <ng-container *ngIf="data.length > 0; else noData">
+          <tbody
+            tuiTbody
+            *tuiLet="data | tuiTableSort as sortedData"
+            [data]="sortedData"
+          >
+            <ng-container formArrayName="checkbox">
+              <tr tuiTr *ngFor="let item of data; let i = index">
+                <td tuiTd *tuiCell="'checkbox'">
+                  <div class="h-full center-flex">
+                    <tui-checkbox
+                      [formControl]="getCheckbox(i)"
+                      (ngModelChange)="onModelChange(item.id, $event)"
+                    ></tui-checkbox>
+                  </div>
+                </td>
+                <td tuiTd *tuiCell="'index'" class="!text-center">
+                  {{ i + 1 }}
+                </td>
+                <td tuiTd *tuiCell="'name'">{{ item.name }}</td>
+                <td tuiTd *tuiCell="'credit'" class="!text-center">
+                  {{ item.credit }}
+                </td>
+                <td tuiTd *tuiCell="'numberReality'" class="!text-center">
+                  {{ item.numberReality }}
+                </td>
+                <td tuiTd *tuiCell="'type'" class="!text-center">
+                  {{ item.type !== undefined ? classType[item.type] : '' }}
+                </td>
+                <ng-container *ngIf="!excludeTeacher">
+                  <td tuiTd *tuiCell="'teacher'">
+                    {{ item.teacher }}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </ng-container>
+
+        <!-- Body without data -->
+        <ng-template #noData>
+          <tbody tuiTbody>
+            <th colspan="7">
+              <div class="py-6">Chưa có dữ liệu</div>
+            </th>
+          </tbody>
+        </ng-template>
+      </table>
+    </form>
+  </tui-loader>
+</tui-scrollbar>

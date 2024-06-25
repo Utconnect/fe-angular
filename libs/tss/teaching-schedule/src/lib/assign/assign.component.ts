@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TssTeachingScheduleAssignFilterComponent } from './assign-filter';
 import { TssTeachingScheduleAssignLeftTitleComponent } from './assign-left-title';
+import { TssTeachingScheduleAssignListComponent } from './assign-list';
+import { TssTeachingScheduleAssignResultComponent } from './assign-result';
 import { TssTeachingScheduleAssignRightTitleComponent } from './assign-right-title';
 
 @Component({
@@ -13,6 +15,8 @@ import { TssTeachingScheduleAssignRightTitleComponent } from './assign-right-tit
     TssTeachingScheduleAssignFilterComponent,
     TssTeachingScheduleAssignLeftTitleComponent,
     TssTeachingScheduleAssignRightTitleComponent,
+    TssTeachingScheduleAssignListComponent,
+    TssTeachingScheduleAssignResultComponent,
   ],
 })
 export class TssTeachingScheduleAssignComponent {}
