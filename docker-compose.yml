@@ -1,0 +1,25 @@
+﻿services:
+  tss:
+    container_name: tss
+    build:
+      context: .
+      args:
+        APP_NAME: 'tss'
+
+  esm:
+    container_name: esm
+    build:
+      context: .
+      args:
+        APP_NAME: 'esm'
+
+  gateway:
+    image: nginx:1.27.0-alpine
+    container_name: gateway_fe
+    ports:
+      - '80:80'
+    volumes:
+      - ./gateway.nginx.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - tss
+      - esm

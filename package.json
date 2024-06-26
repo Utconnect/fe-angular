@@ -73,7 +73,7 @@
     "@nrwl/jest": "15.9.7",
     "@nrwl/js": "15.9.7",
     "@nrwl/linter": "15.9.7",
-    "@nrwl/nx-cloud": "latest",
+    "@nrwl/nx-cloud": "15.3.5",
     "@nrwl/web": "15.9.7",
     "@nrwl/workspace": "15.9.7",
     "@schematics/angular": "~15.2.0",
