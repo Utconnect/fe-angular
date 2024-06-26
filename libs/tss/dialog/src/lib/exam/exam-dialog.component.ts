@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -49,6 +49,13 @@ const TAIGA_UI = [
   providers: [ExamDialogStore],
 })
 export class TssExamDialogComponent {
+  // INJECTIONS
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(ExamDialogStore);
+  private readonly alertService = inject(TuiAlertService);
+  private readonly context =
+    inject<TuiDialogContext<string, TssExamModel>>(POLYMORPHEUS_CONTEXT);
+
   // PUBLIC PROPERTIES
   readonly notAllowFieldHint = 'Không thể thay đổi thông tin của lịch thi';
   readonly noteMaxLength = FormConstant.NOTE_MAX_LENGTH;
@@ -76,14 +83,8 @@ export class TssExamDialogComponent {
   }
 
   // CONSTRUCTOR
-  constructor(
-    @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<string, TssExamModel>,
-    private readonly fb: FormBuilder,
-    @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
-    private readonly store: ExamDialogStore,
-  ) {
-    this.initForm(context.data);
+  constructor() {
+    this.initForm(this.context.data);
     this.handleSubmitStatus();
   }
 

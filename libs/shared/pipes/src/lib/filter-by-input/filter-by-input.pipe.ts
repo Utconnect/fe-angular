@@ -1,4 +1,4 @@
-import { Inject, Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import {
   TuiFocusableElementAccessor,
   TuiStringMatcher,
@@ -13,11 +13,10 @@ import {
   pure: false,
 })
 export class FilterByInputPipe implements PipeTransform {
-  // CONSTRUCTOR
-  constructor(
-    @Inject(TUI_FOCUSABLE_ITEM_ACCESSOR)
-    private readonly accessor: TuiFocusableElementAccessor,
-  ) {}
+  // INJECTIONS
+  private readonly accessor = inject<TuiFocusableElementAccessor>(
+    TUI_FOCUSABLE_ITEM_ACCESSOR,
+  );
 
   // GETTERS
   private get query(): string {

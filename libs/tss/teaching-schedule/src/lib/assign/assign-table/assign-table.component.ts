@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   OnChanges,
   SimpleChanges,
@@ -21,8 +22,6 @@ import { TuiLoaderModule, TuiScrollbarModule } from '@taiga-ui/core';
 import { TuiCheckboxModule } from '@taiga-ui/kit';
 import { ModuleClass } from '@tss/api';
 import { ScheduleConstant } from '@tss/constants';
-import { Status } from '@utconnect/types';
-import { Observable } from 'rxjs';
 import { TssTeachingScheduleAssignStore } from '../store';
 
 const TAIGA_UI = [
@@ -48,6 +47,10 @@ const TAIGA_UI = [
   ],
 })
 export class TssTeachingScheduleAssignTableComponent implements OnChanges {
+  // INJECTIONS
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(TssTeachingScheduleAssignStore);
+
   // INPUT
   @Input() data!: ModuleClass[];
   @Input() excludeTeacher = false;
@@ -63,7 +66,7 @@ export class TssTeachingScheduleAssignTableComponent implements OnChanges {
     'teacher',
   ];
   readonly classType = ScheduleConstant.CLASS_TYPE;
-  readonly filterStatus$: Observable<Status>;
+  readonly filterStatus$ = this.store.status$('filter');
   form!: FormGroup;
 
   // PRIVATE PROPERTIES
@@ -88,14 +91,6 @@ export class TssTeachingScheduleAssignTableComponent implements OnChanges {
       this.data.map(({ id }) => id),
       checked,
     );
-  }
-
-  // CONSTRUCTOR
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly store: TssTeachingScheduleAssignStore,
-  ) {
-    this.filterStatus$ = store.status$('filter');
   }
 
   // LIFECYCLE

@@ -1,4 +1,4 @@
-import { Inject, Injectable, Injector } from '@angular/core';
+import { inject, Injectable, Injector } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { Observable } from 'rxjs';
@@ -9,11 +9,9 @@ import { ConfirmDialogOptions } from './dialog-options';
   providedIn: 'root',
 })
 export class DialogService {
-  // CONSTRUCTOR
-  constructor(
-    private readonly dialogService: TuiDialogService,
-    @Inject(Injector) private readonly injector: Injector,
-  ) {}
+  // INJECTIONS
+  private readonly injector = inject(Injector);
+  private readonly dialogService = inject(TuiDialogService);
 
   // PUBLIC METHODS
   showConfirmDialog<T extends ConfirmDialogOptions>(

@@ -9,7 +9,7 @@
     >
       <ng-container
         *ngIf="
-          obs.roles | array : 'in' : 'ExaminationDepartmentHead';
+          obs.roles | array : 'includes' : 'ExaminationDepartmentHead';
           else buttons
         "
       >

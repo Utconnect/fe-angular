@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-type Operator = 'in' | 'map';
+type Operator = 'includes' | 'map';
 type OperatorParam<T> = {
-  in: T;
+  includes: T;
   map: (value: T, index: number) => T;
 };
 type OperatorResult<T> = {
-  in: boolean;
+  includes: boolean;
   map: T[];
 };
 
@@ -15,24 +15,24 @@ type OperatorResult<T> = {
   standalone: true,
 })
 export class ArrayPipe implements PipeTransform {
-  transform<T>(value: T[], operator: 'in', param: T): boolean;
+  transform<T>(array: T[], operator: 'includes', param: T): boolean;
   transform<T>(
-    value: T[],
+    array: T[],
     operator: 'map',
     param: (value: T, index: number) => T,
   ): T[];
 
   transform<T, O extends Operator>(
-    value: T[],
+    array: T[],
     operator: O,
     param: OperatorParam<T>[O],
   ): OperatorResult<T>[Operator] {
-    if (operator === 'in') {
-      return value.includes(param as OperatorParam<T>['in']);
+    if (operator === 'includes') {
+      return array.includes(param as OperatorParam<T>['includes']);
     }
 
     if (operator === 'map') {
-      return value.map(param as OperatorParam<T>['map']);
+      return array.map(param as OperatorParam<T>['map']);
     }
 
     throw Error('Invalid operator');

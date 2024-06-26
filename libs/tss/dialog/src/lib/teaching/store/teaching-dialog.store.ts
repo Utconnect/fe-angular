@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import {
@@ -48,6 +48,10 @@ const initialState: TeachingDialogState = {
 
 @Injectable()
 export class TssTeachingDialogStore extends ComponentStore<TeachingDialogState> {
+  // INJECTIONS
+  private readonly appStore = inject(Store<TssState>);
+  private readonly scheduleService = inject(ScheduleService);
+
   // PRIVATE PROPERTIES
   private readonly _status$ = this.select((s) => s.status);
 
@@ -272,10 +276,7 @@ export class TssTeachingDialogStore extends ComponentStore<TeachingDialogState> 
     this.select(this._status$, (s) => s[prop]);
 
   // CONSTRUCTOR
-  constructor(
-    private readonly scheduleService: ScheduleService,
-    private readonly appStore: Store<TssState>,
-  ) {
+  constructor() {
     super(initialState);
   }
 

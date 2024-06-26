@@ -6,10 +6,10 @@ describe('ArrayPipe', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('in', () => {
+  it('includes', () => {
     const pipe = new ArrayPipe();
-    expect(pipe.transform([1, 2, 3], 'in', 1)).toEqual(true);
-    expect(pipe.transform([1, 2, 3], 'in', 0)).toEqual(false);
+    expect(pipe.transform([1, 2, 3], 'includes', 1)).toEqual(true);
+    expect(pipe.transform([1, 2, 3], 'includes', 0)).toEqual(false);
   });
 
   it('map', () => {

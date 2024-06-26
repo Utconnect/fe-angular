@@ -1,0 +1,24 @@
+<div *tssTouchScreen="null; else desktopDateSelect" class="flex items-center">
+  <button
+    tuiIconButton
+    (click)="onOpenTouchDialog()"
+    appearance="secondary"
+    icon="tuiIconCalendarLarge"
+    shape="rounded"
+    aria-label="Calendar"
+  ></button>
+  <span class="ml-4 text-base">{{
+    control.value | inputDateRangeDateText
+  }}</span>
+</div>
+<ng-template #desktopDateSelect>
+  <tui-input-date-range
+    (ngModelChange)="onValueChange($event)"
+    [formControl]="control"
+    [items]="items"
+    [min]="min"
+    tuiTextfieldSize="l"
+  >
+    Chọn khoảng thời gian
+  </tui-input-date-range>
+</ng-template>

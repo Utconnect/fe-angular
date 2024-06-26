@@ -69,7 +69,7 @@
             {{ row.facultyShiftGroup.shiftGroup.module.name }}
           </td>
           <td *tuiCell="'startAt'" tuiTd class="w-32">
-            {{ row.facultyShiftGroup.shiftGroup.startAt | date: "dd/MM/y" }}
+            {{ row.facultyShiftGroup.shiftGroup.startAt | date : 'dd/MM/y' }}
           </td>
           <td *tuiCell="'shift'" tuiTd class="w-24 !text-center">
             {{ row.facultyShiftGroup.shiftGroup.shift }}
@@ -78,7 +78,10 @@
           <ng-container *ngrxLet="form.controls[row.id] as rowControl">
             <td *tuiCell="'department'" tuiTd class="w-60">
               <tui-select
-                *ngIf="obs.roles | array: 'in' : 'Teacher'; else departmentTmpl"
+                *ngIf="
+                  obs.roles | array : 'includes' : 'Teacher';
+                  else departmentTmpl
+                "
                 (ngModelChange)="rowControl.controls.user.setValue(null)"
                 [formControl]="rowControl.controls.departmentId"
                 [valueContent]="stringify(obs.departments)"
@@ -107,7 +110,7 @@
                           obs.departments,
                           rowControl.value.departmentId
                         )
-                    : ""
+                    : ''
                 }}
                 <!-- rowControl.value.departmentId -->
               </ng-template>
@@ -120,7 +123,10 @@
               class="w-60"
             >
               <tui-combo-box
-                *ngIf="obs.roles | array: 'in' : 'Teacher'; else teacherTmpl"
+                *ngIf="
+                  obs.roles | array : 'includes' : 'Teacher';
+                  else teacherTmpl
+                "
                 [(search)]="customValues[row.id]"
                 (ngModelChange)="onInvigilatorChanges(row.facultyShiftGroup.id)"
                 [formControl]="rowControl.controls.user"
@@ -157,7 +163,7 @@
                 rowControl.value.user
                   ? obs.invigilatorInfoMap[rowControl.value.user.id]
                       ?.phoneNumber
-                  : ""
+                  : ''
               }}
             </td>
           </ng-container>

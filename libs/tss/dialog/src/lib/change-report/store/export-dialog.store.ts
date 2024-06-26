@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { TuiDayRange } from '@taiga-ui/cdk';
@@ -11,10 +11,14 @@ type ExportDialogState = GenericState<ChangeSchedule[]>;
 
 @Injectable()
 export class TssChangeReportDialogStore extends ComponentStore<ExportDialogState> {
+  // INJECTIONS
+  private readonly appStore = inject(Store<TssState>);
+  private readonly statisticService = inject(StatisticService);
+
   // PUBLIC PROPERTIES
   readonly data$ = this.select((s) => s.data);
   readonly status$ = this.select((s) => s.dataStatus);
-  readonly teacher$ = this.appShellStore.pipe(
+  readonly teacher$ = this.appStore.pipe(
     TssSelector.notNullTeacher,
     takeUntil(this.destroy$),
   );
@@ -47,10 +51,7 @@ export class TssChangeReportDialogStore extends ComponentStore<ExportDialogState
   );
 
   // CONSTRUCTOR
-  constructor(
-    private readonly statisticService: StatisticService,
-    private readonly appShellStore: Store<TssState>,
-  ) {
+  constructor() {
     super(<ExportDialogState>{});
   }
 }

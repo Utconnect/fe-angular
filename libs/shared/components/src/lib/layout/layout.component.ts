@@ -44,6 +44,7 @@ const TAIGA_UI = [
 export class LayoutComponent {
   // INJECT PROPERTIES
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   // INPUT
   @Input() role: string | null = null;
@@ -54,7 +55,7 @@ export class LayoutComponent {
   readonly commonPages = ['/create', '/data'];
 
   // LIFECYCLE
-  constructor(private readonly route: ActivatedRoute) {
+  constructor() {
     this.triggerToggleSidebar();
     this.route.data.subscribe((data) => console.log(data));
   }

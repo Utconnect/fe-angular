@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TuiDialog } from '@taiga-ui/cdk';
 import {
   TuiButtonModule,
@@ -23,11 +23,9 @@ import { ConfirmDialogOptions } from '../dialog-options';
   ],
 })
 export class ConfirmDialogComponent<T extends ConfirmDialogOptions> {
-  // CONSTRUCTOR
-  constructor(
-    @Inject(POLYMORPHEUS_CONTEXT)
-    public readonly context: TuiDialog<TuiDialogOptions<T>, boolean>,
-  ) {}
+  // INJECTIONS
+  public readonly context =
+    inject<TuiDialog<TuiDialogOptions<T>, boolean>>(POLYMORPHEUS_CONTEXT);
 
   // PUBLIC METHODS
   onClick(response: boolean): void {

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
+  inject,
   Injector,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -14,13 +14,14 @@ import {
   TuiDialogService,
 } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { ChangeSchedule, ExportService, Teacher } from '@tss/api';
+import { ExportService } from '@tss/api';
 import { TssChangeReportDialogComponent } from '@tss/dialog';
 import { FileType } from '@tss/types';
 import { IconConstant } from '@utconnect/constants';
 import { StringHelper } from '@utconnect/helpers';
-import { Observable, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
+import { Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
 import { TssTeachingScheduleChangeStore } from '../../change.store';
+import { TssTeachingScheduleChangeRequestFilterLeftComponent } from '../change-request-filter-left';
 
 const TAIGA_UI = [TuiButtonModule];
 
@@ -30,7 +31,6 @@ const TAIGA_UI = [TuiButtonModule];
   styleUrls: ['./change-request-filter.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, LetModule, ...TAIGA_UI],
   providers: [
     TuiDestroyService,
     tuiButtonOptionsProvider({
@@ -38,33 +38,40 @@ const TAIGA_UI = [TuiButtonModule];
       size: 's',
     }),
   ],
+  imports: [
+    CommonModule,
+    LetModule,
+    TssTeachingScheduleChangeRequestFilterLeftComponent,
+    ...TAIGA_UI,
+  ],
 })
-export class ChangeRequestFilterComponent {
+export class TssTeachingScheduleChangeRequestFilterComponent {
+  // INJECTIONS
+  private readonly exportService = inject(ExportService);
+  private readonly injector = inject(Injector);
+  private readonly dialogService = inject(TuiDialogService);
+  private readonly destroy$ = inject(TuiDestroyService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly store = inject(TssTeachingScheduleChangeStore);
+
   // PUBLIC PROPERTIES
   readonly exportMultiple$ = new Subject<void>();
   readonly IconConstant = IconConstant;
-  readonly exportSchedule$: Observable<ChangeSchedule[]>;
-  readonly isPersonal: boolean;
+  readonly exportSchedule$ = this.store.exportSchedule$;
+  readonly isPersonal = this.route.snapshot.data['personal'] as boolean;
 
   // PRIVATE PROPERTIES
-  private readonly teacher$: Observable<Teacher>;
-  private dialog$!: Observable<void>;
+  private readonly teacher$ = this.store.teacher$;
+  private dialog$ = this.dialogService.open(
+    new PolymorpheusComponent(TssChangeReportDialogComponent, this.injector),
+    {
+      label: 'Xuất báo cáo thay đổi giờ giảng',
+      dismissible: false,
+    },
+  );
 
   // CONSTRUCTOR
-  constructor(
-    private readonly exportService: ExportService,
-    @Inject(Injector) private readonly injector: Injector,
-    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
-    private readonly destroy$: TuiDestroyService,
-    route: ActivatedRoute,
-    store: TssTeachingScheduleChangeStore,
-  ) {
-    this.teacher$ = store.teacher$;
-    this.exportSchedule$ = store.exportSchedule$;
-
-    this.isPersonal = route.snapshot.data['personal'] as boolean;
-
-    this.initDialog();
+  constructor() {
     this.handleExportMultiple();
   }
 
@@ -74,16 +81,6 @@ export class ChangeRequestFilterComponent {
   }
 
   // PRIVATE METHODS
-  private initDialog(): void {
-    this.dialog$ = this.dialogService.open(
-      new PolymorpheusComponent(TssChangeReportDialogComponent, this.injector),
-      {
-        label: 'Xuất báo cáo thay đổi giờ giảng',
-        dismissible: false,
-      },
-    );
-  }
-
   private handleExportMultiple(): void {
     this.exportMultiple$
       .pipe(

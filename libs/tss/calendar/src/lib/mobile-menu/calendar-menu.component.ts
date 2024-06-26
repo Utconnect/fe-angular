@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ScheduleComponent, View } from '@syncfusion/ej2-angular-schedule';
@@ -18,7 +23,8 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiSelectModule } from '@taiga-ui/kit';
-import { Observable, takeUntil } from 'rxjs';
+import { TouchScreenDirective } from '@utconnect/directives';
+import { takeUntil } from 'rxjs';
 import { TssCalendarFilterComponent } from '../filter';
 import { TssCalendarHeaderNavigateDirective } from '../header/navigate';
 import {
@@ -50,6 +56,7 @@ type ViewItem = {
   imports: [
     CommonModule,
     FormsModule,
+    TouchScreenDirective,
     TssCalendarFilterComponent,
     TssCalendarHeaderNavigateDirective,
     ...TAIGA_UI,
@@ -63,27 +70,23 @@ type ViewItem = {
   ],
 })
 export class TssCalendarMobileMenuComponent {
+  // INJECTIONS
+  private readonly store = inject(Store<CalendarState>);
+  private readonly destroy$ = inject(TuiDestroyService);
+
   // INPUT
   @Input() scheduleComponent!: ScheduleComponent;
 
   // PUBLIC PROPERTIES
-  readonly view$: Observable<View>;
   readonly viewList: ViewItem[] = [
     { id: 'Month', name: 'Tháng' },
     { id: 'Week', name: 'Tuần' },
     { id: 'Day', name: 'Ngày' },
   ];
+  readonly view$ = this.store
+    .select(TssCalendarSelector.view)
+    .pipe(takeUntil(this.destroy$));
   openRightMenu = false;
-
-  // CONSTRUCTOR
-  constructor(
-    private readonly store: Store<CalendarState>,
-    private readonly destroy$: TuiDestroyService,
-  ) {
-    this.view$ = store
-      .select(TssCalendarSelector.view)
-      .pipe(takeUntil(this.destroy$));
-  }
 
   // PUBLIC METHODS
   @tuiPure

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile';
 import { TuiActiveZoneModule } from '@taiga-ui/cdk';
 import {
@@ -49,6 +49,15 @@ const TAIGA_UI = [
   ],
 })
 export class TssTeachingDialogComponent {
+  // INJECTIONS
+  public readonly context =
+    inject<
+      TuiDialogContext<
+        TssTeachingModel[],
+        { schedules: TssTeachingModel[]; selectedId: number }
+      >
+    >(POLYMORPHEUS_CONTEXT);
+
   // PUBLIC PROPERTIES
   readonly IconConstant = IconConstant;
   schedules = this.context.data.schedules;
@@ -84,14 +93,8 @@ export class TssTeachingDialogComponent {
   }
 
   // CONSTRUCTOR
-  constructor(
-    @Inject(POLYMORPHEUS_CONTEXT)
-    public readonly context: TuiDialogContext<
-      TssTeachingModel[],
-      { schedules: TssTeachingModel[]; selectedId: number }
-    >,
-  ) {
-    this.onChangeSelectedSchedule(context.data.selectedId);
+  constructor() {
+    this.onChangeSelectedSchedule(this.context.data.selectedId);
   }
 
   // PUBLIC METHODS

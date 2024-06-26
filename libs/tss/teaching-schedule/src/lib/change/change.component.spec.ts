@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TssTeachingScheduleChangeComponent } from './change.component';
 
-describe('ChangeComponent', () => {
+describe('TssTeachingScheduleChangeComponent', () => {
   let component: TssTeachingScheduleChangeComponent;
   let fixture: ComponentFixture<TssTeachingScheduleChangeComponent>;
 

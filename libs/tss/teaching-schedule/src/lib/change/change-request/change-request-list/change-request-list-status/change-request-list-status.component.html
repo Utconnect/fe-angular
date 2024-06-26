@@ -1,0 +1,35 @@
+<div
+  *ngIf="displayText; else action"
+  [ngClass]="item.status | tssStatusColor"
+  class="text-center font-semibold"
+>
+  {{ statusList[item.status].name }}
+</div>
+
+<ng-template #action>
+  <tui-loader
+    *ngrxLet="requesting$ as requesting"
+    [showLoader]="requesting | array : 'includes' : item.id"
+    [overlay]="true"
+    class="w-full"
+  >
+    <div class="flex justify-center">
+      <button
+        tuiIconButton
+        (click)="accept$.next()"
+        tuiHint="Chấp nhận"
+        icon="tuiIconCheck"
+        appearance="positive"
+        aria-label="Accept"
+      ></button>
+      <button
+        tuiIconButton
+        (click)="onDeny()"
+        tuiHint="Từ chối"
+        icon="tuiIconClose"
+        appearance="negative"
+        aria-label="Deny"
+      ></button>
+    </div>
+  </tui-loader>
+</ng-template>

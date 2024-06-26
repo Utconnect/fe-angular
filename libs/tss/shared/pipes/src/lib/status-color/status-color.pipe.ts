@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'tssStatusColor',
   standalone: true,
 })
-export class StatusColorPipe implements PipeTransform {
+export class TssStatusColorPipe implements PipeTransform {
   transform(statusCode: number): string {
     switch (true) {
       case statusCode === 100 || (500 <= statusCode && statusCode < 600):

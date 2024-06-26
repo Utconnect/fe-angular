@@ -1,0 +1,41 @@
+<tui-loader
+  *ngrxLet="requesting$ as requesting"
+  [showLoader]="requesting | array : 'includes' : schedule.id"
+  [overlay]="true"
+>
+  <div
+    *ngrxLet="
+      schedule.status
+        | tssTeachingScheduleChangeRequestListActionStatusType as status
+    "
+    class="flex justify-center"
+  >
+    <button
+      tuiIconButton
+      (click)="showDetails()"
+      icon="tuiIconShowLarge"
+      tuiHint="Xem chi tiết"
+      aria-label="Details"
+    ></button>
+    <button
+      tuiIconButton
+      [icon]="IconConstant.exportVariantLarge"
+      [disabled]="
+        !(schedule.status | tssTeachingScheduleChangeRequestListActionCanExport)
+      "
+      (click)="export$.next()"
+      tuiHint="Xuất file yêu cầu"
+      aria-label="Export"
+    ></button>
+    <button
+      tuiIconButton
+      *ngIf="canCancel"
+      [disabled]="status !== 'pending'"
+      (click)="cancel$.next()"
+      icon="tuiIconTrashLarge"
+      tuiHint="Hủy yêu cầu"
+      tuiHintDirection="bottom-left"
+      aria-label="Cancel"
+    ></button>
+  </div>
+</tui-loader>

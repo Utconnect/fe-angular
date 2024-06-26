@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -22,7 +22,7 @@ import { TssChangeReportDialogStore } from './store';
 const TAIGA_UI = [TuiButtonModule];
 
 @Component({
-  selector: 'tss-change-report-dialog',
+  selector: 'tss-change-report-dialog-details',
   templateUrl: './change-report-dialog.component.html',
   styleUrls: ['./change-report-dialog.component.css'],
   standalone: true,
@@ -36,6 +36,13 @@ const TAIGA_UI = [TuiButtonModule];
   ],
 })
 export class TssChangeReportDialogComponent {
+  // INJECTIONS
+  private readonly fb = inject(FormBuilder);
+  private readonly exportService = inject(ExportService);
+  private readonly store = inject(TssChangeReportDialogStore);
+  public readonly context =
+    inject<TuiDialogContext<void, ChangeSchedule>>(POLYMORPHEUS_CONTEXT);
+
   // PUBLIC PROPERTIES
   form!: FormGroup;
   readonly status$ = this.store.status$;
@@ -50,13 +57,7 @@ export class TssChangeReportDialogComponent {
   private readonly teacher$ = this.store.teacher$;
 
   // CONSTRUCTOR
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly store: TssChangeReportDialogStore,
-    private readonly exportService: ExportService,
-    @Inject(POLYMORPHEUS_CONTEXT)
-    public readonly context: TuiDialogContext<void, ChangeSchedule>,
-  ) {
+  constructor() {
     this.initForm();
     this.handleConfirm();
     this.handleReceiveData();

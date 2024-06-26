@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   ViewChild,
 } from '@angular/core';
@@ -16,11 +17,10 @@ import {
   TuiHostedDropdownModule,
 } from '@taiga-ui/core';
 import { TuiCalendarMonthModule } from '@taiga-ui/kit';
-import { CalendarFilter } from '@tss/api';
 import { fadeIn } from '@utconnect/animations';
+import { TouchScreenDirective } from '@utconnect/directives';
 import { DateHelper, ScheduleHelper } from '@utconnect/helpers';
 import { ShortenNamePipe } from '@utconnect/pipes';
-import { SimpleModel } from '@utconnect/types';
 import { combineLatest, delay, map, Observable, takeUntil } from 'rxjs';
 import { TssCalendarFilterComponent } from '../filter';
 import { CalendarState } from '../store';
@@ -49,6 +49,7 @@ type ViewButton = {
   imports: [
     CommonModule,
     ShortenNamePipe,
+    TouchScreenDirective,
     TssCalendarHeaderNavigateDirective,
     TssCalendarFilterComponent,
     ...NGRX,
@@ -64,6 +65,10 @@ type ViewButton = {
   ],
 })
 export class TssCalendarHeaderComponent implements AfterViewInit {
+  // INJECTIONS
+  private readonly store = inject(Store<CalendarState>);
+  private readonly destroy$ = inject(TuiDestroyService);
+
   // INPUT
   @Input() scheduleComponent!: ScheduleComponent;
 
@@ -76,41 +81,30 @@ export class TssCalendarHeaderComponent implements AfterViewInit {
     { view: 'Month', label: 'Tháng' },
     { view: 'Week', label: 'Tuần' },
     { view: 'Day', label: 'Ngày' },
-    // { view: 'Agenda', label: 'Lịch biểu' },
   ];
   openSelectMonth = false;
   openFilter = false;
-  view$: Observable<View>;
-  filter$: Observable<CalendarFilter>;
-  month$: Observable<TuiMonth>;
+
+  view$ = this.store
+    .select(TssCalendarSelector.view)
+    .pipe(takeUntil(this.destroy$));
+  filter$ = this.store
+    .select(TssCalendarSelector.filter)
+    .pipe(takeUntil(this.destroy$));
+  month$ = this.store
+    .select(TssCalendarSelector.month)
+    .pipe(takeUntil(this.destroy$));
+  activeTeachers$ = this.store
+    .select(TssCalendarSelector.activeTeachers)
+    .pipe(takeUntil(this.destroy$));
+
   dateRange$!: Observable<string>;
   activeToday$!: Observable<boolean>;
-  activeTeachers$!: Observable<SimpleModel[]>;
 
   // PRIVATE PROPERTIES
-  private selectedDate$: Observable<Date>;
-
-  // CONSTRUCTOR
-  constructor(
-    private readonly store: Store<CalendarState>,
-    private readonly destroy$: TuiDestroyService,
-  ) {
-    this.selectedDate$ = store
-      .select(TssCalendarSelector.selectedDate)
-      .pipe(takeUntil(this.destroy$));
-    this.filter$ = store
-      .select(TssCalendarSelector.filter)
-      .pipe(takeUntil(this.destroy$));
-    this.month$ = store
-      .select(TssCalendarSelector.month)
-      .pipe(takeUntil(this.destroy$));
-    this.view$ = store
-      .select(TssCalendarSelector.view)
-      .pipe(takeUntil(this.destroy$));
-    this.activeTeachers$ = store
-      .select(TssCalendarSelector.activeTeachers)
-      .pipe(takeUntil(this.destroy$));
-  }
+  private selectedDate$ = this.store
+    .select(TssCalendarSelector.selectedDate)
+    .pipe(takeUntil(this.destroy$));
 
   // LIFECYCLE
   ngAfterViewInit(): void {

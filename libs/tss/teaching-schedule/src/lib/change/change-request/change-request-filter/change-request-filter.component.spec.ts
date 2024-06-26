@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TssTeachingScheduleChangeRequestFilterComponent } from './change-request-filter.component';
 
-import { ChangeRequestFilterComponent } from './change-request-filter.component';
-
-describe('ChangeRequestFilterComponent', () => {
-  let component: ChangeRequestFilterComponent;
-  let fixture: ComponentFixture<ChangeRequestFilterComponent>;
+describe('TssTeachingScheduleChangeRequestFilterComponent', () => {
+  let component: TssTeachingScheduleChangeRequestFilterComponent;
+  let fixture: ComponentFixture<TssTeachingScheduleChangeRequestFilterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChangeRequestFilterComponent],
+      declarations: [TssTeachingScheduleChangeRequestFilterComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeRequestFilterComponent);
+    fixture = TestBed.createComponent(
+      TssTeachingScheduleChangeRequestFilterComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

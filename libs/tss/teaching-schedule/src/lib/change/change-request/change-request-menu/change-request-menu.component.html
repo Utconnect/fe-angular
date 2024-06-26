@@ -1,0 +1,15 @@
+<button
+  tuiIconButton
+  (click)="toggleRightMenu(true)"
+  (tuiActiveZoneChange)="toggleRightMenu($event)"
+  icon="tuiIconFilterLarge"
+  aria-label="Filter"
+>
+  <div *tuiSidebar="openRightMenu; direction: 'right'">
+    <div class="p-4">
+      <tss-teaching-schedule-change-request-filter-left
+        [forMenu]="true"
+      ></tss-teaching-schedule-change-request-filter-left>
+    </div>
+  </div>
+</button>

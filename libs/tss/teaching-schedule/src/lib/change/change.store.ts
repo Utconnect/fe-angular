@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import {
@@ -62,6 +62,10 @@ const initialState: TeachingScheduleRequestState = {
 
 @Injectable()
 export class TssTeachingScheduleChangeStore extends ComponentStore<TeachingScheduleRequestState> {
+  // INJECTIONS
+  private readonly appStore = inject(Store<TssState>);
+  private readonly scheduleService = inject(ScheduleService);
+
   // PRIVATE PROPERTIES
   private personal!: boolean;
   private readonly loadSubject$ = new Subject<ChangeScheduleSearch>();
@@ -335,10 +339,7 @@ export class TssTeachingScheduleChangeStore extends ComponentStore<TeachingSched
     this.select(({ status }) => status[prop]);
 
   // CONSTRUCTOR
-  constructor(
-    private readonly scheduleService: ScheduleService,
-    private readonly appStore: Store<TssState>,
-  ) {
+  constructor() {
     super(initialState);
 
     this.handleLoadPersonal();

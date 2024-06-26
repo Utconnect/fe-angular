@@ -1,9 +1,9 @@
-import { TssCalendarPageAction } from './../store/calendar.page.actions';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  inject,
   Input,
   Output,
 } from '@angular/core';
@@ -33,8 +33,9 @@ import {
 import { CalendarFilter } from '@tss/api';
 import { PermissionConstant } from '@tss/constants';
 import { SimpleModel } from '@utconnect/types';
-import { Observable, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { CalendarState } from '../store';
+import { TssCalendarPageAction } from './../store/calendar.page.actions';
 import { TssCalendarSelector } from './../store/calendar.selectors';
 
 const NGRX = [LetModule];
@@ -55,13 +56,7 @@ const TAIGA_UI = [
   styleUrls: ['./calendar-filter.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    // PermissionDirectiveModule,
-    ...NGRX,
-    ...TAIGA_UI,
-  ],
+  imports: [CommonModule, FormsModule, ...NGRX, ...TAIGA_UI],
   providers: [
     TuiDestroyService,
     tuiButtonOptionsProvider({
@@ -71,6 +66,10 @@ const TAIGA_UI = [
   ],
 })
 export class TssCalendarFilterComponent {
+  // INJECTIONS
+  private readonly store = inject(Store<CalendarState>);
+  private readonly destroy$ = inject(TuiDestroyService);
+
   // INPUT
   @Input() activeZone!: TuiActiveZoneDirective;
   @Input() forMenu = false;
@@ -80,25 +79,15 @@ export class TssCalendarFilterComponent {
 
   // PUBLIC PROPERTIES
   readonly PermissionConstant = PermissionConstant;
-  readonly filter$: Observable<CalendarFilter>;
-  readonly teachers$: Observable<SimpleModel[]>;
-  readonly modules$: Observable<string[]>;
-
-  // CONSTRUCTOR
-  constructor(
-    private readonly store: Store<CalendarState>,
-    private readonly destroy$: TuiDestroyService,
-  ) {
-    this.filter$ = store
-      .select(TssCalendarSelector.currentFilter)
-      .pipe(takeUntil(this.destroy$));
-    this.teachers$ = store
-      .select(TssCalendarSelector.teachers)
-      .pipe(takeUntil(this.destroy$));
-    this.modules$ = store
-      .select(TssCalendarSelector.modules)
-      .pipe(takeUntil(this.destroy$));
-  }
+  readonly filter$ = this.store
+    .select(TssCalendarSelector.currentFilter)
+    .pipe(takeUntil(this.destroy$));
+  readonly teachers$ = this.store
+    .select(TssCalendarSelector.teachers)
+    .pipe(takeUntil(this.destroy$));
+  readonly modules$ = this.store
+    .select(TssCalendarSelector.modules)
+    .pipe(takeUntil(this.destroy$));
 
   // PUBLIC METHODS
   @tuiPure

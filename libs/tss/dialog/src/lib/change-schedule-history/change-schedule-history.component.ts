@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TuiDialogContext, TuiSvgModule } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ScheduleConstant } from '@tss/constants';
-import { StatusColorPipe } from '@tss/pipes';
+import { TssStatusColorPipe } from '@tss/pipes';
 import { FixedScheduleModel } from '@utconnect/types';
 
 const TAIGA_UI = [TuiSvgModule];
@@ -14,15 +14,13 @@ const TAIGA_UI = [TuiSvgModule];
   styleUrls: ['./change-schedule-history.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, StatusColorPipe, ...TAIGA_UI],
+  imports: [CommonModule, TssStatusColorPipe, ...TAIGA_UI],
 })
 export class TssChangeScheduleHistoryDialogComponent {
+  // INJECTIONS
+  public readonly context =
+    inject<TuiDialogContext<void, FixedScheduleModel[]>>(POLYMORPHEUS_CONTEXT);
+
   // PUBLIC PROPERTIES
   readonly statusList = ScheduleConstant.REQUEST_CHANGE_SCHEDULE_STATUS;
-
-  // CONSTRUCTOR
-  constructor(
-    @Inject(POLYMORPHEUS_CONTEXT)
-    public readonly context: TuiDialogContext<void, FixedScheduleModel[]>,
-  ) {}
 }

@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LetModule } from '@ngrx/component';
 import { ModuleClass } from '@tss/api';
-import { Nullable, SimpleModel } from '@utconnect/types';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TssTeachingScheduleAssignTableComponent } from '../assign-table';
 import { TssTeachingScheduleAssignStore } from '../store';
@@ -16,18 +15,17 @@ import { TssTeachingScheduleAssignStore } from '../store';
   imports: [CommonModule, TssTeachingScheduleAssignTableComponent, LetModule],
 })
 export class TssTeachingScheduleAssignResultComponent {
+  // INJECTIONS
+  private readonly store = inject(TssTeachingScheduleAssignStore);
   // PUBLIC PROPERTIES
   data$!: Observable<ModuleClass[]>;
 
   // PRIVATE METHODS
-  private assigned$: Observable<ModuleClass[]>;
-  private selectedTeacher$: Observable<Nullable<SimpleModel>>;
+  private assigned$ = this.store.assigned$;
+  private selectedTeacher$ = this.store.teacher$('selected');
 
   // CONSTRUCTOR
-  constructor(store: TssTeachingScheduleAssignStore) {
-    this.assigned$ = store.assigned$;
-    this.selectedTeacher$ = store.teacher$('selected');
-
+  constructor() {
     this.triggerChangeData();
   }
 

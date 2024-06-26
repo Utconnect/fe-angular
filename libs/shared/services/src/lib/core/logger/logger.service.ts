@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ErrorLogger, ErrorLoggerContainsField } from '@utconnect/helpers';
-import { LOGGER_OPTIONS, LoggerOptions } from './logger.provider';
+import { LoggerOptions, LOGGER_OPTIONS } from './logger.provider';
 
 export type ValueNameErrorParams<T> = {
   value: T | null | undefined;
@@ -11,9 +11,8 @@ export type ValueNameErrorParams<T> = {
   providedIn: 'root',
 })
 export class LoggerService {
-  constructor(
-    @Inject(LOGGER_OPTIONS) private readonly options: LoggerOptions,
-  ) {}
+  // INJECTIONS
+  private readonly options = inject<LoggerOptions>(LOGGER_OPTIONS);
 
   errorNullOrEmpty<T>(params: ValueNameErrorParams<T>): T;
   errorNullOrEmpty<T>(params: ValueNameErrorParams<T>[]): T[];
