@@ -39,7 +39,7 @@ export class TssTeachingScheduleChangeRequestComponent
 {
   // INJECTIONS
   private readonly route = inject(ActivatedRoute);
-  private readonly navbarService = inject(TopBarService);
+  private readonly topBarService = inject(TopBarService);
   private readonly store = inject(TssTeachingScheduleChangeStore);
 
   // VIEWCHILD
@@ -65,7 +65,7 @@ export class TssTeachingScheduleChangeRequestComponent
 
   // LIFECYCLE
   ngAfterViewInit(): void {
-    this.navbarService.addRightMenu(this.rightMenuTemplate);
+    this.topBarService.addRightMenu(this.rightMenuTemplate);
   }
 
   // PRIVATE METHODS

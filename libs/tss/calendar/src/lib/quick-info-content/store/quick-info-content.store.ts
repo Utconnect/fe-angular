@@ -42,7 +42,7 @@ export class TssCalendarQuickInfoContentEventStore extends ComponentStore<QuickI
             () =>
               this.patchState({
                 dataStatus: 'success',
-                dataError: '',
+                dataError: null,
               }),
             (error) =>
               this.patchState({

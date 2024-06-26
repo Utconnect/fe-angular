@@ -34,7 +34,7 @@ export class ExamDialogStore extends ComponentStore<ExportDialogState> {
             () =>
               this.patchState({
                 dataStatus: 'success',
-                dataError: '',
+                dataError: null,
               }),
             (error) =>
               this.patchState({

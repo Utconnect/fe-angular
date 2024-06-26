@@ -44,7 +44,7 @@ export class GoogleEventDialogStore extends ComponentStore<ExportDialogState> {
             () =>
               this.patchState({
                 dataStatus: 'success',
-                dataError: '',
+                dataError: null,
               }),
             (error) =>
               this.patchState({
@@ -71,7 +71,7 @@ export class GoogleEventDialogStore extends ComponentStore<ExportDialogState> {
             () =>
               this.patchState({
                 dataStatus: 'success',
-                dataError: '',
+                dataError: null,
               }),
             (error) =>
               this.patchState({

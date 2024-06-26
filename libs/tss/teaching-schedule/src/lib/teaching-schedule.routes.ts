@@ -8,6 +8,6 @@ export const ROUTES: Route[] = [
   },
   {
     path: 'change',
-    children: (await import('./change')).ROUTES,
+    loadChildren: async () => (await import('./change')).ROUTES,
   },
 ];

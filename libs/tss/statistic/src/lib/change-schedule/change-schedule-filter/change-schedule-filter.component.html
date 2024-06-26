@@ -1,0 +1,37 @@
+<form [formGroup]="form" class="b-form">
+  <div class="tui-form__row tui-form__row_multi-fields">
+    <div class="tui-form__multi-field">
+      <utconnect-input-date-range
+        (ngModelChange)="statisticize()"
+        formControlName="range"
+      ></utconnect-input-date-range>
+    </div>
+    <div class="tui-form__multi-field hidden md:block">
+      <button
+        tuiButton
+        *ngrxLet="status$ as status"
+        [tssStatisticChangeScheduleFilterExport]="form.controls['range']"
+        [showLoader]="status === 'loading'"
+        [disabled]="form.invalid"
+        class="ml-5"
+      >
+        Xuất báo cáo
+      </button>
+    </div>
+  </div>
+</form>
+
+<ng-template #export>
+  <button
+    tuiIconButton
+    *ngrxLet="status$ as status"
+    [tssStatisticChangeScheduleFilterExport]="form.controls['range']"
+    [icon]="IconConstant.exportVariantLarge"
+    [showLoader]="status === 'loading'"
+    [disabled]="form.invalid"
+    appearance="icon"
+    size="m"
+    class="md:!hidden"
+    aria-label="Export"
+  ></button>
+</ng-template>

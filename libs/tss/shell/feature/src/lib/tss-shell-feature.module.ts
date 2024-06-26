@@ -78,19 +78,13 @@ const routes: Routes = [
       //   (await import('@teaching-scheduling-system/web/exam/feature/shell'))
       //     .ShellModule,
       // },
-      // {
-      //   path: 'statistic',
-      //   canActivate: [permissionGuard],
-      //   data: {
-      //     breadcrumb: 'Thống kê',
-      //   },
-      // loadChildren: async () =>
-      //   (
-      //     await import(
-      //       '@teaching-scheduling-system/web/statistic/feature/shell'
-      //     )
-      //   ).ShellModule,
-      // },
+      {
+        path: 'statistic',
+        data: {
+          breadcrumb: 'Thống kê',
+        },
+        loadChildren: async () => (await import('@tss/statistic')).ROUTES,
+      },
       // {
       //   path: 'settings',
       //   data: {

@@ -37,7 +37,7 @@ export class TssChangeReportDialogStore extends ComponentStore<ExportDialogState
               this.patchState({
                 data: r.data,
                 dataStatus: 'success',
-                dataError: '',
+                dataError: null,
               }),
             (error) =>
               this.patchState({
