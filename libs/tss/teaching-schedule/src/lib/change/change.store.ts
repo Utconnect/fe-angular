@@ -11,9 +11,8 @@ import {
 } from '@tss/api';
 import { PermissionConstant, ScheduleConstant } from '@tss/constants';
 import { TssSelector, TssState } from '@tss/store';
-import { RequestChangeScheduleCode } from '@tss/types';
 import { DateHelper, ObjectHelper, ObservableHelper } from '@utconnect/helpers';
-import { Nullable, Status } from '@utconnect/types';
+import { Nullable, RequestChangeScheduleCode, Status } from '@utconnect/types';
 import {
   combineLatest,
   filter,

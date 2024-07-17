@@ -23,7 +23,6 @@ const TAIGA_UI = [TuiTextAreaModule, TuiButtonModule];
 @Component({
   selector: 'tss-teaching-schedule-change-request-list-status-deny-dialog',
   templateUrl: './deny-dialog.component.html',
-  styleUrls: ['./deny-dialog.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule, ...TAIGA_UI],

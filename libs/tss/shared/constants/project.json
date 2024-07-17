@@ -4,16 +4,6 @@
   "sourceRoot": "libs/tss/shared/constants/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/tss/shared/constants",
-        "main": "libs/tss/shared/constants/src/index.ts",
-        "tsConfig": "libs/tss/shared/constants/tsconfig.lib.json",
-        "assets": ["libs/tss/shared/constants/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],

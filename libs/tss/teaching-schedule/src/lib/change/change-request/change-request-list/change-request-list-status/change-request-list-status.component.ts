@@ -36,7 +36,7 @@ const TAIGA_UI = [TuiLoaderModule];
 @Component({
   selector: 'tss-teaching-schedule-change-request-list-status',
   templateUrl: './change-request-list-status.component.html',
-  styleUrls: ['./change-request-list-status.component.css'],
+  styleUrls: ['./change-request-list-status.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ArrayPipe, TssStatusColorPipe, ...TAIGA_UI],

@@ -4,16 +4,6 @@
   "sourceRoot": "libs/tss/api/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/tss/api",
-        "main": "libs/tss/api/src/index.ts",
-        "tsConfig": "libs/tss/api/tsconfig.lib.json",
-        "assets": ["libs/tss/api/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],

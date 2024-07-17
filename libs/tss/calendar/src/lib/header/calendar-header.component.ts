@@ -43,7 +43,7 @@ type ViewButton = {
 @Component({
   selector: 'tss-calendar-header',
   templateUrl: './calendar-header.component.html',
-  styleUrls: ['./calendar-header.component.css'],
+  styleUrls: ['./calendar-header.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

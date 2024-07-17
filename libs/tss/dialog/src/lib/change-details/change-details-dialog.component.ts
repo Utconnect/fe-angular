@@ -12,7 +12,7 @@ const TAIGA_UI = [TuiSvgModule];
 @Component({
   selector: 'tss-change-report-details-dialog',
   templateUrl: './change-details-dialog.component.html',
-  styleUrls: ['./change-details-dialog.component.css'],
+  styleUrls: ['./change-details-dialog.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, LetModule, TssStatusColorPipe, ...TAIGA_UI],

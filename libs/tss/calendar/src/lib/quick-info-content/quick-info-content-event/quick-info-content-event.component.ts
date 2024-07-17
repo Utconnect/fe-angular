@@ -43,7 +43,6 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-calendar-quick-info-content-event',
   templateUrl: './quick-info-content-event.component.html',
-  styleUrls: ['./quick-info-content-event.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

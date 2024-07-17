@@ -68,7 +68,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs';
-import { TssCalendarHeaderComponent } from './header/calendar-header.component';
+import { TssCalendarHeaderComponent } from './header';
 import { TssCalendarMobileMenuComponent } from './mobile-menu';
 import { TssCalendarQuickInfoContentComponent } from './quick-info-content';
 import { TssCalendarQuickInfoHeaderComponent } from './quick-info-header';
@@ -81,7 +81,6 @@ import {
 @Component({
   selector: 'tss-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -114,7 +113,7 @@ export class TssCalendarComponent implements OnInit, AfterViewInit {
   // private readonly sidebarStore = inject(Store<SidebarState>);
   private readonly destroy$ = inject(TuiDestroyService);
 
-  // VIEWCHILD
+  // VIEW CHILD
   @ViewChild('schedule') scheduleComponent!: ScheduleComponent;
   @ViewChild('rightMenu') rightMenuTemplate!: TemplateRef<never>;
 

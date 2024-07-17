@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TssTeachingScheduleChangeRequestListStatusDenyDialogComponent } from './deny-dialog.component';
 
-import { ChangeDenyDialogComponent } from './change-deny-dialog.component';
-
-describe('ChangeDenyDialogComponent', () => {
-  let component: ChangeDenyDialogComponent;
-  let fixture: ComponentFixture<ChangeDenyDialogComponent>;
+describe('TssTeachingScheduleChangeRequestListStatusDenyDialogComponent', () => {
+  let component: TssTeachingScheduleChangeRequestListStatusDenyDialogComponent;
+  let fixture: ComponentFixture<TssTeachingScheduleChangeRequestListStatusDenyDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChangeDenyDialogComponent],
+      declarations: [TssTeachingScheduleChangeRequestListStatusDenyDialogComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeDenyDialogComponent);
+    fixture = TestBed.createComponent(TssTeachingScheduleChangeRequestListStatusDenyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

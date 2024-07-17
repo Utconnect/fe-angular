@@ -53,7 +53,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-calendar-filter',
   templateUrl: './calendar-filter.component.html',
-  styleUrls: ['./calendar-filter.component.css'],
+  styleUrls: ['./calendar-filter.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, FormsModule, ...NGRX, ...TAIGA_UI],

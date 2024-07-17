@@ -19,7 +19,6 @@ const TAIGA_UI = [TuiButtonModule];
 @Component({
   selector: 'tss-teaching-dialog-buttons-right',
   templateUrl: './teaching-dialog-buttons-right.component.html',
-  styleUrls: ['./teaching-dialog-buttons-right.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, LetModule, ...TAIGA_UI],

@@ -24,7 +24,6 @@ const TAIGA_UI = [TuiButtonModule];
 @Component({
   selector: 'tss-change-report-dialog-details',
   templateUrl: './change-report-dialog.component.html',
-  styleUrls: ['./change-report-dialog.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule, ...TAIGA_UI],

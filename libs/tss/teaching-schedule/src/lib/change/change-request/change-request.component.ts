@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TuiScrollbarModule } from '@taiga-ui/core';
 import { TopBarService } from '@utconnect/components';
 import { tap } from 'rxjs';
-import { TssTeachingScheduleChangeStore } from './../change.store';
+import { TssTeachingScheduleChangeStore } from '../change.store';
 import { TssTeachingScheduleChangeRequestFilterComponent } from './change-request-filter';
 import { TssTeachingScheduleChangeRequestListComponent } from './change-request-list';
 import { TssTeachingScheduleChangeRequestMenuComponent } from './change-request-menu';
@@ -22,7 +22,6 @@ const TAIGA_UI = [TuiScrollbarModule];
 @Component({
   selector: 'tss-teaching-schedule-change-request',
   templateUrl: './change-request.component.html',
-  styleUrls: ['./change-request.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

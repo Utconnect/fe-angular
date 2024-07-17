@@ -91,7 +91,7 @@ type FormModel = {
 @Component({
   selector: 'tss-google-event-dialog',
   templateUrl: './google-event-dialog.component.html',
-  styleUrls: ['./google-event-dialog.component.css'],
+  styleUrls: ['./google-event-dialog.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule, LetModule, ...TAIGA_UI],

@@ -45,6 +45,9 @@ module.exports = {
         'tui-error-bg-hover': 'var(--tui-error-bg-hover)',
         'tui-neutral-fill': 'var(--tui-neutral-fill)',
       },
+      borderRadius: {
+        'tui-radius-xs': 'var(--tui-radius-xs)',
+      },
     },
   },
   plugins: [

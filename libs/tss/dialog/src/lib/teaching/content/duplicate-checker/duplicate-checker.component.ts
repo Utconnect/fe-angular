@@ -27,7 +27,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-dialog-content-duplicate-checker',
   templateUrl: './duplicate-checker.component.html',
-  styleUrls: ['./duplicate-checker.component.css'],
+  styleUrls: ['./duplicate-checker.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, LetModule, ...TAIGA_UI],

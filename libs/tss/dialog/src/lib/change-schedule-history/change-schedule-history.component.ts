@@ -11,7 +11,7 @@ const TAIGA_UI = [TuiSvgModule];
 @Component({
   selector: 'tss-change-schedule-history-dialog',
   templateUrl: './change-schedule-history.component.html',
-  styleUrls: ['./change-schedule-history.component.css'],
+  styleUrls: ['./change-schedule-history.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TssStatusColorPipe, ...TAIGA_UI],

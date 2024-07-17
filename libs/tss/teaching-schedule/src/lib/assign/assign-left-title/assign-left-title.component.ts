@@ -33,7 +33,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-schedule-assign-left-title',
   templateUrl: './assign-left-title.component.html',
-  styleUrls: ['./assign-left-title.component.css'],
+  styleUrls: ['./assign-left-title.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule, LetModule, ...TAIGA_UI],

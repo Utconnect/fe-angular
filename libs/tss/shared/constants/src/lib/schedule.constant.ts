@@ -1,5 +1,4 @@
-import { RequestChangeScheduleCode } from '@tss/types';
-import { Nullable } from '@utconnect/types';
+import { Nullable, RequestChangeScheduleCode } from '@utconnect/types';
 import { PermissionConstant } from './permission.constant';
 
 export class ScheduleConstant {

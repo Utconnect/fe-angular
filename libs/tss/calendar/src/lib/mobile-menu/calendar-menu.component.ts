@@ -50,7 +50,6 @@ type ViewItem = {
 @Component({
   selector: 'tss-calendar-mobile-menu',
   templateUrl: './calendar-menu.component.html',
-  styleUrls: ['./calendar-menu.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

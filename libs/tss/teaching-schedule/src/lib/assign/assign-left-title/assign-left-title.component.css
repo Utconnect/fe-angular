@@ -1,4 +1,0 @@
-:host {
-  @apply min-h-[32px] flex flex-wrap justify-between items-center;
-  transition: all 0.3s ease-in;
-}

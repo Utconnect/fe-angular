@@ -9,7 +9,6 @@ import { TssTeachingScheduleAssignStore } from '../store';
 @Component({
   selector: 'tss-teaching-schedule-assign-result',
   templateUrl: './assign-result.component.html',
-  styleUrls: ['./assign-result.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TssTeachingScheduleAssignTableComponent, LetModule],

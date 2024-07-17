@@ -15,7 +15,6 @@ import { TssCalendarQuickInfoContentEventComponent } from './quick-info-content-
 @Component({
   selector: 'tss-calendar-quick-info-content',
   templateUrl: './quick-info-content.component.html',
-  styleUrls: ['./quick-info-content.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

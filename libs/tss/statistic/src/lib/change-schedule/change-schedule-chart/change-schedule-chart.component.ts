@@ -31,7 +31,6 @@ type TeacherData = { [key: string]: { accept: number; deny: number } };
 @Component({
   selector: 'tss-statistic-change-schedule-chart',
   templateUrl: './change-schedule-chart.component.html',
-  styleUrls: ['./change-schedule-chart.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, LetModule, ...TAIGA_UI],

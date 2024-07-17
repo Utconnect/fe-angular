@@ -28,7 +28,6 @@ const TAIGA_UI = [TuiButtonModule];
 @Component({
   selector: 'tss-teaching-schedule-change-request-filter',
   templateUrl: './change-request-filter.component.html',
-  styleUrls: ['./change-request-filter.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

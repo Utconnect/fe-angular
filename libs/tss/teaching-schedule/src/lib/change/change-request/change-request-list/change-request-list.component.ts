@@ -40,7 +40,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-schedule-change-request-list',
   templateUrl: './change-request-list.component.html',
-  styleUrls: ['./change-request-list.component.css'],
+  styleUrls: ['./change-request-list.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TuiDestroyService],

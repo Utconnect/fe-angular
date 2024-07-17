@@ -1,5 +1,17 @@
-import { RequestChangeScheduleCode } from '@tss/types';
 import { Nullable } from '../utilities';
+
+export type RequestChangeScheduleCode = [
+  100,
+  200,
+  201,
+  202,
+  300,
+  301,
+  302,
+  400,
+  500,
+  501
+][number];
 
 export interface SimpleFixedScheduleModel {
   id: number;

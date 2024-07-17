@@ -7,7 +7,6 @@ import { TssTeachingScheduleChangeStore } from './change.store';
 @Component({
   selector: 'tss-teaching-schedule-change',
   templateUrl: './change.component.html',
-  styleUrls: ['./change.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterModule, TuiTabsModule],

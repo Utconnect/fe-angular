@@ -8,7 +8,7 @@ import { TssTeachingScheduleAssignRightTitleComponent } from './assign-right-tit
 @Component({
   selector: 'tss-teaching-schedule-assign',
   templateUrl: './assign.component.html',
-  styleUrls: ['./assign.component.css'],
+  styleUrls: ['./assign.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

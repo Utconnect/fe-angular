@@ -23,7 +23,7 @@ const TAIGA_UI = [TuiButtonModule];
 @Component({
   selector: 'tss-teaching-schedule-assign-right-title',
   templateUrl: './assign-right-title.component.html',
-  styleUrls: ['./assign-right-title.component.css'],
+  styleUrls: ['./assign-right-title.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, LetModule, ...TAIGA_UI],

@@ -30,7 +30,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-dialog',
   templateUrl: './teaching-dialog.component.html',
-  styleUrls: ['./teaching-dialog.component.css'],
+  styleUrls: ['./teaching-dialog.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

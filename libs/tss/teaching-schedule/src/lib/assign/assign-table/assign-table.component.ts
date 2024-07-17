@@ -35,7 +35,6 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-schedule-assign-table',
   templateUrl: './assign-table.component.html',
-  styleUrls: ['./assign-table.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

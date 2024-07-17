@@ -4,16 +4,6 @@
   "sourceRoot": "libs/tss/shared/types/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/tss/shared/types",
-        "main": "libs/tss/shared/types/src/index.ts",
-        "tsConfig": "libs/tss/shared/types/tsconfig.lib.json",
-        "assets": ["libs/tss/shared/types/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],

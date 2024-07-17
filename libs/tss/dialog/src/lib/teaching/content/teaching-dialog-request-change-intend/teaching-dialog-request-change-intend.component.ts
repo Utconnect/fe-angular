@@ -20,7 +20,7 @@ const TAIGA_UI = [TuiSvgModule, TuiTextAreaModule];
 @Component({
   selector: 'tss-teaching-dialog-request-change-intend',
   templateUrl: './teaching-dialog-request-change-intend.component.html',
-  styleUrls: ['./teaching-dialog-request-change-intend.component.css'],
+  styleUrls: ['./teaching-dialog-request-change-intend.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule, ...TAIGA_UI],

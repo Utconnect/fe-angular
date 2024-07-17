@@ -42,7 +42,6 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-exam-dialog',
   templateUrl: './exam-dialog.component.html',
-  styleUrls: ['./exam-dialog.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule, LetModule, ...TAIGA_UI],

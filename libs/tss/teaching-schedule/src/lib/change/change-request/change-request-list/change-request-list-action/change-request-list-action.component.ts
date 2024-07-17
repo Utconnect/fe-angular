@@ -49,7 +49,6 @@ const TAIGA_UI = [TuiButtonModule, TuiLoaderModule];
 @Component({
   selector: 'tss-teaching-schedule-change-request-list-action',
   templateUrl: './change-request-list-action.component.html',
-  styleUrls: ['./change-request-list-action.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

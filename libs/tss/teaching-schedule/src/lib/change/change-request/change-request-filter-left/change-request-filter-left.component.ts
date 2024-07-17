@@ -28,7 +28,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-schedule-change-request-filter-left',
   templateUrl: './change-request-filter-left.component.html',
-  styleUrls: ['./change-request-filter-left.component.css'],
+  styleUrls: ['./change-request-filter-left.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule, LetModule, ...TAIGA_UI],

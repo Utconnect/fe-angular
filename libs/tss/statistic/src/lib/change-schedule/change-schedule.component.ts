@@ -6,7 +6,7 @@ import { TssStatisticChangeScheduleFilterComponent } from './change-schedule-fil
 @Component({
   selector: 'tss-statistic-change-schedule',
   templateUrl: './change-schedule.component.html',
-  styleUrls: ['./change-schedule.component.css'],
+  styleUrls: ['./change-schedule.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

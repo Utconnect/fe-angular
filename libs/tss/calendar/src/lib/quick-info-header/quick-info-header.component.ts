@@ -15,7 +15,7 @@ const TAIGA_UI = [TuiButtonModule];
 @Component({
   selector: 'tss-calendar-quick-info-header',
   templateUrl: './quick-info-header.component.html',
-  styleUrls: ['./quick-info-header.component.css'],
+  styleUrls: ['./quick-info-header.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, LetModule, ...TAIGA_UI],

@@ -29,7 +29,6 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-calendar-quick-info-content-cell',
   templateUrl: './quick-info-content-cell.component.html',
-  styleUrls: ['./quick-info-content-cell.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule, DatePipe, DateRangePipe, ...TAIGA_UI],

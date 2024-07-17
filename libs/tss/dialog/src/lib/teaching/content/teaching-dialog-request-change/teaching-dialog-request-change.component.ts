@@ -53,7 +53,6 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-dialog-request-change',
   templateUrl: './teaching-dialog-request-change.component.html',
-  styleUrls: ['./teaching-dialog-request-change.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

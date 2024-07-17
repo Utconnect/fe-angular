@@ -25,7 +25,6 @@ const TAIGA_UI = [TuiComboBoxModule, TuiDataListWrapperModule, TuiButtonModule];
 @Component({
   selector: 'tss-teaching-schedule-change-request-list-status-set-room-dialog',
   templateUrl: './set-room-dialog.component.html',
-  styleUrls: ['./set-room-dialog.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

@@ -11,7 +11,6 @@ import { ConfirmDialogOptions } from '../dialog-options';
 
 @Component({
   templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.css'],
   imports: [CommonModule, TuiButtonModule],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

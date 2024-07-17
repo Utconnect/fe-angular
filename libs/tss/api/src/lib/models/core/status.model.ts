@@ -1,4 +1,4 @@
-import { RequestChangeScheduleCode } from '@tss/types';
+import { RequestChangeScheduleCode } from '@utconnect/types';
 
 export interface StatusModel {
   status: RequestChangeScheduleCode;

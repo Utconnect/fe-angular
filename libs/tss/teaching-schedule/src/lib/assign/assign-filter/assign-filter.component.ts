@@ -52,7 +52,7 @@ const TAIGA_UI = [
 @Component({
   selector: 'tss-teaching-schedule-assign-filter',
   templateUrl: './assign-filter.component.html',
-  styleUrls: ['./assign-filter.component.css'],
+  styleUrls: ['./assign-filter.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule, LetModule, ...TAIGA_UI],

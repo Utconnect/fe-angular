@@ -9,7 +9,6 @@ import { TssTeachingScheduleAssignStore } from '../store';
 @Component({
   selector: 'tss-teaching-schedule-assign-list',
   templateUrl: './assign-list.component.html',
-  styleUrls: ['./assign-list.component.css'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TssTeachingScheduleAssignTableComponent, LetModule],

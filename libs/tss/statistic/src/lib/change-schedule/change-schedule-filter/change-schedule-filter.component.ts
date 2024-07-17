@@ -30,7 +30,7 @@ const TAIGA_UI = [TuiButtonModule];
 @Component({
   selector: 'tss-statistic-change-schedule-filter',
   templateUrl: './change-schedule-filter.component.html',
-  styleUrls: ['./change-schedule-filter.component.css'],
+  styleUrls: ['./change-schedule-filter.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
