@@ -1,6 +1,7 @@
 ﻿services:
   tss:
     container_name: tss
+    image: snowflower1408/utconnect_tss_fe
     build:
       context: .
       args:
@@ -8,6 +9,7 @@
 
   esm:
     container_name: esm
+    image: snowflower1408/utconnect_esm_fe
     build:
       context: .
       args:
