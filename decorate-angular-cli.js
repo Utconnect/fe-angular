@@ -51,7 +51,7 @@ function symlinkNgCLItoNxCLI() {
       });
     } else {
       // If unix-based, symlink
-      cp.execSync(`ln -sf ./nx ${ngPath}`);
+      cp.spawnSync(`ln -sf ./nx ${ngPath}`, { shell: false });
     }
   }
   catch(e) {
