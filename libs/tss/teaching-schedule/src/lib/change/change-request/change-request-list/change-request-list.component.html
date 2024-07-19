@@ -21,6 +21,7 @@
               [sorter]="null"
               rowspan="2"
               class="!sticky left-0 !z-30"
+              scope="colgroup"
             >
               <tui-checkbox
                 [(ngModel)]="checkAll"
@@ -34,6 +35,7 @@
               [sorter]="null"
               [class.!border-r-0]="!isPersonal"
               rowspan="2"
+              scope="colgroup"
             >
               STT
             </th>
@@ -44,6 +46,7 @@
               #teacherCol
               rowspan="2"
               class="sticky left-0 !border-solid !border-l !border-l-tui-base-04 !z-30"
+              scope="colgroup"
             >
               Giảng viên
             </th>
@@ -54,35 +57,36 @@
               [style.left.px]="moduleClassStyleLeft"
               rowspan="2"
               class="sticky !z-30"
+              scope="colgroup"
             >
               Lớp
             </th>
-            <th tuiTh *tuiHead="'oldDate'" [sorter]="null" colspan="2">
+            <th tuiTh *tuiHead="'oldDate'" [sorter]="null" colspan="2" scope="col">
               Ngày học
             </th>
             <ng-container *tuiHead="'newDate'"></ng-container>
-            <th tuiTh *tuiHead="'oldShift'" [sorter]="null" colspan="2">
+            <th tuiTh *tuiHead="'oldShift'" [sorter]="null" colspan="2" scope="col">
               Ca học
             </th>
             <ng-container *tuiHead="'newShift'"></ng-container>
-            <th tuiTh *tuiHead="'reason'" [sorter]="null" rowspan="2">Lý do</th>
-            <th tuiTh *tuiHead="'createdAt'" [sorter]="null" rowspan="2">
+            <th tuiTh *tuiHead="'reason'" [sorter]="null" rowspan="2" scope="col">Lý do</th>
+            <th tuiTh *tuiHead="'createdAt'" [sorter]="null" rowspan="2" scope="col">
               <div class="whitespace-nowrap">Thời gian tạo yêu cầu</div>
             </th>
-            <th tuiTh *tuiHead="'status'" [sorter]="null" rowspan="2">
+            <th tuiTh *tuiHead="'status'" [sorter]="null" rowspan="2" scope="col">
               <div class="whitespace-nowrap">Trạng thái</div>
             </th>
-            <th tuiTh *tuiHead="'actions'" [sorter]="null" rowspan="2">
+            <th tuiTh *tuiHead="'actions'" [sorter]="null" rowspan="2" scope="col">
               Thao tác
             </th>
           </tr>
           <tr tuiThGroup class="top-11">
-            <th tuiTh *tuiHead="'oldDate'" [sorter]="null" class="!border-l-0">
+            <th tuiTh *tuiHead="'oldDate'" [sorter]="null" class="!border-l-0" scope="col">
               Cũ
             </th>
-            <th tuiTh *tuiHead="'newDate'" [sorter]="null">Mới</th>
-            <th tuiTh *tuiHead="'oldShift'" [sorter]="null" class="">Cũ</th>
-            <th tuiTh *tuiHead="'newShift'" [sorter]="null">Mới</th>
+            <th tuiTh *tuiHead="'newDate'" [sorter]="null" scope="col">Mới</th>
+            <th tuiTh *tuiHead="'oldShift'" [sorter]="null" scope="col">Cũ</th>
+            <th tuiTh *tuiHead="'newShift'" [sorter]="null" scope="col">Mới</th>
           </tr>
         </thead>
 
