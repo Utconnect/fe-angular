@@ -27,6 +27,7 @@
               <div
                 [class.border-l-2]="item.subItems"
                 (click)="$event.stopPropagation()"
+                (keydown)="$event.stopPropagation()"
                 class="my-2 pl-3 border-tui-base-03"
               >
                 <ng-container *ngFor="let subItem of item.subItems">

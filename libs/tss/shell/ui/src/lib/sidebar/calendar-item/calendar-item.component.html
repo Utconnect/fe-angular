@@ -1,4 +1,4 @@
-<div (click)="onClick()">
+<div (click)="onClick()" (keydown)="onClick()">
   <tui-accordion-item
     [borders]="null"
     [nativeId]="name"
@@ -18,6 +18,7 @@
       <div class="sub-item -mt-4 -mb-2">
         <div
           (click)="$event.stopPropagation()"
+          (keydown)="$event.stopPropagation()"
           class="my-2 pl-3 border-tui-base-03"
         >
           <ng-container formGroupName="calendar">
