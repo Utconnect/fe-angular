@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { LetModule } from '@ngrx/component';
 import { TuiDialogContext, TuiSvgModule } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ScheduleConstant } from '@tss/constants';
@@ -14,7 +15,7 @@ const TAIGA_UI = [TuiSvgModule];
   styleUrls: ['./change-schedule-history.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, TssStatusColorPipe, ...TAIGA_UI],
+  imports: [CommonModule, TssStatusColorPipe, LetModule, ...TAIGA_UI],
 })
 export class TssChangeScheduleHistoryDialogComponent {
   // INJECTIONS

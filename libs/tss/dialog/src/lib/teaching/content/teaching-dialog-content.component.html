@@ -56,7 +56,7 @@
 
   <ng-container *ngrxLet="justRequestedSchedule$ as justRequestedSchedule">
     <ng-container
-      *tssVar="justRequestedSchedule || requestedChangeSchedule as schedule"
+      *ngrxLet="justRequestedSchedule || requestedChangeSchedule as schedule"
     >
       <div *ngIf="schedule" class="tui-form__row">
         <ng-container *ngrxLet="cancelStatus$ as cancelStatus">

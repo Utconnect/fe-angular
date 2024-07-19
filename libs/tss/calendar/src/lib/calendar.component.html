@@ -2,7 +2,6 @@
   class="w-full h-main-view-h flex flex-col md:h-main-view-h-md lg:h-content-h"
 >
   <tss-calendar-header
-    #header
     [scheduleComponent]="scheduleComponent"
     class="hidden lg:block"
   ></tss-calendar-header>
@@ -38,7 +37,7 @@
       <!-- Cell header -->
       <ng-template #cellHeaderTemplate let-data>
         <div
-          *tssVar="data.date | date : 'd' as dayOfMonth"
+          *ngrxLet="data.date | date : 'd' as dayOfMonth"
           class="min-w-[20px] text-center"
           [class.px-1]="dayOfMonth === '1'"
         >

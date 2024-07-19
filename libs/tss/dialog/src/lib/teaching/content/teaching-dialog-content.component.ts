@@ -17,6 +17,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LetModule } from '@ngrx/component';
 import { TuiDay, TuiDestroyService, TuiTime } from '@taiga-ui/cdk';
 import {
   TuiAlertService,
@@ -101,6 +102,7 @@ const TAIGA_UI = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    LetModule,
     TssTeachingDialogButtonsLeftComponent,
     TssTeachingDialogButtonsRightComponent,
     TssTeachingDialogHistoryDirective,

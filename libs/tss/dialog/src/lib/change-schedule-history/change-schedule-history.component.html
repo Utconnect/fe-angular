@@ -1,7 +1,7 @@
 <ng-container *ngFor="let schedule of context.data; last as last">
   <div
     class="item"
-    *tssVar="!schedule.newDate && schedule.intendTime as isIntendTime"
+    *ngrxLet="!schedule.newDate && schedule.intendTime as isIntendTime"
   >
     <h5>Ngày yêu cầu: {{ schedule.createdAt | date : 'dd-MM-Y' }}</h5>
     <div class="content flex justify-center mt-1">
