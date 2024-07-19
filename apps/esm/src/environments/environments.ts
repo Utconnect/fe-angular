@@ -1,6 +1,6 @@
-import { TssConfig } from '@tss/config';
+import { EsmConfig } from '@esm/config';
 
-export const environment: TssConfig = {
+export const environment: EsmConfig = {
   production: false,
   baseUrl: 'http://localhost:5001',
   syncfusionLicense: '',
