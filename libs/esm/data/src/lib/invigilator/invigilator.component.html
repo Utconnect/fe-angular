@@ -24,6 +24,7 @@
           [routerLink]="routerLink"
           [value]="''"
           role="menuitemradio"
+          aria-checked="true"
         >
           Tất cả
         </a>
@@ -36,6 +37,7 @@
           [queryParams]="{ facultyId: faculty.id }"
           [value]="faculty.id"
           role="menuitemradio"
+          aria-checked="false"
         >
           {{ faculty.name }}
         </a>
@@ -55,6 +57,7 @@
           queryParamsHandling="merge"
           [value]="''"
           role="menuitemradio"
+          aria-checked="true"
         >
           Tất cả
         </a>
@@ -67,6 +70,7 @@
           queryParamsHandling="merge"
           [value]="department.id"
           role="menuitemradio"
+          aria-checked="false"
         >
           {{ department.name }}
         </a>

@@ -31,6 +31,7 @@
                 *ngFor="let faculty of obs.faculties"
                 [value]="faculty.id"
                 role="menuitemradio"
+                aria-checked="false"
               >
                 {{ faculty.name }}
               </button>
