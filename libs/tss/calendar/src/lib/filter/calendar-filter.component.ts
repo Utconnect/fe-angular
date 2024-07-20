@@ -98,12 +98,15 @@ export class TssCalendarFilterComponent {
       items.map(({ id, name }) => [id, name] as [string, string]),
     );
 
-    return ({ $implicit }) =>
-      $implicit.length === 0
-        ? 'Tất cả'
-        : $implicit.length === 1
-        ? map.get($implicit[0]) || ''
-        : `${$implicit.length} giảng viên`;
+    return ({ $implicit }) => {
+      if ($implicit.length === 0) {
+        return 'Tất cả';
+      }
+      if ($implicit.length === 1) {
+        return map.get($implicit[0]) || '';
+      }
+      return `${$implicit.length} giảng viên`;
+    };
   }
 
   onChangeSelectingState(changes: Partial<CalendarFilter>): void {

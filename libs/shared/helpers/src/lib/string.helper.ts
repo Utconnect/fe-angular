@@ -16,7 +16,20 @@ export class StringHelper {
 
     const name1 = getName(StringHelper.toLatinText(a));
     const name2 = getName(StringHelper.toLatinText(b));
-    return name1 < name2 ? -1 : name1 > name2 ? 1 : a < b ? -1 : a > b ? 1 : 0;
+
+    if (name1 < name2) {
+      return -1;
+    }
+    if (name1 > name2) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
   }
 
   static toLatinText(text: string): string {

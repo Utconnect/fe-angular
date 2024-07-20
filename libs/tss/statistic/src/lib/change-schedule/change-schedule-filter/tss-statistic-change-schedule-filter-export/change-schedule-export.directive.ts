@@ -92,11 +92,7 @@ export class TssStatisticChangeScheduleFilterExportDirective {
     );
 
     const commonName = 'Thay-doi-lich-giang';
-    const rangeText = rangeOptions.sameMonth
-      ? `thang${range.from.month + 1}_${range.from.year}`
-      : rangeOptions.inOneYear
-      ? range.from.year
-      : `${range.from.formattedDayPart}${range.from.formattedMonthPart}${range.from.formattedYear}_${range.to.formattedDayPart}${range.to.formattedMonthPart}${range.to.formattedYear}`;
+    const rangeText = this.getRangeText(rangeOptions);
     const fileName = `${teacher.department?.id}_${commonName}_${rangeText}.docx`;
 
     this.exportService.exportBlob({
@@ -106,5 +102,16 @@ export class TssStatisticChangeScheduleFilterExportDirective {
     });
 
     this.cdr.markForCheck();
+  }
+
+  private getRangeText(rangeOptions: { sameMonth: boolean, inOneYear: boolean }): string {
+    const range = this.rangeControlValue;
+    if (rangeOptions.sameMonth) {
+      return `thang${range.from.month + 1}_${range.from.year}`;
+    }
+    if (rangeOptions.inOneYear) {
+      return range.from.year.toString();
+    }
+    return `${range.from.formattedDayPart}${range.from.formattedMonthPart}${range.from.formattedYear}_${range.to.formattedDayPart}${range.to.formattedMonthPart}${range.to.formattedYear}`;
   }
 }
