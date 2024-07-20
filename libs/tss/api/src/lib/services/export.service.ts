@@ -81,7 +81,7 @@ export class ExportService {
     name: string;
     mimeType: FileType;
   }): void {
-    void Packer.toBlob(settings.document).then((blob) => {
+    Packer.toBlob(settings.document).then((blob) => {
       const docBlob = blob.slice(0, blob.size, settings.mimeType);
       saveAs(docBlob, settings.name);
     });
