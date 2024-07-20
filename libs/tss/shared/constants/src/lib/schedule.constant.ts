@@ -12,7 +12,7 @@ export class ScheduleConstant {
     1: [1, 2, 3],
     2: [1, 2, 3, 5],
   };
-  static REQUEST_CHANGE_SCHEDULE_STATUS: Record<
+  static readonly REQUEST_CHANGE_SCHEDULE_STATUS: Record<
     RequestChangeScheduleCode,
     {
       name: string;

@@ -1,3 +1,3 @@
 export class InterceptorCustomHeader {
-  static skipContentType = 'Tss-Skip-Content-Type';
+  static readonly skipContentType = 'Tss-Skip-Content-Type';
 }

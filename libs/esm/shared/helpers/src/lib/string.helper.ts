@@ -1,7 +1,7 @@
 import { ESMDomainEnumsExamMethod } from '@esm/api';
 
 export class EsmStringHelper {
-  static EXAM_METHOD_MAPPING = {
+  static readonly EXAM_METHOD_MAPPING = {
     0: 'Trắc nghiệm',
     1: 'Tự luận',
     2: 'Thực hành',
