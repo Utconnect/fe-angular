@@ -34,8 +34,7 @@ export class ObservableHelper {
   ): UnaryFunction<Observable<T>, Observable<UnNull<T>>> {
     return pipe(
       filter((x) => {
-        for (let i = 0; i < props.length; i++) {
-          const prop = props[i];
+        for (const prop of props) {
           if (ObjectHelper.isNullOrUndefined(x[prop])) {
             return false;
           }

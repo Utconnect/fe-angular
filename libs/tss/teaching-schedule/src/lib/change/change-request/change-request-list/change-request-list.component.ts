@@ -127,8 +127,7 @@ export class TssTeachingScheduleChangeRequestListComponent {
   }
 
   onCheckChange(checked: boolean): void {
-    for (let i = 0; i < this.checkableIndexes.length; i++) {
-      const index = this.checkableIndexes[i];
+    for (const index of this.checkableIndexes) {
       if (this.checkboxControl.at(index).value !== checked) {
         this.checkAll = null;
         return;
