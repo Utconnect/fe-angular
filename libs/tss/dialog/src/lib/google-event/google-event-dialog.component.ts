@@ -270,7 +270,7 @@ export class TssGoogleEventDialogComponent {
       items.map(({ id, summary }) => [id, summary] as [string, string]),
     );
 
-    return ({ $implicit }) => map.get($implicit) || '';
+    return ({ $implicit }) => map.get($implicit) ?? '';
   }
 
   // PRIVATE METHODS
@@ -291,7 +291,7 @@ export class TssGoogleEventDialogComponent {
       id: data.Id,
       calendarId: data.Calendar?.id || '',
       subject: data.Subject,
-      location: data.Location || '',
+      location: data.Location ?? '',
       people: data.People || [],
       start: startTuiDate,
       end:

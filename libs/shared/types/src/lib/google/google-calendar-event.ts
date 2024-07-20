@@ -138,7 +138,7 @@ export class GoogleCalendarEvent {
       EndTime: new Date(this.end.dateTime ?? this.end.date),
       Location: this.location ?? undefined,
       Type: 'googleEvent',
-      Note: this.description || '',
+      Note: this.description ?? '',
       People: this.attendees,
       Calendar: this.calendar,
       IsAllDay: !!this.start.date,

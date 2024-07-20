@@ -94,7 +94,7 @@ export class TssCalendarMobileMenuComponent {
       this.viewList.map(({ id, name }) => [id, name] as [View, string]),
     );
 
-    return ({ $implicit }) => map.get($implicit) || '';
+    return ({ $implicit }) => map.get($implicit) ?? '';
   }
 
   toggleRightMenu(open: boolean): void {

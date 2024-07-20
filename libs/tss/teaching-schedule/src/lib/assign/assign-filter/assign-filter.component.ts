@@ -164,7 +164,7 @@ export class TssTeachingScheduleAssignFilterComponent implements OnInit {
       items.map(({ id, name }) => [id, name] as [number, string]),
     );
 
-    return ({ $implicit }) => map.get($implicit) || '';
+    return ({ $implicit }) => map.get($implicit) ?? '';
   }
 
   @tuiPure
@@ -175,7 +175,7 @@ export class TssTeachingScheduleAssignFilterComponent implements OnInit {
       items.map(({ id, name }) => [id, name] as [number, string]),
     );
 
-    return ({ $implicit }) => map.get($implicit) || '';
+    return ({ $implicit }) => map.get($implicit) ?? '';
   }
 
   @tuiPure
@@ -190,7 +190,7 @@ export class TssTeachingScheduleAssignFilterComponent implements OnInit {
       departmentList.map(({ id, name }) => [id, name] as [string, string]),
     );
 
-    return ({ $implicit }) => map.get($implicit) || '';
+    return ({ $implicit }) => map.get($implicit) ?? '';
   }
 
   // PRIVATE METHODS

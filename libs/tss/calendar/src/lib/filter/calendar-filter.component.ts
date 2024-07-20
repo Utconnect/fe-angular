@@ -103,7 +103,7 @@ export class TssCalendarFilterComponent {
         return 'Tất cả';
       }
       if ($implicit.length === 1) {
-        return map.get($implicit[0]) || '';
+        return map.get($implicit[0]) ?? '';
       }
       return `${$implicit.length} giảng viên`;
     };

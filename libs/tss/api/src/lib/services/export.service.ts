@@ -698,7 +698,7 @@ export class ExportService {
                 }),
                 new TextRun({
                   break: 1,
-                  text: `Số điện thoại: ${teacher.phone || ''}`,
+                  text: `Số điện thoại: ${teacher.phone ?? ''}`,
                 }),
                 new TextRun({
                   break: 1,
