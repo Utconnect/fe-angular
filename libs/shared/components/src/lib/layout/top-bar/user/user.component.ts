@@ -25,7 +25,6 @@ const TAIGA_UI = [
   standalone: true,
   imports: [CommonModule, RouterModule, ...TAIGA_UI],
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopBarUserComponent {

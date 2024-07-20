@@ -17,7 +17,6 @@ export const TAIGA_UI = [TuiButtonModule];
   standalone: true,
   imports: [CommonModule, RouterModule, ...TAIGA_UI],
   templateUrl: './top-bar-create-button.component.html',
-  styleUrls: ['./top-bar-create-button.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     EsmTopBarCreateButtonStore,

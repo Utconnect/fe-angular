@@ -35,7 +35,6 @@ const applications: TopBarMenuApplication[] = [
   standalone: true,
   imports: [CommonModule, ...TAIGA_UI],
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopBarMenuComponent {

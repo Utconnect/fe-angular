@@ -14,7 +14,6 @@ import {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './custom-item.component.html',
-  styleUrls: ['./custom-item.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomItemComponent implements OnInit {

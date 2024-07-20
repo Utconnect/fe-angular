@@ -39,7 +39,6 @@ const TAIGA_UI = [
 @Component({
   selector: 'utconnect-input-date-range',
   templateUrl: './input-date-range.component.html',
-  styleUrls: ['./input-date-range.component.less'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

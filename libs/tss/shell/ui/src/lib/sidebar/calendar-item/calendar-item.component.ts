@@ -14,7 +14,6 @@ const TAIGA_UI = [TuiAccordionModule, TuiCheckboxLabeledModule];
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ...TAIGA_UI],
   templateUrl: './calendar-item.component.html',
-  styleUrls: ['./calendar-item.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarItemComponent {

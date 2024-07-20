@@ -13,7 +13,7 @@ export class AppComponent {
   // INJECT PROPERTIES
   private readonly esmStore = inject(Store<TssState>);
 
-  // PUBLIC PROPERTIES
+// PUBLIC PROPERTIES
   showLoader$ = this.esmStore
     .select(TssSelector.showLoader)
     .pipe(
