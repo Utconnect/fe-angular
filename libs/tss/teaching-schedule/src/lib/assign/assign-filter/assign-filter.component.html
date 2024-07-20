@@ -79,6 +79,7 @@
               *ngFor="let department of faculty.value"
               [value]="department.id"
               role="option"
+              aria-selected="false"
             >
               {{ department.name }}
             </button>

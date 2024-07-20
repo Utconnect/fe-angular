@@ -129,7 +129,7 @@ export class TssTeachingDialogContentComponent implements OnInit {
   @Output() cancelRequest = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
-  // VIEWCHILD
+  // VIEW CHILD
   @ViewChild(TssTeachingDialogButtonsRightComponent)
   rightButtonComponent!: TssTeachingDialogButtonsRightComponent;
 

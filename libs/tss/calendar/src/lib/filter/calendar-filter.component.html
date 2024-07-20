@@ -47,7 +47,13 @@
             >
               <ng-template tuiDataList>
                 <tui-data-list size="s">
-                  <button tuiOption [value]="[]" role="option">Tất cả</button>
+                  <button
+                    tuiOption [value]="[]"
+                    role="option"
+                    aria-selected="true"
+                  >
+                    Tất cả
+                  </button>
                   <tui-opt-group tuiMultiSelectGroup>
                     <button
                       tuiOption
@@ -55,6 +61,7 @@
                       [value]="teacher.id"
                       [class.!px-2]="forMenu"
                       role="option"
+                      aria-selected="false"
                     >
                       {{ teacher.name }}
                     </button>
@@ -81,7 +88,14 @@
           <ng-template tuiDataList>
             <tui-data-list size="s">
               <tui-opt-group>
-                <button tuiOption [value]="[]" role="option">Tất cả</button>
+                <button
+                  tuiOption
+                  [value]="[]"
+                  role="option"
+                  aria-selected="true"
+                >
+                  Tất cả
+                </button>
               </tui-opt-group>
               <tui-opt-group tuiMultiSelectGroup *ngrxLet="modules$ as modules">
                 <button
@@ -90,6 +104,7 @@
                   [value]="module"
                   [class.!px-2]="forMenu"
                   role="option"
+                  aria-selected="false"
                 >
                   {{ module }}
                 </button>
@@ -119,7 +134,7 @@
     modules.length === 0
       ? 'Tất cả'
       : modules.length === 1
-      ? modules[0]
-      : modules.length + ' học phần'
+        ? modules[0]
+        : modules.length + ' học phần'
   }}
 </ng-template>

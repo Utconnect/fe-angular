@@ -13,7 +13,9 @@
     <ng-template tuiDataList>
       <tui-data-list size="s">
         <tui-opt-group>
-          <button tuiOption [value]="null" role="option">Tất cả</button>
+          <button tuiOption [value]="null" role="option" aria-selected="true">
+            Tất cả
+          </button>
         </tui-opt-group>
         <tui-opt-group>
           <button
@@ -21,6 +23,7 @@
             *ngFor="let teacher of teachers"
             [value]="teacher"
             role="option"
+            aria-selected="false"
           >
             {{ teacher.name }}
           </button>

@@ -24,6 +24,7 @@
           *ngFor="let shiftKey of shiftKeys"
           [value]="shiftKey"
           role="option"
+          aria-selected="false"
         >
           {{ shiftKey | shift }}
         </button>
@@ -35,10 +36,21 @@
       Chọn hình thức học:
       <ng-template tuiDataList>
         <tui-data-list size="l">
-          <button tuiOption [value]="true" role="option">
+          <button
+            tuiOption
+            [value]="true"
+            role="option"
+            aria-selected="false"
+          >
             Phòng học trực tuyến
           </button>
-          <button tuiOption [value]="false" role="option">Học trực tiếp</button>
+          <button
+            tuiOption
+            [value]="false"
+            role="option"
+            aria-selected="false"
+          >Học trực tiếp
+          </button>
         </tui-data-list>
       </ng-template>
     </tui-select>

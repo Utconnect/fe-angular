@@ -13,6 +13,7 @@
           *ngFor="let calendar of googleCalendars"
           [value]="calendar.id"
           role="option"
+          aria-selected="false"
         >
           {{ calendar.summary }}
         </button>

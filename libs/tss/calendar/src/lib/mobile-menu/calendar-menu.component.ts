@@ -6,6 +6,7 @@ import {
   Input,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LetModule } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { ScheduleComponent, View } from '@syncfusion/ej2-angular-schedule';
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile';
@@ -55,6 +56,7 @@ type ViewItem = {
   imports: [
     CommonModule,
     FormsModule,
+    LetModule,
     TouchScreenDirective,
     TssCalendarFilterComponent,
     TssCalendarHeaderNavigateDirective,
