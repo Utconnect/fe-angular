@@ -579,7 +579,7 @@ function calculateRangeO(
   return (source$) =>
     source$.pipe(
       withLatestFrom(ranges$),
-      map(([{ teacherId: teacherId, date }, oldRanges]) => ({
+      map(([{ teacherId, date }, oldRanges]) => ({
         teacherId,
         ...calculateFetchRange(date, oldRanges),
       })),
