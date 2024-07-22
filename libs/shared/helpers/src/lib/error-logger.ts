@@ -27,7 +27,9 @@ export class ErrorLogger {
       return true;
     }
 
-    throw Error(`[${tag}] Required field ${field} is missing in ${value}`);
+    throw Error(
+      `[${tag}] Required field ${field} is missing in ${JSON.stringify(value)}`,
+    );
   }
 
   static unhandled<T>(name: string, value: T, tag: string): void {
