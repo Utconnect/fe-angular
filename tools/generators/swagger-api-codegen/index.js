@@ -45,7 +45,7 @@ await generateApi({
       ...currentConfiguration,
       apiConfig: {
         ...currentConfiguration.apiConfig,
-        baseUrl: 'http://localhost:5001',
+        baseUrl: 'http://localhost:5000',
       },
     }),
   },

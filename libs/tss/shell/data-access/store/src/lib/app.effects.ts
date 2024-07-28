@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import {
-  AuthService,
   BreadcrumbItem,
   CommonInfoService,
   GoogleService,
@@ -11,16 +10,14 @@ import {
   UserService,
 } from '@tss/api';
 import { ObservableHelper } from '@utconnect/helpers';
-import { catchError, filter, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, filter, map, mergeMap, of } from 'rxjs';
 import { TssApiAction } from './app.api.actions';
 import { TssPageAction } from './app.page.actions';
 
 @Injectable()
 export class TssEffects {
   // INJECT PROPERTIES
-  private readonly router = inject(Router);
   private readonly actions$ = inject(Actions);
-  private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
   private readonly googleService = inject(GoogleService);
   private readonly teacherService = inject(TeacherService);
@@ -33,9 +30,9 @@ export class TssEffects {
       mergeMap(() => {
         return this.userService.me().pipe(
           map(({ data }) =>
-            TssApiAction.autoLoginSuccessfully({ teacher: data }),
+            TssApiAction.getUserInfoSuccessfully({ teacher: data }),
           ),
-          catchError(() => of(TssApiAction.autoLoginFailure())),
+          catchError(() => of(TssApiAction.getUserInfoFailure())),
         );
       }),
     );
@@ -51,114 +48,79 @@ export class TssEffects {
     );
   });
 
-  readonly keepLogin$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TssPageAction.keepLogin),
-      mergeMap(() => {
-        return this.userService.me().pipe(
-          map(({ data }) => data),
-          map((teacher) =>
-            teacher
-              ? TssApiAction.autoLoginSuccessfully({ teacher })
-              : TssApiAction.autoLoginFailure(),
-          ),
-          catchError(() => of(TssApiAction.autoLoginFailure())),
-        );
-      }),
-    );
-  });
+  // readonly loadRooms$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TssApiAction.getUserInfoSuccessfully),
+  //     mergeMap(() => {
+  //       return this.commonInfoService.getRooms().pipe(
+  //         map((rooms) => TssApiAction.loadRoomsSuccessfully({ rooms })),
+  //         catchError(() => of(TssApiAction.loadRoomsFailure())),
+  //       );
+  //     }),
+  //   );
+  // });
+  //
+  // readonly loadSchoolYear$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TssApiAction.getUserInfoSuccessfully),
+  //     mergeMap(() => {
+  //       return this.commonInfoService
+  //         .getCurrentTerm()
+  //         .pipe(
+  //           map((currentTerm) =>
+  //             TssApiAction.loadCurrentTermSuccessful({ currentTerm }),
+  //           ),
+  //         );
+  //     }),
+  //   );
+  // });
+  //
+  // readonly loadAcademicYear$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TssApiAction.getUserInfoSuccessfully),
+  //     mergeMap(() => {
+  //       return this.commonInfoService.getAcademicYear().pipe(
+  //         map((academicYears) =>
+  //           TssApiAction.loadAcademicYearSuccessful({ academicYears }),
+  //         ),
+  //         catchError(() => of(TssApiAction.loadAcademicYearFailure())),
+  //       );
+  //     }),
+  //   );
+  // });
+  //
+  // readonly loadTeachersInDepartment$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TssApiAction.getUserInfoSuccessfully),
+  //     map(({ teacher }) => teacher.department?.id),
+  //     ObservableHelper.filterNullish(),
+  //     mergeMap((id) => {
+  //       return this.teacherService.getByDepartment(id).pipe(
+  //         map(({ data }) =>
+  //           TssApiAction.loadTeachersInDepartmentSuccessful({ teachers: data }),
+  //         ),
+  //         catchError(() => of(TssApiAction.loadTeachersInDepartmentFailure())),
+  //       );
+  //     }),
+  //   );
+  // });
 
-  readonly autoLoginFailure$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(TssApiAction.autoLoginFailure),
-        mergeMap(() =>
-          of({}).pipe(
-            tap(() => {
-              this.router.navigate([
-                'https://localhost:7167/Identity/Account/Logout',
-              ]);
-            }),
-          ),
-        ),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly loadRooms$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TssApiAction.autoLoginSuccessfully),
-      mergeMap(() => {
-        return this.commonInfoService.getRooms().pipe(
-          map((rooms) => TssApiAction.loadRoomsSuccessfully({ rooms })),
-          catchError(() => of(TssApiAction.loadRoomsFailure())),
-        );
-      }),
-    );
-  });
-
-  readonly loadSchoolYear$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TssApiAction.autoLoginSuccessfully),
-      mergeMap(() => {
-        return this.commonInfoService
-          .getCurrentTerm()
-          .pipe(
-            map((currentTerm) =>
-              TssApiAction.loadCurrentTermSuccessful({ currentTerm }),
-            ),
-          );
-      }),
-    );
-  });
-
-  readonly loadAcademicYear$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TssApiAction.autoLoginSuccessfully),
-      mergeMap(() => {
-        return this.commonInfoService.getAcademicYear().pipe(
-          map((academicYears) =>
-            TssApiAction.loadAcademicYearSuccessful({ academicYears }),
-          ),
-          catchError(() => of(TssApiAction.loadAcademicYearFailure())),
-        );
-      }),
-    );
-  });
-
-  readonly loadTeachersInDepartment$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TssApiAction.autoLoginSuccessfully),
-      map(({ teacher }) => teacher.department?.id),
-      ObservableHelper.filterNullish(),
-      mergeMap((id) => {
-        return this.teacherService.getByDepartment(id).pipe(
-          map(({ data }) =>
-            TssApiAction.loadTeachersInDepartmentSuccessful({ teachers: data }),
-          ),
-          catchError(() => of(TssApiAction.loadTeachersInDepartmentFailure())),
-        );
-      }),
-    );
-  });
-
-  readonly loadGoogleCalendars = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TssApiAction.autoLoginSuccessfully),
-      filter(({ teacher }) => teacher.settings.googleCalendar),
-      map(({ teacher }) => teacher.department?.id),
-      ObservableHelper.filterNullish(),
-      mergeMap((id) => {
-        return this.googleService.getCalendarList(id).pipe(
-          map(({ data }) =>
-            TssApiAction.loadGoogleCalendarSuccessful({ calendars: data }),
-          ),
-          catchError(() => of(TssApiAction.loadGoogleCalendarFailure())),
-        );
-      }),
-    );
-  });
+  // readonly loadGoogleCalendars = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TssApiAction.getUserInfoSuccessfully),
+  //     filter(({ teacher }) => teacher.settings.googleCalendar),
+  //     map(({ teacher }) => teacher.department?.id),
+  //     ObservableHelper.filterNullish(),
+  //     mergeMap((id) => {
+  //       return this.googleService.getCalendarList(id).pipe(
+  //         map(({ data }) =>
+  //           TssApiAction.loadGoogleCalendarSuccessful({ calendars: data }),
+  //         ),
+  //         catchError(() => of(TssApiAction.loadGoogleCalendarFailure())),
+  //       );
+  //     }),
+  //   );
+  // });
 
   // PRIVATE METHODS
   private createBreadcrumbs(

@@ -50,12 +50,12 @@ export const tssReducer = createReducer(
     ...state,
     breadcrumbs,
   })),
-  on(TssApiAction.autoLoginSuccessfully, (state, { teacher }) => ({
+  on(TssApiAction.getUserInfoSuccessfully, (state, { teacher }) => ({
     ...state,
     teacher,
     status: 'success',
   })),
-  on(TssApiAction.autoLoginFailure, (state) => ({
+  on(TssApiAction.getUserInfoFailure, (state) => ({
     ...state,
     teacher: null,
     status: 'error',

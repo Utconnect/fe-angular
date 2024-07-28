@@ -51,7 +51,7 @@ export class ScheduleService {
 
     return this.http
       .get<ResponseModel<StudyScheduleModel[]>>(
-        this.url + `teachers/${idTeacher}/schedules`,
+        this.url + `teacher/${idTeacher}/schedules`,
         { params },
       )
       .pipe(map(parseStudyScheduleModel));

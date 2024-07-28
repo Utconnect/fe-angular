@@ -9,9 +9,9 @@ import { TssAuthService } from '@tss/api';
 import { TSS_CONFIG } from '@tss/config';
 import { TssEffects, tssFeatureKey, tssReducer, TssState } from '@tss/store';
 import {
+  LAYOUT_ROUTES,
   LayoutComponent,
   layoutProviders,
-  LAYOUT_ROUTES,
 } from '@utconnect/components';
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
 import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
@@ -21,7 +21,6 @@ import { topBarRightItemMapper } from './constants';
 import { dbConfig } from './db-config';
 import {
   menuTextFactory,
-  onLoginSuccess,
   roleFactory,
   tssSidebarItemsFactory,
   tssTopBarItemsFactory,
@@ -152,10 +151,11 @@ const routes: Routes = [
     authProviders({
       authService: TssAuthService,
       role: roleFactory,
-      onLoginSuccess: onLoginSuccess,
       storage: 'localStorage',
       store: Store<TssState>,
       title: userTitleFactory,
+      loginUrl: () => inject(TSS_CONFIG).loginUrl,
+      logoutUrl: () => inject(TSS_CONFIG).logoutUrl,
     }),
     layoutProviders({
       store: Store<TssState>,

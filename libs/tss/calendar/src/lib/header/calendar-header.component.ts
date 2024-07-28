@@ -24,9 +24,9 @@ import { ShortenNamePipe } from '@utconnect/pipes';
 import { combineLatest, delay, map, Observable, takeUntil } from 'rxjs';
 import { TssCalendarFilterComponent } from '../filter';
 import { CalendarState } from '../store';
-import { TssCalendarPageAction } from './../store/calendar.page.actions';
-import { TssCalendarSelector } from './../store/calendar.selectors';
-import { TssCalendarHeaderNavigateDirective } from './navigate/calendar-header-navigate.directive';
+import { TssCalendarPageAction } from '../store';
+import { TssCalendarSelector } from '../store';
+import { TssCalendarHeaderNavigateDirective } from './navigate';
 
 const NGRX = [LetModule];
 const TAIGA_UI = [
@@ -72,7 +72,7 @@ export class TssCalendarHeaderComponent implements AfterViewInit {
   // INPUT
   @Input() scheduleComponent!: ScheduleComponent;
 
-  // VIEWCHILD
+  // VIEW CHILD
   @ViewChild(TssCalendarFilterComponent, { static: false })
   filter!: TssCalendarFilterComponent;
 

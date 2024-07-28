@@ -7,11 +7,11 @@ export class TssApiAction {
     '[App Shell API] Update breadcrumbs',
     props<{ breadcrumbs: BreadcrumbItem[] }>(),
   );
-  static readonly autoLoginSuccessfully = createAction(
+  static readonly getUserInfoSuccessfully = createAction(
     '[App Shell API] Auto login Successfully',
     props<{ teacher: Teacher }>(),
   );
-  static readonly autoLoginFailure = createAction(
+  static readonly getUserInfoFailure = createAction(
     '[App Shell API] Auto login Failed',
   );
   static readonly loadRoomsSuccessfully = createAction(

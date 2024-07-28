@@ -9,9 +9,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { Store, StoreModule } from '@ngrx/store';
 import {
+  LAYOUT_ROUTES,
   LayoutComponent,
   layoutProviders,
-  LAYOUT_ROUTES,
   requiredStepProviders,
 } from '@utconnect/components';
 import { TAIGA_PROVIDERS } from '@utconnect/utils';
@@ -24,7 +24,6 @@ import {
   esmSidebarItemsFactory,
   esmTopBarItemsFactory,
   menuTextFactory,
-  onLoginSuccess,
   roleFactory,
   userTitleFactory,
 } from './factories';
@@ -193,10 +192,11 @@ const routes: Routes = [
     authProviders({
       authService: EsmAuthService,
       role: roleFactory,
-      onLoginSuccess: onLoginSuccess,
       storage: 'localStorage',
       store: Store<EsmState>,
       title: userTitleFactory,
+      loginUrl: () => inject(ESM_CONFIG).loginUrl,
+      logoutUrl: () => inject(ESM_CONFIG).logoutUrl
     }),
     layoutProviders({
       store: Store<EsmState>,

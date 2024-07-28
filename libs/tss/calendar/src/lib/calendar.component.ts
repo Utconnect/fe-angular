@@ -89,6 +89,7 @@ import {
     MonthService,
     DayService,
     AgendaService,
+    TopBarService
   ],
   imports: [
     CommonModule,

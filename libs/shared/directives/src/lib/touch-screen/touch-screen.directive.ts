@@ -18,16 +18,16 @@ export class TouchScreenDirective {
   private elseThenTemplateRef = inject(TemplateRef<unknown>);
 
   // PRIVATE PROPERTIES
-  private _tssTouchScreen!: boolean;
+  private _touchScreen!: boolean;
   private hadElse = false;
 
   // SETTER
-  @Input() set tssTouchScreen(_: null) {
-    this._tssTouchScreen = true;
+  @Input('utconnectTouchScreen') set touchScreen(_: null) {
+    this._touchScreen = true;
     this.updateView();
   }
 
-  @Input() set tssTouchScreenElse(templateRef: TemplateRef<unknown>) {
+  @Input() set utconnectTouchScreenElse(templateRef: TemplateRef<unknown>) {
     this.hadElse = true;
     this.elseThenTemplateRef = templateRef;
     this.updateView();
@@ -35,7 +35,7 @@ export class TouchScreenDirective {
 
   private updateView(): void {
     this.viewContainerRef.clear();
-    if (this._tssTouchScreen && DeviceHelper.isTouchDevice()) {
+    if (this._touchScreen && DeviceHelper.isTouchDevice()) {
       this.viewContainerRef.createEmbeddedView(this.thenTemplateRef);
     } else if (this.hadElse) {
       this.viewContainerRef.createEmbeddedView(this.elseThenTemplateRef);

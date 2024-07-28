@@ -5,7 +5,7 @@ import {
   inject,
   Input,
 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import {
   TuiLinkModule,
   TuiLoaderModule,
@@ -44,7 +44,6 @@ const TAIGA_UI = [
 export class LayoutComponent {
   // INJECT PROPERTIES
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
 
   // INPUT
   @Input() role: string | null = null;
@@ -57,7 +56,6 @@ export class LayoutComponent {
   // LIFECYCLE
   constructor() {
     this.triggerToggleSidebar();
-    this.route.data.subscribe((data) => console.log(data));
   }
 
   // PRIVATE METHODS

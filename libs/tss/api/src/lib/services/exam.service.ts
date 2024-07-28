@@ -38,7 +38,7 @@ export class ExamService {
   ): Observable<ResponseModel<ExamScheduleModel[]>> {
     return this.http
       .get<ResponseModel<ExamScheduleModel[]>>(
-        this.url + `v1/teachers/${idTeacher}/module-classes/exam-schedules`,
+        this.url + `teacher/${idTeacher}/module-classes/exam-schedules`,
         { params: { 'date[between]': date } },
       )
       .pipe(map(parseExamSchedule));

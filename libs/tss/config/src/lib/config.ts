@@ -10,4 +10,6 @@ export interface TssConfig {
     key: string;
     cluster: string;
   };
+  loginUrl: string;
+  logoutUrl: string;
 }

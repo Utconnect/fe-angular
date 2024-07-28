@@ -1,4 +1,4 @@
-import { HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
 import { Provider, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
@@ -7,14 +7,15 @@ import {
 } from '@utconnect/services';
 import { Observable, of } from 'rxjs';
 import {
-  AUTH_ON_LOGIN_SUCCESS_TOKEN,
+  AUTH_LOGIN_URL,
+  AUTH_LOGOUT_URL,
   AUTH_ROLE_TOKEN,
   AUTH_SERVICE_TOKEN,
   AUTH_TITLE_TOKEN,
   AUTH_TOKEN_STORAGE_SERVICE_TOKEN,
 } from './auth.tokens';
 import { JwtInterceptor } from './interceptors';
-import { IAuthService } from './services';
+import { IAuthService, JwtService } from './services';
 
 export type AuthConfigOptions<
   S extends IAuthService,
@@ -23,11 +24,12 @@ export type AuthConfigOptions<
 > = {
   authService?: Type<S>;
   authInterceptor?: Type<I>;
-  onLoginSuccess: (store: T) => () => void;
   role: (store: T) => Observable<string[]>;
   storage: 'localStorage' | 'sessionStorage';
   store: Type<T>;
   title?: (store: T) => Observable<string | null>;
+  loginUrl: () => string;
+  logoutUrl: () => string;
 };
 
 export const authProviders = <
@@ -35,14 +37,18 @@ export const authProviders = <
   I extends HttpInterceptor,
   T extends Store,
 >({
-  authService,
-  authInterceptor,
-  onLoginSuccess,
-  role,
-  storage,
-  store,
-  title,
-}: AuthConfigOptions<S, I, T>): Provider => [
+    authService,
+    authInterceptor,
+    role,
+    storage,
+    store,
+    title,
+    loginUrl,
+    logoutUrl,
+  }: AuthConfigOptions<S, I, T>): Provider => [
+  JwtService,
+  LocalStorageService,
+  SessionStorageService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: authInterceptor ?? JwtInterceptor,
@@ -50,13 +56,7 @@ export const authProviders = <
   },
   {
     provide: AUTH_TOKEN_STORAGE_SERVICE_TOKEN,
-    useClass:
-      storage === 'localStorage' ? LocalStorageService : SessionStorageService,
-  },
-  {
-    provide: AUTH_ON_LOGIN_SUCCESS_TOKEN,
-    useFactory: onLoginSuccess,
-    deps: [store],
+    useFactory: () => storage === 'localStorage' ? LocalStorageService : SessionStorageService,
   },
   {
     provide: AUTH_SERVICE_TOKEN,
@@ -71,5 +71,13 @@ export const authProviders = <
     provide: AUTH_TITLE_TOKEN,
     useFactory: title ?? ((): Observable<null> => of(null)),
     deps: [store],
+  },
+  {
+    provide: AUTH_LOGIN_URL,
+    useFactory: loginUrl,
+  },
+  {
+    provide: AUTH_LOGOUT_URL,
+    useFactory: logoutUrl,
   },
 ];

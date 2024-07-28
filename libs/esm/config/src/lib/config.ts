@@ -10,4 +10,6 @@ export interface EsmConfig {
     key: string;
     cluster: string;
   };
+  loginUrl: string;
+  logoutUrl: string;
 }

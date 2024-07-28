@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -6,13 +7,16 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { CallbackService } from '@utconnect/services';
 import { Observable, tap } from 'rxjs';
+import { AUTH_LOGIN_URL } from '../auth.tokens';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   // INJECT PROPERTIES
-  private readonly router = inject(Router);
+  private readonly document = inject(DOCUMENT);
+  private readonly loginUrl = inject(AUTH_LOGIN_URL);
+  private readonly callbackService = inject(CallbackService);
 
   // IMPLEMENTATIONS
   intercept(
@@ -33,6 +37,8 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   private handleUnauthorized(): void {
-    this.router.navigate(['https://localhost:7167/Identity/Account/Login']);
+    const location = this.document.location;
+    this.callbackService.setReturnUrl(location.href);
+    location.href = this.loginUrl;
   }
 }

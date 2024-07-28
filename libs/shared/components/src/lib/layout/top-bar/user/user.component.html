@@ -12,10 +12,11 @@
   <tui-data-list class="top-bar-dropdown" size="l" role="menu">
     <tui-opt-group *ngFor="let group of items">
       <ng-container *ngFor="let item of group.items">
+        <!-- TODO: Use template for externalLink and externalLinkFactory -->
         <a
           tuiOption
           (click)="close()"
-          *ngIf="item.externalLink; else link"
+          *ngIf="item.externalLink; else externalLinkFactory"
           [href]="item.externalLink"
           target="_blank"
           role="menuitem"
@@ -24,6 +25,20 @@
           <span>{{ item.label }}</span>
           <tui-svg src="tuiIconExternalLinkLarge"></tui-svg>
         </a>
+        <ng-template #externalLinkFactory>
+          <a
+            tuiOption
+            (click)="close()"
+            *ngIf="item.externalLinkFactory; else link"
+            [href]="item.externalLinkFactory()"
+            target="_blank"
+            role="menuitem"
+          >
+            <tui-svg [src]="item.icon"></tui-svg>
+            <span>{{ item.label }}</span>
+            <tui-svg src="tuiIconExternalLinkLarge"></tui-svg>
+          </a>
+        </ng-template>
         <ng-template #link>
           <a
             tuiOption

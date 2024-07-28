@@ -1,8 +1,8 @@
-import { TssConfig } from '@tss/config';
+import { EsmConfig } from '@esm/config';
 
-export const environment: TssConfig = {
+export const environment: EsmConfig = {
   production: true,
-  baseUrl: 'http://localhost:5001',
+  baseUrl: 'http://localhost:5000/',
   syncfusionLicense: '',
   recaptcha: {
     siteKey: '',
@@ -12,4 +12,6 @@ export const environment: TssConfig = {
     key: 'fde3a10d00f7502271d3',
     cluster: 'ap1',
   },
+  loginUrl: 'http://localhost:5100/login',
+  logoutUrl: 'http://localhost:5100/logout',
 };

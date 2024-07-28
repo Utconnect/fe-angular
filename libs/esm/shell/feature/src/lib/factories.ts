@@ -1,5 +1,7 @@
+import { inject } from '@angular/core';
+import { AUTH_LOGOUT_URL } from '@auth';
 import { ESMDomainEnumsExaminationStatus } from '@esm/api';
-import { EsmPageAction, EsmSelector, EsmState } from '@esm/store';
+import { EsmSelector, EsmState } from '@esm/store';
 import { Store } from '@ngrx/store';
 import {
   tuiIconCommentLarge,
@@ -11,7 +13,7 @@ import { RequiredStep, SidebarItem, TopBarGroup } from '@utconnect/components';
 import { combineLatest, map, Observable } from 'rxjs';
 import { Role } from './roles';
 
-export const esmTopBarItemsFactory: () => TopBarGroup[] = () => [
+export const esmTopBarItemsFactory = (): TopBarGroup[] => [
   {
     items: [
       {
@@ -50,7 +52,7 @@ export const esmTopBarItemsFactory: () => TopBarGroup[] = () => [
         key: 'log-out',
         label: 'Đăng xuất',
         icon: tuiIconLogOutLarge,
-        externalLink: 'https://localhost:7167/Identity/Account/Logout',
+        externalLinkFactory: () => inject(AUTH_LOGOUT_URL),
       },
     ],
   },
@@ -179,12 +181,6 @@ export const roleFactory: (store: Store<EsmState>) => Observable<string[]> = (
     EsmSelector.notNullUser,
     map((u) => u.roles ?? []),
   );
-
-export const onLoginSuccess: (store: Store<EsmState>) => () => void = (
-  store,
-) => {
-  return () => store.dispatch(EsmPageAction.getUserInfo());
-};
 
 export const userTitleFactory: (
   store: Store<EsmState>,

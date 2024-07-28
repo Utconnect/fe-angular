@@ -11,4 +11,9 @@ export const LAYOUT_ROUTES: Routes = [
     loadChildren: async () =>
       (await import('../error/not-found')).NOT_FOUND_ROUTES,
   },
+  {
+    path: 'callback',
+    loadChildren: async () =>
+      (await import('../callback')).CALLBACK_ROUTES,
+  },
 ];

@@ -6,7 +6,7 @@ import { TouchScreenDirective } from './touch-screen.directive';
 @Component({
   template: `
     <div>Without Directive</div>
-    <div *tssTouchScreen="null">Default</div>
+    <div *utconnectTouchScreen="null">Default</div>
   `,
 })
 class TestComponent {}
@@ -26,7 +26,7 @@ describe('TouchScreenDirective', () => {
     elementsWithDirective = fixture.debugElement.queryAllNodes(
       By.directive(TouchScreenDirective)
     );
-    bareElement = fixture.debugElement.query(By.css(':not([tssTouchScreen])'));
+    bareElement = fixture.debugElement.query(By.css(':not([utconnectTouchScreen])'));
   });
 
   it('should have bare element', () => {

@@ -1,3 +1,5 @@
+import { inject } from '@angular/core';
+import { AUTH_LOGOUT_URL } from '@auth';
 import { Store } from '@ngrx/store';
 import {
   tuiIconCommentLarge,
@@ -6,7 +8,7 @@ import {
   tuiIconSettingsLarge,
   tuiIconUpload,
 } from '@taiga-ui/icons';
-import { TssPageAction, TssSelector, TssState } from '@tss/store';
+import { TssSelector, TssState } from '@tss/store';
 import { SidebarItem, TopBarGroup } from '@utconnect/components';
 import { combineLatest, map, Observable, of } from 'rxjs';
 
@@ -49,7 +51,7 @@ export const tssTopBarItemsFactory: () => TopBarGroup[] = () => [
         key: 'log-out',
         label: 'Đăng xuất',
         icon: tuiIconLogOutLarge,
-        externalLink: 'https://localhost:7167/Identity/Account/Logout',
+        externalLinkFactory: () => inject(AUTH_LOGOUT_URL),
       },
     ],
   },
@@ -119,12 +121,6 @@ export const roleFactory: (store: Store<TssState>) => Observable<string[]> = (
     TssSelector.notNullTeacher,
     map((u) => u.permissions.map((p) => p.toString()) ?? []),
   );
-
-export const onLoginSuccess: (store: Store<TssState>) => () => void = (
-  store,
-) => {
-  return () => store.dispatch(TssPageAction.getUserInfo());
-};
 
 export const userTitleFactory: (
   store: Store<TssState>,

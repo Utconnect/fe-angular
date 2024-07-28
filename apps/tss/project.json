@@ -30,9 +30,18 @@
           }
         ],
         "styles": [
-          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "node_modules/@syncfusion/ej2-angular-schedule/styles/material.css",
+          "node_modules/@syncfusion/ej2-base/styles/material.css",
           "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
           "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-buttons/styles/material.css",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-calendars/styles/material.css",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-dropdowns/styles/material.css",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-inputs/styles/material.css",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-lists/styles/material.css",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-navigations/styles/material.css",
+          "node_modules/.pnpm/node_modules/@syncfusion/ej2-popups/styles/material.css",
           "apps/tss/src/styles.less"
         ],
         "stylePreprocessorOptions": {
@@ -69,6 +78,9 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4201
+      },
       "configurations": {
         "production": {
           "browserTarget": "tss:build:production"

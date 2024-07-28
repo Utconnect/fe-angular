@@ -1,5 +1,6 @@
 import { Provider, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CallbackService } from '@utconnect/services';
 import { Observable, of } from 'rxjs';
 import {
   SIDE_BAR_OPTION_AUTH_ROLES_TOKEN,
@@ -11,7 +12,7 @@ import {
   TOP_BAR_OPTION_MENU_TEXT_TOKEN,
   TOP_BAR_OPTION_RIGHT_ITEM_TOKEN,
   TopBarGroup,
-  TopBarRightItemProviderType,
+  TopBarRightProviderType,
 } from './top-bar';
 
 type LayoutProvidersType<T extends Store> = {
@@ -23,7 +24,7 @@ type LayoutProvidersType<T extends Store> = {
   topBar: {
     items: () => TopBarGroup[];
     menuText?: (store: T) => Observable<string>;
-    right: TopBarRightItemProviderType;
+    right: TopBarRightProviderType;
   };
 };
 
@@ -32,6 +33,7 @@ export const layoutProviders = <T extends Store>({
   sidebar,
   topBar,
 }: LayoutProvidersType<T>): Provider => [
+  CallbackService,
   {
     provide: SIDE_BAR_OPTION_ITEM_TOKEN,
     useFactory: sidebar.items,
@@ -45,7 +47,6 @@ export const layoutProviders = <T extends Store>({
   {
     provide: TOP_BAR_OPTION_ITEM_TOKEN,
     useFactory: topBar.items,
-    deps: [store],
   },
   {
     provide: TOP_BAR_OPTION_MENU_TEXT_TOKEN,

@@ -3,7 +3,6 @@ import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, fakeAsync } from '@angular/core/testing';
 import { JwtInterceptor } from './jwt.interceptor';
 import { Observable } from 'rxjs';
-import { TokenService } from '@utconnect/services';
 import { TESTING_COMMON_IMPORTS } from '@utconnect/test';
 
 describe('JwtInterceptor', () => {
@@ -12,23 +11,14 @@ describe('JwtInterceptor', () => {
   };
   let mockRequest: HttpRequest<unknown>;
   let interceptor: JwtInterceptor;
-  let mockTokenService: jasmine.SpyObj<TokenService>;
 
   beforeEach(async () => {
-    mockTokenService = jasmine.createSpyObj<TokenService>('TokenService', [
-      'get',
-    ]);
-
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS],
       providers: [
         JwtInterceptor,
         HttpClient,
         HttpTestingController,
-        {
-          provide: TokenService,
-          useValue: mockTokenService,
-        },
       ],
     }).compileComponents();
 
@@ -41,7 +31,6 @@ describe('JwtInterceptor', () => {
       handle: (): Observable<HttpEvent<any>> => new Observable(),
     };
     interceptor.intercept(mockRequest, next);
-    expect(mockTokenService.get).toHaveBeenCalled();
     expect(mockRequest.headers.get('Authorization')).toEqual(null);
   });
 
@@ -57,7 +46,6 @@ describe('JwtInterceptor', () => {
         return new Observable();
       },
     };
-    mockTokenService.get.and.returnValue('saved token');
     interceptor.intercept(mockRequest, next);
 
     expect(response.headers.get('Authorization')).toContain('saved token');

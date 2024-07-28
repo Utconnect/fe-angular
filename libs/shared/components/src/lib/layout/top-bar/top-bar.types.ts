@@ -6,6 +6,7 @@ export type TopBarItem = {
   routerLink?: string;
   icon: string;
   externalLink?: string;
+  externalLinkFactory?: () => string;
   action?: () => void;
 };
 
@@ -13,6 +14,6 @@ export type TopBarGroup = {
   items: TopBarItem[];
 };
 
-export type TopBarRightItemProviderType = {
+export type TopBarRightProviderType = {
   mapper: ComponentRouteMapper;
 };
