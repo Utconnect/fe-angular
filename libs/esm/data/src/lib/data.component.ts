@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {
-  tuiIconRefreshCcwLarge,
-  tuiIconUserLarge,
-  tuiIconUsersLarge,
-} from '@taiga-ui/icons';
+import { tuiIconUserLarge, tuiIconUsersLarge } from '@taiga-ui/icons';
 import { TuiActionModule } from '@taiga-ui/kit';
 
 export const TAIGA_UI = [TuiActionModule];
@@ -38,11 +34,6 @@ export class DataComponent {
       url: 'invigilator',
       label: 'CBCT',
       icon: tuiIconUserLarge,
-    },
-    {
-      url: 'reset-password',
-      label: 'Đặt lại mật khẩu',
-      icon: tuiIconRefreshCcwLarge,
     },
   ];
 }

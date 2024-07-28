@@ -7,7 +7,6 @@ export const environment: TssConfig = {
   recaptcha: {
     siteKey: '',
   },
-  defaultPassword: '123456',
   pusher: {
     key: 'fde3a10d00f7502271d3',
     cluster: 'ap1',

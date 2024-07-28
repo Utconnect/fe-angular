@@ -5,7 +5,6 @@ export interface TssConfig {
   recaptcha: {
     siteKey: string;
   };
-  defaultPassword: string;
   pusher: {
     key: string;
     cluster: string;

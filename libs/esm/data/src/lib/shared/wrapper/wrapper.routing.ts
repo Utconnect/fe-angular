@@ -24,12 +24,6 @@ export const ROUTES: Routes = [
           (await import('../../invigilator/invigilator.component'))
             .DataInvigilatorComponent,
       },
-      {
-        path: 'reset-password',
-        loadComponent: async () =>
-          (await import('../../reset-password/reset-password.component'))
-            .DataResetPasswordComponent,
-      },
     ],
   },
 ];

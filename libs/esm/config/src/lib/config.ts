@@ -5,7 +5,6 @@ export interface EsmConfig {
   recaptcha: {
     siteKey: string;
   };
-  defaultPassword: string;
   pusher: {
     key: string;
     cluster: string;

@@ -1536,14 +1536,6 @@ export interface ImportRoomPayload {
 export type LoginData =
   ESMApplicationCommonModelsResultESMDomainDtosGeneratedToken;
 
-export type ResetPasswordData =
-  | ESMApplicationCommonModelsResultSystemBoolean
-  | ESMApplicationCommonModelsResult;
-
-export interface ResetPasswordQuery {
-  userId?: string;
-}
-
 export type SearchData =
   ESMApplicationCommonModelsResultSystemCollectionsGenericIEnumerableESMDomainDtosUserUserSummary;
 

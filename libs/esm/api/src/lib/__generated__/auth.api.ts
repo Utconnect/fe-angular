@@ -10,9 +10,8 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createAction, props } from '@ngrx/store';
-import { ObjectHelper } from '@utconnect/helpers';
 import { Observable } from 'rxjs';
 import { getEnv } from '../partial';
 import {
@@ -21,8 +20,6 @@ import {
   ESMApplicationAuthCommandsLoginLoginCommand,
   GetMySummaryInfoData,
   LoginData,
-  ResetPasswordData,
-  ResetPasswordQuery,
 } from './data-contracts';
 
 @Injectable()
@@ -76,22 +73,6 @@ export class AuthService {
   getMySummaryInfo(): Observable<GetMySummaryInfoData> {
     return this.http.get<GetMySummaryInfoData>(this.url + `/Auth/me`);
   }
-
-  /**
-   * No description
-   *
-   * @tags Auth
-   * @name ResetPassword
-   * @request PATCH:/Auth/reset-password
-   * @response `200` `ResetPasswordData` Success
-   */
-  resetPassword(query: ResetPasswordQuery): Observable<ResetPasswordData> {
-    return this.http.patch<ResetPasswordData>(
-      this.url + `/Auth/reset-password`,
-      {},
-      { params: ObjectHelper.removeUndefinedField(query) },
-    );
-  }
 }
 
 export class AuthApiAction {
@@ -115,11 +96,4 @@ export class AuthApiAction {
   );
 
   getMySummaryInfoFailed = createAction('[Auth/API] getMySummaryInfo Failed');
-
-  resetPasswordSuccessful = createAction(
-    '[Auth/API] resetPassword Successful',
-    props<{ data: ResetPasswordData['data'] }>(),
-  );
-
-  resetPasswordFailed = createAction('[Auth/API] resetPassword Failed');
 }

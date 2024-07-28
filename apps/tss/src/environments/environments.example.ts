@@ -7,7 +7,6 @@ export const environment: EsmConfig = {
   recaptcha: {
     siteKey: '',
   },
-  defaultPassword: '123456',
   pusher: {
     key: 'exampleKey',
     cluster: 'exampleCluster',
