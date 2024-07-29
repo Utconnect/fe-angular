@@ -18,10 +18,6 @@ export const AUTH_TITLE_TOKEN = new InjectionToken<Observable<string | null>>(
   '[Auth] Title',
 );
 
-export const AUTH_LOGIN_URL = new InjectionToken<string>(
-  '[Auth] Login Url',
-);
+export const AUTH_LOGIN_URL = new InjectionToken<string>('[Auth] Login Url');
 
-export const AUTH_LOGOUT_URL = new InjectionToken<string>(
-  '[Auth] Logout Url',
-);
+export const AUTH_LOGOUT_URL = new InjectionToken<string>('[Auth] Logout Url');

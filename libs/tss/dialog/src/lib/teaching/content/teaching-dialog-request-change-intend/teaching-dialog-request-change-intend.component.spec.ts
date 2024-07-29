@@ -14,7 +14,7 @@ describe('TeachingDialogRequestChangeIntendComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(
-      TssTeachingDialogRequestChangeIntendComponent
+      TssTeachingDialogRequestChangeIntendComponent,
     );
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -3,6 +3,8 @@
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {
+    "format": "npx prettier --write .",
+    "lint-all": "nx run-many --all --target=lint",
     "prepare": "husky install",
     "esm": "nx run esm:serve --port 4201",
     "tss": "nx run tss:serve --port 4202",

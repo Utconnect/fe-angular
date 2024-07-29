@@ -10,7 +10,7 @@ export type RequestChangeScheduleCode = [
   302,
   400,
   500,
-  501
+  501,
 ][number];
 
 export interface SimpleFixedScheduleModel {

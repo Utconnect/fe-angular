@@ -4,27 +4,36 @@
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
+      ],
+      "plugins": ["deprecation"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@angular-eslint/directive-selector": [
           "error",
           {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
+            "type": "attribute",
+            "prefix": "esm",
+            "style": "camelCase"
           }
-        ]
-      }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "esm",
+            "style": "kebab-case"
+          }
+        ],
         "@typescript-eslint/explicit-function-return-type": "warn",
         "@typescript-eslint/no-unused-vars": [
           "error",
@@ -34,13 +43,8 @@
             "argsIgnorePattern": "^_"
           }
         ],
-        "@typescript-eslint/no-empty-interface": "off"
+        "deprecation/deprecation": "warn"
       }
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
-      "rules": {}
     },
     {
       "files": ["*.spec.ts"],
@@ -50,10 +54,8 @@
       }
     },
     {
-      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
-      "env": {
-        "jest": true
-      },
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]

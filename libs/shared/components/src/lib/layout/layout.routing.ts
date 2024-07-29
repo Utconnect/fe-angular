@@ -13,7 +13,6 @@ export const LAYOUT_ROUTES: Routes = [
   },
   {
     path: 'callback',
-    loadChildren: async () =>
-      (await import('../callback')).CALLBACK_ROUTES,
+    loadChildren: async () => (await import('../callback')).CALLBACK_ROUTES,
   },
 ];

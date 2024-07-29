@@ -13,7 +13,9 @@ describe('ChangeScheduleFilterComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TssStatisticChangeScheduleFilterComponent);
+    fixture = TestBed.createComponent(
+      TssStatisticChangeScheduleFilterComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

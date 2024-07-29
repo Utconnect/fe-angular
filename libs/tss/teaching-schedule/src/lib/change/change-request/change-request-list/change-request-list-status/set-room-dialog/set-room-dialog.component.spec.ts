@@ -8,12 +8,16 @@ describe('ChangeSetRoomDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TssTeachingScheduleChangeRequestListStatusSetRoomDialogComponent],
+      declarations: [
+        TssTeachingScheduleChangeRequestListStatusSetRoomDialogComponent,
+      ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TssTeachingScheduleChangeRequestListStatusSetRoomDialogComponent);
+    fixture = TestBed.createComponent(
+      TssTeachingScheduleChangeRequestListStatusSetRoomDialogComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

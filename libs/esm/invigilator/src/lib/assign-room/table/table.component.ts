@@ -151,13 +151,10 @@ export class InvigilatorAssignRoomTableComponent implements OnInit {
 
   private buildForm(data: ShiftUiModel[]): void {
     this.form = this.fb.group(
-      data.reduce(
-        (acc, curr) => {
-          acc[curr.id] = [curr.invigilator?.id ?? null];
-          return acc;
-        },
-        {} as Record<string, (string | null)[]>,
-      ),
+      data.reduce((acc, curr) => {
+        acc[curr.id] = [curr.invigilator?.id ?? null];
+        return acc;
+      }, {} as Record<string, (string | null)[]>),
     );
   }
 

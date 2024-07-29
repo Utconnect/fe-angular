@@ -11,6 +11,4 @@ export const TOP_BAR_OPTION_MENU_TEXT_TOKEN = new InjectionToken<
 >('[Top bar] option menu text');
 
 export const TOP_BAR_OPTION_RIGHT_ITEM_TOKEN =
-  new InjectionToken<TopBarRightProviderType>(
-    '[Top bar] option right item',
-  );
+  new InjectionToken<TopBarRightProviderType>('[Top bar] option right item');

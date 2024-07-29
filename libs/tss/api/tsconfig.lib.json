@@ -5,7 +5,10 @@
     "declaration": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "../../shared/services/src/lib/core/network/online.service.ts"],
+  "include": [
+    "src/**/*.ts",
+    "../../shared/services/src/lib/core/network/online.service.ts"
+  ],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

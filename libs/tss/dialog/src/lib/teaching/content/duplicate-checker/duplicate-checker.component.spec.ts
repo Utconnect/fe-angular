@@ -12,7 +12,9 @@ describe('TssTeachingDialogContentDuplicateCheckerComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TssTeachingDialogContentDuplicateCheckerComponent);
+    fixture = TestBed.createComponent(
+      TssTeachingDialogContentDuplicateCheckerComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

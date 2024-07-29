@@ -7,12 +7,16 @@ describe('TssTeachingScheduleChangeRequestListStatusDenyDialogComponent', () => 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TssTeachingScheduleChangeRequestListStatusDenyDialogComponent],
+      declarations: [
+        TssTeachingScheduleChangeRequestListStatusDenyDialogComponent,
+      ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TssTeachingScheduleChangeRequestListStatusDenyDialogComponent);
+    fixture = TestBed.createComponent(
+      TssTeachingScheduleChangeRequestListStatusDenyDialogComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

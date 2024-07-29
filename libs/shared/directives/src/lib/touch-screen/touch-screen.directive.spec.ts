@@ -24,9 +24,11 @@ describe('TouchScreenDirective', () => {
     fixture = TestBed.createComponent(TestComponent);
     fixture.detectChanges();
     elementsWithDirective = fixture.debugElement.queryAllNodes(
-      By.directive(TouchScreenDirective)
+      By.directive(TouchScreenDirective),
     );
-    bareElement = fixture.debugElement.query(By.css(':not([utconnectTouchScreen])'));
+    bareElement = fixture.debugElement.query(
+      By.css(':not([utconnectTouchScreen])'),
+    );
   });
 
   it('should have bare element', () => {

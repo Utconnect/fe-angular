@@ -13,7 +13,9 @@ describe('ConfirmDialogComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmDialogComponent<ConfirmDialogOptions>);
+    fixture = TestBed.createComponent(
+      ConfirmDialogComponent<ConfirmDialogOptions>,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

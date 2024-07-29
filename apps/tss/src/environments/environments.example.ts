@@ -11,6 +11,7 @@ export const environment: EsmConfig = {
     key: 'exampleKey',
     cluster: 'exampleCluster',
   },
-  loginUrl: 'http://localhost:5100/login?returnUrl=http://localhost:4201/callback',
+  loginUrl:
+    'http://localhost:5100/login?returnUrl=http://localhost:4201/callback',
   logoutUrl: 'http://localhost:5100/logout',
 };

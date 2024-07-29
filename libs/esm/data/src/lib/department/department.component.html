@@ -5,8 +5,8 @@
   <h1 id="title" class="text-3xl font-bold">
     {{
       obs.selectedFacultyName
-        ? "Dữ liệu các bộ môn thuộc khoa " + obs.selectedFacultyName
-        : "Dữ liệu tất cả bộ môn"
+        ? 'Dữ liệu các bộ môn thuộc khoa ' + obs.selectedFacultyName
+        : 'Dữ liệu tất cả bộ môn'
     }}
   </h1>
   <div class="flex items-center">
@@ -75,7 +75,7 @@
         <tr
           *ngFor="
             let department of obs.departments
-              | tuiFilter: departmentMatcher : obs.selectedFacultyId
+              | tuiFilter : departmentMatcher : obs.selectedFacultyId
           "
           tuiTr
         >

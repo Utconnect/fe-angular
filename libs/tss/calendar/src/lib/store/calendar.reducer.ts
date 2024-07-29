@@ -75,20 +75,17 @@ export const calendarReducer = createReducer(
       selecting: { ...state.filter.active },
     },
   })),
-  on(
-    TssCalendarPageAction.changeSelectingState,
-    (state, { changes }) => ({
-      ...state,
-      filter: {
-        ...state.filter,
-        selecting: {
-          ...state.filter.selecting,
-          ...changes,
-          modules: changes.modules || [],
-        },
+  on(TssCalendarPageAction.changeSelectingState, (state, { changes }) => ({
+    ...state,
+    filter: {
+      ...state.filter,
+      selecting: {
+        ...state.filter.selecting,
+        ...changes,
+        modules: changes.modules || [],
       },
-    }),
-  ),
+    },
+  })),
   on(
     TssCalendarPageAction.loadOfflineData,
     (state, { googleCalendar, schedules }) => {

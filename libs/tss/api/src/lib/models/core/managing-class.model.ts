@@ -1,4 +1,4 @@
-import { ManagingClassDta } from "../../dta";
+import { ManagingClassDta } from '../../dta';
 
 export class ManagingClass {
   readonly academicYear!: number;

@@ -13,7 +13,9 @@ describe('AssignRightTitleComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TssTeachingScheduleAssignRightTitleComponent);
+    fixture = TestBed.createComponent(
+      TssTeachingScheduleAssignRightTitleComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

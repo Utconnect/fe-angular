@@ -16,7 +16,6 @@ export class UserService {
   private readonly url = this.env.baseUrl + 'account/';
 
   me(): Observable<ResponseModel<Teacher>> {
-    return this.http
-      .get<ResponseModel<Teacher>>(this.url + 'me');
+    return this.http.get<ResponseModel<Teacher>>(this.url + 'me');
   }
 }

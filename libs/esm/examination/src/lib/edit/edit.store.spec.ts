@@ -2,7 +2,7 @@ import { fakeAsync, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import {
   ESMApplicationExaminationsCommandsCreateCreateCommand,
-  ExaminationService
+  ExaminationService,
 } from '@esm/api';
 import { ESM_STORE_PROVIDER } from '@esm/test';
 import { ResultBuilder, TESTING_COMMON_IMPORTS } from '@utconnect/test';

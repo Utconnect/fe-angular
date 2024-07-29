@@ -123,10 +123,9 @@ export class TssTeachingDialogRequestChangeComponent implements OnInit {
           );
           const payload = {
             date: [date, date].join(),
-            shift:
-              this.shiftControlValue.startsWith('5')
-                ? ['5_1', '5_2'].join()
-                : this.shiftControlValue,
+            shift: this.shiftControlValue.startsWith('5')
+              ? ['5_1', '5_2'].join()
+              : this.shiftControlValue,
           };
           const teacherId =
             (this.isPersonal

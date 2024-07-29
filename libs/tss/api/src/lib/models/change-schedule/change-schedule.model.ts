@@ -1,4 +1,8 @@
-import { Nullable, RequestChangeScheduleCode, SimpleModel } from '@utconnect/types';
+import {
+  Nullable,
+  RequestChangeScheduleCode,
+  SimpleModel,
+} from '@utconnect/types';
 
 export interface ChangeSchedule {
   id: number;

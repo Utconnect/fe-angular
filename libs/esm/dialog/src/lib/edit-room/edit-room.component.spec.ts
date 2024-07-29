@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_STORE_PROVIDER, TESTING_COMMON_IMPORTS } from '@esm/cdk';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { EsmEditRoomDialogComponent, NGRX, TAIGA_UI } from './edit-room.component';
+import {
+  EsmEditRoomDialogComponent,
+  NGRX,
+  TAIGA_UI,
+} from './edit-room.component';
 
 describe('AddRoomDialogComponent', () => {
   let component: EsmEditRoomDialogComponent;

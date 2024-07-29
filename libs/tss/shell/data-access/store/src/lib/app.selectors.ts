@@ -34,15 +34,14 @@ export class TssSelector {
   );
 
   static readonly nameTitle = createSelector(this.teacher, (teacher) => {
-      if (teacher === null) {
-        return 'Bạn';
-      }
-      if (teacher.isFemale) {
-        return 'Cô';
-      }
-      return 'Thầy';
-    },
-  );
+    if (teacher === null) {
+      return 'Bạn';
+    }
+    if (teacher.isFemale) {
+      return 'Cô';
+    }
+    return 'Thầy';
+  });
 
   static readonly permission = createSelector(
     this.teacher,

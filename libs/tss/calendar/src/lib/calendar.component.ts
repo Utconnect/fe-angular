@@ -89,7 +89,7 @@ import {
     MonthService,
     DayService,
     AgendaService,
-    TopBarService
+    TopBarService,
   ],
   imports: [
     CommonModule,

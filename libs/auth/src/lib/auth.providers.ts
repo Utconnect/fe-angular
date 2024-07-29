@@ -37,15 +37,15 @@ export const authProviders = <
   I extends HttpInterceptor,
   T extends Store,
 >({
-    authService,
-    authInterceptor,
-    role,
-    storage,
-    store,
-    title,
-    loginUrl,
-    logoutUrl,
-  }: AuthConfigOptions<S, I, T>): Provider => [
+  authService,
+  authInterceptor,
+  role,
+  storage,
+  store,
+  title,
+  loginUrl,
+  logoutUrl,
+}: AuthConfigOptions<S, I, T>): Provider => [
   JwtService,
   LocalStorageService,
   SessionStorageService,
@@ -56,7 +56,8 @@ export const authProviders = <
   },
   {
     provide: AUTH_TOKEN_STORAGE_SERVICE_TOKEN,
-    useFactory: () => storage === 'localStorage' ? LocalStorageService : SessionStorageService,
+    useFactory: () =>
+      storage === 'localStorage' ? LocalStorageService : SessionStorageService,
   },
   {
     provide: AUTH_SERVICE_TOKEN,

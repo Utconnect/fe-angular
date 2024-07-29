@@ -124,7 +124,10 @@ export class TssChangeReportDialogComponent {
     });
   }
 
-  private getRangeText(rangeOptions: { sameMonth: boolean, inOneYear: boolean }): string {
+  private getRangeText(rangeOptions: {
+    sameMonth: boolean;
+    inOneYear: boolean;
+  }): string {
     const range = this.rangeControlValue;
     if (rangeOptions.sameMonth) {
       return `thang${range.from.month + 1}_${range.from.year}`;

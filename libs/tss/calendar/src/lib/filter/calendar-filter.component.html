@@ -48,7 +48,8 @@
               <ng-template tuiDataList>
                 <tui-data-list size="s">
                   <button
-                    tuiOption [value]="[]"
+                    tuiOption
+                    [value]="[]"
                     role="option"
                     aria-selected="true"
                   >
@@ -134,7 +135,7 @@
     modules.length === 0
       ? 'Tất cả'
       : modules.length === 1
-        ? modules[0]
-        : modules.length + ' học phần'
+      ? modules[0]
+      : modules.length + ' học phần'
   }}
 </ng-template>

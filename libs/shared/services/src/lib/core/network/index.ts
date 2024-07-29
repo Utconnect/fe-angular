@@ -1,1 +1,1 @@
-export * from './online.service'
+export * from './online.service';

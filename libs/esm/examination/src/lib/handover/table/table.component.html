@@ -61,10 +61,10 @@
             {{ row.shiftGroup.method | esmExamMethod }}
           </td>
           <td *tuiCell="'date'" tuiTd>
-            {{ row.shiftGroup.startAt | date: "dd/MM/y" }}
+            {{ row.shiftGroup.startAt | date : 'dd/MM/y' }}
           </td>
           <td *tuiCell="'startAt'" tuiTd class="!text-center">
-            {{ row.shiftGroup.startAt | date: "HH:mm" }}
+            {{ row.shiftGroup.startAt | date : 'HH:mm' }}
           </td>
           <td *tuiCell="'shift'" tuiTd class="!text-center">
             {{ row.shiftGroup.shift }}

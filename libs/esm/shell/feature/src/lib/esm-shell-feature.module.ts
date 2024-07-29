@@ -196,7 +196,7 @@ const routes: Routes = [
       store: Store<EsmState>,
       title: userTitleFactory,
       loginUrl: () => inject(ESM_CONFIG).loginUrl,
-      logoutUrl: () => inject(ESM_CONFIG).logoutUrl
+      logoutUrl: () => inject(ESM_CONFIG).logoutUrl,
     }),
     layoutProviders({
       store: Store<EsmState>,

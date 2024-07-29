@@ -16,7 +16,8 @@ export class CallbackService {
   }
 
   navigate(): void {
-    const callbackUrl = this.storageService.getItem(this.CALLBACK_URL_KEY) ?? '/';
+    const callbackUrl =
+      this.storageService.getItem(this.CALLBACK_URL_KEY) ?? '/';
     this.clear();
     this.document.location.href = callbackUrl;
   }

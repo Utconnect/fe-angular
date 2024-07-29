@@ -1,4 +1,4 @@
-import { Nullable,SimpleModel } from '@utconnect/types';
+import { Nullable, SimpleModel } from '@utconnect/types';
 
 export interface SimpleTeacher {
   readonly birth: Nullable<string>;

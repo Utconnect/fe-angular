@@ -5,8 +5,8 @@
   <h1 id="title" class="text-3xl font-bold">
     {{
       obs.selectedFacultyName
-        ? "Dữ liệu CBCT thuộc khoa " + obs.selectedFacultyName
-        : "Dữ liệu CBCT"
+        ? 'Dữ liệu CBCT thuộc khoa ' + obs.selectedFacultyName
+        : 'Dữ liệu CBCT'
     }}<ng-container *ngIf="obs.selectedDepartmentName"
       >, bộ môn {{ obs.selectedDepartmentName }}
     </ng-container>

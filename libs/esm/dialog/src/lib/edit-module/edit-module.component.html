@@ -44,7 +44,7 @@
           <tui-opt-group>
             <button
               *ngFor="
-                let faculty of obs.departments | tuiFilter: departmentMatcher
+                let faculty of obs.departments | tuiFilter : departmentMatcher
               "
               tuiOption
               [value]="faculty.id"

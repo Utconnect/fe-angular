@@ -13,7 +13,9 @@ describe('ChangeRequestComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TssTeachingScheduleChangeRequestComponent);
+    fixture = TestBed.createComponent(
+      TssTeachingScheduleChangeRequestComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

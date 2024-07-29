@@ -15,11 +15,7 @@ describe('JwtInterceptor', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TESTING_COMMON_IMPORTS],
-      providers: [
-        JwtInterceptor,
-        HttpClient,
-        HttpTestingController,
-      ],
+      providers: [JwtInterceptor, HttpClient, HttpTestingController],
     }).compileComponents();
 
     interceptor = TestBed.inject(JwtInterceptor);

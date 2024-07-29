@@ -77,15 +77,15 @@
 </div>
 
 <ng-template #shiftContent [polymorpheus]="shiftContentContext" let-data>
-  {{ data.length ? "Ca " + data.join(", ") : "Ca thi" }}
+  {{ data.length ? 'Ca ' + data.join(', ') : 'Ca thi' }}
 </ng-template>
 
 <ng-template #methodContent [polymorpheus]="methodContentContext" let-data>
   {{
     data.length === 0
-      ? "Hình thức thi"
+      ? 'Hình thức thi'
       : data.length === 1
-        ? (data[0] | esmExamMethod)
-        : data.length + " hình thức"
+      ? (data[0] | esmExamMethod)
+      : data.length + ' hình thức'
   }}
 </ng-template>

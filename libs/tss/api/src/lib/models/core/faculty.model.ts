@@ -1,4 +1,4 @@
-import { FacultyDta } from "../../dta";
+import { FacultyDta } from '../../dta';
 
 export class Faculty {
   readonly id!: string;

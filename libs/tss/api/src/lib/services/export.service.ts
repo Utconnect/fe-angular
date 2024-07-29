@@ -1474,28 +1474,28 @@ export class ExportService {
                                 },
                                 children: schedule.newSchedule.date
                                   ? [
-                                    new TextRun({
-                                      text: `${
-                                        this.datePipe.transform(
-                                          schedule.newSchedule.date,
-                                          'dd/MM/Y',
-                                        ) ?? schedule.newSchedule.date
-                                      }, ca ${
-                                        schedule.newSchedule.shift ?? ''
-                                      },`,
-                                    }),
-                                    new TextRun({
-                                      break: 1,
-                                      text: `${
-                                        schedule.newSchedule.room ?? ''
-                                      }`,
-                                    }),
-                                  ]
+                                      new TextRun({
+                                        text: `${
+                                          this.datePipe.transform(
+                                            schedule.newSchedule.date,
+                                            'dd/MM/Y',
+                                          ) ?? schedule.newSchedule.date
+                                        }, ca ${
+                                          schedule.newSchedule.shift ?? ''
+                                        },`,
+                                      }),
+                                      new TextRun({
+                                        break: 1,
+                                        text: `${
+                                          schedule.newSchedule.room ?? ''
+                                        }`,
+                                      }),
+                                    ]
                                   : [
-                                    new TextRun({
-                                      text: schedule.intendTime ?? '',
-                                    }),
-                                  ],
+                                      new TextRun({
+                                        text: schedule.intendTime ?? '',
+                                      }),
+                                    ],
                               }),
                             ],
                           }),
@@ -1890,28 +1890,28 @@ export class ExportService {
                                 },
                                 children: schedule.newSchedule.date
                                   ? [
-                                    new TextRun({
-                                      text: `${
-                                        this.datePipe.transform(
-                                          schedule.newSchedule.date,
-                                          'dd/MM/Y',
-                                        ) ?? schedule.newSchedule.date
-                                      }, ca ${
-                                        schedule.newSchedule.shift ?? ''
-                                      },`,
-                                    }),
-                                    new TextRun({
-                                      break: 1,
-                                      text: `${
-                                        schedule.newSchedule.room ?? ''
-                                      }`,
-                                    }),
-                                  ]
+                                      new TextRun({
+                                        text: `${
+                                          this.datePipe.transform(
+                                            schedule.newSchedule.date,
+                                            'dd/MM/Y',
+                                          ) ?? schedule.newSchedule.date
+                                        }, ca ${
+                                          schedule.newSchedule.shift ?? ''
+                                        },`,
+                                      }),
+                                      new TextRun({
+                                        break: 1,
+                                        text: `${
+                                          schedule.newSchedule.room ?? ''
+                                        }`,
+                                      }),
+                                    ]
                                   : [
-                                    new TextRun({
-                                      text: schedule.intendTime ?? '',
-                                    }),
-                                  ],
+                                      new TextRun({
+                                        text: schedule.intendTime ?? '',
+                                      }),
+                                    ],
                               }),
                             ],
                           }),
@@ -1941,11 +1941,13 @@ export class ExportService {
     if (rangeOptions.inOneYear) {
       return `năm ${range.from.year}`;
     }
-    return `từ ${DateHelper.beautifyDay(range.from.day)}/${DateHelper.beautifyDay(
-      range.from.month + 1,
-    )}/${range.from.year} đến ${DateHelper.beautifyDay(
-      range.to.day,
-    )}/${DateHelper.beautifyDay(range.to.month + 1)}/${range.to.year}`;
+    return `từ ${DateHelper.beautifyDay(
+      range.from.day,
+    )}/${DateHelper.beautifyDay(range.from.month + 1)}/${
+      range.from.year
+    } đến ${DateHelper.beautifyDay(range.to.day)}/${DateHelper.beautifyDay(
+      range.to.month + 1,
+    )}/${range.to.year}`;
   }
 
   private getSigner(teacher: Teacher): string {

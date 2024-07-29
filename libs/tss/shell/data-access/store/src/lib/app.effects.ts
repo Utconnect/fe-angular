@@ -9,8 +9,7 @@ import {
   TeacherService,
   UserService,
 } from '@tss/api';
-import { ObservableHelper } from '@utconnect/helpers';
-import { catchError, filter, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of } from 'rxjs';
 import { TssApiAction } from './app.api.actions';
 import { TssPageAction } from './app.page.actions';
 
