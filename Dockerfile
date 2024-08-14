@@ -5,6 +5,7 @@ RUN corepack enable
 
 FROM base AS build
 ARG APP_NAME
+ARG BUILD_ENV
 RUN mkdir -p /app/apps /app/libs
 WORKDIR /app
 COPY ["decorate-angular-cli.js", "package*.json", "pnpm-lock.yaml", "/app/"]
@@ -16,7 +17,10 @@ COPY ./libs/auth /app/libs/auth
 COPY ./libs/shared /app/libs/shared
 COPY ./libs/${APP_NAME} /app/libs/${APP_NAME}
 
-RUN npx nx build ${APP_NAME} --configuration=production --base-href /${APP_NAME}/
+RUN chmod +x replace-env.sh
+RUN ./.ci/replace-env.sh
+
+RUN npx nx build ${APP_NAME} --configuration=${BUILD_ENV} --base-href /${APP_NAME}/
 
 FROM nginxinc/nginx-unprivileged:1.27-alpine
 ARG APP_NAME

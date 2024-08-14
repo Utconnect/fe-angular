@@ -6,6 +6,7 @@
       context: .
       args:
         APP_NAME: 'tss'
+        BUILD_ENV: 'production'
 
   esm:
     container_name: esm
@@ -14,6 +15,7 @@
       context: .
       args:
         APP_NAME: 'esm'
+        BUILD_ENV: 'production'
 
   gateway:
     image: nginxinc/nginx-unprivileged:1.27.0-alpine

@@ -1,0 +1,16 @@
+import { EsmConfig } from '@esm/config';
+
+export const environment: EsmConfig = {
+  production: true,
+  baseUrl: '${BASE_URL}',
+  syncfusionLicense: '${SYNCFUSION_LICENSE}',
+  recaptcha: {
+    siteKey: '${RECAPTCHA__SITE_KEY}',
+  },
+  pusher: {
+    key: '${PUSHER__KEY}',
+    cluster: '${PUSHER__CLUSTER}',
+  },
+  loginUrl: '${LOGIN_URL}',
+  logoutUrl: '${LOGOUT_URL}',
+};
