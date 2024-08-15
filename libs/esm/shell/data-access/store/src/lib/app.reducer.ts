@@ -25,7 +25,7 @@ export const esmInitialState: EsmState = {
 
 export const esmFeatureKey = '[NGRX Key] ESM';
 
-export const appReducer = createReducer(
+export const esmReducer = createReducer(
   esmInitialState,
   on(EsmPageAction.getUserInfo, (state) => ({
     ...state,

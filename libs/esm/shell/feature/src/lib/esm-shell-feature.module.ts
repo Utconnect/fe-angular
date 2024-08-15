@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { authProviders, permissionGuard } from '@auth';
 import { EsmAuthService, ExaminationService, FacultyService } from '@esm/api';
 import { ESM_CONFIG } from '@esm/config';
-import { appReducer, EsmEffects, esmFeatureKey, EsmState } from '@esm/store';
+import { esmReducer, EsmEffects, esmFeatureKey, EsmState } from '@esm/store';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { Store, StoreModule } from '@ngrx/store';
@@ -31,7 +31,7 @@ import { Role } from './roles';
 
 const NGRX = [
   StoreModule.forRoot({ router: routerReducer }, {}),
-  StoreModule.forFeature(esmFeatureKey, appReducer),
+  StoreModule.forFeature(esmFeatureKey, esmReducer),
   EffectsModule.forRoot([EsmEffects]),
   StoreRouterConnectingModule.forRoot(),
 ];

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TssPageAction, TssSelector, TssState } from '@tss/store';
-import { concatMap, delayWhen, interval, of } from 'rxjs';
+import { concatMap, delayWhen, interval, of, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'tss-root',
@@ -12,6 +12,11 @@ import { concatMap, delayWhen, interval, of } from 'rxjs';
 export class AppComponent implements OnInit {
   // INJECT PROPERTIES
   private readonly tssStore = inject(Store<TssState>);
+  private readonly destroy$ = inject(TuiDestroyService);
+  private readonly user$ = this.tssStore.pipe(
+    TssSelector.notNullTeacher,
+    takeUntil(this.destroy$),
+  );
 
   // PUBLIC PROPERTIES
   showLoader$ = this.tssStore

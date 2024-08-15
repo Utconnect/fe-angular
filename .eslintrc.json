@@ -16,7 +16,6 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:prettier/recommended"
       ],
-      "plugins": ["deprecation"],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -42,8 +41,7 @@
             "varsIgnorePattern": "^_",
             "argsIgnorePattern": "^_"
           }
-        ],
-        "deprecation/deprecation": "warn"
+        ]
       }
     },
     {
